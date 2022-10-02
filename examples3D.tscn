@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform float radius = 0.5;
+
+uniform vec4 color : hint_color;
+
+float sdCircle(vec2 pos, float r) {
+	return length(pos) - r;
+}
+
+void fragment() {
+	float circle = sdCircle(UV - position, radius);
+	
+	
+	ALBEDO = vec3((1.0 - step(mod(circle, 5.0), 1.0)) * color.rgb);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/position = Vector2( 0.5, 0.5 )
+shader_param/radius = 0.308
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=4]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform vec2 proportions = vec2(0.5);
+uniform vec4 radius = vec4(0.5);
+
+uniform vec4 color : hint_color;
+
+float sdRoundedBox( in vec2 p, in vec2 b, in vec4 r )
+{
+    r.xy = (p.x>0.0)?r.xy : r.zw;
+    r.x  = (p.y>0.0)?r.x  : r.y;
+    vec2 q = abs(p)-b+r.x;
+    return min(max(q.x,q.y),0.0) + length(max(q,0.0)) - r.x;
+}
+
+void fragment() {
+	float box = sdRoundedBox(UV - position, proportions, radius);
+	
+	
+	ALBEDO = vec3((1.0 - step(mod(box, 5.0), 1.0)) * color.rgb);
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/position = Vector2( 0.469, 0.5 )
+shader_param/proportions = Vector2( 0.25, 0.25 )
+shader_param/radius = Plane( 0, 0.2, 0.122, 0 )
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=6]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform vec2 proportions = vec2(0.25);
+
+uniform vec4 color : hint_color;
+
+float sdBox( in vec2 p, in vec2 b )
+{
+    vec2 d = abs(p)-b;
+    return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
+}
+
+void fragment() {
+	float box = sdBox(UV - position, proportions); 
+	ALBEDO = vec3((1.0 - step(mod(box, 5.0), 1.0)) * color.rgb);
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/position = Vector2( 0.469, 0.5 )
+shader_param/proportions = Vector2( 0.25, 0.25 )
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[node name="examples3D" type="Spatial"]
+
+[node name="Circle" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00569987, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="RoundedBox" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21705, 0.0241101, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 5 )
+
+[node name="Box" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59847, 0.0241101, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
