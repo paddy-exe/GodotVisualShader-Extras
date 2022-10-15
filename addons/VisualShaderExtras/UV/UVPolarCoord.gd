@@ -8,7 +8,7 @@ func _init():
 	set_input_port_default_value(3, 1)
 
 func _get_name():
-	return "UVPolarCoordSpatial"
+	return "UVPolarCoord"
 
 func _get_category():
 	return "VisualShaderExtras"
