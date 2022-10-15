@@ -1,4 +1,4 @@
-# GodotVisualShader-Extras
+# GodotVisualShader-Extras ✨
 
 A Visual Shader Node Add-On for the Godot Engine
 
