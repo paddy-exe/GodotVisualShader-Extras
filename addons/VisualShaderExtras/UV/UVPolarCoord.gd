@@ -79,7 +79,12 @@ func _get_global_code(mode):
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
+	var uv = "UV"
+	
+	if input_vars[0]:
+		uv = input_vars[0]	
+	
 	if (mode == Shader.MODE_CANVAS_ITEM):
-		return "%s.xy = uv_polarcoord_canvas(%s.xy, %s.xy, %s, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2], input_vars[3]]
-	elif (mode == Shader.MODE_CANVAS_ITEM):
-		return "%s.xy = uv_polarcoord_spatial(%s.xy, %s.xy, %s, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2], input_vars[3]]
+		return "%s.xy = uv_polarcoord_canvas(%s.xy, %s.xy, %s, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]
+	elif (mode == Shader.MODE_SPATIAL):
+		return "%s.xy = uv_polarcoord_spatial(%s.xy, %s.xy, %s, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -16,15 +16,14 @@ float sdCircle(vec2 pos, float r) {
 
 void fragment() {
 	float circle = sdCircle(UV - position, radius);
-	
-	
-	ALBEDO = vec3((1.0 - step(mod(circle, 5.0), 1.0)) * color.rgb);
+	//  TODO: correct way for sharp edges!
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, circle));
 }"
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 shader_param/position = Vector2( 0.5, 0.5 )
-shader_param/radius = 0.308
+shader_param/radius = 0.243
 shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
 
 [sub_resource type="Shader" id=4]
@@ -47,15 +46,14 @@ float sdRoundedBox( in vec2 p, in vec2 b, in vec4 r )
 void fragment() {
 	float box = sdRoundedBox(UV - position, proportions, radius);
 	
-	
-	ALBEDO = vec3((1.0 - step(mod(box, 5.0), 1.0)) * color.rgb);
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, box));
 }"
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
-shader_param/position = Vector2( 0.469, 0.5 )
-shader_param/proportions = Vector2( 0.25, 0.25 )
-shader_param/radius = Plane( 0, 0.2, 0.122, 0 )
+shader_param/position = Vector2( 0.5, 0.5 )
+shader_param/proportions = Vector2( 0.248, 0.336 )
+shader_param/radius = Plane( 0.233, 0.26, 0.039, 0.254 )
 shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
 
 [sub_resource type="Shader" id=6]
@@ -74,13 +72,178 @@ float sdBox( in vec2 p, in vec2 b )
 
 void fragment() {
 	float box = sdBox(UV - position, proportions); 
-	ALBEDO = vec3((1.0 - step(mod(box, 5.0), 1.0)) * color.rgb);
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, box));
 }"
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 6 )
 shader_param/position = Vector2( 0.469, 0.5 )
 shader_param/proportions = Vector2( 0.25, 0.25 )
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=8]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform vec2 pointA = vec2(-0.25);
+uniform vec2 pointB = vec2(0.25);
+uniform float thickness = 0.2;
+
+uniform vec4 color : hint_color;
+
+float sdOrientedBox( in vec2 p, in vec2 a, in vec2 b, float th )
+{
+    float l = length(b-a);
+    vec2  d = (b-a)/l;
+    vec2  q = (p-(a+b)*0.5);
+          q = mat2(vec2(d.x,-d.y), vec2(d.y,d.x))*q;
+          q = abs(q)-vec2(l,th)*0.5;
+    return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
+}
+
+void fragment() {
+	float box = sdOrientedBox(UV - position, pointA, pointB, thickness); 
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, box));
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/position = Vector2( 0.469, 0.5 )
+shader_param/pointA = Vector2( -0.266, -0.271 )
+shader_param/pointB = Vector2( 0.253, 0.169 )
+shader_param/thickness = 0.237
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=10]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform vec2 proportions = vec2(0.25);
+
+uniform vec4 color : hint_color;
+
+float ndot(vec2 a, vec2 b ) { return a.x*b.x - a.y*b.y; }
+float sdRhombus( in vec2 p, in vec2 b ) 
+{
+    p = abs(p);
+    float h = clamp( ndot(b-2.0*p,b)/dot(b,b), -1.0, 1.0 );
+    float d = length( p-0.5*b*vec2(1.0-h,1.0+h) );
+    return d * sign( p.x*b.y + p.y*b.x - b.x*b.y );
+}
+
+void fragment() {
+	float rhombus = sdRhombus(UV - position, proportions);
+	
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, rhombus));
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/position = Vector2( 0.5, 0.5 )
+shader_param/proportions = Vector2( 0.25, 0.25 )
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=12]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform float _r1 = 0.25;
+uniform float _r2 = 0.75;
+uniform float _he = 0.5;
+
+uniform vec4 color : hint_color;
+
+float sdTrapezoid( in vec2 p, in float r1, float r2, float he )
+{
+    vec2 k1 = vec2(r2,he);
+    vec2 k2 = vec2(r2-r1,2.0*he);
+    p.x = abs(p.x);
+    vec2 ca = vec2(p.x-min(p.x,(p.y<0.0)?r1:r2), abs(p.y)-he);
+    vec2 cb = p - k1 + k2*clamp( dot(k1-p,k2)/dot(k2, k2), 0.0, 1.0 );
+    float s = (cb.x<0.0 && ca.y<0.0) ? -1.0 : 1.0;
+    return s*sqrt( min(dot(ca, ca),dot(cb, cb)) );
+}
+
+void fragment() {
+	float trapezoid = sdTrapezoid(UV - position, _r1, _r2, _he);
+	
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, trapezoid));
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 12 )
+shader_param/position = Vector2( 0.5, 0.5 )
+shader_param/_r1 = -0.053
+shader_param/_r2 = 0.301
+shader_param/_he = 0.322
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=16]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform float _wi = 0.25;
+uniform float _he = 0.75;
+uniform float _sk = 0.5;
+
+uniform vec4 color : hint_color;
+
+float sdParallelogram( in vec2 p, float wi, float he, float sk )
+{
+    vec2 e = vec2(sk,he);
+    p = (p.y<0.0)?-p:p;
+    vec2  w = p - e; w.x -= clamp(w.x,-wi,wi);
+    vec2  d = vec2(dot(w,w), -w.y);
+    float s = p.x*e.y - p.y*e.x;
+    p = (s<0.0)?-p:p;
+    vec2  v = p - vec2(wi,0); v -= e*clamp(dot(v,e)/dot(e,e),-1.0,1.0);
+    d = min( d, vec2(dot(v,v), wi*he-abs(s)));
+    return sqrt(d.x)*sign(-d.y);
+}
+
+void fragment() {
+	float parallelogram = sdParallelogram(UV - position, _wi, _he, _sk);
+	
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, parallelogram));
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 16 )
+shader_param/position = Vector2( 0.5, 0.5 )
+shader_param/_wi = 0.185
+shader_param/_he = 0.206
+shader_param/_sk = -0.119
+shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
+
+[sub_resource type="Shader" id=17]
+code = "shader_type spatial;
+
+uniform vec2 position = vec2(0.5);
+uniform vec2 _q = vec2(0.75);
+
+uniform vec4 color : hint_color;
+
+float sdTriangleIsosceles( in vec2 p, in vec2 q )
+{
+    p.x = abs(p.x);
+    vec2 a = p - q*clamp( dot(p,q)/dot(q,q), 0.0, 1.0 );
+    vec2 b = p - q*vec2( clamp( p.x/q.x, 0.0, 1.0 ), 1.0 );
+    float s = -sign( q.y );
+    vec2 d = min( vec2( dot(a,a), s*(p.x*q.y-p.y*q.x) ),
+                  vec2( dot(b,b), s*(p.y-q.y)  ));
+    return -sqrt(d.x)*sign(d.y);
+}
+
+void fragment() {
+	float triangle = sdTriangleIsosceles(UV - position, _q);
+	
+	ALBEDO = mix(color.rgb, vec3(0.0), step(0.0, triangle));
+}"
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 17 )
+shader_param/position = Vector2( 0.5, 0.259 )
+shader_param/_q = Vector2( 0.367, 0.567 )
 shader_param/color = Color( 0.658824, 0.247059, 0.490196, 1 )
 
 [node name="examples3D" type="Spatial"]
@@ -99,3 +262,31 @@ material/0 = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59847, 0.0241101, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 7 )
+
+[node name="RotatedBox" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17774, 0.0241101, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 9 )
+
+[node name="Rhombus" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00569987, 2.46924 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 11 )
+
+[node name="Trapezoid" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20994, 0.00569987, 2.46924 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 13 )
+
+[node name="Parallelogram" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59188, 0.00569987, 2.46924 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 15 )
+
+[node name="Triangle" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.12483, 0.00569987, 2.46924 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 18 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.171482, 0.985187, 0, -0.985187, 0.171482, 0, 2.84318, 0 )
