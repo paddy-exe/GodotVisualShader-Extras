@@ -4,7 +4,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeExclusion
 
 func _get_name():
-	return "BlendColorDodge"
+	return "BlendExclusion"
 
 func _get_category():
 	return "VisualShaderExtras"

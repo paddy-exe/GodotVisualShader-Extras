@@ -3,7 +3,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeLuminosity
 
 func _get_name():
-	return "BlendColorDodge"
+	return "BlendLuminosity"
 
 func _get_category():
 	return "VisualShaderExtras"

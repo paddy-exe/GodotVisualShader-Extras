@@ -4,7 +4,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeHardMix
 
 func _get_name():
-	return "BlendColorDodge"
+	return "BlendHardMix"
 
 func _get_category():
 	return "VisualShaderExtras"

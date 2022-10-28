@@ -3,7 +3,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeColorDodge
 
 func _get_name():
-	return "BlendColorDodge"
+	return "BlendVividLight"
 
 func _get_category():
 	return "VisualShaderExtras"
@@ -56,10 +56,10 @@ func _get_global_code(mode):
 		}
 		
 		float blend_rgb_to_v(vec3 __col) {
-			float v = max(max(__col.r / 255.0, __col.g / 255.0), __col.b / 255.0);
+			return max(max(__col.r / 255.0, __col.g / 255.0), __col.b / 255.0);
 		}
 		
-		vec3 blend_vivid_light(vec3__top_col, vec3 __bot_col) {
+		vec3 blend_vivid_light(vec3 __top_col, vec3 __bot_col) {
 			if (blend_rgb_to_v(__top_col) > 0.5) {
 				return blend_color_dodge(__top_col, __bot_col);
 			} else {
