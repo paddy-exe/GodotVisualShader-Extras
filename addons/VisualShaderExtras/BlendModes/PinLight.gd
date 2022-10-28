@@ -4,7 +4,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodePinLight
 
 func _get_name():
-	return "BlendColorDodge"
+	return "BlendPinLight"
 
 func _get_category():
 	return "VisualShaderExtras"
@@ -48,7 +48,7 @@ func _get_global_code(mode):
 	return """
 		float pinLight( float s, float d )
 		{
-			return (2.0 * s - 1.0 > d) ? 2.0 * s - 1.0 : (s < 0.5 * d) ? 2.0 * s : d;
+			return (2.0 * s - 1.0 > d) ? 2.0 * s - 1.0 : ((s < 0.5 * d) ? 2.0 * s : d);
 		}
 
 		vec3 blend_pin_light( vec3 s, vec3 d )

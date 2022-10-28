@@ -3,7 +3,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeLinearBurn
 
 func _get_name():
-	return "BlendColorDodge"
+	return "BlendLinearBurn"
 
 func _get_category():
 	return "VisualShaderExtras"

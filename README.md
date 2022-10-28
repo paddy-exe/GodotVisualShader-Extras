@@ -20,10 +20,16 @@ A Visual Shader Node Add-On for the Godot Engine
     - Box
     - Circle
     - Rounded Box
+    - Rotated Box
+    - Trapezoid
+    - Triangle
+    - Rhombus
+    - Parallelogram
     - more coming soon...
 - UV
-    - UV PolarCoordinates (CanvasItem and Spatial ShaderMode supported)
+    - UV PolarCoord (CanvasItem and Spatial ShaderMode supported)
     - UV Twirl
+    - UV Flipbook
 - Utility
     - Random Range
     - Remap

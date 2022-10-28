@@ -30,7 +30,7 @@ func _get_input_port_name(port):
 		0:
 			return "uv"
 		1:
-			return "scale"
+			return "center"
 		2:
 			return "zoom strength"
 		3:
@@ -57,7 +57,7 @@ func _get_output_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR
 
 func _get_global_code(mode):
-	if (mode == Shader.MODE_CANVAS_ITEM):
+	if (mode == Shader.MODE_SPATIAL):
 		return """
 			vec2 uv_polarcoord_spatial(vec2 __uv, vec2 __center, float __zoom, float __repeat)
 			{
