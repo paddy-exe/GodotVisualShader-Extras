@@ -716,6 +716,7 @@ shader_param/animation_speed = 0.377
 transform = Transform( 1, 0, 0, 0, 0.171482, 0.985187, 0, -0.985187, 0.171482, 0, 2.84318, 0 )
 
 [node name="Shapes" type="Spatial" parent="."]
+visible = false
 
 [node name="Circle" type="MeshInstance" parent="Shapes"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00569987, 0 )
@@ -766,7 +767,6 @@ skeleton = NodePath("../..")
 material/0 = SubResource( 33 )
 
 [node name="UV" type="Spatial" parent="."]
-visible = false
 
 [node name="PolarCoord" type="MeshInstance" parent="UV"]
 mesh = SubResource( 40 )

@@ -171,7 +171,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot Visual Shader - Extras"
-config/icon="res://addons/VisualShaderExtras/AddonAssets/icon.png"
+config/description="Visual Shader Nodes Library containing procedural shapes, UV manipulation and utility nodes"
+config/icon="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo.png"
 
 [gui]
 
