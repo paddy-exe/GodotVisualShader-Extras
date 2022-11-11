@@ -17,6 +17,8 @@
 
 A Visual Shader Node Add-On for the Godot Engine
 
+The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
+
 ## Provided Nodes
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.png" width="800"/>
