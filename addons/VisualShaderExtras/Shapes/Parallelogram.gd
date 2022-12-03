@@ -16,12 +16,12 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeParallelogram
 
 func _init():
-	set_input_port_default_value(1, Vector3(0.5, 0.5, 0.0))
+	set_input_port_default_value(1, Vector2(0.5, 0.5))
 	set_input_port_default_value(2, 0.15)
 	set_input_port_default_value(3, 0.3)
 	set_input_port_default_value(4, 0.2)
@@ -30,13 +30,10 @@ func _get_name():
 	return "Parallelogram"
 
 func _get_category():
-	return "VisualShaderExtras"
-
-func _get_subcategory():
-	return "Shapes"
+	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Parallelogram Shape"
+	return "Signed Distance Parallelogram Shape3D"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -60,9 +57,9 @@ func _get_input_port_name(port):
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
 			return VisualShaderNode.PORT_TYPE_SCALAR
 		3:

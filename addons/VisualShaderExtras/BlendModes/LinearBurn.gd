@@ -1,4 +1,4 @@
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeLinearBurn
 
@@ -6,16 +6,13 @@ func _get_name():
 	return "BlendLinearBurn"
 
 func _get_category():
-	return "VisualShaderExtras"
-
-func _get_subcategory():
-	return "BlendModes"
+	return "VisualShaderExtras/BlendModes"
 
 func _get_description():
 	return "Linear Burn Blending Mode"
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR
+	return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
 func _get_input_port_count():
 	return 2
@@ -30,9 +27,9 @@ func _get_input_port_name(port):
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_3D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
 func _get_output_port_count():
 	return 1

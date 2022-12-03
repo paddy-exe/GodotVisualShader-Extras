@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeUVFlipbook
 
@@ -37,16 +37,13 @@ func _get_name():
 	return "UVFlipbook"
 
 func _get_category():
-	return "VisualShaderExtras"
-
-func _get_subcategory():
-	return "UV"
+	return "VisualShaderExtras/UV"
 
 func _get_description():
 	return "UV Flipbook Animation"
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_input_port_count():
 	return 6
@@ -54,30 +51,30 @@ func _get_input_port_count():
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "uv"
+			return "UV"
 		1:
-			return "columns"
+			return "Columns"
 		2:
-			return "rows"
+			return "Rows"
 		3:
-			return "starting frame"
+			return "Starting frame"
 		4:
-			return "ending frame"
+			return "Ending frame"
 		5:
-			return "animation speed"
+			return "Animation speed"
 
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_SCALAR_INT
 		2:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_SCALAR_INT
 		3:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_SCALAR_INT
 		4:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_SCALAR_INT
 		5:
 			return VisualShaderNode.PORT_TYPE_SCALAR
 
@@ -85,10 +82,10 @@ func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port):
-	return ""
+	return "UV"
 
 func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_global_code(mode):
 	return """
@@ -101,6 +98,7 @@ func _get_global_code(mode):
 			vec2 current_sprite = vec2(0.0, 1.0 - offPerFrame.y);
 			current_sprite.x += frame * offPerFrame.x;
 			float rowIndex;
+			float _mod = modf(frame / float(__columns), rowIndex);
 			current_sprite.y -= rowIndex * offPerFrame.y;
 			current_sprite.x -= rowIndex * float(__columns) * offPerFrame.x;
 			
@@ -114,7 +112,7 @@ func _get_code(input_vars, output_vars, mode, type):
 	var uv = "UV"
 	
 	if input_vars[0]:
-		uv = input_vars[0]	
+		uv = input_vars[0]
 	
-	return "%s.xy = flipbook_anim(%s.xy, int(%s), int(%s), int(%s), int(%s), %s );" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4], input_vars[5]]
+	return "%s.xy = flipbook_anim(%s.xy, %s, %s, %s, %s, %s );" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4], input_vars[5]]
 

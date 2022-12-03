@@ -1,27 +1,23 @@
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeUVTwirl
 
 func _init():
-	set_input_port_default_value(1, Vector3(0.5,0.5,0))
-	set_input_port_default_value(2, 10)
-	set_input_port_default_value(3, Vector3(0,0,0))
+	set_input_port_default_value(1, Vector2(0.5,0.5))
+	set_input_port_default_value(2, 10.0)
+	set_input_port_default_value(3, Vector2(0,0))
 
 func _get_name():
 	return "UVTwirl"
 
 func _get_category():
-	return "VisualShaderExtras"
-
-func _get_subcategory():
-	return "UV"
+	return "VisualShaderExtras/UV"
 
 func _get_description():
 	return "UV Twirl"
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR
-
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_input_port_count():
 	return 4
@@ -29,7 +25,7 @@ func _get_input_port_count():
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "uv"
+			return "UV"
 		1:
 			return "Center"
 		2:
@@ -40,22 +36,22 @@ func _get_input_port_name(port):
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
 			return VisualShaderNode.PORT_TYPE_SCALAR
 		3:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port):
-	return "Twirl UV"
+	return "UV"
 
 func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_global_code(mode):
 	return """

@@ -16,25 +16,22 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeTriangle
 
 func _init():
-	set_input_port_default_value(1, Vector3(0.5, 0.25, 0.0))
-	set_input_port_default_value(2, Vector3(0.25, 0.5, 0.0))
+	set_input_port_default_value(1, Vector2(0.5, 0.25))
+	set_input_port_default_value(2, Vector2(0.25, 0.5))
 
 func _get_name():
 	return "Triangle"
 
 func _get_category():
-	return "VisualShaderExtras"
-
-func _get_subcategory():
-	return "Shapes"
+	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Triangle Shape"
+	return "Signed Distance Triangle Shape3D"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -54,11 +51,11 @@ func _get_input_port_name(port):
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_output_port_count():
 	return 1

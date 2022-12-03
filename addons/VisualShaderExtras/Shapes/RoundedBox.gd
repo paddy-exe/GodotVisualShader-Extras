@@ -16,33 +16,29 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-tool
+@tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeRoundedBox
 
 func _init():
-	set_input_port_default_value(1, Vector3(0.5, 0.5, 0.0))
-	set_input_port_default_value(2, Vector3(0.25, 0.25, 0.0))
-	set_input_port_default_value(3, Vector3(0.0, 0.0, 0.0))
-	set_input_port_default_value(4, 0.0)
+	set_input_port_default_value(1, Vector2(0.5, 0.5))
+	set_input_port_default_value(2, Vector2(0.25, 0.25))
+	set_input_port_default_value(3, Vector4(0.0, 0.0, 0.0, 0.0))
 
 func _get_name():
 	return "RoundedBox"
 
 func _get_category():
-	return "VisualShaderExtras"
-
-func _get_subcategory():
-	return "Shapes"
+	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Rounded Box Shape"
+	return "Signed Distance Rounded Box Shape3D"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 5
+	return 4
 
 func _get_input_port_name(port):
 	match port:
@@ -53,22 +49,18 @@ func _get_input_port_name(port):
 		2:
 			return "proportions"
 		3:
-			return "123radius"
-		4:
-			return "4radius"
+			return "radia"
 
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
-			return VisualShaderNode.PORT_TYPE_VECTOR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		3:
-			return VisualShaderNode.PORT_TYPE_VECTOR
-		4:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_output_port_count():
 	return 1
@@ -81,9 +73,9 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec3 __radia, in float __4radia )
+		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec4 __radia )
 		{
-			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__4radia, __radia.z);
+			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__radia.w, __radia.z);
 			__radia.x  = (__pos.y > 0.0) ? __radia.x  : __radia.y;
 			vec2 __q = abs(__pos) - __proportions + __radia.x;
 			return min(max(__q.x, __q.y), 0.0) + length(max(__q, 0.0)) - __radia.x;
@@ -96,4 +88,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdRoundedBox(%s.xy - %s.xy, %s.xy, %s.xyz, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]
+	return "%s = sdRoundedBox(%s.xy - %s.xy, %s.xy, %s.xyzw);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]
