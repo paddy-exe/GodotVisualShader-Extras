@@ -60,6 +60,11 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Random Range
     - Remap
     - Scene Depth
+- Wave
+    - [Triangle](https://en.wikipedia.org/wiki/Triangle_wave)
+    - [Square](https://en.wikipedia.org/wiki/Square_wave)
+    - [Sawtooth](https://en.wikipedia.org/wiki/Sawtooth_wave)
+    - [Sine (+ Angular Frequency Input variant)](https://en.wikipedia.org/wiki/Sine_wave)
 
 ## How to get started
 To integrate the Visual Shader nodes library into your project, copy the VisualShaderExtras folder inside your addons folder. If the addons folder doesn't exist yet, create one. There's no further steps or activation through the project settings necessary.

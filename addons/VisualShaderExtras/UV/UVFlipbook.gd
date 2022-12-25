@@ -101,7 +101,7 @@ func _get_global_code(mode):
 			vec2 current_sprite = vec2(0.0, 1.0 - offPerFrame.y);
 			current_sprite.x += frame * offPerFrame.x;
 			float rowIndex;
-			float _mod = modf(frame/ float(columns), rowIndex);
+			float _mod = modf(frame/ float(__columns), rowIndex);
 			current_sprite.y -= rowIndex * offPerFrame.y;
 			current_sprite.x -= rowIndex * float(__columns) * offPerFrame.x;
 			

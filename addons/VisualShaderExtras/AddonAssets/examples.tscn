@@ -1,31 +1,35 @@
-[gd_scene load_steps=161 format=2]
+[gd_scene load_steps=189 format=2]
 
 [ext_resource path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" type="Script" id=1]
-[ext_resource path="res://addons/VisualShaderExtras/Shapes/RotatedBox.gd" type="Script" id=2]
-[ext_resource path="res://addons/VisualShaderExtras/Shapes/Triangle.gd" type="Script" id=3]
-[ext_resource path="res://addons/VisualShaderExtras/Shapes/Trapezoid.gd" type="Script" id=4]
-[ext_resource path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" type="Script" id=5]
-[ext_resource path="res://addons/VisualShaderExtras/Shapes/Circle.gd" type="Script" id=6]
+[ext_resource path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" type="Script" id=2]
+[ext_resource path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" type="Script" id=3]
+[ext_resource path="res://addons/VisualShaderExtras/Shapes/RotatedBox.gd" type="Script" id=4]
+[ext_resource path="res://addons/VisualShaderExtras/Shapes/Triangle.gd" type="Script" id=5]
+[ext_resource path="res://addons/VisualShaderExtras/Shapes/Trapezoid.gd" type="Script" id=6]
 [ext_resource path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" type="Script" id=7]
 [ext_resource path="res://addons/VisualShaderExtras/AddonAssets/Kenney Future Narrow.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://addons/VisualShaderExtras/AddonAssets/icon.png" type="Texture" id=9]
-[ext_resource path="res://addons/VisualShaderExtras/Shapes/Box.gd" type="Script" id=10]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/GammaIllumination.gd" type="Script" id=11]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/GammaLight.gd" type="Script" id=12]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/LinearLight.gd" type="Script" id=13]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/HardMix.gd" type="Script" id=14]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/GammaDark.gd" type="Script" id=15]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/LighterColor.gd" type="Script" id=16]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/LinearBurn.gd" type="Script" id=17]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/Luminosity.gd" type="Script" id=18]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/PinLight.gd" type="Script" id=19]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/VividLight.gd" type="Script" id=20]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/DarkerColor.gd" type="Script" id=21]
-[ext_resource path="res://addons/VisualShaderExtras/BlendModes/Exclusion.gd" type="Script" id=22]
-[ext_resource path="res://addons/VisualShaderExtras/UV/UVPolarCoord.gd" type="Script" id=23]
-[ext_resource path="res://addons/VisualShaderExtras/UV/UVTwirl.gd" type="Script" id=24]
-[ext_resource path="res://addons/VisualShaderExtras/AddonAssets/DinoSprites - vita.png" type="Texture" id=25]
-[ext_resource path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" type="Script" id=26]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/LighterColor.gd" type="Script" id=10]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/LinearBurn.gd" type="Script" id=11]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/PinLight.gd" type="Script" id=12]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/VividLight.gd" type="Script" id=13]
+[ext_resource path="res://addons/VisualShaderExtras/AddonAssets/DinoSprites - vita.png" type="Texture" id=14]
+[ext_resource path="res://addons/VisualShaderExtras/Shapes/Circle.gd" type="Script" id=15]
+[ext_resource path="res://addons/VisualShaderExtras/Shapes/Box.gd" type="Script" id=16]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/GammaIllumination.gd" type="Script" id=17]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/GammaLight.gd" type="Script" id=18]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/LinearLight.gd" type="Script" id=19]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/HardMix.gd" type="Script" id=20]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/GammaDark.gd" type="Script" id=21]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/Luminosity.gd" type="Script" id=22]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/DarkerColor.gd" type="Script" id=23]
+[ext_resource path="res://addons/VisualShaderExtras/BlendModes/Exclusion.gd" type="Script" id=24]
+[ext_resource path="res://addons/VisualShaderExtras/UV/UVPolarCoord.gd" type="Script" id=25]
+[ext_resource path="res://addons/VisualShaderExtras/UV/UVTwirl.gd" type="Script" id=26]
+[ext_resource path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" type="Script" id=27]
+[ext_resource path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" type="Script" id=28]
+[ext_resource path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" type="Script" id=29]
+[ext_resource path="res://addons/VisualShaderExtras/Wave/SineWave.gd" type="Script" id=30]
 
 [sub_resource type="DynamicFont" id=27]
 size = 32
@@ -37,7 +41,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="VisualShaderNodeCustom" id=63]
 initialized = true
-script = ExtResource( 11 )
+script = ExtResource( 17 )
 
 [sub_resource type="OpenSimplexNoise" id=64]
 
@@ -132,7 +136,7 @@ texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id=75]
 initialized = true
-script = ExtResource( 12 )
+script = ExtResource( 18 )
 
 [sub_resource type="VisualShader" id=76]
 code = "shader_type canvas_item;
@@ -199,7 +203,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="VisualShaderNodeCustom" id=102]
 initialized = true
-script = ExtResource( 16 )
+script = ExtResource( 10 )
 
 [sub_resource type="OpenSimplexNoise" id=103]
 
@@ -280,7 +284,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="VisualShaderNodeCustom" id=79]
 initialized = true
-script = ExtResource( 13 )
+script = ExtResource( 19 )
 
 [sub_resource type="OpenSimplexNoise" id=80]
 
@@ -372,7 +376,7 @@ texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id=122]
 initialized = true
-script = ExtResource( 18 )
+script = ExtResource( 22 )
 
 [sub_resource type="VisualShader" id=119]
 code = "shader_type canvas_item;
@@ -444,7 +448,7 @@ shader = SubResource( 119 )
 
 [sub_resource type="VisualShaderNodeCustom" id=126]
 initialized = true
-script = ExtResource( 19 )
+script = ExtResource( 12 )
 
 [sub_resource type="OpenSimplexNoise" id=127]
 
@@ -545,7 +549,7 @@ texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id=138]
 initialized = true
-script = ExtResource( 20 )
+script = ExtResource( 13 )
 
 [sub_resource type="VisualShader" id=136]
 code = "shader_type canvas_item;
@@ -644,7 +648,7 @@ texture = ExtResource( 9 )
 
 [sub_resource type="VisualShaderNodeCustom" id=139]
 initialized = true
-script = ExtResource( 21 )
+script = ExtResource( 23 )
 
 [sub_resource type="VisualShader" id=140]
 code = "shader_type canvas_item;
@@ -711,7 +715,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="VisualShaderNodeCustom" id=145]
 initialized = true
-script = ExtResource( 22 )
+script = ExtResource( 24 )
 
 [sub_resource type="VisualShader" id=142]
 code = "shader_type canvas_item;
@@ -775,7 +779,7 @@ shader = SubResource( 142 )
 
 [sub_resource type="VisualShaderNodeCustom" id=95]
 initialized = true
-script = ExtResource( 15 )
+script = ExtResource( 21 )
 
 [sub_resource type="VisualShader" id=144]
 code = "shader_type canvas_item;
@@ -853,7 +857,7 @@ texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id=93]
 initialized = true
-script = ExtResource( 14 )
+script = ExtResource( 20 )
 
 [sub_resource type="VisualShader" id=91]
 code = "shader_type canvas_item;
@@ -931,7 +935,7 @@ texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id=115]
 initialized = true
-script = ExtResource( 17 )
+script = ExtResource( 11 )
 
 [sub_resource type="VisualShader" id=113]
 code = "shader_type canvas_item;
@@ -1010,7 +1014,7 @@ default_value_enabled = true
 [sub_resource type="VisualShaderNodeCustom" id=54]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, 0.25 ]
 initialized = true
-script = ExtResource( 6 )
+script = ExtResource( 15 )
 
 [sub_resource type="VisualShader" id=55]
 code = "shader_type canvas_item;
@@ -1085,7 +1089,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="VisualShaderNodeCustom" id=41]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, Vector3( 0.25, 0.25, 0 ), 3, Vector3( 0.2, 0.2, 0.2 ), 4, 0.0 ]
 initialized = true
-script = ExtResource( 5 )
+script = ExtResource( 2 )
 
 [sub_resource type="VisualShader" id=42]
 code = "shader_type canvas_item;
@@ -1166,7 +1170,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="VisualShaderNodeCustom" id=43]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, Vector3( 0.25, 0.25, 0 ) ]
 initialized = true
-script = ExtResource( 10 )
+script = ExtResource( 16 )
 
 [sub_resource type="VisualShaderNodeVectorScalarMix" id=44]
 
@@ -1251,7 +1255,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="VisualShaderNodeCustom" id=49]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, Vector3( -0.25, -0.25, 0 ), 3, Vector3( 0.25, 0.25, 0 ), 4, 0.2 ]
 initialized = true
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 
 [sub_resource type="VisualShader" id=50]
 code = "shader_type canvas_item;
@@ -1435,7 +1439,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="VisualShaderNodeCustom" id=52]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, 0.15, 3, 0.35, 4, 0.25 ]
 initialized = true
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 
 [sub_resource type="VisualShader" id=37]
 code = "shader_type canvas_item;
@@ -1599,7 +1603,7 @@ shader_param/color = Color( 0.168627, 0.623529, 0.443137, 1 )
 [sub_resource type="VisualShaderNodeCustom" id=60]
 default_input_values = [ 1, Vector3( 0.5, 0.25, 0 ), 2, Vector3( 0.25, 0.5, 0 ) ]
 initialized = true
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 
 [sub_resource type="VisualShader" id=61]
 code = "shader_type canvas_item;
@@ -1678,7 +1682,7 @@ shader_param/color = Color( 0.168627, 0.623529, 0.443137, 1 )
 [sub_resource type="VisualShaderNodeCustom" id=147]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, 1, 3, 1 ]
 initialized = true
-script = ExtResource( 23 )
+script = ExtResource( 25 )
 
 [sub_resource type="VisualShader" id=148]
 code = "shader_type canvas_item;
@@ -1734,7 +1738,7 @@ shader = SubResource( 148 )
 [sub_resource type="VisualShaderNodeCustom" id=150]
 default_input_values = [ 1, Vector3( 0.5, 0.5, 0 ), 2, 10, 3, Vector3( 0, 0, 0 ) ]
 initialized = true
-script = ExtResource( 24 )
+script = ExtResource( 26 )
 
 [sub_resource type="VisualShader" id=151]
 code = "shader_type canvas_item;
@@ -1788,17 +1792,17 @@ nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0 )
 [sub_resource type="ShaderMaterial" id=152]
 shader = SubResource( 151 )
 
-[sub_resource type="VisualShaderNodeCustom" id=153]
-default_input_values = [ 1, 24, 2, 1, 3, 0, 4, 14, 5, 0.37 ]
-initialized = true
-script = ExtResource( 26 )
-
 [sub_resource type="VisualShaderNodeTexture" id=154]
-texture = ExtResource( 25 )
+texture = ExtResource( 14 )
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeInput" id=157]
 input_name = "uv"
+
+[sub_resource type="VisualShaderNodeCustom" id=158]
+default_input_values = [ 1, 24, 2, 1, 3, 0, 4, 14, 5, 0.3 ]
+initialized = true
+script = ExtResource( 3 )
 
 [sub_resource type="VisualShader" id=155]
 code = "shader_type canvas_item;
@@ -1816,6 +1820,7 @@ uniform sampler2D tex_frg_3 : hint_albedo;
 			vec2 current_sprite = vec2(0.0, 1.0 - offPerFrame.y);
 			current_sprite.x += frame * offPerFrame.x;
 			float rowIndex;
+			float _mod = modf(frame/ float(__columns), rowIndex);
 			current_sprite.y -= rowIndex * offPerFrame.y;
 			current_sprite.x -= rowIndex * float(__columns) * offPerFrame.x;
 			
@@ -1834,24 +1839,25 @@ void fragment() {
 // Input:4
 	vec3 n_out4p0 = vec3(UV, 0.0);
 
-// UVFlipbook:2
-	float n_in2p1 = 24.00000;
-	float n_in2p2 = 1.00000;
-	float n_in2p3 = 0.00000;
-	float n_in2p4 = 14.00000;
-	float n_in2p5 = 0.37000;
-	vec3 n_out2p0;
+// UVFlipbook:5
+	float n_in5p1 = 24.00000;
+	float n_in5p2 = 1.00000;
+	float n_in5p3 = 0.00000;
+	float n_in5p4 = 14.00000;
+	float n_in5p5 = 0.30000;
+	vec3 n_out5p0;
 	{
-		n_out2p0.xy = flipbook_anim(n_out4p0.xy, int(n_in2p1), int(n_in2p2), int(n_in2p3), int(n_in2p4), n_in2p5 );
+		n_out5p0.xy = flipbook_anim(n_out4p0.xy, int(n_in5p1), int(n_in5p2), int(n_in5p3), int(n_in5p4), n_in5p5 );
 	}
 
 // Texture:3
-	vec4 tex_frg_3_read = texture(tex_frg_3, n_out2p0.xy);
+	vec4 tex_frg_3_read = texture(tex_frg_3, n_out5p0.xy);
 	vec3 n_out3p0 = tex_frg_3_read.rgb;
 	float n_out3p1 = tex_frg_3_read.a;
 
 // Output:0
 	COLOR.rgb = n_out3p0;
+	COLOR.a = n_out3p1;
 
 }
 
@@ -1860,27 +1866,346 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -456.009, 5.52674 )
+graph_offset = Vector2( -355.59, -42.75 )
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2( 340, 40 )
-nodes/fragment/2/node = SubResource( 153 )
-nodes/fragment/2/position = Vector2( -300, 20 )
+nodes/fragment/0/position = Vector2( 520, 40 )
 nodes/fragment/3/node = SubResource( 154 )
-nodes/fragment/3/position = Vector2( 80, 0 )
+nodes/fragment/3/position = Vector2( -20, 0 )
 nodes/fragment/4/node = SubResource( 157 )
-nodes/fragment/4/position = Vector2( -500, 60 )
-nodes/fragment/connections = PoolIntArray( 3, 0, 0, 0, 4, 0, 2, 0, 2, 0, 3, 0 )
+nodes/fragment/4/position = Vector2( -920, 60 )
+nodes/fragment/5/node = SubResource( 158 )
+nodes/fragment/5/position = Vector2( -560, 20 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 0, 0, 4, 0, 5, 0, 5, 0, 3, 0, 3, 1, 0, 1 )
 
 [sub_resource type="ShaderMaterial" id=156]
 shader = SubResource( 155 )
+
+[sub_resource type="VisualShaderNodeInput" id=159]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeCustom" id=160]
+default_input_values = [ 1, 2.0, 2, 1.0, 3, 0.0 ]
+initialized = true
+script = ExtResource( 27 )
+
+[sub_resource type="VisualShaderNodeVectorOp" id=161]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=162]
+texture = ExtResource( 9 )
+texture_type = 1
+
+[sub_resource type="VisualShader" id=163]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_5 : hint_albedo;
+
+
+// TriangleWave
+
+		float triangle_wave(float IN, float __amplitude, float __frequency, float __height) {
+			return 1.0 - __amplitude * abs(round(IN / __frequency) - (IN / __frequency)) + __height;
+		}
+	
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	float n_out2p0 = TIME;
+
+// TriangleWave:3
+	float n_in3p1 = 2.00000;
+	float n_in3p2 = 1.00000;
+	float n_in3p3 = 0.00000;
+	float n_out3p0;
+	{
+		n_out3p0 = triangle_wave(n_out2p0, n_in3p1, n_in3p2, n_in3p3);
+	}
+
+// Texture:5
+	vec4 tex_frg_5_read = texture(tex_frg_5, UV.xy);
+	vec3 n_out5p0 = tex_frg_5_read.rgb;
+	float n_out5p1 = tex_frg_5_read.a;
+
+// VectorOp:4
+	vec3 n_out4p0 = vec3(n_out3p0) * n_out5p0;
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -296.325, 4.5 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 820, 140 )
+nodes/fragment/2/node = SubResource( 159 )
+nodes/fragment/2/position = Vector2( -540, 140 )
+nodes/fragment/3/node = SubResource( 160 )
+nodes/fragment/3/position = Vector2( -120, 120 )
+nodes/fragment/4/node = SubResource( 161 )
+nodes/fragment/4/position = Vector2( 322.82, 228.5 )
+nodes/fragment/5/node = SubResource( 162 )
+nodes/fragment/5/position = Vector2( -180, 440 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 4, 0, 5, 0, 4, 1, 4, 0, 0, 0, 2, 0, 3, 0 )
+
+[sub_resource type="ShaderMaterial" id=164]
+shader = SubResource( 163 )
+
+[sub_resource type="VisualShaderNodeInput" id=165]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeTexture" id=168]
+texture = ExtResource( 9 )
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id=171]
+operator = 2
+
+[sub_resource type="VisualShaderNodeCustom" id=172]
+default_input_values = [ 1, 2.0, 2, 1.0, 3, 0.0 ]
+initialized = true
+script = ExtResource( 28 )
+
+[sub_resource type="VisualShader" id=169]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_5 : hint_albedo;
+
+
+// SquareWave
+
+		float square_wave(float IN, float __amplitude, float __frequency, float __height) {
+			return __amplitude*sign(sin(2.0 * 3.1416 * IN * __frequency)) + __height;
+		}
+	
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	float n_out2p0 = TIME;
+
+// SquareWave:7
+	float n_in7p1 = 2.00000;
+	float n_in7p2 = 1.00000;
+	float n_in7p3 = 0.00000;
+	float n_out7p0;
+	{
+		n_out7p0 = square_wave(n_out2p0, n_in7p1, n_in7p2, n_in7p3);
+	}
+
+// Texture:5
+	vec4 tex_frg_5_read = texture(tex_frg_5, UV.xy);
+	vec3 n_out5p0 = tex_frg_5_read.rgb;
+	float n_out5p1 = tex_frg_5_read.a;
+
+// VectorOp:6
+	vec3 n_out6p0 = vec3(n_out7p0) * n_out5p0;
+
+// Output:0
+	COLOR.rgb = n_out6p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -210.72, 49.5 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 740, 200 )
+nodes/fragment/2/node = SubResource( 165 )
+nodes/fragment/2/position = Vector2( -558.54, 84.5 )
+nodes/fragment/5/node = SubResource( 168 )
+nodes/fragment/5/position = Vector2( -140, 460 )
+nodes/fragment/6/node = SubResource( 171 )
+nodes/fragment/6/position = Vector2( 341.35, 259.5 )
+nodes/fragment/7/node = SubResource( 172 )
+nodes/fragment/7/position = Vector2( -95.3502, 185 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 7, 0, 7, 0, 6, 0, 5, 0, 6, 1, 6, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=170]
+shader = SubResource( 169 )
+
+[sub_resource type="VisualShaderNodeInput" id=173]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeCustom" id=174]
+default_input_values = [ 1, 1.0, 2, 1.0, 3, 0.0 ]
+initialized = true
+script = ExtResource( 29 )
+
+[sub_resource type="VisualShaderNodeVectorOp" id=175]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=176]
+texture = ExtResource( 9 )
+texture_type = 1
+
+[sub_resource type="VisualShader" id=177]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_5 : hint_albedo;
+
+
+// SawtoothWave
+
+		float sawtooth_wave(float IN, float __amplitude, float __period, float __height) {
+			return 2.0 * __amplitude * ((IN/__period) - floor((1.0/2.0) + (IN / __period))) + __height;
+		}
+	
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	float n_out2p0 = TIME;
+
+// SawtoothWave:3
+	float n_in3p1 = 1.00000;
+	float n_in3p2 = 1.00000;
+	float n_in3p3 = 0.00000;
+	float n_out3p0;
+	{
+		n_out3p0 = sawtooth_wave(n_out2p0, n_in3p1, n_in3p2, n_in3p3);
+	}
+
+// Texture:5
+	vec4 tex_frg_5_read = texture(tex_frg_5, UV.xy);
+	vec3 n_out5p0 = tex_frg_5_read.rgb;
+	float n_out5p1 = tex_frg_5_read.a;
+
+// VectorOp:4
+	vec3 n_out4p0 = vec3(n_out3p0) * n_out5p0;
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -296.325, 74.25 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 640, 180 )
+nodes/fragment/2/node = SubResource( 173 )
+nodes/fragment/2/position = Vector2( -574.73, 121.5 )
+nodes/fragment/3/node = SubResource( 174 )
+nodes/fragment/3/position = Vector2( -200, 140 )
+nodes/fragment/4/node = SubResource( 175 )
+nodes/fragment/4/position = Vector2( 220.27, 279.5 )
+nodes/fragment/5/node = SubResource( 176 )
+nodes/fragment/5/position = Vector2( -240, 440 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 3, 0, 3, 0, 4, 0, 5, 0, 4, 1, 4, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=178]
+shader = SubResource( 177 )
+
+[sub_resource type="VisualShaderNodeInput" id=179]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeCustom" id=180]
+default_input_values = [ 1, 1.0, 2, 1.0, 3, 0.0, 4, 0.0 ]
+initialized = true
+script = ExtResource( 30 )
+
+[sub_resource type="VisualShaderNodeVectorOp" id=181]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=182]
+texture = ExtResource( 9 )
+texture_type = 1
+
+[sub_resource type="VisualShader" id=183]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_5 : hint_albedo;
+
+
+// SineWave
+
+		float sine_wave(float IN, float __amplitude, float __frequency, float __phase, float __height) {
+			return __amplitude * sin(2.0 * 3.1416 * __frequency * IN + __phase) + __height;
+		}
+	
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	float n_out2p0 = TIME;
+
+// SineWave:3
+	float n_in3p1 = 1.00000;
+	float n_in3p2 = 1.00000;
+	float n_in3p3 = 0.00000;
+	float n_in3p4 = 0.00000;
+	float n_out3p0;
+	{
+		n_out3p0 = sine_wave(n_out2p0, n_in3p1, n_in3p2, n_in3p3, n_in3p4);
+	}
+
+// Texture:5
+	vec4 tex_frg_5_read = texture(tex_frg_5, UV.xy);
+	vec3 n_out5p0 = tex_frg_5_read.rgb;
+	float n_out5p1 = tex_frg_5_read.a;
+
+// VectorOp:4
+	vec3 n_out4p0 = vec3(n_out3p0) * n_out5p0;
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -289.74, 38.25 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 179 )
+nodes/fragment/2/position = Vector2( -852.45, 68 )
+nodes/fragment/3/node = SubResource( 180 )
+nodes/fragment/3/position = Vector2( -500, 80 )
+nodes/fragment/4/node = SubResource( 181 )
+nodes/fragment/4/position = Vector2( 10.5498, 226 )
+nodes/fragment/5/node = SubResource( 182 )
+nodes/fragment/5/position = Vector2( -560, 420 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 3, 0, 3, 0, 4, 0, 5, 0, 4, 1, 4, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=184]
+shader = SubResource( 183 )
 
 [node name="Examples" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="BlendModes" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -2236,6 +2561,7 @@ valign = 1
 autowrap = true
 
 [node name="Shapes" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -2511,5 +2837,147 @@ text = "Flipbook"
 align = 1
 autowrap = true
 
+[node name="Wave" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Wave"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="Wave/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 27 )
+text = "Wave"
+align = 1
+valign = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Wave/VBoxContainer"]
+margin_top = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="TriangleWave" type="VBoxContainer" parent="Wave/VBoxContainer/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TriangleWave" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/TriangleWave"]
+material = SubResource( 164 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/TriangleWave"]
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 143.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 70 )
+text = "Triangle Wave"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="SquareWave" type="VBoxContainer" parent="Wave/VBoxContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 204.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SquareWave" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/SquareWave"]
+material = SubResource( 170 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/SquareWave"]
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 143.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 70 )
+text = "Square Wave"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="SawtoothWave" type="VBoxContainer" parent="Wave/VBoxContainer/HBoxContainer"]
+margin_left = 208.0
+margin_right = 308.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SawtoothWave" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/SawtoothWave"]
+material = SubResource( 178 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/SawtoothWave"]
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 143.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 70 )
+text = "Sawtooth Wave"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="SineWave" type="VBoxContainer" parent="Wave/VBoxContainer/HBoxContainer"]
+margin_left = 312.0
+margin_right = 412.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SineWave" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/SineWave"]
+material = SubResource( 184 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/SineWave"]
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 122.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 70 )
+text = "Sine Wave"
+align = 1
+valign = 1
+autowrap = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 512, 304 )
+position = Vector2( 512, 300 )
