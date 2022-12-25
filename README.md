@@ -81,7 +81,7 @@ You can contribute by:
 * reporting issues
 * creating PRs to solve standing issues
 * adding more nodes that you find useful yourself in a PR
-* use the library and spread the word 📰
+* using the library and spreading the word 📰
 
 ## 🔢 Versioning
 This branch is for the 3.x version of Godot. If you do want to use this addon for 4.0, switch to the 4.0 branch. Beware of breaking changes and bugs in the 4.0 version.
