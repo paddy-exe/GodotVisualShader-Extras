@@ -85,7 +85,7 @@ You can contribute by:
 * reporting issues
 * creating PRs to solve standing issues
 * adding more nodes that you find useful yourself in a PR
-* use the library and spread the word 📰
+* using the library and spreading the word 📰
 
 ## 🔢 Versioning
 This branch is currently still undergoing changes so you might encounter bugs and breaking changes from the 3.x version.
