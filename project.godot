@@ -187,6 +187,10 @@ config/description="Visual Shader Nodes Library containing procedural shapes, UV
 config/features=PackedStringArray("4.0")
 config/icon="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo.png"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

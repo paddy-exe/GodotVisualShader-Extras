@@ -52,9 +52,19 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Rhombus
     - Parallelogram
     - more coming soon...
+
+<div align="center">
+  <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
+</div>
+
 - UV
     - UV Twirl
     - UV Flipbook
+
+<div align="center">
+  <img src="addons/VisualShaderExtras/AddonAssets/Wave-Showcase.gif" width="800"/>
+</div>
+
 - Wave
     - [Triangle](https://en.wikipedia.org/wiki/Triangle_wave)
     - [Square](https://en.wikipedia.org/wiki/Square_wave)
