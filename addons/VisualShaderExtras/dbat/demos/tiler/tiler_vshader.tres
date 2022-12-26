@@ -1,0 +1,151 @@
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://1a2c8tpsprgn"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/VividLight.gd" id="3_2vffd"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/tiler.gd" id="3_35se3"]
+[ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="4_7m7pb"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="4_46hr2"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_u5jbf"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
+initialized = true
+script = ExtResource("4_46hr2")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_llsic"]
+default_input_values = [0, Vector2(2, 4), 1, 8.0]
+initialized = true
+script = ExtResource("3_35se3")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_uxt0j"]
+initialized = true
+script = ExtResource("3_2vffd")
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_rosqw"]
+constant = Color(0.10576, 0.181688, 0.480469, 1)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5typr"]
+texture = ExtResource("4_7m7pb")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_3iycs"]
+default_input_values = [0, Vector2(1, 1), 1, 4.0]
+initialized = true
+script = ExtResource("3_35se3")
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_27;
+
+
+// Tiler
+
+	vec2 tile(vec2 _st, float _zoom){
+		_st *= _zoom;
+		return fract(_st);
+	}
+	
+// Box
+
+		float sdBox( in vec2 __position, in vec2 __proportions )
+		{
+			vec2 __d = abs(__position) - __proportions;
+			return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
+		}
+	
+// BlendVividLight
+
+		vec3 blend_color_dodge(vec3 __top_col, vec3 __bot_col)
+		{
+			return __bot_col / (1.0 - __top_col);
+		}
+		
+		vec3 blend_color_burn(vec3 __top_col, vec3 __bot_col)
+		{
+			return 1.0 - ((1.0 - __bot_col) / __top_col);
+		}
+		
+		float blend_rgb_to_v(vec3 __col) {
+			return max(max(__col.r / 255.0, __col.g / 255.0), __col.b / 255.0);
+		}
+		
+		vec3 blend_vivid_light(vec3 __top_col, vec3 __bot_col) {
+			if (blend_rgb_to_v(__top_col) > 0.5) {
+				return blend_color_dodge(__top_col, __bot_col);
+			} else {
+				return blend_color_burn(__top_col, __bot_col);
+			}
+		}
+	
+
+void fragment() {
+	vec2 n_out24p0;
+// Tiler:24
+	vec2 n_in24p0 = vec2(2.00000, 4.00000);
+	float n_in24p1 = 8.00000;
+	{
+		
+			vec2 st = UV.xy/n_in24p0.xy;
+			st = tile(st,n_in24p1); // split the space in n 
+			n_out24p0 = st; //emit the new tiled uv
+			
+	}
+
+
+	float n_out23p0;
+// Box:23
+	vec2 n_in23p1 = vec2(0.50000, 0.50000);
+	vec2 n_in23p2 = vec2(0.25000, 0.25000);
+	{
+		n_out23p0 = sdBox(n_out24p0.xy - n_in23p1.xy, n_in23p2.xy);
+	}
+
+
+// ColorConstant:26
+	vec4 n_out26p0 = vec4(0.105760, 0.181688, 0.480469, 1.000000);
+
+
+	vec3 n_out25p0;
+// BlendVividLight:25
+	{
+		n_out25p0.rgb = blend_vivid_light(vec3(n_out23p0).rgb, vec3(n_out26p0.xyz).rgb);
+	}
+
+
+	vec2 n_out28p0;
+// Tiler:28
+	vec2 n_in28p0 = vec2(1.00000, 1.00000);
+	float n_in28p1 = 4.00000;
+	{
+		
+			vec2 st = UV.xy/n_in28p0.xy;
+			st = tile(st,n_in28p1); // split the space in n 
+			n_out28p0 = st; //emit the new tiled uv
+			
+	}
+
+
+// Texture2D:27
+	vec4 n_out27p0 = texture(tex_frg_27, n_out28p0);
+
+
+// Output:0
+	ALBEDO = n_out25p0;
+	EMISSION = vec3(n_out27p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-1256.62, 84.3382)
+nodes/fragment/0/position = Vector2(-1240, 340)
+nodes/fragment/23/node = SubResource("VisualShaderNodeCustom_u5jbf")
+nodes/fragment/23/position = Vector2(-1720, 220)
+nodes/fragment/24/node = SubResource("VisualShaderNodeCustom_llsic")
+nodes/fragment/24/position = Vector2(-2040, 320)
+nodes/fragment/25/node = SubResource("VisualShaderNodeCustom_uxt0j")
+nodes/fragment/25/position = Vector2(-1460, 260)
+nodes/fragment/26/node = SubResource("VisualShaderNodeColorConstant_rosqw")
+nodes/fragment/26/position = Vector2(-1660, 520)
+nodes/fragment/27/node = SubResource("VisualShaderNodeTexture_5typr")
+nodes/fragment/27/position = Vector2(-1680, 600)
+nodes/fragment/28/node = SubResource("VisualShaderNodeCustom_3iycs")
+nodes/fragment/28/position = Vector2(-2040, 520)
+nodes/fragment/connections = PackedInt32Array(24, 0, 23, 0, 26, 0, 25, 1, 23, 0, 25, 0, 25, 0, 0, 0, 28, 0, 27, 0, 27, 0, 0, 5)
