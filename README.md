@@ -1,3 +1,5 @@
+# This is a fork -- please go to the original source: #
+
 <div id="header" align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo.png" width="250"/>
 </div>
