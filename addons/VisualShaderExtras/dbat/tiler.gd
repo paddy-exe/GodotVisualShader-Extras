@@ -16,6 +16,8 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# With assist from https://thebookofshaders.com/09/
+
 @tool
 extends VisualShaderNodeCustom
 class_name VisualShaderNodeTiler
@@ -26,6 +28,7 @@ func _get_name():
 func _init() -> void:
 	set_input_port_default_value(0, Vector2(2, 2))
 	set_input_port_default_value(1, 4.0)
+	set_input_port_default_value(2, 0.0)
 
 func _get_category():
 	return "VisualShaderExtras/Tiler"
@@ -37,7 +40,7 @@ func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_input_port_count():
-	return 2
+	return 3
 
 func _get_input_port_name(port):
 	match port:
@@ -45,6 +48,8 @@ func _get_input_port_name(port):
 			return "tiling"
 		1:
 			return "split"
+		2:
+			return "rotation radians"
 
 func _get_input_port_type(port):
 	match port:
@@ -52,6 +57,8 @@ func _get_input_port_type(port):
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D #tile x and y
 		1:
 			return VisualShaderNode.PORT_TYPE_SCALAR #split
+		2:
+			return VisualShaderNode.PORT_TYPE_SCALAR #radians
 			
 func _get_output_port_count():
 	return 1
@@ -63,24 +70,32 @@ func _get_output_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_global_code(mode):
-	# https://thebookofshaders.com/09/
 	return """
-	vec2 tile(vec2 _st, float _zoom){
-		_st *= _zoom;
-		return fract(_st);
+	vec2 tile(vec2 _uv, float _zoom){
+		_uv *= _zoom;
+		return fract(_uv);
+	}
+	vec2 rotate(vec2 _uv, float _angle) {
+		_uv -= 0.5;
+		_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+		_uv += 0.5;
+		return _uv;
 	}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	# https://thebookofshaders.com/09/
-	# I am unsure of the licence. I can't believe it's prohibitive. Let me know.
+	var rot:String
+	rot = "st = rotate(st, %s);" % input_vars[2] if input_vars[2] != "" else ""
+		
 	return """
 	vec2 st = UV.xy/{in_tilexy}.xy;
-	st = tile(st,{split}); // split the space in n 
-	{out_uv} = st; //emit the new tiled uv
+	st = tile(st,{split});
+	{rot}
+	{out_uv} = st;
 	""".format(
 		{
 		"in_tilexy":input_vars[0],
 		"split":  	input_vars[1],
 		"out_uv":	output_vars[0],
+		"rot":		rot
 		})
