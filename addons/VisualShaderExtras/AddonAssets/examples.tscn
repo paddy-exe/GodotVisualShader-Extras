@@ -1104,9 +1104,9 @@ script = ExtResource("17_4su7r")
 code = "shader_type canvas_item;
 
 
-// RotatedBox
+// PreciseBox
 
-		float sdRotatedBox( in vec2 p, in vec2 a, in vec2 b, float th )
+		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
 		{
 			float l = length(b-a);
 			vec2  d = (b-a)/l;
@@ -1119,13 +1119,13 @@ code = "shader_type canvas_item;
 
 void fragment() {
 	float n_out4p0;
-// RotatedBox:4
+// PreciseBox:4
 	vec2 n_in4p1 = vec2(0.50000, 0.50000);
 	vec2 n_in4p2 = vec2(-0.25000, -0.25000);
 	vec2 n_in4p3 = vec2(0.25000, 0.25000);
 	float n_in4p4 = 0.20000;
 	{
-		n_out4p0 = sdRotatedBox(UV.xy - n_in4p1.xy, n_in4p2.xy, n_in4p3.xy, n_in4p4);
+		n_out4p0 = sdPreciseBox(UV.xy - n_in4p1.xy, n_in4p2.xy, n_in4p3.xy, n_in4p4);
 	}
 
 
