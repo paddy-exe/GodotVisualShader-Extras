@@ -1,0 +1,12 @@
+name: Node Proposal
+description: Propose a new Shader node for the library
+body:
+
+- type: textarea
+  attributes:
+    label: Issue description
+    description: |
+      Describe your proposal descriptively.
+      You can and should include images or videos with drag and drop, and format code blocks or logs with <code>```</code> tags.
+  validations:
+    required: true

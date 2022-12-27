@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a bug in VisualShader-Extras
+body:
+
+- type: markdown
+  attributes:
+    value: |
+      - Write a descriptive issue title above.
+      - Search [open](https://github.com/paddy-exe/GodotVisualShader-Extras/issues) and [closed](https://github.com/paddy-exe/GodotVisualShader-Extras/issues?q=is%3Aissue+is%3Aclosed) issues to ensure it has not already been reported.
+
+- type: input
+  attributes:
+    label: Godot version
+    description: >
+      Specify the Git commit hash of your Godot build.
+    placeholder: v4.0.beta4.official [e6751549c]
+  validations:
+    required: true
+
+- type: input
+  attributes:
+    label: System information
+    description: |
+      Specify the OS version.
+    placeholder: Windows 10
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Issue description
+    description: |
+      Describe your issue briefly. What doesn't work, and how do you expect it to work instead?
+      You can include images or videos with drag and drop, and format code blocks or logs with <code>```</code> tags.
+  validations:
+    required: true

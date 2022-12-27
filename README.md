@@ -13,7 +13,7 @@
   </a>
 </div>
 
-# GodotVisualShader-Extras ✨
+# GodotVisualShader-Extras 3.x✨
 
 A Visual Shader Node Add-On for the Godot Engine
 
@@ -60,7 +60,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Random Range
     - Remap
     - Scene Depth
-- Wave
+- Wave (click on the links for more detail about the patterns)
     - [Triangle](https://en.wikipedia.org/wiki/Triangle_wave)
     - [Square](https://en.wikipedia.org/wiki/Square_wave)
     - [Sawtooth](https://en.wikipedia.org/wiki/Sawtooth_wave)
