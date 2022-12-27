@@ -42,11 +42,11 @@ func _get_input_port_count():
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "uv"
+			return "UV"
 		1:
-			return "position"
+			return "Position"
 		2:
-			return "proportions"
+			return "Proportions"
 
 func _get_input_port_type(port):
 	match port:

@@ -18,27 +18,28 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeRoundedBox
+class_name VisualShaderNodePreciseBox
 
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))
-	set_input_port_default_value(2, Vector2(0.25, 0.25))
-	set_input_port_default_value(3, Vector4(0.0, 0.0, 0.0, 0.0))
+	set_input_port_default_value(2, Vector2(-0.25, -0.25))
+	set_input_port_default_value(3, Vector2(0.25, 0.25))
+	set_input_port_default_value(4, 0.2)
 
 func _get_name():
-	return "RoundedBox"
+	return "PreciseBox"
 
 func _get_category():
 	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Rounded Box Shape3D"
+	return "Signed Distance precise Box Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 4
+	return 5
 
 func _get_input_port_name(port):
 	match port:
@@ -47,9 +48,11 @@ func _get_input_port_name(port):
 		1:
 			return "Position"
 		2:
-			return "Proportions"
+			return "Point A"
 		3:
-			return "Radia"
+			return "Point B"
+		4:
+			return "Thickness"
 
 func _get_input_port_type(port):
 	match port:
@@ -60,7 +63,9 @@ func _get_input_port_type(port):
 		2:
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		3:
-			return VisualShaderNode.PORT_TYPE_VECTOR_4D
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		4:
+			return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_output_port_count():
 	return 1
@@ -73,12 +78,14 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec4 __radia )
+		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
 		{
-			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__radia.w, __radia.z);
-			__radia.x  = (__pos.y > 0.0) ? __radia.x  : __radia.y;
-			vec2 __q = abs(__pos) - __proportions + __radia.x;
-			return min(max(__q.x, __q.y), 0.0) + length(max(__q, 0.0)) - __radia.x;
+			float l = length(b-a);
+			vec2  d = (b-a)/l;
+			vec2  q = (p-(a+b)*0.5);
+				  q = mat2(vec2(d.x,-d.y), vec2(d.y,d.x))*q;
+				  q = abs(q)-vec2(l,th)*0.5;
+			return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
 		}
 	"""
 
@@ -88,4 +95,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdRoundedBox(%s.xy - %s.xy, %s.xy, %s.xyzw);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]
+	return "%s = sdPreciseBox(%s.xy - %s.xy, %s.xy, %s.xy, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]
