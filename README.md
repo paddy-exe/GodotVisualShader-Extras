@@ -20,10 +20,6 @@ A Visual Shader Node Add-On for the Godot Engine
 The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
 
 ## Provided Nodes
-<div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.png" width="800"/>
-</div>
-
 - Blending Modes (taken from Krita Docs and other sources)
     - Darker Colors
     - Exclusion
@@ -39,7 +35,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Vivid Light
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/Shapes-Showcase.png" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.png" width="800"/>
 </div>
 
 - Shapes (Signed Distance Fields)
@@ -51,18 +47,20 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Triangle
     - Rhombus
     - Parallelogram
-    - more coming soon...
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonAssets/Shapes-Showcase.png" width="800"/>
 </div>
+
+- Usability
+    - Compare
 
 - UV
     - UV Twirl
     - UV Flipbook
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/Wave-Showcase.gif" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
 </div>
 
 - Wave
@@ -70,6 +68,10 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - [Square](https://en.wikipedia.org/wiki/Square_wave)
     - [Sawtooth](https://en.wikipedia.org/wiki/Sawtooth_wave)
     - [Sine (+ Angular Frequency Input variant)](https://en.wikipedia.org/wiki/Sine_wave)
+
+<div align="center">
+  <img src="addons/VisualShaderExtras/AddonAssets/Wave-Showcase.gif" width="800"/>
+</div>
 
 ## How to get started
 To integrate the Visual Shader nodes library into your poject, copy the VisualShaderExtras folder inside your addons folder. If the addons folder doesn't exist yet, create one. There's no further steps or activation through the project settings necessary.

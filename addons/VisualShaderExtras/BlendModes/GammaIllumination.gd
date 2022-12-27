@@ -23,11 +23,11 @@ func _get_input_port_count():
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "top layer"
+			return "Top layer"
 		1:
-			return "bottom layer"
+			return "Bottom layer"
 		2:
-			return "opacity"
+			return "Opacity"
 
 func _get_input_port_type(port):
 	match port:
@@ -42,7 +42,7 @@ func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int) -> String:
-	return "output"
+	return "Output"
 
 func _get_output_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D

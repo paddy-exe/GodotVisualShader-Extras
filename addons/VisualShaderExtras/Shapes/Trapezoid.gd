@@ -44,13 +44,13 @@ func _get_input_port_count():
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "uv"
+			return "UV"
 		1:
-			return "position"
+			return "Position"
 		2:
-			return "upper width"
+			return "Top width"
 		3:
-			return "lower width"
+			return "Bottom width"
 		4:
 			return "height"
 

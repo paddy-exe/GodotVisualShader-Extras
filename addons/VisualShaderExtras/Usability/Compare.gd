@@ -1,5 +1,7 @@
 # The MIT License
 # Copyright © 2022 Inigo Quilez
+# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
+# Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation 
@@ -18,74 +20,57 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeRoundedBox
-
-func _init():
-	set_input_port_default_value(1, Vector2(0.5, 0.5))
-	set_input_port_default_value(2, Vector2(0.25, 0.25))
-	set_input_port_default_value(3, Vector4(0.0, 0.0, 0.0, 0.0))
+class_name VisualShaderNodeCustomCompare
 
 func _get_name():
-	return "RoundedBox"
+	return "Compare"
+
+func _init() -> void:
+	pass#set_input_port_default_value(2, 0.5)
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return "Signed Distance Rounded Box Shape3D"
+	return "Compare Color inputs and output a mask for the second input"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 4
+	return 2
 
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "UV"
+			return "Color 1"
 		1:
-			return "Position"
-		2:
-			return "Proportions"
-		3:
-			return "Radia"
+			return "Color 2"
 
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		2:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		3:
 			return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_output_port_count():
 	return 1
 
-func _get_output_port_name(port):
-	return ""
+func _get_output_port_name(port: int) -> String:
+	return "Mask"
 
 func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_SCALAR
+	return VisualShaderNode.PORT_TYPE_SCALAR #float
 
 func _get_global_code(mode):
+	## Code from MaterialMaker, care of Rodzilla
 	return """
-		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec4 __radia )
+		float compare(vec4 in1, vec4 in2) 
 		{
-			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__radia.w, __radia.z);
-			__radia.x  = (__pos.y > 0.0) ? __radia.x  : __radia.y;
-			vec2 __q = abs(__pos) - __proportions + __radia.x;
-			return min(max(__q.x, __q.y), 0.0) + length(max(__q, 0.0)) - __radia.x;
+			return dot(abs(in1-in2), vec4(1.0));
 		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	var uv = "UV"
-	
-	if input_vars[0]:
-		uv = input_vars[0]
-	
-	return "%s = sdRoundedBox(%s.xy - %s.xy, %s.xy, %s.xyzw);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]
+	return "%s = compare(%s,%s);" % [output_vars[0],input_vars[0],input_vars[1]]
