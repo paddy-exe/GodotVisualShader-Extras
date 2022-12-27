@@ -13,7 +13,7 @@
   </a>
 </div>
 
-# GodotVisualShader-Extras ✨
+# GodotVisualShader-Extras 4.0✨
 
 A Visual Shader Node Add-On for the Godot Engine
 
@@ -58,12 +58,13 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
 - UV
     - UV Twirl
     - UV Flipbook
+    - UV Tiler
 
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
 </div>
 
-- Wave
+- Wave (click on the links for more detail about the patterns)
     - [Triangle](https://en.wikipedia.org/wiki/Triangle_wave)
     - [Square](https://en.wikipedia.org/wiki/Square_wave)
     - [Sawtooth](https://en.wikipedia.org/wiki/Sawtooth_wave)
