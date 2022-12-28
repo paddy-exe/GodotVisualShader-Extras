@@ -1,9 +1,9 @@
 [gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://1a2c8tpsprgn"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/VividLight.gd" id="3_2vffd"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/tiler.gd" id="3_35se3"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="4_7m7pb"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="4_46hr2"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/tilerv2.gd" id="4_j5nbg"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_u5jbf"]
 output_port_for_preview = 0
@@ -23,16 +23,6 @@ source = 5
 texture = ExtResource("4_7m7pb")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bfivj"]
-default_input_values = [0, Vector2(2, 2), 1, 8.0, 2, 0.76]
-initialized = true
-script = ExtResource("3_35se3")
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_n81jp"]
-default_input_values = [0, Vector2(2, 2), 1, 4.0, 2, 0.54]
-initialized = true
-script = ExtResource("3_35se3")
-
 [sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_xdvas"]
 operator = 3
 
@@ -42,139 +32,109 @@ texture_type = 1
 color_default = 2
 texture_filter = 2
 
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_133nf"]
+output_port_for_preview = 0
+default_input_values = [0, Vector2(6, 5), 1, 0.278, 2, 0.0, 3, 2.127]
+initialized = true
+script = ExtResource("4_j5nbg")
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_rdjab"]
+parameter_name = "BrickShift"
+default_value_enabled = true
+default_value = 1.0
+
 [resource]
 code = "shader_type spatial;
+uniform float BrickShift = 1;
 uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_linear;
 
 
-// Tiler
+// Tiler2
 
-	vec2 tile(vec2 _uv, float _zoom){
+	//uniform float shift : hint_range(0.0, 2.0) = 0.5; 
+	
+vec2 vec2_rotate(vec2 _v2, float _angle) {
+	_v2 -= 0.5;
+	_v2 = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _v2;
+	_v2 += 0.5;
+	return _v2;
+}
+	
+float random_float(vec2 input) {
+	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+	vec2 brick_tile(vec2 _uv, float _zoom, float shift)
+	{
 		_uv *= _zoom;
+		_uv.x += step(1.0, mod(_uv.y, 2.0)) * 0.5 * shift;
 		return fract(_uv);
 	}
-	vec2 rotate(vec2 _uv, float _angle) {
-		_uv -= 0.5;
-		_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-		_uv += 0.5;
-		return _uv;
-	}
 	
-// Box
-
-		float sdBox( in vec2 __position, in vec2 __proportions )
-		{
-			vec2 __d = abs(__position) - __proportions;
-			return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
-		}
-	
-// BlendVividLight
-
-		vec3 blend_color_dodge(vec3 __top_col, vec3 __bot_col)
-		{
-			return __bot_col / (1.0 - __top_col);
-		}
-		
-		vec3 blend_color_burn(vec3 __top_col, vec3 __bot_col)
-		{
-			return 1.0 - ((1.0 - __bot_col) / __top_col);
-		}
-		
-		float blend_rgb_to_v(vec3 __col) {
-			return max(max(__col.r / 255.0, __col.g / 255.0), __col.b / 255.0);
-		}
-		
-		vec3 blend_vivid_light(vec3 __top_col, vec3 __bot_col) {
-			if (blend_rgb_to_v(__top_col) > 0.5) {
-				return blend_color_dodge(__top_col, __bot_col);
-			} else {
-				return blend_color_burn(__top_col, __bot_col);
-			}
-		}
 	
 
 void fragment() {
-	vec2 n_out30p0;
-// Tiler:30
-	vec2 n_in30p0 = vec2(2.00000, 2.00000);
-	float n_in30p1 = 4.00000;
-	float n_in30p2 = 0.54000;
+// FloatParameter:36
+	float n_out36p0 = BrickShift;
+
+
+	vec2 n_out35p0;
+// Tiler2:35
+	vec2 n_in35p0 = vec2(6.00000, 5.00000);
+	float n_in35p1 = 0.27800;
+	float n_in35p2 = 0.00000;
 	{
 		
-			vec2 st = UV.xy/n_in30p0.xy;
-			st = tile(st,n_in30p1);
-			st = rotate(st, n_in30p2);
-			n_out30p0 = st;
+			//Much simpler to calculate zoom from the tiling vec2
+			float zoom = n_in35p0.x * n_in35p0.y;
+			
+			vec2 st = UV/n_in35p0;
+			
+			//This variation took me ages to work out:
+			vec2 unique_val = floor( st * zoom ) / zoom; 
+			
+			// Now the random rotation: Courtesy Arnklit
+			// https://github.com/Arnklit/TutorialResources/tree/main/tiling_rotation
+			
+			float rand_rotation = (random_float(unique_val) * 2.0 - 1.0) * n_in35p2 * 3.14;
+			//Just add whatever static rotation may be input:
+			rand_rotation += n_in35p1;
+			
+			st = brick_tile(st,zoom,n_out36p0);
+			
+			st = vec2_rotate(st, rand_rotation);
+		
+			n_out35p0 = st;
 			
 	}
 
 
 	vec4 n_out27p0;
 // Texture2D:27
-	n_out27p0 = texture(Texture2DParameter, n_out30p0);
-
-
-	vec2 n_out29p0;
-// Tiler:29
-	vec2 n_in29p0 = vec2(2.00000, 2.00000);
-	float n_in29p1 = 8.00000;
-	float n_in29p2 = 0.76000;
-	{
-		
-			vec2 st = UV.xy/n_in29p0.xy;
-			st = tile(st,n_in29p1);
-			st = rotate(st, n_in29p2);
-			n_out29p0 = st;
-			
-	}
-
-
-	float n_out23p0;
-// Box:23
-	vec2 n_in23p1 = vec2(0.50000, 0.50000);
-	vec2 n_in23p2 = vec2(0.25000, 0.25000);
-	{
-		n_out23p0 = sdBox(n_out29p0.xy - n_in23p1.xy, n_in23p2.xy);
-	}
-
-
-// ColorConstant:26
-	vec4 n_out26p0 = vec4(0.105760, 0.181688, 0.480469, 1.000000);
-
-
-	vec3 n_out25p0;
-// BlendVividLight:25
-	{
-		n_out25p0.rgb = blend_vivid_light(vec3(n_out23p0).rgb, vec3(n_out26p0.xyz).rgb);
-	}
-
-
-// ColorOp:33
-	vec3 n_out33p0 = max(vec3(n_out27p0.xyz), n_out25p0);
+	n_out27p0 = texture(Texture2DParameter, n_out35p0);
 
 
 // Output:0
-	ALBEDO = n_out33p0;
+	ALBEDO = vec3(n_out27p0.xyz);
 
 
 }
 "
-graph_offset = Vector2(-2009.17, 267.045)
+graph_offset = Vector2(-1442.48, 172.184)
 nodes/fragment/0/position = Vector2(-400, 460)
 nodes/fragment/23/node = SubResource("VisualShaderNodeCustom_u5jbf")
 nodes/fragment/23/position = Vector2(-1220, 280)
 nodes/fragment/25/node = SubResource("VisualShaderNodeCustom_uxt0j")
-nodes/fragment/25/position = Vector2(-800, 400)
+nodes/fragment/25/position = Vector2(-880, 420)
 nodes/fragment/26/node = SubResource("VisualShaderNodeColorConstant_rosqw")
-nodes/fragment/26/position = Vector2(-1080, 560)
+nodes/fragment/26/position = Vector2(-1100, 600)
 nodes/fragment/27/node = SubResource("VisualShaderNodeTexture_5typr")
-nodes/fragment/27/position = Vector2(-1080, 660)
-nodes/fragment/29/node = SubResource("VisualShaderNodeCustom_bfivj")
-nodes/fragment/29/position = Vector2(-1580, 280)
-nodes/fragment/30/node = SubResource("VisualShaderNodeCustom_n81jp")
-nodes/fragment/30/position = Vector2(-1560, 460)
+nodes/fragment/27/position = Vector2(-1100, 700)
 nodes/fragment/33/node = SubResource("VisualShaderNodeColorOp_xdvas")
-nodes/fragment/33/position = Vector2(-600, 480)
+nodes/fragment/33/position = Vector2(-640, 540)
 nodes/fragment/34/node = SubResource("VisualShaderNodeTexture2DParameter_bg1tf")
-nodes/fragment/34/position = Vector2(-1520, 660)
-nodes/fragment/connections = PackedInt32Array(26, 0, 25, 1, 23, 0, 25, 0, 29, 0, 23, 0, 27, 0, 33, 0, 25, 0, 33, 1, 30, 0, 27, 0, 34, 0, 27, 2, 33, 0, 0, 0)
+nodes/fragment/34/position = Vector2(-1580, 780)
+nodes/fragment/35/node = SubResource("VisualShaderNodeCustom_133nf")
+nodes/fragment/35/position = Vector2(-1640, 340)
+nodes/fragment/36/node = SubResource("VisualShaderNodeFloatParameter_rdjab")
+nodes/fragment/36/position = Vector2(-1940, 400)
+nodes/fragment/connections = PackedInt32Array(26, 0, 25, 1, 23, 0, 25, 0, 25, 0, 33, 1, 34, 0, 27, 2, 27, 0, 0, 0, 35, 0, 27, 0, 35, 0, 23, 0, 36, 0, 35, 3)

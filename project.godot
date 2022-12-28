@@ -9,6 +9,26 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Resource",
+"class": &"LizardShaderLib",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/lib/lizardshaderlib.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeCompare",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/compare.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTiler",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/tiler.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTiler2",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/tilerv2.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
 "language": &"GDScript",
@@ -160,6 +180,10 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/BlendModes/VividLight.gd"
 }]
 _global_script_class_icons={
+"LizardShaderLib": "",
+"TempVisualShaderNodeCompare": "",
+"TempVisualShaderNodeTiler": "",
+"TempVisualShaderNodeTiler2": "",
 "VisualShaderNodeBox": "",
 "VisualShaderNodeCircle": "",
 "VisualShaderNodeCustomCompare": "",

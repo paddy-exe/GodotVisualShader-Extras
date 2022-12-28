@@ -25,9 +25,6 @@ class_name VisualShaderNodeCustomCompare
 func _get_name():
 	return "Compare"
 
-func _init() -> void:
-	pass#set_input_port_default_value(2, 0.5)
-
 func _get_category():
 	return "VisualShaderExtras/Usability"
 

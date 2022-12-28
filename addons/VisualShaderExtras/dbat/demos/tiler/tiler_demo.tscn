@@ -1,15 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb5m54tdeqf1i"]
+[gd_scene load_steps=8 format=3 uid="uid://bb5m54tdeqf1i"]
 
 [ext_resource type="Shader" uid="uid://1a2c8tpsprgn" path="res://addons/VisualShaderExtras/dbat/demos/tiler/tiler_vshader.tres" id="1_04drd"]
 [ext_resource type="ArrayMesh" uid="uid://bcv4ug57hcmnt" path="res://addons/VisualShaderExtras/dbat/demos/resources/suzanne.obj" id="1_b56b5"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="3_eldiv"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/tiler/arnklit_tiler_study.gdshader" id="4_b3niv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k21rv"]
 render_priority = 0
 shader = ExtResource("1_04drd")
+shader_parameter/BrickShift = 1.144
 shader_parameter/Texture2DParameter = ExtResource("3_eldiv")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xbehk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20tqy"]
+render_priority = 0
+shader = ExtResource("4_b3niv")
+shader_parameter/tiling = 4.028
+shader_parameter/randomize_rotation = 0.352
+shader_parameter/albedo_texture = ExtResource("3_eldiv")
 
 [node name="Node3D" type="Node3D"]
 
@@ -22,3 +31,8 @@ surface_material_override/0 = SubResource("ShaderMaterial_k21rv")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.10987, -0.0478901, 0.061174)
 mesh = SubResource("PlaneMesh_xbehk")
 surface_material_override/0 = SubResource("ShaderMaterial_k21rv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4.24086, -0.0478901, 0.061174)
+mesh = SubResource("PlaneMesh_xbehk")
+surface_material_override/0 = SubResource("ShaderMaterial_20tqy")

@@ -20,7 +20,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCombine
+class_name TempVisualShaderNodeCompare
 
 func _get_name():
 	return "Compare"
@@ -29,7 +29,7 @@ func _init() -> void:
 	pass#set_input_port_default_value(2, 0.5)
 
 func _get_category():
-	return "VisualShaderExtras/Compare"
+	return "dbatWork/Compare"
 
 func _get_description():
 	return "Compare Stuff"
