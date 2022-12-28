@@ -1,4 +1,4 @@
-[gd_scene load_steps=172 format=3 uid="uid://bgjqmbctmrcvv"]
+[gd_scene load_steps=176 format=3 uid="uid://cn7nb6ac3skd6"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonAssets/icon.svg" id="1_cgkaa"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/GammaIllumination.gd" id="2_jf1ub"]
@@ -15,8 +15,8 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="14_jc8jc"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="15_ge12c"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="16_lficu"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="17_4su7r"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" id="17_kodn2"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RotatedBox.gd" id="18_3s65g"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" id="19_jp1e3"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Trapezoid.gd" id="20_7awbu"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Triangle.gd" id="21_775g5"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bn8avh1dk262a" path="res://addons/VisualShaderExtras/AddonAssets/DinoSprites - vita.png" id="23_7eq8w"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" id="24_b72mw"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" id="24_peh0q"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTiler.gd" id="24_xmnb7"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="25_srj7y"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="26_777un"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="27_5a8eg"]
@@ -1097,15 +1098,15 @@ shader = SubResource("VisualShader_atxn6")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eypac"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(-0.25, -0.25), 3, Vector2(0.25, 0.25), 4, 0.2]
 initialized = true
-script = ExtResource("18_3s65g")
+script = ExtResource("17_4su7r")
 
 [sub_resource type="VisualShader" id="VisualShader_2wk66"]
 code = "shader_type canvas_item;
 
 
-// RotatedBox
+// PreciseBox
 
-		float sdRotatedBox( in vec2 p, in vec2 a, in vec2 b, float th )
+		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
 		{
 			float l = length(b-a);
 			vec2  d = (b-a)/l;
@@ -1118,13 +1119,13 @@ code = "shader_type canvas_item;
 
 void fragment() {
 	float n_out4p0;
-// RotatedBox:4
+// PreciseBox:4
 	vec2 n_in4p1 = vec2(0.50000, 0.50000);
 	vec2 n_in4p2 = vec2(-0.25000, -0.25000);
 	vec2 n_in4p3 = vec2(0.25000, 0.25000);
 	float n_in4p4 = 0.20000;
 	{
-		n_out4p0 = sdRotatedBox(UV.xy - n_in4p1.xy, n_in4p2.xy, n_in4p3.xy, n_in4p4);
+		n_out4p0 = sdPreciseBox(UV.xy - n_in4p1.xy, n_in4p2.xy, n_in4p3.xy, n_in4p4);
 	}
 
 
@@ -1490,6 +1491,63 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 0, 5, 0, 5, 3, 0, 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esshf"]
 shader = SubResource("VisualShader_pgiym")
 shader_parameter/MainTex = ExtResource("23_7eq8w")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fuam6"]
+default_input_values = [0, Vector2(2, 2), 1, 4.0, 2, 2.08165e-12]
+initialized = true
+script = ExtResource("24_xmnb7")
+
+[sub_resource type="VisualShader" id="VisualShader_8gnev"]
+code = "shader_type canvas_item;
+
+
+// UVTiler
+
+		vec2 tile(vec2 _uv, float _zoom){
+			_uv *= _zoom;
+			return fract(_uv);
+		}
+		
+		vec2 rotate(vec2 _uv, float _angle) {
+			_uv -= 0.5;
+			_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+			_uv += 0.5;
+			return _uv;
+		}
+	
+
+void fragment() {
+	vec2 n_out2p0;
+// UVTiler:2
+	vec2 n_in2p0 = vec2(2.00000, 2.00000);
+	float n_in2p1 = 4.00000;
+	float n_in2p2 = 0.00000;
+	{
+		
+			vec2 st = UV.xy/n_in2p0.xy;
+			st = tile(st,n_in2p1);
+			st = rotate(st, n_in2p2);
+			n_out2p0 = st;
+			
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out2p0, 0.0);
+
+
+}
+"
+graph_offset = Vector2(-215.28, -54)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(340, 40)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_fuam6")
+nodes/fragment/2/position = Vector2(-260, 60)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8ct1"]
+shader = SubResource("VisualShader_8gnev")
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qhyoa"]
 default_input_values = [1, 2.0, 2, 1.0, 3, 0.0]
@@ -2079,18 +2137,18 @@ text = "Rhombus"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RotatedBox" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
+[node name="PreciseBox" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/RotatedBox"]
+[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/PreciseBox"]
 material = SubResource("ShaderMaterial_lucsr")
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("1_cgkaa")
 
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/RotatedBox"]
+[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/PreciseBox"]
 layout_mode = 2
-text = "Rotated Box"
+text = "Precise Box"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2173,18 +2231,29 @@ horizontal_alignment = 1
 
 [node name="UVFlipbook" type="VBoxContainer" parent="UV/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 
-[node name="ColorRect" type="ColorRect" parent="UV/VBoxContainer/HBoxContainer/UVFlipbook"]
-texture_filter = 6
-texture_repeat = 2
+[node name="TextureRect" type="TextureRect" parent="UV/VBoxContainer/HBoxContainer/UVFlipbook"]
 material = SubResource("ShaderMaterial_esshf")
 layout_mode = 2
-size_flags_vertical = 3
+texture = ExtResource("1_cgkaa")
 
 [node name="Label" type="Label" parent="UV/VBoxContainer/HBoxContainer/UVFlipbook"]
 layout_mode = 2
-text = "UV Flipbook Anim"
+text = "UV Flipbook Animation"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UVTiler" type="VBoxContainer" parent="UV/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UV/VBoxContainer/HBoxContainer/UVTiler"]
+material = SubResource("ShaderMaterial_v8ct1")
+layout_mode = 2
+texture = ExtResource("1_cgkaa")
+
+[node name="Label" type="Label" parent="UV/VBoxContainer/HBoxContainer/UVTiler"]
+layout_mode = 2
+text = "UV Tiler"
 horizontal_alignment = 1
 
 [node name="Wave" type="Control" parent="."]

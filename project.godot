@@ -20,9 +20,9 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Shapes/Circle.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeCombine",
+"class": &"VisualShaderNodeCustomCompare",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/compare.gd"
+"path": "res://addons/VisualShaderExtras/Usability/Compare.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeDarkerColor",
@@ -85,14 +85,14 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/BlendModes/PinLight.gd"
 }, {
 "base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodePreciseBox",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/Shapes/PreciseBox.gd"
+}, {
+"base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeRhombus",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Shapes/Rhombus.gd"
-}, {
-"base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeRotatedBox",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/Shapes/RotatedBox.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeRoundedBox",
@@ -122,7 +122,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeTiler",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/tiler.gd"
+"path": "res://addons/VisualShaderExtras/UV/UVTiler.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeTrapezoid",
@@ -162,7 +162,7 @@ _global_script_classes=[{
 _global_script_class_icons={
 "VisualShaderNodeBox": "",
 "VisualShaderNodeCircle": "",
-"VisualShaderNodeCombine": "",
+"VisualShaderNodeCustomCompare": "",
 "VisualShaderNodeDarkerColor": "",
 "VisualShaderNodeExclusion": "",
 "VisualShaderNodeGammaDark": "",
@@ -175,8 +175,8 @@ _global_script_class_icons={
 "VisualShaderNodeLuminosity": "",
 "VisualShaderNodeParallelogram": "",
 "VisualShaderNodePinLight": "",
+"VisualShaderNodePreciseBox": "",
 "VisualShaderNodeRhombus": "",
-"VisualShaderNodeRotatedBox": "",
 "VisualShaderNodeRoundedBox": "",
 "VisualShaderNodeSawtoothWave": "",
 "VisualShaderNodeSineWave": "",
