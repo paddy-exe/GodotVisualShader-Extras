@@ -24,7 +24,7 @@ texture = ExtResource("4_7m7pb")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bfivj"]
-default_input_values = [0, Vector2(2, 2), 1, 4.0, 2, 0.76]
+default_input_values = [0, Vector2(2, 2), 1, 8.0, 2, 0.76]
 initialized = true
 script = ExtResource("3_35se3")
 
@@ -117,7 +117,7 @@ void fragment() {
 	vec2 n_out29p0;
 // Tiler:29
 	vec2 n_in29p0 = vec2(2.00000, 2.00000);
-	float n_in29p1 = 4.00000;
+	float n_in29p1 = 8.00000;
 	float n_in29p2 = 0.76000;
 	{
 		
@@ -159,22 +159,22 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1191.51, 159.694)
-nodes/fragment/0/position = Vector2(-440, 400)
+graph_offset = Vector2(-2009.17, 267.045)
+nodes/fragment/0/position = Vector2(-400, 460)
 nodes/fragment/23/node = SubResource("VisualShaderNodeCustom_u5jbf")
-nodes/fragment/23/position = Vector2(-1140, 260)
+nodes/fragment/23/position = Vector2(-1220, 280)
 nodes/fragment/25/node = SubResource("VisualShaderNodeCustom_uxt0j")
-nodes/fragment/25/position = Vector2(-880, 300)
+nodes/fragment/25/position = Vector2(-800, 400)
 nodes/fragment/26/node = SubResource("VisualShaderNodeColorConstant_rosqw")
 nodes/fragment/26/position = Vector2(-1080, 560)
 nodes/fragment/27/node = SubResource("VisualShaderNodeTexture_5typr")
-nodes/fragment/27/position = Vector2(-1140, 760)
+nodes/fragment/27/position = Vector2(-1080, 660)
 nodes/fragment/29/node = SubResource("VisualShaderNodeCustom_bfivj")
-nodes/fragment/29/position = Vector2(-1640, 400)
+nodes/fragment/29/position = Vector2(-1580, 280)
 nodes/fragment/30/node = SubResource("VisualShaderNodeCustom_n81jp")
-nodes/fragment/30/position = Vector2(-1560, 600)
+nodes/fragment/30/position = Vector2(-1560, 460)
 nodes/fragment/33/node = SubResource("VisualShaderNodeColorOp_xdvas")
-nodes/fragment/33/position = Vector2(-620, 420)
+nodes/fragment/33/position = Vector2(-600, 480)
 nodes/fragment/34/node = SubResource("VisualShaderNodeTexture2DParameter_bg1tf")
-nodes/fragment/34/position = Vector2(-1540, 900)
+nodes/fragment/34/position = Vector2(-1520, 660)
 nodes/fragment/connections = PackedInt32Array(26, 0, 25, 1, 23, 0, 25, 0, 29, 0, 23, 0, 27, 0, 33, 0, 25, 0, 33, 1, 30, 0, 27, 0, 34, 0, 27, 2, 33, 0, 0, 0)
