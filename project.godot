@@ -52,7 +52,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCustomExtended",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/lib/VisualShaderNodeCustomExtended.gd"
+"path": "res://addons/VisualShaderExtras/libs_PR/VisualShaderNodeCustomExtended.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeDarkerColor",

@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://disggi2i4kjos"]
 
 [ext_resource type="ArrayMesh" uid="uid://bcv4ug57hcmnt" path="res://addons/VisualShaderExtras/dbat/demos/resources/suzanne.obj" id="1_b56b5"]
-[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/tiler/tiler_vshader.tres" id="2_d3cw6"]
+[ext_resource type="Shader" uid="uid://dylv1qc38ibcq" path="res://addons/VisualShaderExtras/dbat/demos/tiler/tiler_vshader.tres" id="2_d3cw6"]
 [ext_resource type="Texture2D" uid="uid://ck6ib50lrnxw5" path="res://addons/VisualShaderExtras/AddonAssets/icon.png" id="3_bro2i"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="3_eldiv"]
 [ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/tiler/scraps/arnklit_tiler_study.gdshader" id="4_b3niv"]
@@ -10,9 +10,9 @@
 render_priority = 0
 shader = ExtResource("2_d3cw6")
 shader_parameter/DownAcross = null
-shader_parameter/Rot = 0.15
-shader_parameter/RandRot = 0.392
-shader_parameter/BrickShift = null
+shader_parameter/Rot = 2.046
+shader_parameter/RandRot = 1.0
+shader_parameter/BrickShift = 0.344
 shader_parameter/Texture2DParameter = ExtResource("3_bro2i")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xbehk"]
