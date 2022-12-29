@@ -11,5 +11,3 @@ export_presets.cfg
 .mono/
 data_*/
 
-# Ignore Donn's dbat directory
-dbat/
