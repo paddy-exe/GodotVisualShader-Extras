@@ -8,8 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k21rv"]
 render_priority = 0
 shader = ExtResource("1_04drd")
-shader_parameter/BrickShift = 0.0
-shader_parameter/Texture2DParameter = ExtResource("3_eldiv")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xbehk"]
 

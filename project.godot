@@ -27,7 +27,17 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeTiler2",
 "language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/tilerv2.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTiler3",
+"language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/tilerv3.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTilerOKBUTNOT",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/tilerv_works.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
@@ -184,6 +194,8 @@ _global_script_class_icons={
 "TempVisualShaderNodeCompare": "",
 "TempVisualShaderNodeTiler": "",
 "TempVisualShaderNodeTiler2": "",
+"TempVisualShaderNodeTiler3": "",
+"TempVisualShaderNodeTilerOKBUTNOT": "",
 "VisualShaderNodeBox": "",
 "VisualShaderNodeCircle": "",
 "VisualShaderNodeCustomCompare": "",
