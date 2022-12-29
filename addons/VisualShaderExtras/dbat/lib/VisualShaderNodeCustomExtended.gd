@@ -1,3 +1,6 @@
+class_name VisualShaderNodeCustomExtended
+extends VisualShaderNodeCustom
+
 # The MIT License
 # Copyright © 2022 Donn Ingle
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
@@ -16,33 +19,32 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-class_name LizardShaderLib extends Resource
 
 ## A general store of common funcs we can recall form anywhere
 ## Done as a Resource to try keep duplication of these strings 
 ## down to, hopefully, one instance.
 
-@export var random_float:="""
+## Returns radians
+var random_float:="""
 float random_float(vec2 input) {
 	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }"""
 
-@export var hash_noise_range:="""
+var hash_noise_range:="""
 vec3 hash_noise_range( vec3 p ) {
 	p *= mat3(vec3(127.1, 311.7, -53.7), vec3(269.5, 183.3, 77.1), vec3(-301.7, 27.3, 215.3));
 	return 2.0 * fract(fract(p)*4375.55) -1.;
 }"""
 
-@export var vec2_rotate:="""
-vec2 vec2_rotate(vec2 _v2, float _angle) {
-	_v2 -= 0.5;
-	//_angle = radians(_angle);
-	_v2 = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _v2;
-	_v2 += 0.5;
-	return _v2;
+var vec2_rotate:="""
+vec2 vec2_rotate(vec2 _uv, float _angle) {
+	_uv -= 0.5;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += 0.5;
+	return _uv;
 }"""
 
-@export var mip_map_lod:="""
+var mip_map_lod:="""
 float mip_map_level(in vec2 _uv, vec2 texture_size) {
 	vec2 texture_coordinate = _uv * texture_size;
 	vec2 dx_vtc = dFdx(texture_coordinate);
@@ -52,9 +54,16 @@ float mip_map_level(in vec2 _uv, vec2 texture_size) {
 	return max(0, mml);
 }"""
 
-@export var basic_uv_tile:="""
+var basic_uv_tile:="""
 vec2 tile(vec2 _uv, float _zoom){
 	_uv *= _zoom;
 	return fract(_uv);
 }"""
 
+var brick_tile:="""
+vec2 brick_tile(vec2 _uv, float _zoom, float _shift)
+{
+	_uv *= _zoom;
+	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
+	return fract(_uv);
+}"""

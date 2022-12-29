@@ -34,25 +34,18 @@
 #    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
 #    HEREUNDER.
 
-## ISSUES:
-## There's always one tile that will not rotate randomly. Search me!
-
 @tool
-extends VisualShaderNodeCustom
+extends VisualShaderNodeCustomExtended
 class_name TempVisualShaderNodeTiler3
-
 
 func _get_name():
 	return "Tiler3"
 
-var LSL:LizardShaderLib
-
 func _init() -> void:
-	LSL = LizardShaderLib.new()
-	
 	set_input_port_default_value(0, Vector2(2, 2))
 	set_input_port_default_value(1, 0.0) #rot
 	set_input_port_default_value(2, 0.0) #randomize
+	set_input_port_default_value(3, 0.5) #shift
 	
 func _get_category():
 	return "dbatWork/Tiler"
@@ -60,6 +53,12 @@ func _get_category():
 func _get_description():
 	return "Tile Stuff"
 
+func _get_issues():
+	return """
+	## ISSUES:
+	1. There's often one tile that will not rotate randomly. Search me!
+	2. The brick-shifting and the random rotation do not play well together. Help!
+"""
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
@@ -90,67 +89,31 @@ func _get_output_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_global_code(mode):
-	#{LIB_rot}
-	return """
-	//uniform float shift : hint_range(0.0, 2.0) = 0.5; 
-	
-	vec2 FUCKKKKvec2_rotate(vec2 _v2, float _angle, float _shift, float _zoom) {
-		//float _row = mod(_v2.y, 2.0);
-		float _pivot = 0.5;//_v2/2.0;
-		_v2 -= 0.5;
-		_v2 = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _v2;
-		_v2 += 0.5; 
-		return _v2;
-	}
-	
-vec2 vec2_rotate(vec2 _v2, float _angle) {
-	_v2 -= 0.5;
-	_v2 = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _v2;
-	_v2 += 0.5;
-	return _v2;
-}
-	
-	vec2 brick_tile(vec2 _uv, float _zoom, float shift)
-	{
-		_uv *= _zoom;
-		float _row = mod(_uv.y, 2.0);
-		_uv.x += step(1.0, _row)  *  shift;
-		//return fract(_uv);
-		return _uv;
-	}
-	
-	{LIB_rand}
-	""".format({
-		"LIB_rot":LSL.vec2_rotate,
-		"LIB_rand":LSL.random_float,
-		})
+	return \
+		self.brick_tile + \
+		self.vec2_rotate + \
+		self.random_float
 
 func _get_code(input_vars, output_vars, mode, type):
 	return """
-	//Much simpler to calculate zoom from the tiling vec2
-	float zoom = {in_tilexy}.x * {in_tilexy}.y;
+	//Much simpler to calculate zoom from the tiling vec2 
+	float zoom = ({in_tilexy}.x * {in_tilexy}.y);
 	
 	vec2 st = UV/{in_tilexy};
 	
 	//This variation took me ages to work out:
-	vec2 unique_val = floor( st * zoom ) / zoom; 
+	vec2 unique_val = floor( st * zoom);
 	
 	// Now the random rotation: Courtesy Arnklit
 	// https://github.com/Arnklit/TutorialResources/tree/main/tiling_rotation
+	float rand_rotation = (random_float(unique_val) * 2.0 - 1.0) * {rr};
 	
-	float rand_rotation = (random_float(unique_val) * 2.0 - 1.0) * {rr} * 3.14;
-	//float rand_rotation = ( (random_float(unique_val) * {shift} )-({shift}/2.0)  ) * {rr} * 3.14;
+	//Just add whatever static rotation may be input and clamp:
+	rand_rotation = clamp(rand_rotation + {rot}, 0.0, 180.0);
 	
-	//Just add whatever static rotation may be input:
-	rand_rotation += {rot};
+	st = brick_tile(st, zoom, {shift});
+	st = vec2_rotate(st, rand_rotation);
 	
-	
-	//float row = mod(st.y, 2.0);
-	st = fract(st*zoom); //basic tile
-	st = vec2_rotate(st, rand_rotation);//, {shift}, zoom);
-	//st = brick_tile(st, zoom, {shift});
-	
-
 	{out_uv} = st;
 	""".format(
 		{
