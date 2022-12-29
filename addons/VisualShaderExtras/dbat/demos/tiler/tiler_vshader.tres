@@ -34,42 +34,42 @@ texture_filter = 2
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_133nf"]
 output_port_for_preview = 0
-default_input_values = [0, Vector2(6, 5), 1, 0.278, 2, 0.0, 3, 2.127]
+default_input_values = [0, Vector2(3, 2), 1, 0.0, 2, 2.96, 3, 2.127]
 initialized = true
 script = ExtResource("4_j5nbg")
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_rdjab"]
 parameter_name = "BrickShift"
+hint = 1
 default_value_enabled = true
-default_value = 1.0
+default_value = 0.5
 
 [resource]
 code = "shader_type spatial;
-uniform float BrickShift = 1;
+uniform float BrickShift : hint_range(0, 1) = 0.5;
 uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_linear;
 
 
 // Tiler2
 
 	//uniform float shift : hint_range(0.0, 2.0) = 0.5; 
-	
-vec2 vec2_rotate(vec2 _v2, float _angle) {
-	_v2 -= 0.5;
+vec2 vec2_rotate(vec2 _v2, float _angle, float _row, float _shift) {
+	vec2 _pivot = vec2((_v2.x + _shift)/2.0, _v2.y/2.0);
+	_v2 -= _pivot;
 	_v2 = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _v2;
-	_v2 += 0.5;
+	_v2 += _pivot;
 	return _v2;
-}
+}		
 	
 float random_float(vec2 input) {
 	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
-	vec2 brick_tile(vec2 _uv, float _zoom, float shift)
+	vec2 brick_tile(vec2 _uv, float _zoom, float _row, float shift)
 	{
 		_uv *= _zoom;
-		_uv.x += step(1.0, mod(_uv.y, 2.0)) * 0.5 * shift;
+		_uv.x += step(1.0, _row)  * shift;
 		return fract(_uv);
 	}
-	
 	
 
 void fragment() {
@@ -79,9 +79,9 @@ void fragment() {
 
 	vec2 n_out35p0;
 // Tiler2:35
-	vec2 n_in35p0 = vec2(6.00000, 5.00000);
-	float n_in35p1 = 0.27800;
-	float n_in35p2 = 0.00000;
+	vec2 n_in35p0 = vec2(3.00000, 2.00000);
+	float n_in35p1 = 0.00000;
+	float n_in35p2 = 2.96000;
 	{
 		
 			//Much simpler to calculate zoom from the tiling vec2
@@ -96,12 +96,14 @@ void fragment() {
 			// https://github.com/Arnklit/TutorialResources/tree/main/tiling_rotation
 			
 			float rand_rotation = (random_float(unique_val) * 2.0 - 1.0) * n_in35p2 * 3.14;
+			//float rand_rotation = ( (random_float(unique_val) * n_out36p0 )-(n_out36p0/2.0)  ) * n_in35p2 * 3.14;
 			//Just add whatever static rotation may be input:
 			rand_rotation += n_in35p1;
 			
-			st = brick_tile(st,zoom,n_out36p0);
+			float row = mod(st.y, 2.0);
+			st = brick_tile(st, zoom, row, n_out36p0);
+			//st = vec2_rotate(st, rand_rotation, row, n_out36p0);
 			
-			st = vec2_rotate(st, rand_rotation);
 		
 			n_out35p0 = st;
 			
@@ -119,22 +121,22 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1442.48, 172.184)
+graph_offset = Vector2(-2234, 516.233)
 nodes/fragment/0/position = Vector2(-400, 460)
 nodes/fragment/23/node = SubResource("VisualShaderNodeCustom_u5jbf")
-nodes/fragment/23/position = Vector2(-1220, 280)
+nodes/fragment/23/position = Vector2(-1335.2, 319.6)
 nodes/fragment/25/node = SubResource("VisualShaderNodeCustom_uxt0j")
 nodes/fragment/25/position = Vector2(-880, 420)
 nodes/fragment/26/node = SubResource("VisualShaderNodeColorConstant_rosqw")
-nodes/fragment/26/position = Vector2(-1100, 600)
+nodes/fragment/26/position = Vector2(-994.4, 615.6)
 nodes/fragment/27/node = SubResource("VisualShaderNodeTexture_5typr")
-nodes/fragment/27/position = Vector2(-1100, 700)
+nodes/fragment/27/position = Vector2(-1331.6, 622)
 nodes/fragment/33/node = SubResource("VisualShaderNodeColorOp_xdvas")
 nodes/fragment/33/position = Vector2(-640, 540)
 nodes/fragment/34/node = SubResource("VisualShaderNodeTexture2DParameter_bg1tf")
-nodes/fragment/34/position = Vector2(-1580, 780)
+nodes/fragment/34/position = Vector2(-1756.4, 722.4)
 nodes/fragment/35/node = SubResource("VisualShaderNodeCustom_133nf")
 nodes/fragment/35/position = Vector2(-1640, 340)
 nodes/fragment/36/node = SubResource("VisualShaderNodeFloatParameter_rdjab")
-nodes/fragment/36/position = Vector2(-1940, 400)
+nodes/fragment/36/position = Vector2(-1920, 340)
 nodes/fragment/connections = PackedInt32Array(26, 0, 25, 1, 23, 0, 25, 0, 25, 0, 33, 1, 34, 0, 27, 2, 27, 0, 0, 0, 35, 0, 27, 0, 35, 0, 23, 0, 36, 0, 35, 3)

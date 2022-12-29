@@ -72,8 +72,9 @@ func _get_output_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_global_code(mode):
+	#{LIB_rot}
 	return """
-	{LIB_rot}
+
 	{LIB_rand}
 	""".format({
 		"LIB_rot":LSL.vec2_rotate,
@@ -90,6 +91,7 @@ func _get_code(input_vars, output_vars, mode, type):
 	//float rand_rotation = (random_float(unique_val)) * {rr};// * 3.14;
 	rand_rotation += {rot};
 	st = vec2_rotate(st, rand_rotation);
+	
 	""".format({
 		"rot":	input_vars[2],
 		"rr":	input_vars[3]

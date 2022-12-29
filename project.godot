@@ -27,7 +27,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeTiler2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/tilerv2.gd"
+"path": "res://addons/VisualShaderExtras/dbat/tilerv3.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
