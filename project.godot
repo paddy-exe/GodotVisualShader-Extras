@@ -9,35 +9,25 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "Resource",
-"class": &"LizardShaderLib",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/lib/lizardshaderlib.gd"
-}, {
-"base": "VisualShaderNodeCustom",
-"class": &"TempVisualShaderNodeCompare",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/compare.gd"
-}, {
-"base": "VisualShaderNodeCustom",
+"base": "VisualShaderNodeCustomExtended",
 "class": &"TempVisualShaderNodeTiler",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/tiler.gd"
+"path": "res://addons/VisualShaderExtras/UV/PR/UVTiler.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTiler1",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/scraps/tiler.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeTiler2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/tilerv2.gd"
-}, {
-"base": "VisualShaderNodeCustomExtended",
-"class": &"TempVisualShaderNodeTiler3",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/tilerv3.gd"
+"path": "res://addons/VisualShaderExtras/dbat/scraps/tilerv2.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeTilerOKBUTNOT",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/tilerv_works.gd"
+"path": "res://addons/VisualShaderExtras/dbat/scraps/tilerv_works.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
@@ -49,8 +39,13 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Shapes/Circle.gd"
 }, {
-"base": "VisualShaderNodeCustom",
+"base": "VisualShaderNodeCustomExtended",
 "class": &"VisualShaderNodeCustomCompare",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/Usability/PR/Compare.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeCustomCompareOLD",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Usability/Compare.gd"
 }, {
@@ -155,7 +150,7 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Wave/SquareWave.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeTiler",
+"class": &"VisualShaderNodeTilerOLD",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/UV/UVTiler.gd"
 }, {
@@ -195,15 +190,14 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/BlendModes/VividLight.gd"
 }]
 _global_script_class_icons={
-"LizardShaderLib": "",
-"TempVisualShaderNodeCompare": "",
 "TempVisualShaderNodeTiler": "",
+"TempVisualShaderNodeTiler1": "",
 "TempVisualShaderNodeTiler2": "",
-"TempVisualShaderNodeTiler3": "",
 "TempVisualShaderNodeTilerOKBUTNOT": "",
 "VisualShaderNodeBox": "",
 "VisualShaderNodeCircle": "",
 "VisualShaderNodeCustomCompare": "",
+"VisualShaderNodeCustomCompareOLD": "",
 "VisualShaderNodeCustomExtended": "",
 "VisualShaderNodeDarkerColor": "",
 "VisualShaderNodeExclusion": "",
@@ -224,7 +218,7 @@ _global_script_class_icons={
 "VisualShaderNodeSineWave": "",
 "VisualShaderNodeSineWaveAngular": "",
 "VisualShaderNodeSquareWave": "",
-"VisualShaderNodeTiler": "",
+"VisualShaderNodeTilerOLD": "",
 "VisualShaderNodeTrapezoid": "",
 "VisualShaderNodeTriangle": "",
 "VisualShaderNodeTriangleWave": "",

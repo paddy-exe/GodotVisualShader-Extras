@@ -18,9 +18,9 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-@tool
+#@tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCustomCompare
+class_name VisualShaderNodeCustomCompareOLD
 
 func _get_name():
 	return "Compare"

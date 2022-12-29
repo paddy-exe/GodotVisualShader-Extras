@@ -20,7 +20,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeTiler
+class_name TempVisualShaderNodeTiler1
 
 
 func _get_name():

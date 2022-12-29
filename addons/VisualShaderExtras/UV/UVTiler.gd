@@ -19,9 +19,9 @@
 
 # With assist from https://thebookofshaders.com/09/
 
-@tool
+#@tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTiler
+class_name VisualShaderNodeTilerOLD
 
 func _get_name():
 	return "UVTiler"

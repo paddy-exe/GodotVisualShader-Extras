@@ -1,7 +1,6 @@
-[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://1a2c8tpsprgn"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://dylv1qc38ibcq"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/VividLight.gd" id="3_2vffd"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/tilerv3.gd" id="4_1khye"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/PR/UVTiler.gd" id="3_cu2nc"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="4_7m7pb"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="4_46hr2"]
 
@@ -11,22 +10,12 @@ default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.1, 0.1)]
 initialized = true
 script = ExtResource("4_46hr2")
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_uxt0j"]
-initialized = true
-script = ExtResource("3_2vffd")
-
-[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_rosqw"]
-constant = Color(0.10576, 0.181688, 0.480469, 1)
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5typr"]
 output_port_for_preview = 0
 expanded_output_ports = [0]
 source = 5
 texture = ExtResource("4_7m7pb")
 texture_type = 1
-
-[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_xdvas"]
-operator = 3
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_bg1tf"]
 parameter_name = "Texture2DParameter"
@@ -40,16 +29,9 @@ hint = 1
 default_value_enabled = true
 default_value = 0.5
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ogv2t"]
-output_port_for_preview = 0
-default_input_values = [0, Vector2(2, 2), 1, 2.0, 2, 0.66, 3, 0.5]
-initialized = true
-script = ExtResource("4_1khye")
-
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_ooq8t"]
 parameter_name = "RandRot"
 hint = 1
-max = 2.0
 default_value_enabled = true
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_3flr0"]
@@ -63,20 +45,24 @@ parameter_name = "DownAcross"
 default_value_enabled = true
 default_value = Vector2(2, 2)
 
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_4cqbd"]
+default_input_values = [0, Vector2(2, 2), 1, 0.0, 2, 0.0, 3, 0.5]
+initialized = true
+script = ExtResource("3_cu2nc")
+
 [resource]
 code = "shader_type spatial;
 uniform vec2 DownAcross = vec2(2.000000, 2.000000);
 uniform float Rot : hint_range(0, 3.14199995994568) = 0;
-uniform float RandRot : hint_range(0, 2) = 0;
+uniform float RandRot : hint_range(0, 1) = 0;
 uniform float BrickShift : hint_range(0, 1) = 0.5;
 uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_linear;
 
 
-// Tiler3
+// UVTiler
 
 vec2 brick_tile(vec2 _uv, float _zoom, float _shift)
 {
-	_uv *= _zoom;
 	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
 	return fract(_uv);
 }
@@ -107,36 +93,36 @@ void fragment() {
 	float n_out36p0 = BrickShift;
 
 
-	vec2 n_out37p0;
-// Tiler3:37
+	vec2 n_out41p0;
+// UVTiler:41
 	{
 		
 			//Much simpler to calculate zoom from the tiling vec2 
 			float zoom = (n_out40p0.x * n_out40p0.y);
 			
 			vec2 st = UV/n_out40p0;
+			st *= zoom; //Scale coordinate system by zoom
 			
-			//This variation took me ages to work out:
-			vec2 unique_val = floor( st * zoom);
+			vec2 unique_val = floor( st ); //get the integer coordinates
 			
-			// Now the random rotation: Courtesy Arnklit
-			// https://github.com/Arnklit/TutorialResources/tree/main/tiling_rotation
-			float rand_rotation = (random_float(unique_val) * 2.0 - 1.0) * n_out38p0;
+			//Something about this calc is the problem with the brick shift when 
+			//rr is > 0
+			float rand_rotation = ((random_float(unique_val) * 2.0) - 1.0) * n_out38p0;
 			
 			//Just add whatever static rotation may be input and clamp:
-			rand_rotation = clamp(rand_rotation + n_out39p0, 0.0, 180.0);
+			rand_rotation = clamp(rand_rotation + n_out39p0, 0.0, 2.*PI);
 			
 			st = brick_tile(st, zoom, n_out36p0);
 			st = vec2_rotate(st, rand_rotation);
 			
-			n_out37p0 = st;
+			n_out41p0 = st;
 			
 	}
 
 
 	vec4 n_out27p0;
 // Texture2D:27
-	n_out27p0 = texture(Texture2DParameter, n_out37p0);
+	n_out27p0 = texture(Texture2DParameter, n_out41p0);
 
 
 // Output:0
@@ -145,28 +131,22 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1726.14, 195.902)
-nodes/fragment/0/position = Vector2(-400, 460)
+graph_offset = Vector2(-1874.7, 154.039)
+nodes/fragment/0/position = Vector2(-940, 440)
 nodes/fragment/23/node = SubResource("VisualShaderNodeCustom_u5jbf")
 nodes/fragment/23/position = Vector2(-1335.2, 319.6)
-nodes/fragment/25/node = SubResource("VisualShaderNodeCustom_uxt0j")
-nodes/fragment/25/position = Vector2(-800, 420)
-nodes/fragment/26/node = SubResource("VisualShaderNodeColorConstant_rosqw")
-nodes/fragment/26/position = Vector2(-994.4, 615.6)
 nodes/fragment/27/node = SubResource("VisualShaderNodeTexture_5typr")
 nodes/fragment/27/position = Vector2(-1331.6, 622)
-nodes/fragment/33/node = SubResource("VisualShaderNodeColorOp_xdvas")
-nodes/fragment/33/position = Vector2(-640, 540)
 nodes/fragment/34/node = SubResource("VisualShaderNodeTexture2DParameter_bg1tf")
 nodes/fragment/34/position = Vector2(-1756.4, 722.4)
 nodes/fragment/36/node = SubResource("VisualShaderNodeFloatParameter_rdjab")
 nodes/fragment/36/position = Vector2(-2380, 580)
-nodes/fragment/37/node = SubResource("VisualShaderNodeCustom_ogv2t")
-nodes/fragment/37/position = Vector2(-1660, 360)
 nodes/fragment/38/node = SubResource("VisualShaderNodeFloatParameter_ooq8t")
 nodes/fragment/38/position = Vector2(-2120, 580)
 nodes/fragment/39/node = SubResource("VisualShaderNodeFloatParameter_3flr0")
 nodes/fragment/39/position = Vector2(-2260, 300)
 nodes/fragment/40/node = SubResource("VisualShaderNodeVec2Parameter_7g6li")
 nodes/fragment/40/position = Vector2(-2000, 160)
-nodes/fragment/connections = PackedInt32Array(26, 0, 25, 1, 25, 0, 33, 1, 34, 0, 27, 2, 27, 0, 0, 0, 37, 0, 23, 0, 37, 0, 27, 0, 36, 0, 37, 3, 38, 0, 37, 2, 39, 0, 37, 1, 40, 0, 37, 0)
+nodes/fragment/41/node = SubResource("VisualShaderNodeCustom_4cqbd")
+nodes/fragment/41/position = Vector2(-1664.24, 235.683)
+nodes/fragment/connections = PackedInt32Array(34, 0, 27, 2, 27, 0, 0, 0, 40, 0, 41, 0, 41, 0, 23, 0, 41, 0, 27, 0, 39, 0, 41, 1, 38, 0, 41, 2, 36, 0, 41, 3)

@@ -36,39 +36,53 @@
 
 @tool
 extends VisualShaderNodeCustomExtended
-class_name TempVisualShaderNodeTiler3
+class_name TempVisualShaderNodeTiler
 
 func _get_name():
-	return "Tiler3"
+	return "UVTiler"
 
-func _init() -> void:
-	set_input_port_default_value(0, Vector2(2, 2))
-	set_input_port_default_value(1, 0.0) #rot
-	set_input_port_default_value(2, 0.0) #randomize
-	set_input_port_default_value(3, 0.5) #shift
+func _get_version():
+	return "2"
 	
 func _get_category():
-	return "dbatWork/Tiler"
+	return "VisualShaderExtras/UV/PR"
 
 func _get_description():
-	return "Tile Stuff"
+	return self._get_description_and_version("Tiles the UV and rotates and brick-shifts it.")
 
 func _get_issues():
 	return """
 	## ISSUES:
 	1. There's often one tile that will not rotate randomly. Search me!
 	2. The brick-shifting and the random rotation do not play well together. Help!
+	3. Should this take-in a UV? And how would that work?
 """
-func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
+func _get_return_icon_type():
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
+
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
+	
+func _get_output_port_count():
+	return 1
+
+func _get_output_port_name(port: int) -> String:
+	return "UV"
+	
+func _init() -> void:
+	set_input_port_default_value(0, Vector2(2, 2))
+	set_input_port_default_value(1, 0.0) #rot
+	set_input_port_default_value(2, 0.0) #randomize
+	set_input_port_default_value(3, 0.5) #shift
+	
 func _get_input_port_count():
 	return 4
 
 func _get_input_port_name(port):
 	match port:
-		0: return "Tiling down, across"
-		1: return "Rotation radians"
+		0: return "Tiling (Down, Across)"
+		1: return "Rotation (Radians)"
 		2: return "Randomize rotation"
 		3: return "Brick Shift"
 
@@ -78,15 +92,6 @@ func _get_input_port_type(port):
 		1: return VisualShaderNode.PORT_TYPE_SCALAR #radians
 		2: return VisualShaderNode.PORT_TYPE_SCALAR #float
 		3: return VisualShaderNode.PORT_TYPE_SCALAR #float for bricks
-		
-func _get_output_port_count():
-	return 1
-
-func _get_output_port_name(port: int) -> String:
-	return "UV"
-
-func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_global_code(mode):
 	return \
@@ -100,16 +105,16 @@ func _get_code(input_vars, output_vars, mode, type):
 	float zoom = ({in_tilexy}.x * {in_tilexy}.y);
 	
 	vec2 st = UV/{in_tilexy};
+	st *= zoom; //Scale coordinate system by zoom
 	
-	//This variation took me ages to work out:
-	vec2 unique_val = floor( st * zoom);
+	vec2 unique_val = floor( st ); //get the integer coordinates
 	
-	// Now the random rotation: Courtesy Arnklit
-	// https://github.com/Arnklit/TutorialResources/tree/main/tiling_rotation
-	float rand_rotation = (random_float(unique_val) * 2.0 - 1.0) * {rr};
+	//Something about this calc is the problem with the brick shift when 
+	//rr is > 0
+	float rand_rotation = ((random_float(unique_val) * 2.0) - 1.0) * {rr};
 	
 	//Just add whatever static rotation may be input and clamp:
-	rand_rotation = clamp(rand_rotation + {rot}, 0.0, 180.0);
+	rand_rotation = clamp(rand_rotation + {rot}, 0.0, 2.*PI);
 	
 	st = brick_tile(st, zoom, {shift});
 	st = vec2_rotate(st, rand_rotation);
@@ -123,4 +128,3 @@ func _get_code(input_vars, output_vars, mode, type):
 		"shift":	input_vars[3],
 		"out_uv":	output_vars[0] 
 		})
-
