@@ -19,7 +19,7 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @tool
-extends VisualShaderNodeCustomExtended
+extends VisualShaderNodeCustom
 class_name VisualShaderNodeCustomCompare
 
 func _get_name():
@@ -32,7 +32,8 @@ func _get_category():
 	return "VisualShaderExtras/Usability/PR"
 
 func _get_description():
-	return self._get_description_and_version("Compare Color inputs and output a mask for the second input.")
+	return LizardShaderLibrary.format_description(self,
+	"Compare Color inputs and output a mask for the second input.")
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -60,7 +61,7 @@ func _get_input_port_type(port):
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_global_code(mode):
-	return self.compare
+	return LizardShaderLibrary.compare
 
 func _get_code(input_vars, output_vars, mode, type):
 	return "%s = compare(%s,%s);" % [output_vars[0],input_vars[0],input_vars[1]]

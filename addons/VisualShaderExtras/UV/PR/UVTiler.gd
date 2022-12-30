@@ -35,7 +35,7 @@
 #    HEREUNDER.
 
 @tool
-extends VisualShaderNodeCustomExtended
+extends VisualShaderNodeCustom
 class_name TempVisualShaderNodeTiler
 
 func _get_name():
@@ -48,14 +48,14 @@ func _get_category():
 	return "VisualShaderExtras/UV/PR"
 
 func _get_description():
-	return self._get_description_and_version("Tiles the UV and rotates and brick-shifts it.")
+	return LizardShaderLibrary.format_description(self,
+	"Tiles the UV and rotates and brick-shifts it.")
 
 func _get_issues():
 	return """
-	## ISSUES:
-	1. There's often one tile that will not rotate randomly. Search me!
-	2. The brick-shifting and the random rotation do not play well together. Help!
-	3. Should this take-in a UV? And how would that work?
+1. There's often one tile that will not rotate randomly. Search me!
+2. The brick-shifting and the random rotation do not play well together. Help!
+3. Should this take-in a UV? And how would that work?
 """
 
 func _get_return_icon_type():
@@ -95,9 +95,9 @@ func _get_input_port_type(port):
 
 func _get_global_code(mode):
 	return \
-		self.brick_tile + \
-		self.vec2_rotate + \
-		self.random_float
+		LizardShaderLibrary.brick_tile + \
+		LizardShaderLibrary.vec2_rotate + \
+		LizardShaderLibrary.random_float
 
 func _get_code(input_vars, output_vars, mode, type):
 	return """

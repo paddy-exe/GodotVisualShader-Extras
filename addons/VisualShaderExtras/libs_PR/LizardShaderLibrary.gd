@@ -1,7 +1,3 @@
-@tool
-class_name VisualShaderNodeCustomExtended
-extends VisualShaderNodeCustom
-
 # The MIT License
 # Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur.
 # Copyright © 2022 Donn Ingle
@@ -21,36 +17,49 @@ extends VisualShaderNodeCustom
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+extends RefCounted
+class_name LizardShaderLibrary
 
+const foo:="FOO"
+
+## The Lizard Shader Library
 ## A general store of common funcs we can recall form anywhere
-## Done as a Resource to try keep duplication of these strings 
-## down to, hopefully, one instance.
+## This is Refcounted and uses consts so these strings exist only once.
+##
+## Use:
+## In any other code simply call:
+## LizardShaderLibrary.__whatever__ <-- func or string
 
-func _get_description_and_version(s):
-	return "%s\nVersion:%s" % [s,self._get_version()]
+static func format_description(obj:Object, desc:String)->String:
+	return "%s\nVersion:%s\n%s" % [
+		desc,
+		obj._get_version(),
+		"Issues:%s" % [obj._get_issues() if obj.has_method("_get_issues") else "None" ]
+	]
 
 ## Code from MaterialMaker, care of Rodzilla
-var compare:="""
+const compare:="""
 float compare(vec4 in1, vec4 in2)
 {
 	return dot(abs(in1-in2), vec4(1.0));
 }
 """
 
-## Returns radians
-var random_float:="""
+## Returns float from 0.0 to 1.0
+const random_float:="""
 float random_float(vec2 input) {
 	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }"""
 
 ## From Juan Linietsky, Ariel Manzur
-var hash_noise_range:="""
+const hash_noise_range:="""
 vec3 hash_noise_range( vec3 p ) {
 	p *= mat3(vec3(127.1, 311.7, -53.7), vec3(269.5, 183.3, 77.1), vec3(-301.7, 27.3, 215.3));
 	return 2.0 * fract(fract(p)*4375.55) -1.;
 }"""
 
-var vec2_rotate:="""
+## _angle in radians
+const vec2_rotate:="""
 vec2 vec2_rotate(vec2 _uv, float _angle) {
 	_uv -= 0.5;
 	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
@@ -64,7 +73,7 @@ vec2 vec2_rotate(vec2 _uv, float _angle) {
 ## uniform sampler2D albedo_texture;
 ## float lod = mip_map_lod(UV*tiling * vec2(textureSize(albedo_texture, 0)));
 ## ALBEDO = textureLod(albedo_texture, some_new_uv, lod).rgb;
-var mip_map_lod:="""
+const mip_map_lod:="""
 //Returns an "lod" according to some dark openGL voodoo
 float mip_map_lod(in vec2 _uv, vec2 texture_size) {
 	vec2 texture_coordinate = _uv * texture_size;
@@ -75,13 +84,13 @@ float mip_map_lod(in vec2 _uv, vec2 texture_size) {
 	return max(0, mml);
 }"""
 
-var basic_uv_tile:="""
+const basic_uv_tile:="""
 vec2 tile(vec2 _uv, float _zoom){
 	_uv *= _zoom;
 	return fract(_uv);
 }"""
 
-var brick_tile:="""
+const brick_tile:="""
 vec2 brick_tile(vec2 _uv, float _zoom, float _shift)
 {
 	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
