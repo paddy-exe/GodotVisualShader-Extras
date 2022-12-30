@@ -10,7 +10,7 @@
 render_priority = 0
 shader = ExtResource("2_d3cw6")
 shader_parameter/DownAcross = null
-shader_parameter/Rot = 2.046
+shader_parameter/Rot = 2.739
 shader_parameter/RandRot = 1.0
 shader_parameter/BrickShift = 0.344
 shader_parameter/Texture2DParameter = ExtResource("3_bro2i")
