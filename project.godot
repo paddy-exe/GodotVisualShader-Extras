@@ -9,6 +9,21 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Node2D",
+"class": &"A",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/classmayhem/class_A.gd"
+}, {
+"base": "A",
+"class": &"B",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/classmayhem/class_B.gd"
+}, {
+"base": "RefCounted",
+"class": &"LIB",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/classmayhem/statictest.gd"
+}, {
 "base": "VisualShaderNodeCustomExtended",
 "class": &"TempVisualShaderNodeTiler",
 "language": &"GDScript",
@@ -190,6 +205,9 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/BlendModes/VividLight.gd"
 }]
 _global_script_class_icons={
+"A": "",
+"B": "",
+"LIB": "",
 "TempVisualShaderNodeTiler": "",
 "TempVisualShaderNodeTiler1": "",
 "TempVisualShaderNodeTiler2": "",
