@@ -1,0 +1,29 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://d30fu0gvppv65"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/shapes/Circle2.gd" id="1_n1igs"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/shapes/Box2.gd" id="2_fi760"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ugkp2"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.605, 3, 0.0]
+initialized = true
+script = ExtResource("1_n1igs")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_amhp6"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(1.557, 2.732), 2, Vector2(2.845, 2.619), 3, 0.25, 4, 0.0]
+initialized = true
+script = ExtResource("2_fi760")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+"
+graph_offset = Vector2(-479.036, -9.17203)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_ugkp2")
+nodes/fragment/2/position = Vector2(140, 240)
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_amhp6")
+nodes/fragment/3/position = Vector2(-300, 40)
