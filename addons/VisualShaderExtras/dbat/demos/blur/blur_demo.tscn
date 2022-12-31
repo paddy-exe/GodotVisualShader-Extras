@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3q11bi07sbvu"]
 
-[ext_resource type="Shader" uid="uid://mv5vl6qgaop5" path="res://addons/VisualShaderExtras/dbat/demos/blur/UVBlur.tres" id="1_3v56r"]
+[ext_resource type="Shader" uid="uid://wk365y05dwk2" path="res://addons/VisualShaderExtras/dbat/demos/blur/UVBlur.tres" id="1_3v56r"]
 [ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/tiler/scraps/arnklit_tiler_study.gdshader" id="4_06qug"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="5_vc82q"]
 
@@ -9,7 +9,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mjkcc"]
 render_priority = 0
 shader = ExtResource("1_3v56r")
-shader_parameter/Blur = 2.355
+shader_parameter/Blur = 1.755
 shader_parameter/Texture2DParameter = ExtResource("5_vc82q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_20tqy"]
@@ -22,7 +22,7 @@ shader_parameter/albedo_texture = ExtResource("5_vc82q")
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.10987, -0.0478901, 0.061174)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.47317, 0.211519, 0.190587)
 mesh = SubResource("PlaneMesh_xbehk")
 surface_material_override/0 = SubResource("ShaderMaterial_mjkcc")
 

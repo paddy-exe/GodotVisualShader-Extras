@@ -1,16 +1,19 @@
-[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://mv5vl6qgaop5"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://wk365y05dwk2"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/blur/UVBlur.gd" id="1_yt1ug"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Samplers/PR/SamplerBlur.gd" id="1_is7ar"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/PR/Connector.gd" id="2_bj2vn"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/PR/Compare.gd" id="3_37n33"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/PR/UVTiler.gd" id="4_ehlkv"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qxj8l"]
 parameter_name = "Texture2DParameter"
 texture_type = 1
-texture_filter = 5
+texture_filter = 4
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e5pk6"]
 default_input_values = [2, 1.115]
 initialized = true
-script = ExtResource("1_yt1ug")
+script = ExtResource("1_is7ar")
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_k3rmt"]
 parameter_name = "Blur"
@@ -18,9 +21,27 @@ hint = 1
 max = 10.0
 default_value_enabled = true
 
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fkcfh"]
+default_input_values = [2, 0.0]
+initialized = true
+script = ExtResource("1_is7ar")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_hb6ei"]
+initialized = true
+script = ExtResource("2_bj2vn")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_3rbpy"]
+initialized = true
+script = ExtResource("3_37n33")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8n43x"]
+default_input_values = [0, Vector2(2, 2), 1, 0.0, 2, 0.0, 3, 0.5]
+initialized = true
+script = ExtResource("4_ehlkv")
+
 [resource]
 code = "shader_type spatial;
-uniform sampler2D Texture2DParameter : source_color, filter_nearest_mipmap_anisotropic;
+uniform sampler2D Texture2DParameter : source_color, filter_linear_mipmap;
 uniform float Blur : hint_range(0, 10) = 0;
 
 
@@ -36,7 +57,6 @@ void fragment() {
 		
 			//When the sampler is set to Linear Mipmap it works best.
 			//The Bias will cause blurring.
-			//vec4 color = texture(Texture2DParameter, UV, n_out23p0);
 			vec4 color = textureLod(Texture2DParameter, UV, n_out23p0);
 			n_out22p0 = color.rgb;
 			
@@ -49,12 +69,20 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-2078.33, 356.123)
-nodes/fragment/0/position = Vector2(-2320, 680)
+graph_offset = Vector2(-531.986, 1032.97)
+nodes/fragment/0/position = Vector2(-1960, 1360)
 nodes/fragment/18/node = SubResource("VisualShaderNodeTexture2DParameter_qxj8l")
-nodes/fragment/18/position = Vector2(-3360, 940)
+nodes/fragment/18/position = Vector2(-2660, 1520)
 nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_e5pk6")
-nodes/fragment/22/position = Vector2(-2960.04, 853.642)
+nodes/fragment/22/position = Vector2(-2260, 1420)
 nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_k3rmt")
-nodes/fragment/23/position = Vector2(-3360, 660)
-nodes/fragment/connections = PackedInt32Array(18, 0, 22, 1, 22, 0, 0, 0, 23, 0, 22, 2)
+nodes/fragment/23/position = Vector2(-2660, 1240)
+nodes/fragment/24/node = SubResource("VisualShaderNodeCustom_fkcfh")
+nodes/fragment/24/position = Vector2(-320, 1120)
+nodes/fragment/25/node = SubResource("VisualShaderNodeCustom_hb6ei")
+nodes/fragment/25/position = Vector2(-470, 1121)
+nodes/fragment/26/node = SubResource("VisualShaderNodeCustom_3rbpy")
+nodes/fragment/26/position = Vector2(-140, 1120)
+nodes/fragment/27/node = SubResource("VisualShaderNodeCustom_8n43x")
+nodes/fragment/27/position = Vector2(-140, 1220)
+nodes/fragment/connections = PackedInt32Array(18, 0, 22, 1, 23, 0, 22, 2, 22, 0, 0, 0)

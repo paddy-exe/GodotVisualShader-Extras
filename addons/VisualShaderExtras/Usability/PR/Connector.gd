@@ -18,70 +18,56 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeSamplerBlur
+class_name TempVisualShaderNodeConnector
 
 func _get_name():
-	return "SamplerBlur"
+	return "Connector"
 
 func _get_version():
 	return "1"
 	
 func _get_category():
-	return "DBAT/"
+	return "VisualShaderExtras/Usability/PR"
 
 func _get_description():
 	return LizardShaderLibrary.format_description(self,
-	"Be sure to try different Sampler Filters.\nBlurs textures added via a Texture2DParameter Node.")
+	"Node to let you just hang a noodle somewhere. It will also convert types, in to out.")
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
+const ptypes:Array = [
+	VisualShaderNode.PORT_TYPE_BOOLEAN,
+	VisualShaderNode.PORT_TYPE_SAMPLER,
+	VisualShaderNode.PORT_TYPE_SCALAR,
+	VisualShaderNode.PORT_TYPE_SCALAR_INT,
+	VisualShaderNode.PORT_TYPE_TRANSFORM,
+	VisualShaderNode.PORT_TYPE_VECTOR_2D,
+	VisualShaderNode.PORT_TYPE_VECTOR_3D,
+	VisualShaderNode.PORT_TYPE_VECTOR_4D
+]
+const names:Array = ["B","S","Flt","Int","X","2D","3D","4D"]
 func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_3D
+	return ptypes[port]
 	
 func _get_output_port_count():
-	return 1
+	return 8
 
-func _get_output_port_name(port: int) -> String:
-	return "Color"
-	
-func _init() -> void:
-	pass
-	set_input_port_default_value(2, 0.0)
+func _get_output_port_name(port: int):
+	return names[port]
 	
 func _get_input_port_count():
-	return 3
+	return 8
 
 func _get_input_port_name(port):
-	match port:
-		0: return "UV in"
-		1: return "Texture Sampler"
-		2: return "Blur"
+	return names[port]
 
 func _get_input_port_type(port):
-	match port:
-		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		1: return VisualShaderNode.PORT_TYPE_SAMPLER
-		2: return VisualShaderNode.PORT_TYPE_SCALAR
+	return ptypes[port]
 
-#func _get_global_code(mode):
-#	pass
-	
 func _get_code(input_vars, output_vars, mode, type):
-	var inuv = "UV"
-	if input_vars[0]:
-		inuv = input_vars[0]
-		
-	return """
-	//When the sampler is set to Linear Mipmap it works best.
-	//The Bias will cause blurring.
-	//vec4 color = texture({sampler}, {inuv}, {bias});
-	vec4 color = textureLod({sampler}, {inuv}, {bias});
-	{outcol} = color.rgb;
-	""".format(
-		{
-		"inuv": inuv,
-		"sampler": input_vars[1],
-		"bias"   : input_vars[2],
-		"outcol" : output_vars[0] 
-		})
+	var s = ""
+	for p in range(0,8):
+		if input_vars[p]:
+			s += "{outp} = {inp};".format({"outp":output_vars[p],"inp":input_vars[p]})
+	return s
