@@ -1,103 +1,60 @@
-[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://mv5vl6qgaop5"]
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://mv5vl6qgaop5"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/blur/UVBlur.gd" id="1_yt1ug"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="2_r6qer"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTwirl.gd" id="2_sluqp"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="3_vtekj"]
-[ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="5_kgs13"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_g2f8q"]
-output_port_for_preview = 0
-default_input_values = [1, Vector2(0.5, 0.5), 2, 0.25]
-initialized = true
-script = ExtResource("2_r6qer")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_ihil7"]
-output_port_for_preview = 0
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eojgp"]
-output_port_for_preview = 0
-default_input_values = [1, Vector2(0.5, 0.5), 2, 10.0, 3, Vector2(0.488, 0)]
-initialized = true
-script = ExtResource("2_sluqp")
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_usa1j"]
-output_port_for_preview = 0
-default_input_values = [1, 1.0, 2, 1.0, 3, 0.0]
-initialized = true
-script = ExtResource("3_vtekj")
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_l2lw5"]
-output_port_for_preview = 0
-initialized = true
-script = ExtResource("1_yt1ug")
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vbfqs"]
-input_name = "uv"
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_d0ifb"]
-texture = ExtResource("5_kgs13")
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qxj8l"]
 parameter_name = "Texture2DParameter"
 texture_type = 1
-texture_filter = 2
+texture_filter = 5
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e5pk6"]
+default_input_values = [2, 1.115]
+initialized = true
+script = ExtResource("1_yt1ug")
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_k3rmt"]
+parameter_name = "Blur"
+hint = 1
+max = 10.0
+default_value_enabled = true
 
 [resource]
 code = "shader_type spatial;
-uniform sampler2D Texture2DParameter : source_color, filter_linear;
-uniform sampler2D tex_frg_17;
+uniform sampler2D Texture2DParameter : source_color, filter_nearest_mipmap_anisotropic;
+uniform float Blur : hint_range(0, 10) = 0;
 
 
-// UVTwirl
-
-		vec2 Twirl(vec2 __uv, vec2 __center, float __strength, vec2 __offset)
-		{
-			vec2 __delta = __uv - __center;
-			float __angle = __strength * length(__delta);
-			float __x = cos(__angle) * __delta.x - sin(__angle) * __delta.y;
-			float __y = sin(__angle) * __delta.x + cos(__angle) * __delta.y;
-			return vec2(__x + __center.x + __offset.x, __y + __center.y + __offset.y);
-		}
-	
 
 void fragment() {
-	vec2 n_out13p0;
-// UVTwirl:13
-	vec2 n_in13p1 = vec2(0.50000, 0.50000);
-	float n_in13p2 = 10.00000;
-	vec2 n_in13p3 = vec2(0.48800, 0.00000);
+// FloatParameter:23
+	float n_out23p0 = Blur;
+
+
+	vec3 n_out22p0;
+// SamplerBlur:22
 	{
-		n_out13p0.xy = Twirl(UV.xy, n_in13p1.xy, n_in13p2, n_in13p3.xy);
+		
+			//When the sampler is set to Linear Mipmap it works best.
+			//The Bias will cause blurring.
+			//vec4 color = texture(Texture2DParameter, UV, n_out23p0);
+			vec4 color = textureLod(Texture2DParameter, UV, n_out23p0);
+			n_out22p0 = color.rgb;
+			
 	}
 
 
-// Texture2D:17
-	vec4 n_out17p0 = texture(tex_frg_17, n_out13p0);
-
-
 // Output:0
-	ALBEDO = vec3(n_out17p0.xyz);
+	ALBEDO = n_out22p0;
 
 
 }
 "
-graph_offset = Vector2(-1469.82, 281.94)
-nodes/fragment/0/position = Vector2(-680, 500)
-nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_g2f8q")
-nodes/fragment/10/position = Vector2(-1680, 540)
-nodes/fragment/11/node = SubResource("VisualShaderNodeStep_ihil7")
-nodes/fragment/11/position = Vector2(-1360, 720)
-nodes/fragment/13/node = SubResource("VisualShaderNodeCustom_eojgp")
-nodes/fragment/13/position = Vector2(-2640, 980)
-nodes/fragment/14/node = SubResource("VisualShaderNodeCustom_usa1j")
-nodes/fragment/14/position = Vector2(-1040, 560)
-nodes/fragment/15/node = SubResource("VisualShaderNodeCustom_l2lw5")
-nodes/fragment/15/position = Vector2(-2545.17, 705.112)
-nodes/fragment/16/node = SubResource("VisualShaderNodeInput_vbfqs")
-nodes/fragment/16/position = Vector2(-2938.73, 746.458)
-nodes/fragment/17/node = SubResource("VisualShaderNodeTexture_d0ifb")
-nodes/fragment/17/position = Vector2(-1851.93, 1074.49)
+graph_offset = Vector2(-2078.33, 356.123)
+nodes/fragment/0/position = Vector2(-2320, 680)
 nodes/fragment/18/node = SubResource("VisualShaderNodeTexture2DParameter_qxj8l")
-nodes/fragment/18/position = Vector2(-2260, 1260)
-nodes/fragment/connections = PackedInt32Array(10, 0, 14, 0, 16, 0, 15, 0, 13, 0, 10, 0, 17, 0, 0, 0, 18, 0, 17, 2, 13, 0, 17, 0)
+nodes/fragment/18/position = Vector2(-3360, 940)
+nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_e5pk6")
+nodes/fragment/22/position = Vector2(-2960.04, 853.642)
+nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_k3rmt")
+nodes/fragment/23/position = Vector2(-3360, 660)
+nodes/fragment/connections = PackedInt32Array(18, 0, 22, 1, 22, 0, 0, 0, 23, 0, 22, 2)

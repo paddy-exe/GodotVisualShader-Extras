@@ -1,5 +1,5 @@
 # The MIT License
-# Copyright © 2022 Donn Ingle (on shoulders of giants)
+# Copyright © 2022 Inigo Quilez
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation 
@@ -18,70 +18,65 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeSamplerBlur
+class_name VisualShaderNodeCircle2
+
+func _init():
+	set_input_port_default_value(1, Vector2(0.5, 0.5))
+	set_input_port_default_value(2, 0.25)
 
 func _get_name():
-	return "SamplerBlur"
+	return "Circle2"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
-	return "DBAT/"
+	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Be sure to try different Sampler Filters.\nBlurs textures added via a Texture2DParameter Node.")
+	return "Signed Distance Circle Shape3D"
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_3D
+	return VisualShaderNode.PORT_TYPE_SCALAR
 
-func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_3D
-	
-func _get_output_port_count():
-	return 1
-
-func _get_output_port_name(port: int) -> String:
-	return "Color"
-	
-func _init() -> void:
-	pass
-	set_input_port_default_value(2, 0.0)
-	
 func _get_input_port_count():
 	return 3
 
 func _get_input_port_name(port):
 	match port:
-		0: return "UV in"
-		1: return "Texture Sampler"
-		2: return "Blur"
+		0:
+			return "UV"
+		1:
+			return "Position"
+		2:
+			return "Radius"
 
 func _get_input_port_type(port):
 	match port:
-		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		1: return VisualShaderNode.PORT_TYPE_SAMPLER
-		2: return VisualShaderNode.PORT_TYPE_SCALAR
+		0:
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		1:
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		2:
+			return VisualShaderNode.PORT_TYPE_SCALAR
 
-#func _get_global_code(mode):
-#	pass
-	
-func _get_code(input_vars, output_vars, mode, type):
-	var inuv = "UV"
-	if input_vars[0]:
-		inuv = input_vars[0]
-		
+func _get_output_port_count():
+	return 1
+
+func _get_output_port_name(port):
+	return ""
+
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_SCALAR
+
+func _get_global_code(mode):
 	return """
-	//When the sampler is set to Linear Mipmap it works best.
-	//The Bias will cause blurring.
-	//vec4 color = texture({sampler}, {inuv}, {bias});
-	vec4 color = textureLod({sampler}, {inuv}, {bias});
-	{outcol} = color.rgb;
-	""".format(
-		{
-		"inuv": inuv,
-		"sampler": input_vars[1],
-		"bias"   : input_vars[2],
-		"outcol" : output_vars[0] 
-		})
+		float sdCircle(vec2 pos, float r) {
+			return step(length(pos) - r, pos).x;
+		}
+	"""
+
+func _get_code(input_vars, output_vars, mode, type):
+	var uv = "UV"
+	
+	if input_vars[0]:
+		uv = input_vars[0]
+	
+	return "%s = sdCircle(%s.xy - %s.xy, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2]]

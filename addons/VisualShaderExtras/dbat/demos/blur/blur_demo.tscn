@@ -9,6 +9,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mjkcc"]
 render_priority = 0
 shader = ExtResource("1_3v56r")
+shader_parameter/Blur = 2.355
+shader_parameter/Texture2DParameter = ExtResource("5_vc82q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_20tqy"]
 render_priority = 0

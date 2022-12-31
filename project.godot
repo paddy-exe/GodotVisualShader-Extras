@@ -15,7 +15,7 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/libs_PR/LizardShaderLibrary.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"TempVisualShaderNodeBlur",
+"class": &"TempVisualShaderNodeSamplerBlur",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/demos/blur/UVBlur.gd"
 }, {
@@ -48,6 +48,11 @@ _global_script_classes=[{
 "class": &"VisualShaderNodeCircle",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Shapes/Circle.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeCircle2",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/demos/blur/Circle2.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCustomCompare",
@@ -196,13 +201,14 @@ _global_script_classes=[{
 }]
 _global_script_class_icons={
 "LizardShaderLibrary": "",
-"TempVisualShaderNodeBlur": "",
+"TempVisualShaderNodeSamplerBlur": "",
 "TempVisualShaderNodeTiler": "",
 "TempVisualShaderNodeTiler1": "",
 "TempVisualShaderNodeTiler2": "",
 "TempVisualShaderNodeTilerOKBUTNOT": "",
 "VisualShaderNodeBox": "",
 "VisualShaderNodeCircle": "",
+"VisualShaderNodeCircle2": "",
 "VisualShaderNodeCustomCompare": "",
 "VisualShaderNodeCustomCompareOLD": "",
 "VisualShaderNodeDarkerColor": "",
