@@ -52,7 +52,12 @@ uniform sampler2D tex_frg_19;
 
 
 // Compare
-<null>
+
+float compare(vec4 in1, vec4 in2)
+{
+	return dot(abs(in1-in2), vec4(1.0));
+}
+
 
 void fragment() {
 // ColorConstant:21
@@ -111,7 +116,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-524.837, 93.4907)
+graph_offset = Vector2(-509.648, 4.82643)
 nodes/fragment/0/position = Vector2(400, 200)
 nodes/fragment/4/node = SubResource("VisualShaderNodeColorConstant_25vsa")
 nodes/fragment/4/position = Vector2(-720, 280)

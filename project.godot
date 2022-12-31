@@ -57,7 +57,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCircle2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/blur/scraps/Circle2.gd"
+"path": "res://addons/VisualShaderExtras/dbat/scraps/Circle2.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCustomCompare",
