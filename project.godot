@@ -45,6 +45,11 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/dbat/scraps/tilerv_works.gd"
 }, {
 "base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeUVRotate",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/UV/PR/UVRotate.gd"
+}, {
+"base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Shapes/Box.gd"
@@ -212,6 +217,7 @@ _global_script_class_icons={
 "TempVisualShaderNodeTiler1": "",
 "TempVisualShaderNodeTiler2": "",
 "TempVisualShaderNodeTilerOKBUTNOT": "",
+"TempVisualShaderNodeUVRotate": "",
 "VisualShaderNodeBox": "",
 "VisualShaderNodeCircle": "",
 "VisualShaderNodeCircle2": "",

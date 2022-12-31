@@ -1,0 +1,83 @@
+[gd_resource type="VisualShader" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/PR/UVRotate.gd" id="1_lmtvb"]
+[ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="2_2acqy"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_2xe3x"]
+output_port_for_preview = 0
+texture = ExtResource("2_2acqy")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_1s4vi"]
+default_input_values = [1, Vector2(0.071, 0.014), 2, 1.235]
+initialized = true
+script = ExtResource("1_lmtvb")
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_gbafe"]
+default_input_values = [0, Vector3(0.37, 0.219, 1.184)]
+function = 26
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h280l"]
+input_name = "uv"
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_3;
+
+
+// UVRotate
+
+vec2 vec2_rotate(vec2 _uv, float _angle) {
+	_uv -= 0.5;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += 0.5;
+	return _uv;
+}
+
+void fragment() {
+// Input:6
+	vec2 n_out6p0 = UV;
+
+
+// VectorFunc:5
+	vec3 n_out5p0 = sin(vec3(n_out6p0, 0.0));
+
+
+	vec2 n_out4p0;
+// UVRotate:4
+	vec2 n_in4p1 = vec2(0.07100, 0.01400);
+	float n_in4p2 = 1.23500;
+	{
+		
+			//vec2 st = UV/{in_tilexy};
+			//st *= zoom; //Scale coordinate system by zoom
+			vec2 rotated_uv = vec2(n_out5p0.xy);
+			rotated_uv -= n_in4p1;
+			rotated_uv = vec2_rotate(vec2(n_out5p0.xy), n_in4p2);
+			rotated_uv += n_in4p1;
+			n_out4p0 = rotated_uv;
+			
+	}
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, n_out4p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-719.647, 157.246)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_2xe3x")
+nodes/fragment/3/position = Vector2(-14.64, 192.68)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_1s4vi")
+nodes/fragment/4/position = Vector2(-412.771, 368.994)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorFunc_gbafe")
+nodes/fragment/5/position = Vector2(-720, 340)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_h280l")
+nodes/fragment/6/position = Vector2(-1080, 320)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0, 5, 0, 4, 0, 6, 0, 5, 0)
