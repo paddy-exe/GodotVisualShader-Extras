@@ -23,8 +23,7 @@ class_name VisualShaderNodeBox2
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))
 	set_input_port_default_value(2, Vector2(0.25, 0.25))
-	set_input_port_default_value(3, 0.25)
-	set_input_port_default_value(4, 0.) # outline
+	set_input_port_default_value(3, 0.)#feather
 
 func _get_name():
 	return "Box2"
@@ -33,28 +32,29 @@ func _get_category():
 	return "VisualShaderExtras/Shapes/PR"
 
 func _get_description():
-	return "Signed Distance Box Shape3D"
+	return "Signed Distance Box Shape3D with feathering."
 
+func _get_version():
+	return "2"
+	
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 5
+	return 4
 
 func _get_input_port_name(port):
 	match port:
 		0: return "UV"
 		1: return "Position"
 		2: return "Proportions"
-		3: return "Outline Thickness"
-		4: return "Feather"
+		3: return "Feather"
 		
 func _get_input_port_type(port):
 	match port:
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		3: return VisualShaderNode.PORT_TYPE_SCALAR #outline
 		3: return VisualShaderNode.PORT_TYPE_SCALAR #feather
 
 func _get_output_port_count():
@@ -68,54 +68,39 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-//Original - not sure how to smooth this
-float sdBox( in vec2 __position, in vec2 __proportions )
-{
- vec2 __d = abs(__position) - __proportions;
- return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
-}
-
-
-
-
-//float sdBox2( in vec2 __position, in vec2 __proportions, float _feather)
+//Original
+//float sdBox( in vec2 __position, in vec2 __proportions )
 //{
 // vec2 __d = abs(__position) - __proportions;
-// float f = length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
-// return smoothstep(f,f + _feather ,__d);
+// return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
 //}
-
-float roundedFrame (vec2 _uv, vec2 pos, vec2 size, float thickness, float radius)
-{
-  float d = length(max(abs(_uv - pos),size) - size) - radius;
-  return smoothstep(0.55, 0.45, abs(d / thickness) * 5.0);
-}
-
-float sdRect(vec2 p, vec2 sz) {
-	//
-	vec2 d = abs(p) - sz; 
-	//
+//Alteration
+float sdBox(vec2 _pos, vec2 __proportions, float _feather) {
+	vec2 d = abs(_pos) - __proportions; 
 	float outside = length(max(d, 0.));
 	float inside = min(max(d.x, d.y), 0.);
-	return outside + inside;
+	float both = outside + inside;
+	
+	//float f = outside - _feather; //makes a kind of outline
+	
+	// ok! feather is v sensitive tho.
+	// when f is 0 the edge is sharp
+	float f = _feather; 
+	
+	return smoothstep(outside, inside, f);
 }
-
 """
 
 func _get_code(input_vars, output_vars, mode, type):
 	var uv = "UV"
 	if input_vars[0]:
 		uv = input_vars[0]
-	#return "{out} = roundedFrame({uv}, {pos}, {proportions}, {feather}, {outline});" \
-	#return "{out} = sdBox2({pos}, {proportions}, {feather});" \
-	return "{out} = sdRect({pos}, {proportions});//, {feather});" \
+	return "{out} = sdBox({uv}-{pos}, {proportions}, {feather});" \
 	.format({
 		"uv": uv,
 		"pos": input_vars[1],
 		"proportions": input_vars[2],
 		"feather": input_vars[3],
-		"outline": input_vars[4],
 		"out" : output_vars[0]
 	})
 	
-#	return "%s = sdBox(%s.xy - %s.xy, %s.xy);" % [output_vars[0], uv, input_vars[1], input_vars[2]]

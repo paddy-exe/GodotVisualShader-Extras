@@ -57,7 +57,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/shapes/Box2.gd"
+"path": "res://addons/VisualShaderExtras/Shapes/PR/Box2.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCircle",
@@ -67,7 +67,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCircle2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/shapes/Circle2.gd"
+"path": "res://addons/VisualShaderExtras/Shapes/PR/Circle2.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCustomCompare",
