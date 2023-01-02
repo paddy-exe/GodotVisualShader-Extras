@@ -22,7 +22,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeMaskBlend",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/world_normal_mixer/MaskBlend.gd"
+"path": "res://addons/VisualShaderExtras/dbat/demos/mask_blend/MaskBlend.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeSamplerBlur",
@@ -32,7 +32,7 @@ _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeSamplerNormalMapZ",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/world_normal_mixer/NormalMapZ.gd"
+"path": "res://addons/VisualShaderExtras/dbat/demos/normalmap_z/NormalMapZ.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeTiler",
@@ -60,14 +60,14 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/UV/PR/UVRotate.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"TempVisualShaderNodeWorldNormalMapMixMask",
+"class": &"TempVisualShaderNodeWorldNormalMapMixer",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/world_normal_mixer/WorldNormalMapMixMask.gd"
+"path": "res://addons/VisualShaderExtras/dbat/demos/world_normals/WorldNormalMapMixMask.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeWorldNormalMask",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/demos/world_normal_mixer/WorldNormalMask.gd"
+"path": "res://addons/VisualShaderExtras/dbat/demos/world_normals/WorldNormalMask.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
@@ -245,7 +245,7 @@ _global_script_class_icons={
 "TempVisualShaderNodeTiler2": "",
 "TempVisualShaderNodeTilerOKBUTNOT": "",
 "TempVisualShaderNodeUVRotate": "",
-"TempVisualShaderNodeWorldNormalMapMixMask": "",
+"TempVisualShaderNodeWorldNormalMapMixer": "",
 "TempVisualShaderNodeWorldNormalMask": "",
 "VisualShaderNodeBox": "",
 "VisualShaderNodeBox2": "",

@@ -1,0 +1,128 @@
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://cynucuekq2wtu"]
+
+[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="1_k8xgi"]
+[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="2_814ee"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/mask_blend/MaskBlend.gd" id="3_52467"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="4_1qqte"]
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_1vtdj"]
+size = Vector2(799.435, 691.375)
+title = "Albedos"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_jgj26"]
+source = 5
+texture = ExtResource("1_k8xgi")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_338pd"]
+source = 5
+texture = ExtResource("2_814ee")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_orcc3"]
+parameter_name = "ForeGroundAlbedo"
+texture_type = 1
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_kafga"]
+parameter_name = "BackgroundAlbedo"
+texture_type = 1
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8tnnv"]
+default_input_values = [0, 0.0, 1, 0.023, 2, 0.166]
+initialized = true
+script = ExtResource("3_52467")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_1xvdg"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.25]
+initialized = true
+script = ExtResource("4_1qqte")
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_3p70w"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.5]
+op_type = 4
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D ForeGroundAlbedo : source_color, filter_linear;
+uniform sampler2D BackgroundAlbedo : source_color, filter_linear;
+
+
+// Circle
+
+		float sdCircle(vec2 pos, float r) {
+			return length(pos) - r;
+		}
+	
+// Mask_Blend
+
+float mask_blend(float offset, float fade, float mask_in) {
+	offset *= -1.;
+
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+	return smoothstep(offset - fade, offset + fade, mask_in);
+}
+
+
+void fragment() {
+	vec4 n_out4p0;
+// Texture2D:4
+	n_out4p0 = texture(ForeGroundAlbedo, UV);
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(BackgroundAlbedo, UV);
+
+
+	float n_out8p0;
+// Circle:8
+	vec2 n_in8p1 = vec2(0.50000, 0.50000);
+	float n_in8p2 = 0.25000;
+	{
+		n_out8p0 = sdCircle(UV.xy - n_in8p1.xy, n_in8p2);
+	}
+
+
+	float n_out7p0;
+// Mask_Blend:7
+	float n_in7p1 = 0.02300;
+	float n_in7p2 = 0.16600;
+	{
+		
+		n_out7p0 = mask_blend(n_in7p1, n_in7p2, n_out8p0);
+	}
+
+
+// Mix:9
+	vec3 n_out9p0 = mix(vec3(n_out4p0.xyz), vec3(n_out3p0.xyz), n_out7p0);
+
+
+// Output:0
+	COLOR.rgb = n_out9p0;
+
+
+}
+"
+graph_offset = Vector2(422.517, 151.641)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1100, 180)
+nodes/fragment/2/node = SubResource("VisualShaderNodeComment_1vtdj")
+nodes/fragment/2/position = Vector2(-280, 420)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_jgj26")
+nodes/fragment/3/position = Vector2(180, 780)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_338pd")
+nodes/fragment/4/position = Vector2(180, 600)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_orcc3")
+nodes/fragment/5/position = Vector2(-160, 500)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_kafga")
+nodes/fragment/6/position = Vector2(-180, 780)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_8tnnv")
+nodes/fragment/7/position = Vector2(580, 240)
+nodes/fragment/8/node = SubResource("VisualShaderNodeCustom_1xvdg")
+nodes/fragment/8/position = Vector2(400, 120)
+nodes/fragment/9/node = SubResource("VisualShaderNodeMix_3p70w")
+nodes/fragment/9/position = Vector2(750.4, 328.792)
+nodes/fragment/connections = PackedInt32Array(5, 0, 4, 2, 6, 0, 3, 2, 8, 0, 7, 0, 4, 0, 9, 0, 3, 0, 9, 1, 9, 0, 0, 0, 7, 0, 9, 2)

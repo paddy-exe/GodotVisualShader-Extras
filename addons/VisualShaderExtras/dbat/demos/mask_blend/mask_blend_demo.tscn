@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuyespkfhyvad"]
+
+[ext_resource type="Shader" uid="uid://cynucuekq2wtu" path="res://addons/VisualShaderExtras/dbat/demos/mask_blend/mask_blend_demo.tres" id="1_8i6o1"]
+[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_m45y7"]
+[ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="2_nfpfi"]
+[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="3_ensfb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tv3gx"]
+shader = ExtResource("1_8i6o1")
+shader_parameter/ForeGroundAlbedo = ExtResource("3_ensfb")
+shader_parameter/BackgroundAlbedo = ExtResource("2_m45y7")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tv3gx")
+offset_right = 307.0
+offset_bottom = 311.0
+texture = ExtResource("2_nfpfi")
