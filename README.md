@@ -8,13 +8,13 @@ https://github.com/paddy-exe/GodotVisualShader-Extras/tree/4.0
 </div>
 <div id="badges" align="center">
   <a href="https://ko-fi.com/flamelizard">
-    <img src="https://img.shields.io/badge/Support my work-red?style=for-the-badge&logo=kofi&logoColor=white" alt="Ko-Fi Badge"/>
+	<img src="https://img.shields.io/badge/Support my work-red?style=for-the-badge&logo=kofi&logoColor=white" alt="Ko-Fi Badge"/>
   </a>
   <a href="https://twitter.com/patrick_exe">
-    <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
+	<img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
   </a>
   <a href="https://mastodon.gamedev.place/@flamelizard">
-    <img src="https://img.shields.io/badge/Mastodon-purple?style=for-the-badge&logo=mastodon&logoColor=white" alt="Mastodon Badge"/>
+	<img src="https://img.shields.io/badge/Mastodon-purple?style=for-the-badge&logo=mastodon&logoColor=white" alt="Mastodon Badge"/>
   </a>
 </div>
 
@@ -26,54 +26,54 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
 
 ## Provided Nodes
 - Blending Modes (taken from Krita Docs and other sources)
-    - Darker Colors
-    - Exclusion
-    - Gamma Dark
-    - Gamma Illumination
-    - Gamma Light
-    - Hard Mix
-    - Lighter Color
-    - Linear Burn
-    - Linear Light
-    - Luminosity
-    - Pin Light
-    - Vivid Light
+	- Darker Colors
+	- Exclusion
+	- Gamma Dark
+	- Gamma Illumination
+	- Gamma Light
+	- Hard Mix
+	- Lighter Color
+	- Linear Burn
+	- Linear Light
+	- Luminosity
+	- Pin Light
+	- Vivid Light
 
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.png" width="800"/>
 </div>
 
 - Shapes (Signed Distance Fields)
-    - Box
-    - Circle
-    - Rounded Box
-    - Rotated Box
-    - Trapezoid
-    - Triangle
-    - Rhombus
-    - Parallelogram
+	- Box
+	- Circle
+	- Rounded Box
+	- Rotated Box
+	- Trapezoid
+	- Triangle
+	- Rhombus
+	- Parallelogram
 
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/Shapes-Showcase.png" width="800"/>
 </div>
 
 - Usability
-    - Compare
+	- Compare
 
 - UV
-    - UV Twirl
-    - UV Flipbook
-    - UV Tiler
+	- UV Twirl
+	- UV Flipbook
+	- UV Tiler
 
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
 </div>
 
 - Wave (click on the links for more detail about the patterns)
-    - [Triangle](https://en.wikipedia.org/wiki/Triangle_wave)
-    - [Square](https://en.wikipedia.org/wiki/Square_wave)
-    - [Sawtooth](https://en.wikipedia.org/wiki/Sawtooth_wave)
-    - [Sine (+ Angular Frequency Input variant)](https://en.wikipedia.org/wiki/Sine_wave)
+	- [Triangle](https://en.wikipedia.org/wiki/Triangle_wave)
+	- [Square](https://en.wikipedia.org/wiki/Square_wave)
+	- [Sawtooth](https://en.wikipedia.org/wiki/Sawtooth_wave)
+	- [Sine (+ Angular Frequency Input variant)](https://en.wikipedia.org/wiki/Sine_wave)
 
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/Wave-Showcase.gif" width="800"/>

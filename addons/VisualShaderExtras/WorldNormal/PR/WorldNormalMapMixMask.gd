@@ -31,11 +31,13 @@ func _get_version():
 	return "1"
 	
 func _get_category():
-	return "VisualShaderExtras/Utility/PR"
+	return "VisualShaderExtras/WorldNormal/PR"
 
 func _get_description():
 	return LizardShaderLibrary.format_description(self,
-	""" magic """)
+	"""This node gives a much better mix between textures where normal maps are involved.
+It lets you keep a direction (up/down/left/right) to your mixture so that you can rotate meshes and the direction of the mix stays fixed in world space.
+NB: Don't use this on mobile.""")
 
 func _is_available(mode, type):
 	return mode == VisualShader.MODE_SPATIAL

@@ -1,6 +1,6 @@
-[gd_resource type="VisualShader" load_steps=30 format=3 uid="uid://dpgyxu2egu2gm"]
+[gd_resource type="VisualShader" load_steps=30 format=3 uid="uid://dkaaycade5fnm"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/world_normals/WorldNormalMapMixMask.gd" id="1_bkjt5"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/WorldNormal/PR/WorldNormalMapMixMask.gd" id="1_bkjt5"]
 [ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_5m13w"]
 [ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="3_3y52a"]
 
@@ -283,6 +283,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-606.721, -52.9244)
 nodes/fragment/0/position = Vector2(1600, 400)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_2f28t")
 nodes/fragment/2/position = Vector2(-820, 220)

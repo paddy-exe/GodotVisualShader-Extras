@@ -31,7 +31,7 @@ func _get_version():
 	return "1"
 	
 func _get_category():
-	return "VisualShaderExtras/Utility/PR"
+	return "VisualShaderExtras/WorldNormal/PR"
 
 func _get_description():
 	return LizardShaderLibrary.format_description(self,

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ch7r6dx2dxlhh"]
 
-[ext_resource type="Shader" uid="uid://dpgyxu2egu2gm" path="res://addons/VisualShaderExtras/dbat/demos/world_normals/wnstest_vshader.tres" id="1_54q1f"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/world_normals/wnstest_vshader.tres" id="1_54q1f"]
 [ext_resource type="Texture2D" uid="uid://mbf8s277lmac" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_normal.png" id="2_jfu4j"]
 [ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_vi8j0"]
 [ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="4_8hw0d"]
