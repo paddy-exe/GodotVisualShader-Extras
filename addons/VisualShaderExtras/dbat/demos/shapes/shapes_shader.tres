@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=5 format=3]
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cq5eywkqypp65"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PR/Circle2.gd" id="1_n1igs"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PR/Box2.gd" id="2_fi760"]

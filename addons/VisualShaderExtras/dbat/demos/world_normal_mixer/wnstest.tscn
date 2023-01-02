@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://k2nmfkw4hppv"]
+
+[ext_resource type="Shader" uid="uid://ddwjjj0yfkr5d" path="res://addons/VisualShaderExtras/dbat/demos/world_normal_mixer/wnstest_vshader.tres" id="1_54q1f"]
+[ext_resource type="Texture2D" uid="uid://mbf8s277lmac" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_normal.png" id="2_jfu4j"]
+[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_vi8j0"]
+[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="4_8hw0d"]
+[ext_resource type="Texture2D" uid="uid://l18yyfue3www" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_normal.png" id="5_wudyx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hfkdh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebavy"]
+render_priority = 0
+shader = ExtResource("1_54q1f")
+shader_parameter/Offset = -0.097
+shader_parameter/Fade = 0.358
+shader_parameter/BackgroundAlbedo = ExtResource("2_vi8j0")
+shader_parameter/ForeGroundAlbedo = ExtResource("4_8hw0d")
+shader_parameter/BackgroundNormalMap = ExtResource("2_jfu4j")
+shader_parameter/ForegroundNormalMap = ExtResource("5_wudyx")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_hfkdh")
+surface_material_override/0 = SubResource("ShaderMaterial_ebavy")
