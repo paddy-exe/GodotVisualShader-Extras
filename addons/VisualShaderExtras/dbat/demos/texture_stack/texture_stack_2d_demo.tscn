@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3h2skjms2flm"]
+
+[ext_resource type="Shader" uid="uid://uktmg16jwvd" path="res://addons/VisualShaderExtras/dbat/demos/texture_stack/texture_stack.tres" id="1_5rhkq"]
+[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_m16nd"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_xqx38"]
+[ext_resource type="Texture2D" uid="uid://mbf8s277lmac" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_normal.png" id="3_be1ab"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a2wk"]
+shader = ExtResource("1_5rhkq")
+shader_parameter/Albedo = ExtResource("2_m16nd")
+shader_parameter/Normalmap = ExtResource("3_be1ab")
+
+[node name="texture_stack_2d_demo" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8a2wk")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_xqx38")

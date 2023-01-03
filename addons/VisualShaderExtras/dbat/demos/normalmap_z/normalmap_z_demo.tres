@@ -1,0 +1,92 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dklhyu0fandoc"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/NormalMapZ.gd" id="1_e7ynp"]
+[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="1_oxwyf"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_i7wow"]
+parameter_name = "BackgroundNormalMap"
+texture_type = 2
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_574f2"]
+default_input_values = [2, 0.0]
+initialized = true
+script = ExtResource("1_e7ynp")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_oxktn"]
+texture = ExtResource("1_oxwyf")
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_15;
+uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
+
+
+// Sampler_Restore_NormalMap_Z
+
+// Godot strips the z value from imported Normal Maps.
+// It does this for two reasons:
+// 1. Obtaining better compression because the z can be calculated by shader.
+//    Compression boosts speed of CPU to GPU transfer.
+// 2. On mobile devices they do not do that calculation. They either ignore the z
+//    or do some other calculation, but the normal one (below) is apparently too slow
+//    or power-hungry for mobile devices.
+//
+// Create the texture to pass in like this:
+//  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
+vec3 normal_map_add_z(
+	vec3 normal_map_texture, 
+	vec2 inuv,
+	vec3 _TANGENT,
+	vec3 _BINORMAL,
+	vec3 _NORMAL) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+
+	// Unpack the background normal map.
+	vec3 bg_normal = normal_map_texture * 2.0 - 1.0;
+
+	// Recalculate z-component of the normal map with the Pythagorean theorem.
+	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
+
+	// Apply the tangent-space normal map to the view-space normals.
+	vec3 normal_applied = bg_normal.x * _TANGENT + bg_normal.y * _BINORMAL + bg_normal.z * _NORMAL;
+	return normal_applied;
+}
+
+
+void fragment() {
+// Texture2D:15
+	vec4 n_out15p0 = texture(tex_frg_15, UV);
+
+
+	vec3 n_out14p0;
+// Sampler_Restore_NormalMap_Z:14
+	{
+		
+		vec3 normal_map_texture = textureLod(BackgroundNormalMap, UV, 0.).rgb;
+		
+		n_out14p0 = normal_map_add_z(
+			normal_map_texture, 
+			UV,
+			TANGENT,
+			BINORMAL,
+			NORMAL);
+	}
+
+
+// Output:0
+	ALBEDO = vec3(n_out15p0.xyz);
+	NORMAL_MAP = n_out14p0;
+
+
+}
+"
+graph_offset = Vector2(245.847, -92.0463)
+nodes/fragment/0/position = Vector2(1540, -80)
+nodes/fragment/12/node = SubResource("VisualShaderNodeTexture2DParameter_i7wow")
+nodes/fragment/12/position = Vector2(480, 100)
+nodes/fragment/14/node = SubResource("VisualShaderNodeCustom_574f2")
+nodes/fragment/14/position = Vector2(860, 160)
+nodes/fragment/15/node = SubResource("VisualShaderNodeTexture_oxktn")
+nodes/fragment/15/position = Vector2(1140, -120)
+nodes/fragment/connections = PackedInt32Array(12, 0, 14, 1, 14, 0, 0, 9, 15, 0, 0, 0)

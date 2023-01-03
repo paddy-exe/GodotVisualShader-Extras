@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://djpjul2qtnxp4"]
+
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/compare/compare_vshader.tres" id="1_04drd"]
+[ext_resource type="ArrayMesh" uid="uid://bcv4ug57hcmnt" path="res://addons/VisualShaderExtras/dbat/demos/resources/suzanne.obj" id="1_b56b5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcei7"]
+render_priority = 0
+shader = ExtResource("1_04drd")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="suzanne" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.566285, 0.0365433, 0.0734995)
+mesh = ExtResource("1_b56b5")
+surface_material_override/0 = SubResource("ShaderMaterial_pcei7")
