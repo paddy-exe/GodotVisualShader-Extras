@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4mocimooqfyc"]
+
+[ext_resource type="Shader" uid="uid://us3x01qliulo" path="res://addons/VisualShaderExtras/dbat/demos/rotateuv/rotateuvshader.tres" id="1_k13un"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_2cm2h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ihqfp"]
+shader = ExtResource("1_k13un")
+shader_parameter/Texture2DParameter = ExtResource("2_2cm2h")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ihqfp")
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_2cm2h")
