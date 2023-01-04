@@ -18,10 +18,10 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeSamplerBlur
+class_name TempVisualShaderNodeLodBlur
 
 func _get_name():
-	return "Lod_Blur"
+	return "LodBlur"
 
 func _get_version():
 	return "1"
@@ -43,7 +43,7 @@ func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int) -> String:
-	return "Color"
+	return "Output"
 	
 func _init() -> void:
 	pass
@@ -54,9 +54,9 @@ func _get_input_port_count():
 
 func _get_input_port_name(port):
 	match port:
-		0: return "UV in"
+		0: return "UV"
 		1: return "Texture Sampler"
-		2: return "Blur"
+		2: return "Blur Amount"
 
 func _get_input_port_type(port):
 	match port:

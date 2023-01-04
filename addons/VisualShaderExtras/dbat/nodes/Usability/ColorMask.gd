@@ -20,13 +20,13 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCustomColorCompare
+class_name VisualShaderNodeCustomColorMask
 
 func _init():
 	set_input_port_default_value(2, 1.0)#fuzz
 	
 func _get_name():
-	return "Color_Compare"
+	return "ColorMask"
 	
 func _get_version():
 	return "3"
@@ -48,16 +48,16 @@ func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int):
-	return "Mask"
+	return "Output"
 
 func _get_input_port_count():
 	return 3
 
 func _get_input_port_name(port):
 	match port:
-		0: return "Color 1"
-		1: return "Color 2"
-		2: return "Fuzz"
+		0: return "Input"
+		1: return "Mask Input"
+		2: return "Fuzziness"
 
 func _get_input_port_type(port):
 	match port:

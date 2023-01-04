@@ -25,7 +25,7 @@ extends VisualShaderNodeCustom
 class_name TempVisualShaderNodeSamplerNormalMapZ
 
 func _get_name():
-	return "Sampler_Restore_NormalMap_Z"
+	return "RestoreNormalMapZ"
 
 func _get_version():
 	return "1"
@@ -67,7 +67,7 @@ func _get_input_port_count():
 
 func _get_input_port_name(port):
 	match port:
-		0: return "UV in"
+		0: return "UV"
 		1: return "Normal Map Sampler"
 
 func _get_input_port_type(port):

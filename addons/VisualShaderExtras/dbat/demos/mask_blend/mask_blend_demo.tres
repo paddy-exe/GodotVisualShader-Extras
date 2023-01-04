@@ -50,8 +50,8 @@ initialized = true
 script = ExtResource("4_1qqte")
 
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_3p70w"]
-default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.5]
-op_type = 4
+default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 1), 2, Vector2(0.5, 0.5)]
+op_type = 1
 
 [resource]
 code = "shader_type canvas_item;
@@ -65,7 +65,7 @@ uniform sampler2D BackgroundAlbedo : source_color, filter_linear;
 			return length(pos) - r;
 		}
 	
-// Mask_Blend
+// MaskBlend
 
 float mask_blend(float offset, float fade, float mask_in) {
 	offset *= -1.;
@@ -109,7 +109,7 @@ void fragment() {
 
 
 	float n_out7p0;
-// Mask_Blend:7
+// MaskBlend:7
 	float n_in7p1 = 0.02300;
 	{
 		
@@ -118,16 +118,16 @@ void fragment() {
 
 
 // Mix:9
-	vec3 n_out9p0 = mix(vec3(n_out4p0.xyz), vec3(n_out3p0.xyz), n_out7p0);
+	vec2 n_out9p0 = mix(vec2(n_out4p0.xy), vec2(n_out3p0.xy), vec2(n_out7p0));
 
 
 // Output:0
-	COLOR.rgb = n_out9p0;
+	COLOR.rgb = vec3(n_out9p0, 0.0);
 
 
 }
 "
-graph_offset = Vector2(-146.544, -24.2463)
+graph_offset = Vector2(126.069, 79.0784)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(1100, 180)
@@ -146,7 +146,7 @@ nodes/fragment/7/position = Vector2(580, 240)
 nodes/fragment/8/node = SubResource("VisualShaderNodeCustom_1xvdg")
 nodes/fragment/8/position = Vector2(400, 120)
 nodes/fragment/9/node = SubResource("VisualShaderNodeMix_3p70w")
-nodes/fragment/9/position = Vector2(750.4, 328.792)
+nodes/fragment/9/position = Vector2(800, 400)
 nodes/fragment/10/node = SubResource("VisualShaderNodeInput_6xmu7")
 nodes/fragment/10/position = Vector2(-480, 180)
 nodes/fragment/12/node = SubResource("VisualShaderNodeFloatFunc_y5reu")

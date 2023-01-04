@@ -25,7 +25,7 @@ extends VisualShaderNodeCustom
 class_name TempVisualShaderNodeMaskBlend
 
 func _get_name():
-	return "Mask_Blend"
+	return "MaskBlend"
 
 func _get_version():
 	return "1"
@@ -47,7 +47,7 @@ func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int) -> String:
-	return "Mask"
+	return "Output"
 	
 func _init() -> void:
 	set_input_port_default_value(0, 0.)
@@ -59,9 +59,9 @@ func _get_input_port_count():
 
 func _get_input_port_name(port):
 	match port:
-		0: return "Mask"
-		1: return "Offset"
-		2: return "Fade"
+		0: return "Mask Input"
+		1: return "Blend Amount"
+		2: return "Blend Fade"
 
 func _get_input_port_type(port):
 	return VisualShaderNode.PORT_TYPE_SCALAR

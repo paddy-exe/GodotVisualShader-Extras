@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://rxakddyrh0n7"]
+
+[ext_resource type="Shader" uid="uid://b1jk8uibhkakb" path="res://addons/VisualShaderExtras/dbat/demos/texture_stack/texture_stack_3d.tres" id="1_y5mdw"]
+[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="2_7eknb"]
+[ext_resource type="Texture2D" uid="uid://l18yyfue3www" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_normal.png" id="3_neddd"]
+[ext_resource type="Texture2D" uid="uid://c3isbx13gnpaq" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_orm.png" id="4_j0ncb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_gb4fn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0p61"]
+render_priority = 0
+shader = ExtResource("1_y5mdw")
+shader_parameter/Albedo = ExtResource("2_7eknb")
+shader_parameter/ORM = ExtResource("4_j0ncb")
+shader_parameter/Normalmap = ExtResource("3_neddd")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_gb4fn")
+surface_material_override/0 = SubResource("ShaderMaterial_h0p61")

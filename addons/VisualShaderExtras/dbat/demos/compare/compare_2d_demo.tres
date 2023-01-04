@@ -1,6 +1,6 @@
-[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://bvmueimpt8ku5"]
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://3njtlijhw2o4"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorCompare.gd" id="1_8hvao"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorMask.gd" id="1_8hvao"]
 [ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_lfyqb"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_sb0wx"]
@@ -36,7 +36,7 @@ code = "shader_type canvas_item;
 uniform sampler2D Texture2DParameter : source_color, filter_linear;
 
 
-// Color_Compare
+// ColorMask
 
 float compare(vec4 in1, vec4 in2, float fuzz)
 {
@@ -63,7 +63,7 @@ void fragment() {
 
 
 	float n_out10p0;
-// Color_Compare:10
+// ColorMask:10
 	float n_in10p2 = 0.57400;
 	{
 		n_out10p0 = compare(n_out3p0,n_out4p0,n_in10p2);
@@ -80,7 +80,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-413.55, -23.458)
+graph_offset = Vector2(-85.6667, 52)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(720, 140)

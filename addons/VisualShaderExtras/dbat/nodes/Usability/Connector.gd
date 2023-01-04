@@ -38,15 +38,15 @@ func _get_return_icon_type():
 
 const ptypes:Array = [
 	VisualShaderNode.PORT_TYPE_BOOLEAN,
-	VisualShaderNode.PORT_TYPE_SAMPLER,
 	VisualShaderNode.PORT_TYPE_SCALAR,
 	VisualShaderNode.PORT_TYPE_SCALAR_INT,
-	VisualShaderNode.PORT_TYPE_TRANSFORM,
 	VisualShaderNode.PORT_TYPE_VECTOR_2D,
 	VisualShaderNode.PORT_TYPE_VECTOR_3D,
-	VisualShaderNode.PORT_TYPE_VECTOR_4D
+	VisualShaderNode.PORT_TYPE_VECTOR_4D,
+	VisualShaderNode.PORT_TYPE_TRANSFORM,
+	VisualShaderNode.PORT_TYPE_SAMPLER,
 ]
-const names:Array = ["B","S","Flt","Int","X","2D","3D","4D"]
+const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform","Sampler"]
 func _get_output_port_type(port):
 	return ptypes[port]
 	
@@ -54,7 +54,7 @@ func _get_output_port_count():
 	return 8
 
 func _get_output_port_name(port: int):
-	return names[port]
+	return ""#names[port]
 	
 func _get_input_port_count():
 	return 8

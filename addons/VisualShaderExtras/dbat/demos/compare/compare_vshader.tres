@@ -1,6 +1,6 @@
-[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://bol0w2kkfmixb"]
+[gd_resource type="VisualShader" load_steps=14 format=3]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorCompare.gd" id="2_s3ydu"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorMask.gd" id="2_s3ydu"]
 [ext_resource type="Texture2D" uid="uid://x3a0rntfqelx" path="res://addons/VisualShaderExtras/dbat/demos/compare/ids.png" id="2_xlhv6"]
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_818w5"]

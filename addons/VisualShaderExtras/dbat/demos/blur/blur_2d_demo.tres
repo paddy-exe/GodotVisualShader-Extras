@@ -43,7 +43,7 @@ void fragment() {
 
 
 	vec3 n_out3p0;
-// Lod_Blur:3
+// LodBlur:3
 	{
 		
 			//When the sampler is set to Linear Mipmap it works best.
@@ -60,7 +60,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-415.333, 47)
+graph_offset = Vector2(-122, 61)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(500, 120)
