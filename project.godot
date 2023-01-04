@@ -20,6 +20,16 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/Connector.gd"
 }, {
 "base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeConnector2",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/demos/connector/Connectorv2.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeConverter",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/Caster.gd"
+}, {
+"base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeLodBlur",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Filters/LodBlur.gd"
@@ -242,6 +252,8 @@ _global_script_classes=[{
 _global_script_class_icons={
 "LizardShaderLibrary": "",
 "TempVisualShaderNodeConnector": "",
+"TempVisualShaderNodeConnector2": "",
+"TempVisualShaderNodeConverter": "",
 "TempVisualShaderNodeLodBlur": "",
 "TempVisualShaderNodeMaskBlend": "",
 "TempVisualShaderNodeSamplerNormalMapZ": "",

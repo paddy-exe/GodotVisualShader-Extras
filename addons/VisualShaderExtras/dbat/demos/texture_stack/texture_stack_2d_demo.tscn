@@ -19,3 +19,8 @@ material = SubResource("ShaderMaterial_8a2wk")
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_xqx38")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(64, 67)
+energy = 6.3
+height = 0.08

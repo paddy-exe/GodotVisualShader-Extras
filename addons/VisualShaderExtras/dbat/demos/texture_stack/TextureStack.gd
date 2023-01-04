@@ -40,8 +40,8 @@ func _get_description():
 #func _is_available(mode, type):
 #	return mode == VisualShader.MODE_SPATIAL
 	
-func _is_highend():
-	return true #mark as PC only.
+#func _is_highend():
+#	return true #mark as PC only.
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
