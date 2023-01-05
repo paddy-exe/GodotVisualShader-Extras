@@ -1,6 +1,12 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://b1jk8uibhkakb"]
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://b1jk8uibhkakb"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/texture_stack/TextureStack.gd" id="1_b8cyd"]
+
+[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_06jpf"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8w8o6"]
+default_input_values = [0, 0.0, 1, 2.251]
+operator = 2
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_g8hug"]
 parameter_name = "Albedo"
@@ -9,9 +15,6 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_a2cfy"]
 parameter_name = "Normalmap"
 texture_type = 2
-
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_q8t6v"]
-parameter_name = "Height"
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_eafs5"]
 parameter_name = "ORM"
@@ -29,7 +32,6 @@ code = "shader_type spatial;
 uniform sampler2D Albedo : source_color;
 uniform sampler2D ORM;
 uniform sampler2D Normalmap : hint_normal;
-uniform sampler2D Height;
 
 
 
@@ -52,11 +54,24 @@ void fragment() {
 		
 		n_out8p6 = textureLod(Normalmap, UV, 0.).rgb;
 		
-		n_out8p7 = textureLod(Height, UV, 0.).r;
-		
 		
 		n_out8p0 = UV;
 	}
+
+
+	vec3 n_out10p0;
+// ColorFunc:10
+	{
+		vec3 c = vec3(n_out8p1.xyz);
+		float max1 = max(c.r, c.g);
+		float max2 = max(max1, c.b);
+		n_out10p0 = vec3(max2, max2, max2);
+	}
+
+
+// FloatOp:11
+	float n_in11p1 = 2.25100;
+	float n_out11p0 = n_out10p0.x * n_in11p1;
 
 
 // Output:0
@@ -65,22 +80,25 @@ void fragment() {
 	ROUGHNESS = n_out8p4;
 	AO = n_out8p3;
 	NORMAL_MAP = n_out8p6;
-	NORMAL_MAP_DEPTH = n_out8p7;
+	NORMAL_MAP_DEPTH = n_out11p0;
 
 
 }
 "
+graph_offset = Vector2(-89.5834, -15.4111)
 nodes/fragment/0/position = Vector2(860, 60)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_g8hug")
 nodes/fragment/2/position = Vector2(-295.143, -122.143)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_a2cfy")
-nodes/fragment/3/position = Vector2(-260, 580)
-nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_q8t6v")
-nodes/fragment/6/position = Vector2(-740, 360)
+nodes/fragment/3/position = Vector2(-280, 360)
 nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_eafs5")
 nodes/fragment/7/position = Vector2(-600, 80)
 nodes/fragment/8/node = SubResource("VisualShaderNodeCustom_thkgx")
 nodes/fragment/8/position = Vector2(124.857, 137.857)
 nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_t843c")
 nodes/fragment/9/position = Vector2(100, -200)
-nodes/fragment/connections = PackedInt32Array(2, 0, 8, 1, 3, 0, 8, 6, 6, 0, 8, 7, 8, 1, 0, 0, 8, 3, 0, 6, 8, 4, 0, 3, 8, 5, 0, 2, 8, 6, 0, 9, 7, 0, 8, 2, 8, 7, 0, 10)
+nodes/fragment/10/node = SubResource("VisualShaderNodeColorFunc_06jpf")
+nodes/fragment/10/position = Vector2(340, 380)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_8w8o6")
+nodes/fragment/11/position = Vector2(520, 380)
+nodes/fragment/connections = PackedInt32Array(2, 0, 8, 1, 3, 0, 8, 6, 8, 1, 0, 0, 8, 3, 0, 6, 8, 4, 0, 3, 8, 5, 0, 2, 8, 6, 0, 9, 7, 0, 8, 2, 8, 1, 10, 0, 10, 0, 11, 0, 11, 0, 0, 10)
