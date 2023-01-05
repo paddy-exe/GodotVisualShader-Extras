@@ -21,7 +21,7 @@ extends VisualShaderNodeCustom
 class_name TempVisualShaderNodeConnector2
 
 func _init():
-	in_type = "bool"
+	in_type = "vec4"
 	
 func _get_name():
 	return "Connector2"
@@ -37,7 +37,7 @@ func _get_description():
 	"Node to let you just hang a noodle somewhere, and pass it through.\nNB: Make sure to match the same in and out ports.\nNote: One can't connect any Sampler.")
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_BOOLEAN
+	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 const ptypes:={
 	"bool":VisualShaderNode.PORT_TYPE_BOOLEAN,
@@ -49,35 +49,32 @@ const ptypes:={
 }
 #const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform"]
 
-var in_name : String
+
 var in_type : String
 
 func _get_output_port_count():
-
 	return 1
 
 func _get_output_port_type(port):
-	print("GET OUT TYPE RUNS")
+	var outpt = ptypes[in_type]
+	if last_pt != outpt:
+		last_pt = outpt
+	return outpt
 
-
-	return ptypes[in_type] 
+func _get_input_port_type(port):
+	var inpt = ptypes[in_type]
+	if inpt != last_pt:
+		last_pt = inpt
+	return last_pt 
 
 func _get_output_port_name(port: int):
-	return "OUT"#in_name
-	
-	
+	return "OUT"
+
 func _get_input_port_count():
 	return 1
 
 func _get_input_port_name(port):
 	return "Anything"
-
-func _get_input_port_type(port):
-	#var outpt = ptypes[in_type]#self._get_input_port_type(0)
-		#emit_changed()
-		#last_pt = outpt
-	return last_pt
-
 
 ## A brutal way to work out what the variable name is
 ## and infer its type from the input_vars array.
@@ -101,69 +98,13 @@ func _get_input_port_var_and_its_type(inp:String)->Array:
 	
 	return [inp,"bool"] #boolean is the last
 
-#func _get_global_code(mode):
-#	var outpt = self._get_output_port_type(0)
-#	return """
-#	vec3 vec3thru = vec3(0.);
-#	vec4 vec4thru;
-#	"""
-	
 var foo = true
 var in_vars:Array
 var last_pt
 func _get_code(input_vars, output_vars, mode, type):
-	#call_deferred("emit_changed")
 	var data := _get_input_port_var_and_its_type(input_vars[0])
-	#print ("data:",data) 
-	in_name = data[0]
-	in_type = data[1]
+	in_type = data[1]  
 	
 	last_pt = _get_input_port_type(0)
-
-		
-#	if foo:
-#		foo = false
-#		self.editor_refresh_request.emit()
-#		self._get_code(input_vars, output_vars, mode, type)
-		
-#	print("GET CODE")
-#	in_vars = input_vars
-
-	#print("in_name:",in_name)
-#
-#	print("outpt:",outpt)
-	#print(output_vars)
-#	#self._get_output_port_name(0)
-	#foo = true
-	#var s:String=""
-#	s = "%s outpop = %s;" % [in_type, in_name]
-	#s = "%sthru = %s;" % [in_type, in_name]
-	return "{out} = {in};".format({"out":output_vars[0], "in":input_vars[0]})#in_name})
-#	var s = ""
-#	for p in range(0,7):
-#		if input_vars[p]:
-#			s += "{outp} = {inp};\n".format({"outp":output_vars[p],"inp":input_vars[p]})
-#	return s
-
-## I learned that we can't use Sampers in the normal way as other types
-## they can only be declared in global space with uniform sampler2d
-## So I took that out of the connector.
-
-## Sadly there is no way to know whether an output port
-## is actually connected to a noodle - hence I can't make this
-## into a general type casting control :(
-## I leave this code for possible futures:
-#	var in_list:Array = input_vars.duplicate()
-#	var out_list:Array = output_vars.duplicate()
-#
-#	for in_v in in_list:
-#		if in_v:
-#			print("in_v:", in_v)
-#			var i = 0
-#			for out_v in out_list:
-#				print("out_v:", out_v)
-#				if out_v:
-#					s += "{out_v} = {in_v};\n".format({"out_v":out_v,"in_v":in_v})
-#					out_list[i] = ""
-#				i += 1
-#	return s
+ 
+	return "{out} = {in};".format({"out":output_vars[0], "in":input_vars[0]})
