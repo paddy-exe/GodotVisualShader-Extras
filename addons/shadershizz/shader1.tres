@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ce8crsfqd413i"]
+
+[ext_resource type="Script" path="res://addons/shadershizz/lib.gd" id="1_nppnt"]
+
+[resource]
+script = ExtResource("1_nppnt")
+foo = "rotate -> XXX"

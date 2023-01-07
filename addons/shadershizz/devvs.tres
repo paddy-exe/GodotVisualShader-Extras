@@ -1,0 +1,33 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://iqthd06a2lxa"]
+
+[ext_resource type="Script" path="res://addons/shadershizz/UVRotate.gd" id="1_uow1a"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_gg2ac"]
+default_input_values = [1, Vector2(0, 0), 2, 0.0]
+initialized = true
+script = ExtResource("1_uow1a")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+
+void fragment() {
+	vec2 n_out3p0;
+// TESTUVRotate:3
+	vec2 n_in3p1 = vec2(0.00000, 0.00000);
+	float n_in3p2 = 0.00000;
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0, 0.0);
+
+
+}
+"
+graph_offset = Vector2(-119.759, 3.00925)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_gg2ac")
+nodes/fragment/3/position = Vector2(-20, 180)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0)

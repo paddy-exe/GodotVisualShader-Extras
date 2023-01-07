@@ -14,6 +14,26 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/library/LizardShaderLibrary.gd"
 }, {
+"base": "RefCounted",
+"class": &"ShaderFuncRef",
+"language": &"GDScript",
+"path": "res://addons/shadershizz/libdespair.gd"
+}, {
+"base": "RefCounted",
+"class": &"ShaderFuncRefFuck",
+"language": &"GDScript",
+"path": "res://addons/shadershizz/lib.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TESTNodeUVRotate",
+"language": &"GDScript",
+"path": "res://addons/shadershizz/UVRotate.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TESTNodeUVTiler",
+"language": &"GDScript",
+"path": "res://addons/shadershizz/UVTiler.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeConnector",
 "language": &"GDScript",
@@ -23,6 +43,11 @@ _global_script_classes=[{
 "class": &"TempVisualShaderNodeConverter",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/Converter.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeHacks",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/dev/libidea/hacks.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeLodBlur",
@@ -246,8 +271,13 @@ _global_script_classes=[{
 }]
 _global_script_class_icons={
 "LizardShaderLibrary": "",
+"ShaderFuncRef": "",
+"ShaderFuncRefFuck": "",
+"TESTNodeUVRotate": "",
+"TESTNodeUVTiler": "",
 "TempVisualShaderNodeConnector": "",
 "TempVisualShaderNodeConverter": "",
+"TempVisualShaderNodeHacks": "",
 "TempVisualShaderNodeLodBlur": "",
 "TempVisualShaderNodeMaskBlend": "",
 "TempVisualShaderNodeSamplerNormalMapZ": "",
@@ -304,6 +334,10 @@ config/icon="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/shadershizz/plugin.cfg")
 
 [gui]
 
