@@ -134,8 +134,11 @@
 extends VisualShaderNodeCustom
 class_name TESTNodeUVRotate
 
+var call_order:String = ""
+
 func _get_name():
 	print("get name")
+	call_order+="N"
 	return "TESTUVRotate"
 
 func _get_version():
@@ -198,16 +201,25 @@ func _get_input_port_type(port):
 		2: return VisualShaderNode.PORT_TYPE_SCALAR #radians
 
 
-var output_ports_live:bool
 func _get_global_code(mode):
-	output_ports_live = true #how do i flip this?
 	print("get global")
-	return ""
-	#return lib.get_unique_funcs(self,["vec2_rotate"])
+	if call_order == "N":
+		#N then G means disconnect or duplicate
+		#So, let's return nothing
+		call_order=""
+		return ""
+	call_order += "G"
+	return lib.get_unique_funcs(self,["vec2_rotate"])
 	
 	#return LizardShaderLibrary.vec2_rotate
 
+func _notification(what): #useless
+	print("notif:",what) #you get what == 1 on duplicate of node
+	
 func _get_code(input_vars, output_vars, mode, type):
+	print(self.get_local_scene()) #useful
+	print(self.output_ports_live) #true when con to output node
+	
 	print("get code")
 	return ""
 	
