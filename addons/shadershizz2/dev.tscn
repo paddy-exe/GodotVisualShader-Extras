@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://by8bp833x1fn7"]
+
+[ext_resource type="Shader" uid="uid://iqthd06a2lxa" path="res://addons/shadershizz/devvs.tres" id="1_2o3u7"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_c0x1e"]
+[ext_resource type="Shader" uid="uid://chh7giqnl1vbk" path="res://addons/shadershizz/devvs2.tres" id="3_bowwj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dljfv"]
+shader = ExtResource("1_2o3u7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oc8ct"]
+shader = ExtResource("3_bowwj")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_dljfv")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_c0x1e")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_oc8ct")
+offset_left = 222.0
+offset_top = -1.0
+offset_right = 350.0
+offset_bottom = 127.0
+texture = ExtResource("2_c0x1e")

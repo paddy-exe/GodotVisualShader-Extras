@@ -1,0 +1,69 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://co2vo1uv12utf"]
+
+[ext_resource type="Script" path="res://addons/shadershizz2/UVRotate.gd" id="1_mmo7i"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_r6ckw"]
+default_input_values = [1, Vector2(0, 0), 2, 0.0]
+initialized = true
+script = ExtResource("1_mmo7i")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qldei"]
+default_input_values = [1, Vector2(0, 0), 2, 0.0]
+initialized = true
+script = ExtResource("1_mmo7i")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+// TESTUVRotate
+
+vec2 vec2_rotate(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
+
+
+void fragment() {
+	vec2 n_out3p0;
+// TESTUVRotate:3
+	vec2 n_in3p1 = vec2(0.00000, 0.00000);
+	float n_in3p2 = 0.00000;
+	{
+		
+			vec2 rotated_uv = UV;
+			rotated_uv = vec2_rotate(UV, n_in3p2, n_in3p1);
+			n_out3p0 = rotated_uv;
+			
+	}
+
+
+	vec2 n_out2p0;
+// TESTUVRotate:2
+	vec2 n_in2p1 = vec2(0.00000, 0.00000);
+	float n_in2p2 = 0.00000;
+	{
+		
+			vec2 rotated_uv = n_out3p0;
+			rotated_uv = vec2_rotate(n_out3p0, n_in2p2, n_in2p1);
+			n_out2p0 = rotated_uv;
+			
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out2p0, 0.0);
+
+
+}
+"
+graph_offset = Vector2(-143.222, 23.4167)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_r6ckw")
+nodes/fragment/2/position = Vector2(140, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_qldei")
+nodes/fragment/3/position = Vector2(60, 300)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 0)

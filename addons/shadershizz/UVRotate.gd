@@ -137,64 +137,64 @@ class_name TESTNodeUVRotate
 var call_order:String = ""
 
 func _get_name():
-	print("get name")
-	call_order+="N"
+	#print("get name")
+	if not "N" in call_order: call_order += "N"
 	return "TESTUVRotate"
 
 func _get_version():
 	return "1"
 	
 func _get_category():
-	print("get_cat")
+	#print("get_cat")
 	return "VisualShaderExtras/TEST"
 
 func _get_description():
-	print("get_desc")
+	#print("get_desc")
 	return LizardShaderLibrary.format_description(self,
 	"Rotates UV coordinates around a pivot point.")
 
 func _get_return_icon_type():
-	print("get_icon")
+	#print("get_icon")
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
 func _get_output_port_type(port):
-	print("GET OUT PORT type")
+	#print("GET OUT PORT type")
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 	
 func _get_output_port_count():
-	print("get_out_count")
+	#print("get_out_count")
 	return 1
 
 func _get_output_port_name(port: int) -> String:
-	print("get_out_name")
+	#print("get_out_name")
 	return "UV"
 	
 var lib:ShaderFuncRef
 func _init() -> void:
-	print("init")
+	#print("init")
 	lib = ShaderFuncRef.new()
 	set_input_port_default_value(1, Vector2(0., 0.)) #pivot
 	set_input_port_default_value(2, 0.0) #rot
 	
-	connect("disconnection_request",discon) # does fa :(
+	#connect("disconnection_request",discon) # does fa :(
 #	connect("editor_refresh_request",discon)
 
-func discon():
-	print("disconnection_request")
+#func discon():
+#	print("disconnection_request")
 	
 func _get_input_port_count():
-	print("get_in_count")
+	#print("get_in_count")
 	return 3
 
 func _get_input_port_name(port):
-	print("get_in_name")
+	#print("get_in_name")
 	match port:
 		0: return "UV"
 		1: return "Pivot"
 		2: return "Rotation (Radians)"
 
 func _get_input_port_type(port):
-	print("GET IN PORT type")
+	#print("GET IN PORT type")
 	match port:
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D #UV
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D #pivot
@@ -202,26 +202,33 @@ func _get_input_port_type(port):
 
 
 func _get_global_code(mode):
-	print("get global")
-	if call_order == "N":
-		#N then G means disconnect or duplicate
-		#So, let's return nothing
-		call_order=""
-		return ""
-	call_order += "G"
-	return lib.get_unique_funcs(self,["vec2_rotate"])
-	
+	#print("get global")
+	var s:String = ""
+	if not "G" in call_order: call_order += "G"
+	print("Call order:", call_order)
+	if self.has_method("output_ports_live"):
+		print("output_ports_live:", self.output_ports_live) #true when con to output node
+	match call_order:
+		"NG": #DISCONNECT from another CUSTOM node (not any built ins)
+			#N then G means disconnect or duplicate
+			#So, let's return nothing
+			s="//NO GLOBAL STRING NEEDED"
+			return s
+		"G","GN" : #CONNECT
+			s = lib.get_unique_funcs(self,["vec2_rotate"])
+		"_":
+			s= "UNCERTAIN STATE"
+			
+	call_order=""
+	return s
 	#return LizardShaderLibrary.vec2_rotate
 
-func _notification(what): #useless
-	print("notif:",what) #you get what == 1 on duplicate of node
+#func _notification(what): #useless
+#	print("notif:",what) #you get what == 1 on duplicate of node
 	
 func _get_code(input_vars, output_vars, mode, type):
-	print(self.get_local_scene()) #useful
-	print(self.output_ports_live) #true when con to output node
-	
-	print("get code")
-	return ""
+	#print(self.get_local_scene()) #useful?
+	#print(self.output_ports_live) #true when con to output node
 	
 	var uv = input_vars[0] if input_vars[0] else "UV"
 	return """
@@ -235,18 +242,3 @@ func _get_code(input_vars, output_vars, mode, type):
 		"rand_rotation": input_vars[2],
 		"out_uv": output_vars[0] 
 		})
-
-
-	return """
-	vec2 rotated_uv = {uv};
-	rotated_uv = vec2_rotate({uv}, {rand_rotation}, {pivot});
-	{vec2_rotate_here}
-	{out_uv} = rotated_uv;
-	""".format(
-		{
-		"uv": uv,
-		"pivot": input_vars[1],
-		"rand_rotation": input_vars[2],
-		"out_uv": output_vars[0] 
-		})
-		

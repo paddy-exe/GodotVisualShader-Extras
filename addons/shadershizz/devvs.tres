@@ -1,32 +1,90 @@
-[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://iqthd06a2lxa"]
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://iqthd06a2lxa"]
 
-[ext_resource type="Script" path="res://addons/shadershizz/UVRotate.gd" id="1_uow1a"]
+[ext_resource type="Script" path="res://addons/shadershizz2/UVRotate.gd" id="1_0cbjb"]
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5435w"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_y4i22"]
 default_input_values = [1, Vector2(0, 0), 2, 0.0]
 initialized = true
-script = ExtResource("1_uow1a")
+script = ExtResource("1_0cbjb")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cffpd"]
+default_input_values = [1, Vector2(0, 0), 2, 0.0]
+initialized = true
+script = ExtResource("1_0cbjb")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ni67x"]
+default_input_values = [1, Vector2(0, 0), 2, 0.0]
+initialized = true
+script = ExtResource("1_0cbjb")
 
 [resource]
 code = "shader_type canvas_item;
 
 
+// TESTUVRotate
+
+vec2 vec2_rotate(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
+
 
 void fragment() {
+	vec2 n_out3p0;
+// TESTUVRotate:3
+	vec2 n_in3p1 = vec2(0.00000, 0.00000);
+	float n_in3p2 = 0.00000;
+	{
+		
+			vec2 rotated_uv = UV;
+			rotated_uv = vec2_rotate(UV, n_in3p2, n_in3p1);
+			n_out3p0 = rotated_uv;
+			
+	}
+
+
 	vec2 n_out2p0;
 // TESTUVRotate:2
 	vec2 n_in2p1 = vec2(0.00000, 0.00000);
 	float n_in2p2 = 0.00000;
+	{
+		
+			vec2 rotated_uv = n_out3p0;
+			rotated_uv = vec2_rotate(n_out3p0, n_in2p2, n_in2p1);
+			n_out2p0 = rotated_uv;
+			
+	}
+
+
+	vec2 n_out4p0;
+// TESTUVRotate:4
+	vec2 n_in4p1 = vec2(0.00000, 0.00000);
+	float n_in4p2 = 0.00000;
+	{
+		
+			vec2 rotated_uv = n_out3p0;
+			rotated_uv = vec2_rotate(n_out3p0, n_in4p2, n_in4p1);
+			n_out4p0 = rotated_uv;
+			
+	}
 
 
 // Output:0
 	COLOR.rgb = vec3(n_out2p0, 0.0);
+	NORMAL = vec3(n_out4p0, 0.0);
 
 
 }
 "
+graph_offset = Vector2(-453.884, 42.3611)
 mode = 1
 flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_5435w")
-nodes/fragment/2/position = Vector2(102, 219)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_y4i22")
+nodes/fragment/2/position = Vector2(-179.512, 268.464)
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_cffpd")
+nodes/fragment/3/position = Vector2(-680, 240)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_ni67x")
+nodes/fragment/4/position = Vector2(-383.416, 399.792)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 4, 0, 0, 2, 3, 0, 4, 0, 3, 0, 2, 0)

@@ -8,7 +8,8 @@ var sfuncs_already_in_global:Dictionary
 # id: {funcs dict}, id: {funcsdict} etc.
 
 func get_unique_funcs(vsnode, sfunc_names_in:Array)->String:
-	var id = vsnode.get_instance_id()
+	var id = vsnode.get_local_scene()
+	#var id = vsnode.get_instance_id()
 	print("got id:", id)
 	var s:String = ""
 	var subdict : Dictionary
@@ -30,7 +31,7 @@ func get_unique_funcs(vsnode, sfunc_names_in:Array)->String:
 	print("returning:",s)
 	print("-------------------")
 	print(sfuncs_already_in_global)
-	prune(vsnode) # dumb....
+	#prune(vsnode) # dumb....
 	return s
 
 func prune(vsnode):

@@ -1,0 +1,18 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://qsgqih41id3t"]
+
+[ext_resource type="Script" path="res://addons/shadershizz2/UVRotate.gd" id="1_hcp51"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_esgcj"]
+default_input_values = [1, Vector2(0, 0), 2, 0.0]
+initialized = true
+script = ExtResource("1_hcp51")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_esgcj")
+nodes/fragment/2/position = Vector2(-26, 208)

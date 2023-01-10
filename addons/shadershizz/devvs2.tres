@@ -1,22 +1,11 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://chh7giqnl1vbk"]
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://chh7giqnl1vbk"]
 
 [ext_resource type="Script" path="res://addons/shadershizz/UVRotate.gd" id="1_35tw2"]
-[ext_resource type="Script" path="res://addons/shadershizz/UVTiler.gd" id="2_1o1jy"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rrl2x"]
-default_input_values = [1, Vector2(0, 0), 2, 0.0]
-initialized = true
-script = ExtResource("1_35tw2")
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8jobq"]
 default_input_values = [1, Vector2(0, 0), 2, 0.0]
 initialized = true
 script = ExtResource("1_35tw2")
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8st5i"]
-default_input_values = [0, Vector2(2, 2), 1, 0.0, 2, 0.0, 3, 0.5]
-initialized = true
-script = ExtResource("2_1o1jy")
 
 [resource]
 code = "shader_type canvas_item;
@@ -29,22 +18,6 @@ vec2 vec2_rotate(vec2 _uv, float _angle, vec2 _pivot) {
 	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
 	_uv += _pivot;
 	return _uv;
-}
-// TESTUV_Tiler
-
-vec2 vec2_rotate(vec2 _uv, float _angle, vec2 _pivot) {
-	_uv -= _pivot;
-	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-	_uv += _pivot;
-	return _uv;
-}
-vec2 brick_tile(vec2 _uv, float _zoom, float _shift)
-{
-	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
-	return fract(_uv);
-}
-float random_float(vec2 input) {
-	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
 
 void fragment() {
@@ -61,49 +34,15 @@ void fragment() {
 	}
 
 
-	vec2 n_out4p0;
-// TESTUV_Tiler:4
-	float n_in4p1 = 0.00000;
-	float n_in4p2 = 0.00000;
-	float n_in4p3 = 0.50000;
-	{
-		
-			//Much simpler to calculate zoom from the tiling vec2 
-			float zoom = (n_out3p0.x * n_out3p0.y);
-			
-			vec2 st = UV/n_out3p0;
-			st *= zoom; //Scale coordinate system by zoom
-			
-			vec2 unique_val = floor( st ); //get the integer coordinates
-			
-			//Something about this calc is the problem with the brick shift when 
-			//rr is > 0
-			float rand_rotation = ((random_float(unique_val) * 2.0) - 1.0) * n_in4p2;
-			
-			//Just add whatever static rotation may be input and clamp:
-			rand_rotation = clamp(rand_rotation + n_in4p1, 0.0, 2.*PI);
-			
-			st = brick_tile(st, zoom, n_in4p3);
-			st = vec2_rotate(st, rand_rotation, vec2(0.5));
-			
-			n_out4p0 = st;
-			
-	}
-
-
 // Output:0
-	NORMAL_MAP = vec3(n_out4p0, 0.0);
+	COLOR.rgb = vec3(n_out3p0, 0.0);
 
 
 }
 "
-graph_offset = Vector2(-188.8, 68.5)
+graph_offset = Vector2(-223, 106)
 mode = 1
 flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_rrl2x")
-nodes/fragment/2/position = Vector2(-229.893, 343.493)
 nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_8jobq")
-nodes/fragment/3/position = Vector2(-160, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_8st5i")
-nodes/fragment/4/position = Vector2(60, 180)
-nodes/fragment/connections = PackedInt32Array(4, 0, 0, 3, 3, 0, 4, 0)
+nodes/fragment/3/position = Vector2(100, 200)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0)
