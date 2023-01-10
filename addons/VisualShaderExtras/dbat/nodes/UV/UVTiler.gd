@@ -34,29 +34,23 @@
 #    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
 #    HEREUNDER.
 
+## ISSUES
+## 1. There's often one tile that will not rotate randomly. Search me!
+## 2. The brick-shifting and the random rotation do not play well together. Help!
+## 3. Should this take-in a UV? And how would that work?
+
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeUVTiler
+class_name NodeUVTilerV3
 
 func _get_name():
-	return "UV_Tiler"
+	return "UVTilerV3"
 
-func _get_version():
-	return "2"
-	
 func _get_category():
 	return "VisualShaderExtras/UV"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Tiles the UV and rotates and brick-shifts it.")
-
-func _get_issues():
-	return """
-1. There's often one tile that will not rotate randomly. Search me!
-2. The brick-shifting and the random rotation do not play well together. Help!
-3. Should this take-in a UV? And how would that work?
-"""
+	return "Tiles the UV, rotates and brick-shifts it."
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
@@ -93,14 +87,17 @@ func _get_input_port_type(port):
 		2: return VisualShaderNode.PORT_TYPE_SCALAR #float
 		3: return VisualShaderNode.PORT_TYPE_SCALAR #float for bricks
 
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["vec2_rotate","brick_tile","random_float"]
+	
 func _get_global_code(mode):
-	return \
-		LizardShaderLibrary.brick_tile + \
-		LizardShaderLibrary.vec2_rotate + \
-		LizardShaderLibrary.random_float
+	return ShaderLib.prep_global_code(self)
 
 func _get_code(input_vars, output_vars, mode, type):
-	return """
+	
+	var code = """
 	//Much simpler to calculate zoom from the tiling vec2 
 	float zoom = ({in_tilexy}.x * {in_tilexy}.y);
 	
@@ -111,7 +108,7 @@ func _get_code(input_vars, output_vars, mode, type):
 	
 	//Something about this calc is the problem with the brick shift when 
 	//rr is > 0
-	float rand_rotation = ((random_float(unique_val) * 2.0) - 1.0) * {rr};
+	float rand_rotation = (( random_float(unique_val) * 2.0) - 1.0) * {rr};
 	
 	//Just add whatever static rotation may be input and clamp:
 	rand_rotation = clamp(rand_rotation + {rot}, 0.0, 2.*PI);
@@ -128,3 +125,4 @@ func _get_code(input_vars, output_vars, mode, type):
 		"shift":	input_vars[3],
 		"out_uv":	output_vars[0] 
 		})
+	return ShaderLib.rename_functions(self, code)

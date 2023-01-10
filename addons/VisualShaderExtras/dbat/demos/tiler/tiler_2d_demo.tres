@@ -52,22 +52,27 @@ uniform float BrickShift : hint_range(0, 1) = 0.5;
 uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_linear;
 
 
-// UVTiler
+// UVTilerV3
 
-vec2 brick_tile(vec2 _uv, float _zoom, float _shift)
-{
-	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
-	return fract(_uv);
-}
-vec2 vec2_rotate(vec2 _uv, float _angle, vec2 _pivot) {
+// _angle in radians
+vec2 vec2_rotate_VisualShaderExtrasUvUvTilerV3(vec2 _uv, float _angle, vec2 _pivot) {
 	_uv -= _pivot;
 	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
 	_uv += _pivot;
 	return _uv;
 }
-float random_float(vec2 input) {
+
+vec2 brick_tile_VisualShaderExtrasUvUvTilerV3(vec2 _uv, float _zoom, float _shift)
+{
+	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
+	return fract(_uv);
+}
+
+// Returns float from 0.0 to 1.0
+float random_float_VisualShaderExtrasUvUvTilerV3(vec2 input) {
 	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
+
 
 void fragment() {
 // Vector2Parameter:8
@@ -87,7 +92,7 @@ void fragment() {
 
 
 	vec2 n_out9p0;
-// UVTiler:9
+// UVTilerV3:9
 	{
 		
 			//Much simpler to calculate zoom from the tiling vec2 
@@ -100,13 +105,13 @@ void fragment() {
 			
 			//Something about this calc is the problem with the brick shift when 
 			//rr is > 0
-			float rand_rotation = ((random_float(unique_val) * 2.0) - 1.0) * n_out6p0;
+			float rand_rotation = (( random_float_VisualShaderExtrasUvUvTilerV3(unique_val) * 2.0) - 1.0) * n_out6p0;
 			
 			//Just add whatever static rotation may be input and clamp:
 			rand_rotation = clamp(rand_rotation + n_out7p0, 0.0, 2.*PI);
 			
-			st = brick_tile(st, zoom, n_out5p0);
-			st = vec2_rotate(st, rand_rotation, vec2(0.5));
+			st = brick_tile_VisualShaderExtrasUvUvTilerV3(st, zoom, n_out5p0);
+			st = vec2_rotate_VisualShaderExtrasUvUvTilerV3(st, rand_rotation, vec2(0.5));
 			
 			n_out9p0 = st;
 			
@@ -124,7 +129,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-536.58, -81.6)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(500, 140)

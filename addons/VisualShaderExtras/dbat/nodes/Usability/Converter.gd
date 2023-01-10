@@ -23,15 +23,11 @@ class_name TempVisualShaderNodeConverter
 func _get_name():
 	return "Converter"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Lets you convert number-like things into specific types. Passes through UV and Transforms.")
+	return "Lets you convert number-like things into specific types. Passes through UV and Transforms."
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_4D

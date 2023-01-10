@@ -1,4 +1,6 @@
 # The MIT License
+# Copyright © 2022 Inigo Quilez
+# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
 # Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
@@ -18,62 +20,57 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeHacks
+class_name VisualShaderNodeCustomCompareDEPRECATED
 
 func _get_name():
-	return "Hacks"
+	return "Compare-deprecated"
 
-func _get_version():
-	return "2"
-	
+func _init() -> void:
+	pass#set_input_port_default_value(2, 0.5)
+
 func _get_category():
 	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Node to let you just hang a noodle somewhere, and pass it through.\nNB: Make sure to match the same in and out ports.\nNote: One can't connect any Sampler.")
+	return "Compare Color inputs and output a mask for the second input"
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+	return VisualShaderNode.PORT_TYPE_SCALAR
 
-const ptypes:Array = [
-	VisualShaderNode.PORT_TYPE_BOOLEAN,
-	VisualShaderNode.PORT_TYPE_SCALAR,
-	VisualShaderNode.PORT_TYPE_SCALAR_INT,
-	VisualShaderNode.PORT_TYPE_VECTOR_2D,
-	VisualShaderNode.PORT_TYPE_VECTOR_3D,
-	VisualShaderNode.PORT_TYPE_VECTOR_4D,
-	VisualShaderNode.PORT_TYPE_TRANSFORM,
-]
-const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform"]
-func _get_output_port_type(port):
-	return ptypes[port]
-	
-func _get_output_port_count():
-	return ptypes.size()
-
-func _get_output_port_name(port: int):
-	return ""#names[port]
-	
 func _get_input_port_count():
-	return ptypes.size()
+	return 2
 
 func _get_input_port_name(port):
-	return names[port]
+	match port:
+		0:
+			return "Color 1"
+		1:
+			return "Color 2"
 
 func _get_input_port_type(port):
-	return ptypes[port]
+	match port:
+		0:
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
+		1:
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
+
+func _get_output_port_count():
+	return 1
+
+func _get_output_port_name(port: int) -> String:
+	return "Mask"
+
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_SCALAR #float
 
 func _get_global_code(mode):
-	return \
-		LizardShaderLibrary.brick_tile + \
-		LizardShaderLibrary.vec2_rotate + \
-		LizardShaderLibrary.random_float
-	#return LSL.unique_funcs(["brick_tile","vec2_rotate"])
-	
+	## Code from MaterialMaker, care of Rodzilla
+	return """
+		float compare(vec4 in1, vec4 in2) 
+		{
+			return dot(abs(in1-in2), vec4(1.0));
+		}
+	"""
+
 func _get_code(input_vars, output_vars, mode, type):
-	var s = ""
-	for p in range(0,7):
-		if input_vars[p]:
-			s += "{outp} = {inp};\n".format({"outp":output_vars[p],"inp":input_vars[p]})
-	return s
+	return "%s = compare(%s,%s);" % [output_vars[0],input_vars[0],input_vars[1]]

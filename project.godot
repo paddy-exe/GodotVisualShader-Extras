@@ -9,30 +9,40 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "RefCounted",
-"class": &"LizardShaderLibrary",
+"base": "VisualShaderNodeCustom",
+"class": &"NodeUVRotateV2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/nodes/library/LizardShaderLibrary.gd"
-}, {
-"base": "RefCounted",
-"class": &"ShaderFuncRef",
-"language": &"GDScript",
-"path": "res://addons/shadershizz/libdespair.gd"
-}, {
-"base": "RefCounted",
-"class": &"ShaderFuncRefFuck",
-"language": &"GDScript",
-"path": "res://addons/shadershizz/lib.gd"
+"path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVRotate.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"TESTNodeUVRotate",
+"class": &"NodeUVTilerV3",
 "language": &"GDScript",
-"path": "res://addons/shadershizz/UVRotate.gd"
+"path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVTiler.gd"
+}, {
+"base": "RefCounted",
+"class": &"ShaderFuncRef2",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/libdespair.gd"
+}, {
+"base": "RefCounted",
+"class": &"ShaderFuncRefFuckkkkk",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/lib.gd"
+}, {
+"base": "RefCounted",
+"class": &"ShaderLib",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/library/shaderlib.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"TESTNodeUVTiler",
+"class": &"TEST2NodeUVRotate",
 "language": &"GDScript",
-"path": "res://addons/shadershizz/UVTiler.gd"
+"path": "res://addons/shadershizz2/UVRotate.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TEST2NodeUVTiler",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/UVTiler.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeConnector",
@@ -43,11 +53,6 @@ _global_script_classes=[{
 "class": &"TempVisualShaderNodeConverter",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/Converter.gd"
-}, {
-"base": "VisualShaderNodeCustom",
-"class": &"TempVisualShaderNodeHacks",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/dev/libidea/hacks.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeLodBlur",
@@ -85,11 +90,6 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/dbat/demos/_scraps/tilerv_works.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"TempVisualShaderNodeUVRotate",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVRotate.gd"
-}, {
-"base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeWorldNormalMapMixer",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/WorldNormal/WorldNormalMapMixer.gd"
@@ -105,7 +105,7 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Shapes/Box.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeBox2",
+"class": &"VisualShaderNodeBoxV2",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Shapes/Box2.gd"
 }, {
@@ -115,7 +115,7 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Shapes/Circle.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeCircle2",
+"class": &"VisualShaderNodeCircleV2",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Shapes/Circle2.gd"
 }, {
@@ -125,9 +125,9 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorMask.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeCustomCompare",
+"class": &"VisualShaderNodeCustomCompareDEPRECATED",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/Usability/Compare.gd"
+"path": "res://addons/VisualShaderExtras/Usability/__Compare.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeDarkerColor",
@@ -225,7 +225,7 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Wave/SquareWave.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeTiler",
+"class": &"VisualShaderNodeTilerDeprecated",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/UV/UVTiler.gd"
 }, {
@@ -250,11 +250,6 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/UV/UVFlipbook.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeUVTiler",
-"language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVTiler.gd"
-}, {
-"base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeUVTwirl",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/UV/UVTwirl.gd"
@@ -270,14 +265,15 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/BlendModes/VividLight.gd"
 }]
 _global_script_class_icons={
-"LizardShaderLibrary": "",
-"ShaderFuncRef": "",
-"ShaderFuncRefFuck": "",
-"TESTNodeUVRotate": "",
-"TESTNodeUVTiler": "",
+"NodeUVRotateV2": "",
+"NodeUVTilerV3": "",
+"ShaderFuncRef2": "",
+"ShaderFuncRefFuckkkkk": "",
+"ShaderLib": "",
+"TEST2NodeUVRotate": "",
+"TEST2NodeUVTiler": "",
 "TempVisualShaderNodeConnector": "",
 "TempVisualShaderNodeConverter": "",
-"TempVisualShaderNodeHacks": "",
 "TempVisualShaderNodeLodBlur": "",
 "TempVisualShaderNodeMaskBlend": "",
 "TempVisualShaderNodeSamplerNormalMapZ": "",
@@ -285,15 +281,14 @@ _global_script_class_icons={
 "TempVisualShaderNodeTiler1": "",
 "TempVisualShaderNodeTiler2": "",
 "TempVisualShaderNodeTilerOKBUTNOT": "",
-"TempVisualShaderNodeUVRotate": "",
 "TempVisualShaderNodeWorldNormalMapMixer": "",
 "TempVisualShaderNodeWorldNormalMask": "",
 "VisualShaderNodeBox": "",
-"VisualShaderNodeBox2": "",
+"VisualShaderNodeBoxV2": "",
 "VisualShaderNodeCircle": "",
-"VisualShaderNodeCircle2": "",
+"VisualShaderNodeCircleV2": "",
 "VisualShaderNodeCustomColorMask": "",
-"VisualShaderNodeCustomCompare": "",
+"VisualShaderNodeCustomCompareDEPRECATED": "",
 "VisualShaderNodeDarkerColor": "",
 "VisualShaderNodeExclusion": "",
 "VisualShaderNodeGammaDark": "",
@@ -313,12 +308,11 @@ _global_script_class_icons={
 "VisualShaderNodeSineWave": "",
 "VisualShaderNodeSineWaveAngular": "",
 "VisualShaderNodeSquareWave": "",
-"VisualShaderNodeTiler": "",
+"VisualShaderNodeTilerDeprecated": "",
 "VisualShaderNodeTrapezoid": "",
 "VisualShaderNodeTriangle": "",
 "VisualShaderNodeTriangleWave": "",
 "VisualShaderNodeUVFlipbook": "",
-"VisualShaderNodeUVTiler": "",
 "VisualShaderNodeUVTwirl": "",
 "VisualShaderNodeUVtoSphereCoord": "",
 "VisualShaderNodeVividLight": ""
@@ -337,7 +331,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/shadershizz/plugin.cfg")
+enabled=PackedStringArray()
 
 [gui]
 

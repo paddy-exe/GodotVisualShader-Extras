@@ -27,17 +27,13 @@ class_name TempVisualShaderNodeWorldNormalMapMixer
 func _get_name():
 	return "World_Normal_Map_Mixer"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/WorldNormal"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"""This node gives a much better mix between textures where normal maps are involved.
+	return """This node gives a much better mix between textures where normal maps are involved.
 It lets you keep a direction (up/down/left/right) to your mixture so that you can rotate meshes and the direction of the mix stays fixed in world space.
-NB: Don't use this on mobile.""")
+NB: Don't use this on mobile."""
 
 func _is_available(mode, type):
 	return mode == VisualShader.MODE_SPATIAL
@@ -71,7 +67,7 @@ func _get_input_port_count():
 
 func _get_input_port_name(port):
 	match port:
-		0: return "UV in"
+		0: return "UV"
 		1: return "Normal Map Sampler"
 		2: return "Direction Vector"
 		3: return "Offset"
@@ -85,17 +81,20 @@ func _get_input_port_type(port):
 		3: return VisualShaderNode.PORT_TYPE_SCALAR #offset
 		4: return VisualShaderNode.PORT_TYPE_SCALAR #fade
 
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["normal_map_add_z", "world_normal_mask", "mask_blend"]
+
 func _get_global_code(mode):
-	return LizardShaderLibrary.normal_map_add_z \
-	+ LizardShaderLibrary.world_normal_mask \
-	+ LizardShaderLibrary.mask_blend
-	
+	return ShaderLib.prep_global_code(self)
+
 func _get_code(input_vars, output_vars, mode, type):
 	var inuv = "UV"
 	if input_vars[0]:
 		inuv = input_vars[0]
 		
-	return """
+	var code = """
 vec3 normal_map_texture = textureLod({normal_texture_sampler}, {inuv}, 0.).rgb;
 
 vec3 normal_applied = normal_map_add_z(
@@ -111,13 +110,14 @@ float mask = world_normal_mask(
 float blended_mask = mask_blend({offset}, {fade}, mask);
 {out_float} = blended_mask;
 {out_normal_map} = normal_map_texture;
-""".format(
-{
-"inuv" : inuv,
-"normal_texture_sampler": input_vars[1],
-"vector_direction" : input_vars[2],
-"offset": input_vars[3],
-"fade" : input_vars[4],
-"out_float" : output_vars[0],
-"out_normal_map" : output_vars[1]
-})
+	""".format(
+	{
+	"inuv" : inuv,
+	"normal_texture_sampler": input_vars[1],
+	"vector_direction" : input_vars[2],
+	"offset": input_vars[3],
+	"fade" : input_vars[4],
+	"out_float" : output_vars[0],
+	"out_normal_map" : output_vars[1]
+	})
+	return ShaderLib.rename_functions(self, code)

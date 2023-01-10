@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorMask.gd" id="1_8hvao"]
 [ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_lfyqb"]
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_sb0wx"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ipv1k"]
 output_port_for_preview = 0
-default_input_values = [2, 0.574]
+default_input_values = [2, 0.502]
 initialized = true
 script = ExtResource("1_8hvao")
 
@@ -38,10 +38,11 @@ uniform sampler2D Texture2DParameter : source_color, filter_linear;
 
 // ColorMask
 
-float compare(vec4 in1, vec4 in2, float fuzz)
+float compare_VisualShaderExtrasUsabilityColorMask(vec4 in1, vec4 in2, float fuzz)
 {
 	return dot(abs(in1-in2), vec4(fuzz));
 }
+
 
 
 void fragment() {
@@ -64,9 +65,9 @@ void fragment() {
 
 	float n_out10p0;
 // ColorMask:10
-	float n_in10p2 = 0.57400;
+	float n_in10p2 = 0.50200;
 	{
-		n_out10p0 = compare(n_out3p0,n_out4p0,n_in10p2);
+		n_out10p0 = compare_VisualShaderExtrasUsabilityColorMask(n_out3p0,n_out4p0,n_in10p2);
 	}
 
 
@@ -80,7 +81,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-85.6667, 52)
+graph_offset = Vector2(-334.81, -34.9294)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(720, 140)
@@ -96,6 +97,6 @@ nodes/fragment/8/node = SubResource("VisualShaderNodeMix_jdtvy")
 nodes/fragment/8/position = Vector2(540, 140)
 nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_ticoq")
 nodes/fragment/9/position = Vector2(-580, 100)
-nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_sb0wx")
-nodes/fragment/10/position = Vector2(100, 160)
+nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_ipv1k")
+nodes/fragment/10/position = Vector2(60, 180)
 nodes/fragment/connections = PackedInt32Array(9, 0, 3, 2, 7, 0, 8, 0, 5, 0, 8, 1, 8, 0, 0, 0, 3, 0, 10, 0, 4, 0, 10, 1, 10, 0, 8, 2)

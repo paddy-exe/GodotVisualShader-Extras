@@ -36,14 +36,16 @@ code = "shader_type canvas_item;
 uniform sampler2D Texture2DParameter : source_color, filter_linear;
 
 
-// UVRotate
+// UVRotateV2
 
-vec2 vec2_rotate(vec2 _uv, float _angle, vec2 _pivot) {
+// _angle in radians
+vec2 vec2_rotate_VisualShaderExtrasUvUvRotateV2(vec2 _uv, float _angle, vec2 _pivot) {
 	_uv -= _pivot;
 	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
 	_uv += _pivot;
 	return _uv;
 }
+
 
 void fragment() {
 // Input:6
@@ -64,12 +66,12 @@ void fragment() {
 
 
 	vec2 n_out4p0;
-// UVRotate:4
+// UVRotateV2:4
 	vec2 n_in4p1 = vec2(0.50000, 0.50000);
 	{
 		
 			vec2 rotated_uv = n_out6p0;
-			rotated_uv = vec2_rotate(n_out6p0, n_out11p0, n_in4p1);
+			rotated_uv = vec2_rotate_VisualShaderExtrasUvUvRotateV2(n_out6p0, n_out11p0, n_in4p1);
 			n_out4p0 = rotated_uv;
 			
 	}
@@ -86,7 +88,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-859.247, 245.233)
 mode = 1
 flags/light_only = false
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_2xe3x")

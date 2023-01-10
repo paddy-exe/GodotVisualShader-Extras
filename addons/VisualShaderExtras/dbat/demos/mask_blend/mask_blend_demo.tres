@@ -67,12 +67,13 @@ uniform sampler2D BackgroundAlbedo : source_color, filter_linear;
 	
 // MaskBlend
 
-float mask_blend(float offset, float fade, float mask_in) {
+float mask_blend_VisualShaderExtrasUtilityMaskBlend(float offset, float fade, float mask_in) {
 	offset *= -1.;
 
 	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
 	return smoothstep(offset - fade, offset + fade, mask_in);
 }
+
 
 
 void fragment() {
@@ -113,7 +114,7 @@ void fragment() {
 	float n_in7p1 = 0.02300;
 	{
 		
-		n_out7p0 = mask_blend(n_in7p1, n_out13p0, n_out8p0);
+		n_out7p0 = mask_blend_VisualShaderExtrasUtilityMaskBlend(n_in7p1, n_out13p0, n_out8p0);
 	}
 
 
@@ -127,7 +128,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(126.069, 79.0784)
+graph_offset = Vector2(-133.891, -28.9351)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(1100, 180)
