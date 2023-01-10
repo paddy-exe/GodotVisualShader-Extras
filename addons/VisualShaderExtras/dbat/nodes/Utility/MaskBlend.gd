@@ -27,15 +27,11 @@ class_name TempVisualShaderNodeMaskBlend
 func _get_name():
 	return "MaskBlend"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/Utility"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"""Let's you control the blend and fade of a given mask.""")
+	return """Let's you control the blend and fade of a given mask."""
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -66,16 +62,22 @@ func _get_input_port_name(port):
 func _get_input_port_type(port):
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["mask_blend"]
+	
 func _get_global_code(mode):
-	return LizardShaderLibrary.mask_blend
+	return ShaderLib.prep_global_code(self)
 
 func _get_code(input_vars, output_vars, mode, type):
-	return """
+	var code = """
 {out_float} = mask_blend({offset}, {fade}, {mask_in});
 """.format(
-{
-"mask_in" : input_vars[0],
-"offset": input_vars[1],
-"fade" : input_vars[2],
-"out_float" : output_vars[0] 
-})
+	{
+	"mask_in" : input_vars[0],
+	"offset": input_vars[1],
+	"fade" : input_vars[2],
+	"out_float" : output_vars[0] 
+	})
+	return ShaderLib.rename_functions(self, code)

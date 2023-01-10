@@ -20,10 +20,10 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTiler
+class_name VisualShaderNodeTilerDeprecated
 
 func _get_name():
-	return "UVTiler"
+	return "UVTiler-deprecated"
 
 func _init() -> void:
 	set_input_port_default_value(0, Vector2(2, 2))

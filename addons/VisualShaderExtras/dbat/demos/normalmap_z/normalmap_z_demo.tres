@@ -22,7 +22,7 @@ uniform sampler2D tex_frg_15;
 uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
 
 
-// Sampler_Restore_NormalMap_Z
+// RestoreNormalMapZ
 
 // Godot strips the z value from imported Normal Maps.
 // It does this for two reasons:
@@ -34,7 +34,7 @@ uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
 //
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-vec3 normal_map_add_z(
+vec3 normal_map_add_z_VisualShaderExtrasUtilityRestoreNormalMapZ(
 	vec3 normal_map_texture, 
 	vec2 inuv,
 	vec3 _TANGENT,
@@ -54,23 +54,25 @@ vec3 normal_map_add_z(
 }
 
 
+
 void fragment() {
 // Texture2D:15
 	vec4 n_out15p0 = texture(tex_frg_15, UV);
 
 
 	vec3 n_out14p0;
-// Sampler_Restore_NormalMap_Z:14
+// RestoreNormalMapZ:14
 	{
 		
 		vec3 normal_map_texture = textureLod(BackgroundNormalMap, UV, 0.).rgb;
 		
-		n_out14p0 = normal_map_add_z(
+		n_out14p0 = normal_map_add_z_VisualShaderExtrasUtilityRestoreNormalMapZ(
 			normal_map_texture, 
 			UV,
 			TANGENT,
 			BINORMAL,
 			NORMAL);
+			
 	}
 
 
@@ -81,7 +83,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(245.847, -92.0463)
+graph_offset = Vector2(262.866, -135.532)
 nodes/fragment/0/position = Vector2(1540, -80)
 nodes/fragment/12/node = SubResource("VisualShaderNodeTexture2DParameter_i7wow")
 nodes/fragment/12/position = Vector2(480, 100)

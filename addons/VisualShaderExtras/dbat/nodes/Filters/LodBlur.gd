@@ -21,17 +21,13 @@ extends VisualShaderNodeCustom
 class_name TempVisualShaderNodeLodBlur
 
 func _get_name():
-	return "LodBlur"
+	return "LoDBlur"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/Filters"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Blurs using the mipmaps of this texture.\nNB: Be sure to try different Sampler Filters.\nBlurs textures added via a Texture2DParameter Node.")
+	return "Blurs using the LOD mipmaps of this texture.\nNB: Be sure to try different Sampler Filters.\nBlurs textures added via a Texture2DParameter Node."
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
@@ -46,7 +42,6 @@ func _get_output_port_name(port: int) -> String:
 	return "Output"
 	
 func _init() -> void:
-	pass
 	set_input_port_default_value(2, 0.0)
 	
 func _get_input_port_count():

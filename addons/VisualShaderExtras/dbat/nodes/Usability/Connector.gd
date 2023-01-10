@@ -23,15 +23,11 @@ class_name TempVisualShaderNodeConnector
 func _get_name():
 	return "Connector"
 
-func _get_version():
-	return "2"
-	
 func _get_category():
 	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Node to let you just hang a noodle somewhere, and pass it through.\nNB: Make sure to match the same in and out ports.\nNote: One can't connect any Sampler.")
+	return "Node to let you just hang a noodle somewhere and pass it through.\nNB: Make sure to match the same in and out ports.\nNote: One can't connect any Samplers."
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_4D
@@ -53,7 +49,7 @@ func _get_output_port_count():
 	return ptypes.size()
 
 func _get_output_port_name(port: int):
-	return ""#names[port]
+	return ""
 	
 func _get_input_port_count():
 	return ptypes.size()

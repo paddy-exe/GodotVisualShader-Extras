@@ -23,20 +23,16 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeCustomColorMask
 
 func _init():
-	set_input_port_default_value(2, 1.0)#fuzz
+	set_input_port_default_value(2, 1.0)#blend amount
 	
 func _get_name():
 	return "ColorMask"
-	
-func _get_version():
-	return "3"
 	
 func _get_category():
 	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Compare Color inputs and output a mask for the second input.\nAdded a Fuzz factor to make the mask easier to control.")
+	return "Compare Color inputs, and outputs a mask for the second input.\nAdded a Blend Amount to make the mask easier to control."
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -57,7 +53,7 @@ func _get_input_port_name(port):
 	match port:
 		0: return "Input"
 		1: return "Mask Input"
-		2: return "Fuzziness"
+		2: return "Blend Amount"
 
 func _get_input_port_type(port):
 	match port:
@@ -65,8 +61,14 @@ func _get_input_port_type(port):
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_4D
 		2: return VisualShaderNode.PORT_TYPE_SCALAR
 
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["compare"]
+	
 func _get_global_code(mode):
-	return LizardShaderLibrary.compare
+	return ShaderLib.prep_global_code(self)
 
 func _get_code(input_vars, output_vars, mode, type):
-	return "%s = compare(%s,%s,%s);" % [output_vars[0],input_vars[0],input_vars[1],input_vars[2]]
+	var code = "%s = compare(%s,%s,%s);" % [output_vars[0],input_vars[0],input_vars[1],input_vars[2]]
+	return ShaderLib.rename_functions(self, code)

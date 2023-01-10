@@ -18,12 +18,12 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeBox2
+class_name VisualShaderNodeBoxV2
 
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))
 	set_input_port_default_value(2, Vector2(0.25, 0.25))
-	set_input_port_default_value(3, 0.)#feather
+	set_input_port_default_value(3, 0.)#smoothness
 
 func _get_name():
 	return "Box2"
@@ -32,7 +32,7 @@ func _get_category():
 	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Box Shape3D with feathering."
+	return "Signed Distance Box Shape3D with smoothing."
 
 func _get_version():
 	return "2"
@@ -48,14 +48,14 @@ func _get_input_port_name(port):
 		0: return "UV"
 		1: return "Position"
 		2: return "Proportions"
-		3: return "Feather"
+		3: return "Smoothness"
 		
 func _get_input_port_type(port):
 	match port:
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		3: return VisualShaderNode.PORT_TYPE_SCALAR #feather
+		3: return VisualShaderNode.PORT_TYPE_SCALAR #smoothness
 
 func _get_output_port_count():
 	return 1
@@ -83,7 +83,7 @@ float sdBox(vec2 _pos, vec2 __proportions, float _feather) {
 	
 	//float f = outside - _feather; //makes a kind of outline
 	
-	// ok! feather is v sensitive tho.
+	// ok! smoothness is v sensitive tho.
 	// when f is 0 the edge is sharp
 	float f = _feather; 
 	
@@ -95,12 +95,12 @@ func _get_code(input_vars, output_vars, mode, type):
 	var uv = "UV"
 	if input_vars[0]:
 		uv = input_vars[0]
-	return "{out} = sdBox({uv}-{pos}, {proportions}, {feather});" \
+	return "{out} = sdBox({uv}-{pos}, {proportions}, {smoothness});" \
 	.format({
 		"uv": uv,
 		"pos": input_vars[1],
 		"proportions": input_vars[2],
-		"feather": input_vars[3],
+		"smoothness": input_vars[3],
 		"out" : output_vars[0]
 	})
 	

@@ -31,7 +31,7 @@ void fragment() {
 
 
 	vec3 n_out22p0;
-// SamplerBlur:22
+// LoDBlur:22
 	{
 		
 			//When the sampler is set to Linear Mipmap it works best.
@@ -48,7 +48,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-680.251, 543.535)
+graph_offset = Vector2(-780.108, 575.002)
 nodes/fragment/0/position = Vector2(-280, 1080)
 nodes/fragment/18/node = SubResource("VisualShaderNodeTexture2DParameter_qxj8l")
 nodes/fragment/18/position = Vector2(-980, 1240)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://djpjul2qtnxp4"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/compare/compare_vshader.tres" id="1_04drd"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/color_mask/color_mask_3d_vshader.tres" id="1_04drd"]
 [ext_resource type="ArrayMesh" uid="uid://bcv4ug57hcmnt" path="res://addons/VisualShaderExtras/dbat/demos/resources/suzanne.obj" id="1_b56b5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pcei7"]

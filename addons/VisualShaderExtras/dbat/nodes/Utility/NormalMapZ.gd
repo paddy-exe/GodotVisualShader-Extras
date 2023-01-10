@@ -27,18 +27,14 @@ class_name TempVisualShaderNodeSamplerNormalMapZ
 func _get_name():
 	return "RestoreNormalMapZ"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/Utility"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"""Adds the correct Z vector back to normal maps.
+	return """Adds the correct Z vector back to normal maps.
 Use this if you want a detailed normal map.
 NB: Your Sampler Type must be Normal Map.
-Don't use this on mobile.""")
+Don't use this on mobile."""
 
 func _is_available(mode, type):
 	return mode == VisualShader.MODE_SPATIAL
@@ -58,10 +54,6 @@ func _get_output_port_count():
 func _get_output_port_name(port: int) -> String:
 	return "Normal Map with Z"
 	
-func _init() -> void:
-	pass
-	set_input_port_default_value(2, 0.0)
-	
 func _get_input_port_count():
 	return 2
 
@@ -74,16 +66,21 @@ func _get_input_port_type(port):
 	match port:
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1: return VisualShaderNode.PORT_TYPE_SAMPLER
-
+		
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["normal_map_add_z"]
+	
 func _get_global_code(mode):
-	return LizardShaderLibrary.normal_map_add_z
+	return ShaderLib.prep_global_code(self)
 	
 func _get_code(input_vars, output_vars, mode, type):
 	var inuv = "UV"
 	if input_vars[0]:
 		inuv = input_vars[0]
 		
-	return """
+	var code = """
 vec3 normal_map_texture = textureLod({normal_texture_sampler}, {inuv}, 0.).rgb;
 
 {out_normal_map} = normal_map_add_z(
@@ -92,9 +89,10 @@ vec3 normal_map_texture = textureLod({normal_texture_sampler}, {inuv}, 0.).rgb;
 	TANGENT,
 	BINORMAL,
 	NORMAL);
-""".format(
-{
-"inuv" : inuv,
-"normal_texture_sampler": input_vars[1],
-"out_normal_map" : output_vars[0] 
-})
+	""".format(
+	{
+	"inuv" : inuv,
+	"normal_texture_sampler": input_vars[1],
+	"out_normal_map" : output_vars[0] 
+	})
+	return ShaderLib.rename_functions(self, code)

@@ -19,12 +19,12 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCircle2
+class_name VisualShaderNodeCircleV2
 
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))#pos
 	set_input_port_default_value(2, 0.25) #radius
-	set_input_port_default_value(3, 0.25) #feather
+	set_input_port_default_value(3, 0.25) #smoothness
 
 func _get_name():
 	return "Circle2"
@@ -33,7 +33,7 @@ func _get_category():
 	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Circle Shape3D with feathering on edge."
+	return "Signed Distance Circle Shape3D with smoothing."
 
 func _get_version():
 	return "2"
@@ -49,7 +49,7 @@ func _get_input_port_name(port):
 		0: return "UV"
 		1: return "Position"
 		2: return "Radius"
-		3: return "Feather"
+		3: return "Smoothness"
 
 func _get_input_port_type(port):
 	match port:
@@ -75,9 +75,9 @@ func _get_global_code(mode):
 //}
 
 //New hack - faster than using length func
-float circle(vec2 position, float radius, float feather)
+float circle(vec2 position, float radius, float smoothness)
 {
-	return smoothstep(radius, radius + feather, dot(position, position) * 6.0);
+	return smoothstep(radius, radius + smoothness, dot(position, position) * 6.0);
 }
 """
 
@@ -85,11 +85,11 @@ func _get_code(input_vars, output_vars, mode, type):
 	var uv = "UV"
 	if input_vars[0]:
 		uv = input_vars[0]
-	return "{out} = circle({uv} - {pos}, {radius}, {feather});" \
+	return "{out} = circle({uv} - {pos}, {radius}, {smoothness});" \
 	.format({
 		"uv": uv,
 		"pos": input_vars[1],
 		"radius": input_vars[2],
-		"feather": input_vars[3],
+		"smoothness": input_vars[3],
 		"out" : output_vars[0]
 	})

@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://x3a0rntfqelx"
-path.s3tc="res://.godot/imported/ids.png-12b2dc4f20f12ca4376b309de4a3eb33.s3tc.ctex"
-path.etc2="res://.godot/imported/ids.png-12b2dc4f20f12ca4376b309de4a3eb33.etc2.ctex"
+path.s3tc="res://.godot/imported/ids.png-cd7a94e407f5ff02ca874a1ad778a2a4.s3tc.ctex"
+path.etc2="res://.godot/imported/ids.png-cd7a94e407f5ff02ca874a1ad778a2a4.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/dbat/demos/compare/ids.png"
-dest_files=["res://.godot/imported/ids.png-12b2dc4f20f12ca4376b309de4a3eb33.s3tc.ctex", "res://.godot/imported/ids.png-12b2dc4f20f12ca4376b309de4a3eb33.etc2.ctex"]
+source_file="res://addons/VisualShaderExtras/dbat/demos/color_mask/ids.png"
+dest_files=["res://.godot/imported/ids.png-cd7a94e407f5ff02ca874a1ad778a2a4.s3tc.ctex", "res://.godot/imported/ids.png-cd7a94e407f5ff02ca874a1ad778a2a4.etc2.ctex"]
 
 [params]
 

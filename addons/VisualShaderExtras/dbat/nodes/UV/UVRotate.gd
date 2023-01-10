@@ -18,20 +18,16 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeUVRotate
+class_name NodeUVRotateV2
 
 func _get_name():
-	return "UVRotate"
+	return "UVRotateV2"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/UV"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"Rotates UV coordinates around a pivot point.")
+	return "Rotates UV coordinates around a pivot point."
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_2D
@@ -64,12 +60,15 @@ func _get_input_port_type(port):
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D #pivot
 		2: return VisualShaderNode.PORT_TYPE_SCALAR #radians
 
-func _get_global_code(mode):
-	return LizardShaderLibrary.vec2_rotate
+func _get_global_func_names()->Array:
+	return ["vec2_rotate"]
 
+func _get_global_code(mode)->String:
+	return ShaderLib.prep_global_code(self)
+	
 func _get_code(input_vars, output_vars, mode, type):
 	var uv = input_vars[0] if input_vars[0] else "UV"
-	return """
+	var code : String = """
 	vec2 rotated_uv = {uv};
 	rotated_uv = vec2_rotate({uv}, {rand_rotation}, {pivot});
 	{out_uv} = rotated_uv;
@@ -80,3 +79,5 @@ func _get_code(input_vars, output_vars, mode, type):
 		"rand_rotation": input_vars[2],
 		"out_uv": output_vars[0] 
 		})
+	return ShaderLib.rename_functions(self, code)
+

@@ -27,17 +27,13 @@ class_name TempVisualShaderNodeWorldNormalMask
 func _get_name():
 	return "World_Normal_Mask"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/WorldNormal"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"""Outputs a mask where the given Direction Vector is matched.
+	return """Outputs a mask where the given Direction Vector is matched.
 Use this to mask out directions like up/down/left/right.
-NB: You must supply a normal map with a Z direction. For that use the Normal Map Z Node.""")
+NB: You must supply a normal map with a Z direction. For that use the Normal Map Z Node."""
 
 func _is_available(mode, type):
 	return mode == VisualShader.MODE_SPATIAL
@@ -70,18 +66,24 @@ func _get_input_port_type(port):
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_3D
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["world_normal_mask"]
+
 func _get_global_code(mode):
-	return LizardShaderLibrary.world_normal_mask
-	
+	return ShaderLib.prep_global_code(self)
+
 func _get_code(input_vars, output_vars, mode, type):
-	return """
+	var code = """
 {out_float} = world_normal_mask(
 	{normal_z_applied},
 	{vector_direction},
 	VIEW_MATRIX);
 """.format(
-{
-"normal_z_applied": input_vars[0],
-"vector_direction" : input_vars[1],
-"out_float" : output_vars[0],
-})
+	{
+	"normal_z_applied": input_vars[0],
+	"vector_direction" : input_vars[1],
+	"out_float" : output_vars[0],
+	})
+	return ShaderLib.rename_functions(self, code)
