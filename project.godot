@@ -20,9 +20,29 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVTiler.gd"
 }, {
 "base": "RefCounted",
+"class": &"ShaderFuncRef2",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/libdespair.gd"
+}, {
+"base": "RefCounted",
+"class": &"ShaderFuncRefFuckkkkk",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/lib.gd"
+}, {
+"base": "RefCounted",
 "class": &"ShaderLib",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/dbat/nodes/library/shaderlib.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TEST2NodeUVRotate",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/UVRotate.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TEST2NodeUVTiler",
+"language": &"GDScript",
+"path": "res://addons/shadershizz2/UVTiler.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"TempVisualShaderNodeConnector",
@@ -247,7 +267,11 @@ _global_script_classes=[{
 _global_script_class_icons={
 "NodeUVRotateV2": "",
 "NodeUVTilerV3": "",
+"ShaderFuncRef2": "",
+"ShaderFuncRefFuckkkkk": "",
 "ShaderLib": "",
+"TEST2NodeUVRotate": "",
+"TEST2NodeUVTiler": "",
 "TempVisualShaderNodeConnector": "",
 "TempVisualShaderNodeConverter": "",
 "TempVisualShaderNodeLodBlur": "",
@@ -307,7 +331,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/shadershizz/plugin.cfg")
+enabled=PackedStringArray()
 
 [gui]
 
