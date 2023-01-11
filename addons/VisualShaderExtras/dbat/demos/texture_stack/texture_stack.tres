@@ -1,10 +1,10 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://uktmg16jwvd"]
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://b4md8hmohnhur"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/texture_stack/TextureStack.gd" id="1_54m7b"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/TextureStack.gd" id="1_1588i"]
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_onicn"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_y67u7"]
 initialized = true
-script = ExtResource("1_54m7b")
+script = ExtResource("1_1588i")
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_o2o18"]
 parameter_name = "Albedo"
@@ -33,28 +33,28 @@ uniform sampler2D Height;
 
 
 void fragment() {
-	vec2 n_out2p0;
-	vec4 n_out2p1;
-	vec3 n_out2p2;
-	float n_out2p3;
-	float n_out2p4;
-	float n_out2p5;
-	vec3 n_out2p6;
-	float n_out2p7;
-// TextureStack:2
+	vec2 n_out10p0;
+	vec4 n_out10p1;
+	vec3 n_out10p2;
+	float n_out10p3;
+	float n_out10p4;
+	float n_out10p5;
+	vec3 n_out10p6;
+	float n_out10p7;
+// TextureStack:10
 	{
-		n_out2p1 = textureLod(Albedo, UV, 0.);
+		n_out10p1 = textureLod(Albedo, UV, 0.);
 		
-		n_out2p3 = textureLod(ORM, UV, 0.).r;
-		n_out2p4 = textureLod(ORM, UV, 0.).g;
-		n_out2p5 = textureLod(ORM, UV, 0.).b;
+		n_out10p3 = textureLod(ORM, UV, 0.).r;
+		n_out10p4 = textureLod(ORM, UV, 0.).g;
+		n_out10p5 = textureLod(ORM, UV, 0.).b;
 		
-		n_out2p6 = textureLod(Normalmap, UV, 0.).rgb;
+		n_out10p6 = textureLod(Normalmap, UV, 0.).rgb;
 		
-		n_out2p7 = textureLod(Height, UV, 0.).r;
+		n_out10p7 = textureLod(Height, UV, 0.).r;
 		
 		
-		n_out2p0 = UV;
+		n_out10p0 = UV;
 	}
 
 
@@ -63,19 +63,17 @@ void fragment() {
 
 
 // Output:0
-	COLOR.rgb = vec3(n_out2p1.xyz);
-	NORMAL_MAP = n_out2p6;
+	COLOR.rgb = vec3(n_out10p1.xyz);
+	NORMAL_MAP = n_out10p6;
 	NORMAL_MAP_DEPTH = n_out9p0;
 
 
 }
 "
-graph_offset = Vector2(-420.283, 75.876)
+graph_offset = Vector2(-556.94, -194.013)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(140, 240)
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_onicn")
-nodes/fragment/2/position = Vector2(-220, 200)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_o2o18")
 nodes/fragment/3/position = Vector2(-620, -140)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_1wkfw")
@@ -85,5 +83,7 @@ nodes/fragment/7/position = Vector2(-620, 380)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_xrkj6")
 nodes/fragment/8/position = Vector2(-620, 120)
 nodes/fragment/9/node = SubResource("VisualShaderNodeFloatConstant_na4a3")
-nodes/fragment/9/position = Vector2(-100, 440)
-nodes/fragment/connections = PackedInt32Array(3, 0, 2, 1, 2, 1, 0, 0, 4, 0, 2, 6, 7, 0, 2, 7, 8, 0, 2, 2, 2, 6, 0, 3, 9, 0, 0, 4)
+nodes/fragment/9/position = Vector2(-160, 540)
+nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_y67u7")
+nodes/fragment/10/position = Vector2(-260, 280)
+nodes/fragment/connections = PackedInt32Array(9, 0, 0, 4, 8, 0, 10, 2, 7, 0, 10, 7, 4, 0, 10, 6, 10, 1, 0, 0, 10, 6, 0, 3, 3, 0, 10, 1)
