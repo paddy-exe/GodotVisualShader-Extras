@@ -27,21 +27,11 @@ class_name TempVisualShaderNodeTextureStack
 func _get_name():
 	return "TextureStack"
 
-func _get_version():
-	return "1"
-	
 func _get_category():
 	return "VisualShaderExtras/Utility"
 
 func _get_description():
-	return LizardShaderLibrary.format_description(self,
-	"""A single node to plug multiple Samplers into. If you use the ORM port, it will ignore the individual O, R and M ports, but the outputs will supply the data.""")
-
-#func _is_available(mode, type):
-#	return mode == VisualShader.MODE_SPATIAL
-	
-#func _is_highend():
-#	return true #mark as PC only.
+	return """A single node to plug multiple Samplers into. If you use the ORM port, it will ignore the individual O, R and M ports, but the outputs will supply the data."""
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D

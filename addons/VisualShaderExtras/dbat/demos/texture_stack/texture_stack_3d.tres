@@ -1,6 +1,6 @@
-[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://b1jk8uibhkakb"]
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://d2ntsd8s1i2pt"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/demos/texture_stack/TextureStack.gd" id="1_b8cyd"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/TextureStack.gd" id="1_b8cyd"]
 
 [sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_06jpf"]
 
@@ -22,10 +22,6 @@ parameter_name = "ORM"
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_thkgx"]
 initialized = true
 script = ExtResource("1_b8cyd")
-
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_t843c"]
-parameter_name = "TESTORM"
-texture_type = 1
 
 [resource]
 code = "shader_type spatial;
@@ -85,7 +81,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-89.5834, -15.4111)
+graph_offset = Vector2(-27.8027, -241.002)
 nodes/fragment/0/position = Vector2(860, 60)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_g8hug")
 nodes/fragment/2/position = Vector2(-295.143, -122.143)
@@ -95,8 +91,6 @@ nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_eafs5")
 nodes/fragment/7/position = Vector2(-600, 80)
 nodes/fragment/8/node = SubResource("VisualShaderNodeCustom_thkgx")
 nodes/fragment/8/position = Vector2(124.857, 137.857)
-nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_t843c")
-nodes/fragment/9/position = Vector2(100, -200)
 nodes/fragment/10/node = SubResource("VisualShaderNodeColorFunc_06jpf")
 nodes/fragment/10/position = Vector2(340, 380)
 nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_8w8o6")
