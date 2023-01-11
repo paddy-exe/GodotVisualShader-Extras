@@ -18,10 +18,10 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeConnector
+class_name TempVisualShaderNodeConnectManyToMany
 
 func _get_name():
-	return "Connector"
+	return "ConnectMany"
 
 func _get_category():
 	return "VisualShaderExtras/Usability"

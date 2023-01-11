@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cyncv0o65sq5l"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Filters/LodBlur.gd" id="1_is7ar"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Filters/LodBlur.gd" id="1_u5y11"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qxj8l"]
 parameter_name = "Texture2DParameter"
@@ -10,7 +10,7 @@ texture_filter = 4
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e5pk6"]
 default_input_values = [2, 1.115]
 initialized = true
-script = ExtResource("1_is7ar")
+script = ExtResource("1_u5y11")
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_k3rmt"]
 parameter_name = "Blur"
@@ -48,7 +48,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-780.108, 575.002)
+graph_offset = Vector2(-942.389, 686.417)
 nodes/fragment/0/position = Vector2(-280, 1080)
 nodes/fragment/18/node = SubResource("VisualShaderNodeTexture2DParameter_qxj8l")
 nodes/fragment/18/position = Vector2(-980, 1240)

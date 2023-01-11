@@ -1,9 +1,9 @@
-[gd_resource type="VisualShader" load_steps=11 format=3]
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://cgc72epxh3s5a"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/WorldNormal/WorldNormalMask.gd" id="1_xm86j"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/NormalMapZ.gd" id="2_662ls"]
-[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png" id="3_etwos"]
-[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_albedo.png" id="4_106cm"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png" id="3_etwos"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_albedo.png" id="4_106cm"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_4lrbg"]
 parameter_name = "BackgroundNormalMap"
@@ -37,7 +37,7 @@ uniform sampler2D tex_frg_8;
 uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
 
 
-// Sampler_Restore_NormalMap_Z
+// RestoreNormalMapZ
 
 // Godot strips the z value from imported Normal Maps.
 // It does this for two reasons:
@@ -49,7 +49,7 @@ uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
 //
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-vec3 normal_map_add_z(
+vec3 normal_map_add_z_VisualShaderExtrasUtilityRestoreNormalMapZ(
 	vec3 normal_map_texture, 
 	vec2 inuv,
 	vec3 _TANGENT,
@@ -68,11 +68,12 @@ vec3 normal_map_add_z(
 	return normal_applied;
 }
 
+
 // World_Normal_Mask
 
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-float world_normal_mask(
+float world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMask(
 	vec3 normal_map_texture, 
 	vec3 vector_direction,
 	mat4 _VIEW_MATRIX
@@ -88,6 +89,7 @@ float world_normal_mask(
 }
 
 
+
 void fragment() {
 // Texture2D:6
 	vec4 n_out6p0 = texture(tex_frg_6, UV);
@@ -98,17 +100,18 @@ void fragment() {
 
 
 	vec3 n_out5p0;
-// Sampler_Restore_NormalMap_Z:5
+// RestoreNormalMapZ:5
 	{
 		
 		vec3 normal_map_texture = textureLod(BackgroundNormalMap, UV, 0.).rgb;
 		
-		n_out5p0 = normal_map_add_z(
+		n_out5p0 = normal_map_add_z_VisualShaderExtrasUtilityRestoreNormalMapZ(
 			normal_map_texture, 
 			UV,
 			TANGENT,
 			BINORMAL,
 			NORMAL);
+			
 	}
 
 
@@ -117,7 +120,7 @@ void fragment() {
 	vec3 n_in9p1 = vec3(0.00000, 1.00000, 0.00000);
 	{
 		
-		n_out9p0 = world_normal_mask(
+		n_out9p0 = world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMask(
 			n_out5p0,
 			n_in9p1,
 			VIEW_MATRIX);
@@ -134,7 +137,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-531.639, -35.8333)
+graph_offset = Vector2(-453.803, -59.7417)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_4lrbg")
 nodes/fragment/4/position = Vector2(-640, 660)
 nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_qn4go")

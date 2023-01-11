@@ -17,8 +17,8 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @tool
-extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeConverter
+#extends VisualShaderNodeCustom
+class_name TempVisualShaderNodeConverterDEPRECATED
 
 func _get_name():
 	return "Converter"

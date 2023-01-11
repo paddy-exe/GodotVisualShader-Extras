@@ -19,7 +19,7 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @tool
-extends VisualShaderNodeCustom
+#extends VisualShaderNodeCustom
 class_name VisualShaderNodeCustomCompareDEPRECATED
 
 func _get_name():

@@ -1,0 +1,188 @@
+[gd_resource type="VisualShader" load_steps=19 format=3 uid="uid://cruu3xwn7bhet"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="1_10ds4"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ConnectorMM.gd" id="2_5d53v"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ConnectorOM.gd" id="3_083sn"]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_m3ool"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.5]
+op_type = 4
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_n1wjm"]
+size = Vector2(379.28, 558.36)
+title = "Connector demos"
+description = "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Try add different inputs to the One To Many Connector."
+
+[sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_ha5ap"]
+constant = Vector2(0.5, 0.3)
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_v1480"]
+constant = 1.479
+
+[sub_resource type="VisualShaderNodeIntConstant" id="VisualShaderNodeIntConstant_4p474"]
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_uutbx"]
+constant = Vector3(1, 1, 0)
+
+[sub_resource type="VisualShaderNodeVec4Constant" id="VisualShaderNodeVec4Constant_61tys"]
+constant = Quaternion(-200, 0, -11.2, 100)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_6r16i"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_k1ph0"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, -0.005]
+initialized = true
+script = ExtResource("1_10ds4")
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_dd5ua"]
+constant = Color(1, 0.386878, 0.342078, 1)
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_srnum"]
+operator = 1
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_v7x2n"]
+initialized = true
+script = ExtResource("2_5d53v")
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_btql7"]
+default_input_values = [0, 0.757, 1, 0.0]
+operator = 1
+
+[sub_resource type="VisualShaderNodeBooleanConstant" id="VisualShaderNodeBooleanConstant_yq66k"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cyr48"]
+initialized = true
+script = ExtResource("3_083sn")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+// Circle
+
+		float sdCircle(vec2 pos, float r) {
+			return length(pos) - r;
+		}
+	
+
+void fragment() {
+// Input:18
+	vec2 n_out18p0 = UV;
+
+
+	vec4 n_out9p0;
+// ConnectOne:9
+	{
+		n_out9p0 = vec4(n_out18p0.xy,0.,0.);
+	}
+
+
+	float n_out2p0;
+// Circle:2
+	vec2 n_in2p1 = vec2(0.50000, 0.50000);
+	float n_in2p2 = -0.00500;
+	{
+		n_out2p0 = sdCircle(UV.xy - n_in2p1.xy, n_in2p2);
+	}
+
+
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(1.000000, 0.386878, 0.342078, 1.000000);
+
+
+// ColorOp:5
+	vec3 n_out5p0 = abs(vec3(n_out3p0.xyz) - vec3(n_out2p0));
+
+
+	bool n_out6p0;
+	float n_out6p1;
+	int n_out6p2;
+	vec2 n_out6p3;
+	vec3 n_out6p4;
+	vec4 n_out6p5;
+	mat4 n_out6p6;
+// ConnectMany:6
+	{
+		n_out6p1 = n_out2p0;
+		n_out6p4 = n_out5p0;
+	}
+
+
+// Mix:10
+	float n_in10p2 = 0.50000;
+	vec3 n_out10p0 = mix(vec3(n_out9p0.xyz), n_out6p4, n_in10p2);
+
+
+// FloatOp:7
+	float n_in7p0 = 0.75700;
+	float n_out7p0 = n_in7p0 - n_out6p1;
+
+
+// Output:0
+	COLOR.rgb = n_out10p0;
+	COLOR.a = n_out7p0;
+	NORMAL_MAP_DEPTH = n_out9p0.x;
+
+
+}
+"
+graph_offset = Vector2(-302.806, -0.00927734)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(900, 200)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_k1ph0")
+nodes/fragment/2/position = Vector2(-320, 320)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_dd5ua")
+nodes/fragment/3/position = Vector2(-320, 220)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorOp_srnum")
+nodes/fragment/5/position = Vector2(-120, 180)
+nodes/fragment/6/node = SubResource("VisualShaderNodeCustom_v7x2n")
+nodes/fragment/6/position = Vector2(240, 180)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_btql7")
+nodes/fragment/7/position = Vector2(680, 100)
+nodes/fragment/8/node = SubResource("VisualShaderNodeBooleanConstant_yq66k")
+nodes/fragment/8/position = Vector2(-160, 480)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_cyr48")
+nodes/fragment/9/position = Vector2(220, 560)
+nodes/fragment/10/node = SubResource("VisualShaderNodeMix_m3ool")
+nodes/fragment/10/position = Vector2(680, 240)
+nodes/fragment/11/node = SubResource("VisualShaderNodeComment_n1wjm")
+nodes/fragment/11/position = Vector2(180, 120)
+nodes/fragment/12/node = SubResource("VisualShaderNodeVec2Constant_ha5ap")
+nodes/fragment/12/position = Vector2(-160, 800)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatConstant_v1480")
+nodes/fragment/13/position = Vector2(-160, 720)
+nodes/fragment/14/node = SubResource("VisualShaderNodeIntConstant_4p474")
+nodes/fragment/14/position = Vector2(-140, 640)
+nodes/fragment/15/node = SubResource("VisualShaderNodeVec3Constant_uutbx")
+nodes/fragment/15/position = Vector2(-300, 900)
+nodes/fragment/17/node = SubResource("VisualShaderNodeVec4Constant_61tys")
+nodes/fragment/17/position = Vector2(-360, 1000)
+nodes/fragment/18/node = SubResource("VisualShaderNodeInput_6r16i")
+nodes/fragment/18/position = Vector2(-300, 560)
+nodes/fragment/connections = PackedInt32Array(2, 0, 5, 1, 3, 0, 5, 0, 5, 0, 6, 4, 2, 0, 6, 1, 6, 1, 7, 1, 7, 0, 0, 1, 9, 0, 10, 0, 6, 4, 10, 1, 10, 0, 0, 0, 9, 0, 0, 4, 18, 0, 9, 0)

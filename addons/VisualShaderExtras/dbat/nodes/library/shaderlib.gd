@@ -31,7 +31,7 @@ class_name ShaderLib
 # OTOH, this works: preload("res://addons/shadershizz2/vec2_rotate.gdshaderinc").code
 
 ## Make a unique name for a shader function
-## based on the category and shader node name
+## based on the category and shader node name.
 ## This ensures the functions are the same for the
 ## same nodes, but different for other nodes which
 ## happen to use the same function - I cannot optimize this
@@ -56,7 +56,6 @@ static func prep_global_code(vnode, extra_code="")->String:
 		if name in shader_funcs:
 			shader_code = shader_funcs[name]
 		else:
-			#assert("Can't find %s in shader funcs" % name)
 			return "Can't find %s in shader funcs" % name
 		glob_code += shader_code + "\n"
 		var out_name:String = "%s_%s" % [name,uid]
