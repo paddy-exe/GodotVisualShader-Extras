@@ -10,9 +10,84 @@ config_version=5
 
 _global_script_classes=[{
 "base": "VisualShaderNodeCustom",
+"class": &"NodeUVRotateV2",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVRotate.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"NodeUVTilerV3",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/UV/UVTiler.gd"
+}, {
+"base": "RefCounted",
+"class": &"ShaderLib",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/library/shaderlib.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeConnector",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/Connector.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeConverter",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/Converter.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeLodBlur",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Filters/LodBlur.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeMaskBlend",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Utility/MaskBlend.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeSamplerNormalMapZ",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Utility/NormalMapZ.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTextureStack",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Utility/TextureStack.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTiler1",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/demos/_scraps/tiler.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTiler2",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/demos/_scraps/tilerv2.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeTilerOKBUTNOT",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/demos/_scraps/tilerv_works.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeWorldNormalMapMixer",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/WorldNormal/WorldNormalMapMixer.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"TempVisualShaderNodeWorldNormalMask",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/WorldNormal/WorldNormalMask.gd"
+}, {
+"base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeBox",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Shapes/Box.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeBoxV2",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Shapes/Box2.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCircle",
@@ -20,9 +95,19 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Shapes/Circle.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeCustomCompare",
+"class": &"VisualShaderNodeCircleV2",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/Usability/Compare.gd"
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Shapes/Circle2.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeCustomColorMask",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/dbat/nodes/Usability/ColorMask.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeCustomCompareDEPRECATED",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/Usability/__Compare.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeDarkerColor",
@@ -120,7 +205,7 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Wave/SquareWave.gd"
 }, {
 "base": "VisualShaderNodeCustom",
-"class": &"VisualShaderNodeTiler",
+"class": &"VisualShaderNodeTilerDeprecated",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/UV/UVTiler.gd"
 }, {
@@ -160,9 +245,26 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/BlendModes/VividLight.gd"
 }]
 _global_script_class_icons={
+"NodeUVRotateV2": "",
+"NodeUVTilerV3": "",
+"ShaderLib": "",
+"TempVisualShaderNodeConnector": "",
+"TempVisualShaderNodeConverter": "",
+"TempVisualShaderNodeLodBlur": "",
+"TempVisualShaderNodeMaskBlend": "",
+"TempVisualShaderNodeSamplerNormalMapZ": "",
+"TempVisualShaderNodeTextureStack": "",
+"TempVisualShaderNodeTiler1": "",
+"TempVisualShaderNodeTiler2": "",
+"TempVisualShaderNodeTilerOKBUTNOT": "",
+"TempVisualShaderNodeWorldNormalMapMixer": "",
+"TempVisualShaderNodeWorldNormalMask": "",
 "VisualShaderNodeBox": "",
+"VisualShaderNodeBoxV2": "",
 "VisualShaderNodeCircle": "",
-"VisualShaderNodeCustomCompare": "",
+"VisualShaderNodeCircleV2": "",
+"VisualShaderNodeCustomColorMask": "",
+"VisualShaderNodeCustomCompareDEPRECATED": "",
 "VisualShaderNodeDarkerColor": "",
 "VisualShaderNodeExclusion": "",
 "VisualShaderNodeGammaDark": "",
@@ -182,7 +284,7 @@ _global_script_class_icons={
 "VisualShaderNodeSineWave": "",
 "VisualShaderNodeSineWaveAngular": "",
 "VisualShaderNodeSquareWave": "",
-"VisualShaderNodeTiler": "",
+"VisualShaderNodeTilerDeprecated": "",
 "VisualShaderNodeTrapezoid": "",
 "VisualShaderNodeTriangle": "",
 "VisualShaderNodeTriangleWave": "",
@@ -202,6 +304,10 @@ config/icon="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [gui]
 

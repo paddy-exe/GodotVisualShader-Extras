@@ -1,5 +1,7 @@
 # The MIT License
 # Copyright © 2022 Inigo Quilez
+# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
+# Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation 
@@ -16,87 +18,57 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# With assist from https://thebookofshaders.com/09/
-
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTilerDeprecated
+class_name VisualShaderNodeCustomColorMask
 
+func _init():
+	set_input_port_default_value(2, 1.0)#blend amount
+	
 func _get_name():
-	return "UVTiler-deprecated"
-
-func _init() -> void:
-	set_input_port_default_value(0, Vector2(2, 2))
-	set_input_port_default_value(1, 4.0)
-	set_input_port_default_value(2, 0.0)
-
+	return "ColorMask"
+	
 func _get_category():
-	return "VisualShaderExtras/UV"
+	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return "Tile a given UV into the given UV tiles and rotate them"
+	return "Compare Color inputs, and outputs a mask for the second input.\nAdded a Blend Amount to make the mask easier to control."
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+	return VisualShaderNode.PORT_TYPE_SCALAR
+
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_SCALAR
+	
+func _get_output_port_count():
+	return 1
+
+func _get_output_port_name(port: int):
+	return "Output"
 
 func _get_input_port_count():
 	return 3
 
 func _get_input_port_name(port):
 	match port:
-		0:
-			return "Tiling"
-		1:
-			return "Split"
-		2:
-			return "Rotation (Radians)"
+		0: return "Input"
+		1: return "Mask Input"
+		2: return "Blend Amount"
 
 func _get_input_port_type(port):
 	match port:
-		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		1:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-		2:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-			
-func _get_output_port_count():
-	return 1
+		0: return VisualShaderNode.PORT_TYPE_VECTOR_4D
+		1: return VisualShaderNode.PORT_TYPE_VECTOR_4D
+		2: return VisualShaderNode.PORT_TYPE_SCALAR
 
-func _get_output_port_name(port: int) -> String:
-	return "UV"
-
-func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_2D
-
+## return all the functions (in the ShaderLib Dict) that you want
+## to use.
+func _get_global_func_names()->Array:
+	return ["compare"]
+	
 func _get_global_code(mode):
-	return """
-		vec2 tile(vec2 _uv, float _zoom){
-			_uv *= _zoom;
-			return fract(_uv);
-		}
-		
-		vec2 rotate(vec2 _uv, float _angle) {
-			_uv -= 0.5;
-			_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-			_uv += 0.5;
-			return _uv;
-		}
-	"""
+	return ShaderLib.prep_global_code(self)
 
 func _get_code(input_vars, output_vars, mode, type):
-	var rot:String
-	rot = "st = rotate(st, %s);" % input_vars[2] if input_vars[2] != "" else ""
-		
-	return """
-	vec2 st = UV.xy/{in_tilexy}.xy;
-	st = tile(st,{split});
-	{rot}
-	{out_uv} = st;
-	""".format(
-		{
-		"in_tilexy":input_vars[0],
-		"split":  	input_vars[1],
-		"out_uv":	output_vars[0],
-		"rot":		rot
-		})
+	var code = "%s = compare(%s,%s,%s);" % [output_vars[0],input_vars[0],input_vars[1],input_vars[2]]
+	return ShaderLib.rename_functions(self, code)

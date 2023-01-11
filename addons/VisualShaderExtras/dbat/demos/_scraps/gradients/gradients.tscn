@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Shader" uid="uid://duhpjxmcic87" path="res://addons/VisualShaderExtras/dbat/demos/_scraps/gradients/gradients.tres" id="1_ohako"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_hvxh7"]
+
+[sub_resource type="Gradient" id="Gradient_jalff"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8v2ly"]
+gradient = SubResource("Gradient_jalff")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8lan"]
+shader = ExtResource("1_ohako")
+shader_parameter/tex_frg_2 = SubResource("GradientTexture1D_8v2ly")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_k8lan")
+offset_right = 492.0
+offset_bottom = 517.0
+texture = ExtResource("2_hvxh7")

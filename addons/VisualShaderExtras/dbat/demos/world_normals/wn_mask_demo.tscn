@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d06vlyieg00iu"]
+
+[ext_resource type="Shader" uid="uid://dy68impnb6a0x" path="res://addons/VisualShaderExtras/dbat/demos/world_normals/wn_mask_demo.tres" id="1_nrcg1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_04dv8"]
+height = 0.561
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp3mh"]
+render_priority = 0
+shader = ExtResource("1_nrcg1")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.911159, 0.412055, 0, -0.412055, 0.911159, 0, 0, 0)
+mesh = SubResource("CylinderMesh_04dv8")
+surface_material_override/0 = SubResource("ShaderMaterial_dp3mh")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.07762, 0)

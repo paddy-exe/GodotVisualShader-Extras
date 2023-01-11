@@ -1,5 +1,7 @@
 # The MIT License
 # Copyright © 2022 Inigo Quilez
+# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
+# Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation 
@@ -16,87 +18,59 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# With assist from https://thebookofshaders.com/09/
-
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTilerDeprecated
+class_name VisualShaderNodeCustomCompareDEPRECATED
 
 func _get_name():
-	return "UVTiler-deprecated"
+	return "Compare-deprecated"
 
 func _init() -> void:
-	set_input_port_default_value(0, Vector2(2, 2))
-	set_input_port_default_value(1, 4.0)
-	set_input_port_default_value(2, 0.0)
+	pass#set_input_port_default_value(2, 0.5)
 
 func _get_category():
-	return "VisualShaderExtras/UV"
+	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return "Tile a given UV into the given UV tiles and rotate them"
+	return "Compare Color inputs and output a mask for the second input"
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 3
+	return 2
 
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "Tiling"
+			return "Color 1"
 		1:
-			return "Split"
-		2:
-			return "Rotation (Radians)"
+			return "Color 2"
 
 func _get_input_port_type(port):
 	match port:
 		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
 		1:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-		2:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-			
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
+
 func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int) -> String:
-	return "UV"
+	return "Mask"
 
 func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_2D
+	return VisualShaderNode.PORT_TYPE_SCALAR #float
 
 func _get_global_code(mode):
+	## Code from MaterialMaker, care of Rodzilla
 	return """
-		vec2 tile(vec2 _uv, float _zoom){
-			_uv *= _zoom;
-			return fract(_uv);
-		}
-		
-		vec2 rotate(vec2 _uv, float _angle) {
-			_uv -= 0.5;
-			_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-			_uv += 0.5;
-			return _uv;
+		float compare(vec4 in1, vec4 in2) 
+		{
+			return dot(abs(in1-in2), vec4(1.0));
 		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	var rot:String
-	rot = "st = rotate(st, %s);" % input_vars[2] if input_vars[2] != "" else ""
-		
-	return """
-	vec2 st = UV.xy/{in_tilexy}.xy;
-	st = tile(st,{split});
-	{rot}
-	{out_uv} = st;
-	""".format(
-		{
-		"in_tilexy":input_vars[0],
-		"split":  	input_vars[1],
-		"out_uv":	output_vars[0],
-		"rot":		rot
-		})
+	return "%s = compare(%s,%s);" % [output_vars[0],input_vars[0],input_vars[1]]
