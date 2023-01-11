@@ -1,22 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch7r6dx2dxlhh"]
+[gd_scene load_steps=10 format=3 uid="uid://ch7r6dx2dxlhh"]
 
-[ext_resource type="Shader" path="res://addons/VisualShaderExtras/dbat/demos/world_normals/wnstest_vshader.tres" id="1_54q1f"]
-[ext_resource type="Texture2D" uid="uid://mbf8s277lmac" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_normal.png" id="2_jfu4j"]
-[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_vi8j0"]
-[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="4_8hw0d"]
-[ext_resource type="Texture2D" uid="uid://l18yyfue3www" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_normal.png" id="5_wudyx"]
+[ext_resource type="Shader" uid="uid://bdv4jso7obbjv" path="res://addons/VisualShaderExtras/dbat/demos/world_normals/wnstest_vshader.tres" id="1_54q1f"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png" id="2_oek2h"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_normal.png" id="3_oanfk"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_orm.png" id="4_s7kvu"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_albedo.png" id="5_gl7y4"]
+[ext_resource type="Texture2D" uid="uid://bqtpccn3wemel" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_orm.png" id="6_mn6qu"]
+[ext_resource type="Texture2D" uid="uid://ms6yr1tx6aq8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_normal.png" id="7_06qru"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hfkdh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebavy"]
 render_priority = 0
 shader = ExtResource("1_54q1f")
-shader_parameter/Offset = -0.188
-shader_parameter/Fade = 0.556
-shader_parameter/BackgroundAlbedo = ExtResource("2_vi8j0")
-shader_parameter/ForeGroundAlbedo = ExtResource("4_8hw0d")
-shader_parameter/BackgroundNormalMap = ExtResource("2_jfu4j")
-shader_parameter/ForegroundNormalMap = ExtResource("5_wudyx")
+shader_parameter/Offset = -0.352
+shader_parameter/Fade = 0.152
+shader_parameter/BackgroundAlbedo = ExtResource("2_oek2h")
+shader_parameter/ForeGroundAlbedo = ExtResource("5_gl7y4")
+shader_parameter/BackgroundNormalMap = ExtResource("3_oanfk")
+shader_parameter/BackgroundORM = ExtResource("4_s7kvu")
+shader_parameter/ForeGroundORM = ExtResource("6_mn6qu")
+shader_parameter/ForegroundNormalMap = ExtResource("7_06qru")
 
 [node name="Node3D" type="Node3D"]
 

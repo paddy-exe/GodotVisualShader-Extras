@@ -1,8 +1,9 @@
 [gd_resource type="ORMMaterial3D" load_steps=6 format=3]
-[ext_resource path="moss_orm_albedo.png" type="Texture" id=1]
-[ext_resource path="moss_orm_orm.png" type="Texture" id=2]
-[ext_resource path="moss_orm_normal.png" type="Texture" id=3]
-[ext_resource path="moss_orm_heightmap.png" type="Texture" id=4]
+
+[ext_resource type="Texture" path="../../demos/resources/textures/moss_orm_albedo.png" id="1"]
+[ext_resource type="Texture" path="../../demos/resources/textures/moss_orm_orm.png" id="2"]
+[ext_resource type="Texture" path="../../demos/resources/textures/moss_orm_normal.png" id="3"]
+[ext_resource type="Texture" path="../../demos/resources/textures/moss_orm_heightmap.png" id="4"]
 [resource]
 albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource( 1 )

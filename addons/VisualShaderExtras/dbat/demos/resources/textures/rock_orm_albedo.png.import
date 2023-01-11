@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy54qktg6uuct"
-path.s3tc="res://.godot/imported/moss_albedo.png-d3e6d9fec4775af24a5c0d25694002d6.s3tc.ctex"
-path.etc2="res://.godot/imported/moss_albedo.png-d3e6d9fec4775af24a5c0d25694002d6.etc2.ctex"
+uid="uid://dq3jk3ga3vpy8"
+path.s3tc="res://.godot/imported/rock_orm_albedo.png-84278d0340cc16f361c06b4cc506d390.s3tc.ctex"
+path.etc2="res://.godot/imported/rock_orm_albedo.png-84278d0340cc16f361c06b4cc506d390.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png"
-dest_files=["res://.godot/imported/moss_albedo.png-d3e6d9fec4775af24a5c0d25694002d6.s3tc.ctex", "res://.godot/imported/moss_albedo.png-d3e6d9fec4775af24a5c0d25694002d6.etc2.ctex"]
+source_file="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png"
+dest_files=["res://.godot/imported/rock_orm_albedo.png-84278d0340cc16f361c06b4cc506d390.s3tc.ctex", "res://.godot/imported/rock_orm_albedo.png-84278d0340cc16f361c06b4cc506d390.etc2.ctex"]
 
 [params]
 

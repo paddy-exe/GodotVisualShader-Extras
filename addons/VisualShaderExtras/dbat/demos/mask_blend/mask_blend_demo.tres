@@ -1,7 +1,7 @@
-[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://1rqwoqhig1wi"]
+[gd_resource type="VisualShader" load_steps=18 format=3 uid="uid://1rqwoqhig1wi"]
 
-[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="1_k8xgi"]
-[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="2_814ee"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/TextureStack.gd" id="1_iva28"]
+[ext_resource type="Texture2D" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_albedo.png" id="2_814ee"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/MaskBlend.gd" id="3_52467"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="4_1qqte"]
 
@@ -15,14 +15,22 @@ function = 0
 default_input_values = [0, 0.0, 1, 0.5]
 operator = 2
 
-[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_1vtdj"]
-size = Vector2(799.435, 691.375)
-title = "Albedos"
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_s6kcb"]
+initialized = true
+script = ExtResource("1_iva28")
 
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_jgj26"]
-source = 5
-texture = ExtResource("1_k8xgi")
-texture_type = 1
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_j7adv"]
+parameter_name = "BackgroundNormalMap"
+texture_type = 2
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_51rlw"]
+parameter_name = "BackgroundDepth"
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_1vtdj"]
+size = Vector2(929.035, 1159.38)
+title = "Textures"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_338pd"]
 source = 5
@@ -50,13 +58,15 @@ initialized = true
 script = ExtResource("4_1qqte")
 
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_3p70w"]
-default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 1), 2, Vector2(0.5, 0.5)]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 1), 2, Vector2(0, 0)]
 op_type = 1
 
 [resource]
 code = "shader_type canvas_item;
 uniform sampler2D ForeGroundAlbedo : source_color, filter_linear;
 uniform sampler2D BackgroundAlbedo : source_color, filter_linear;
+uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
+uniform sampler2D BackgroundDepth : filter_linear;
 
 
 // Circle
@@ -82,9 +92,25 @@ void fragment() {
 	n_out4p0 = texture(ForeGroundAlbedo, UV);
 
 
-	vec4 n_out3p0;
-// Texture2D:3
-	n_out3p0 = texture(BackgroundAlbedo, UV);
+	vec2 n_out14p0;
+	vec4 n_out14p1;
+	vec3 n_out14p2;
+	float n_out14p3;
+	float n_out14p4;
+	float n_out14p5;
+	vec3 n_out14p6;
+	float n_out14p7;
+// TextureStack:14
+	{
+		n_out14p1 = textureLod(BackgroundAlbedo, UV, 0.);
+		
+		n_out14p6 = textureLod(BackgroundNormalMap, UV, 0.).rgb;
+		
+		n_out14p7 = textureLod(BackgroundDepth, UV, 0.).r;
+		
+		
+		n_out14p0 = UV;
+	}
 
 
 	float n_out8p0;
@@ -119,39 +145,45 @@ void fragment() {
 
 
 // Mix:9
-	vec2 n_out9p0 = mix(vec2(n_out4p0.xy), vec2(n_out3p0.xy), vec2(n_out7p0));
+	vec2 n_out9p0 = mix(vec2(n_out4p0.xy), vec2(n_out14p1.xy), vec2(n_out7p0));
 
 
 // Output:0
 	COLOR.rgb = vec3(n_out9p0, 0.0);
+	NORMAL_MAP = n_out14p6;
+	NORMAL_MAP_DEPTH = n_out14p7;
 
 
 }
 "
-graph_offset = Vector2(-133.891, -28.9351)
+graph_offset = Vector2(-175.544, 239.624)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(1100, 180)
+nodes/fragment/0/position = Vector2(1060, 560)
 nodes/fragment/2/node = SubResource("VisualShaderNodeComment_1vtdj")
-nodes/fragment/2/position = Vector2(-280, 420)
-nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_jgj26")
-nodes/fragment/3/position = Vector2(180, 780)
+nodes/fragment/2/position = Vector2(-420, 420)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_338pd")
-nodes/fragment/4/position = Vector2(180, 600)
+nodes/fragment/4/position = Vector2(20, 500)
 nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_orcc3")
-nodes/fragment/5/position = Vector2(-160, 500)
+nodes/fragment/5/position = Vector2(-300, 500)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_kafga")
-nodes/fragment/6/position = Vector2(-180, 780)
+nodes/fragment/6/position = Vector2(-320, 780)
 nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_8tnnv")
 nodes/fragment/7/position = Vector2(580, 240)
 nodes/fragment/8/node = SubResource("VisualShaderNodeCustom_1xvdg")
-nodes/fragment/8/position = Vector2(400, 120)
+nodes/fragment/8/position = Vector2(380, 160)
 nodes/fragment/9/node = SubResource("VisualShaderNodeMix_3p70w")
-nodes/fragment/9/position = Vector2(800, 400)
+nodes/fragment/9/position = Vector2(880, 380)
 nodes/fragment/10/node = SubResource("VisualShaderNodeInput_6xmu7")
 nodes/fragment/10/position = Vector2(-480, 180)
 nodes/fragment/12/node = SubResource("VisualShaderNodeFloatFunc_y5reu")
 nodes/fragment/12/position = Vector2(-120, 160)
 nodes/fragment/13/node = SubResource("VisualShaderNodeFloatOp_vai6w")
 nodes/fragment/13/position = Vector2(220, 280)
-nodes/fragment/connections = PackedInt32Array(5, 0, 4, 2, 6, 0, 3, 2, 8, 0, 7, 0, 4, 0, 9, 0, 3, 0, 9, 1, 9, 0, 0, 0, 7, 0, 9, 2, 10, 0, 12, 0, 12, 0, 13, 0, 13, 0, 7, 2)
+nodes/fragment/14/node = SubResource("VisualShaderNodeCustom_s6kcb")
+nodes/fragment/14/position = Vector2(300, 780)
+nodes/fragment/15/node = SubResource("VisualShaderNodeTexture2DParameter_j7adv")
+nodes/fragment/15/position = Vector2(-320, 1060)
+nodes/fragment/16/node = SubResource("VisualShaderNodeTexture2DParameter_51rlw")
+nodes/fragment/16/position = Vector2(-300, 1320)
+nodes/fragment/connections = PackedInt32Array(5, 0, 4, 2, 8, 0, 7, 0, 10, 0, 12, 0, 12, 0, 13, 0, 13, 0, 7, 2, 6, 0, 14, 1, 15, 0, 14, 6, 16, 0, 14, 7, 14, 1, 9, 1, 14, 6, 0, 3, 14, 7, 0, 4, 9, 0, 0, 0, 4, 0, 9, 0, 7, 0, 9, 2)

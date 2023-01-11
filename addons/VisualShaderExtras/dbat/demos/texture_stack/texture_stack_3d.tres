@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/TextureStack.gd" id="1_b8cyd"]
 
-[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_06jpf"]
-
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_8w8o6"]
-default_input_values = [0, 0.0, 1, 2.251]
-operator = 2
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_idn4t"]
+default_input_values = [1, Vector2(2, 2), 2, Vector2(0, 0)]
+function = 1
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_g8hug"]
 parameter_name = "Albedo"
@@ -23,15 +21,26 @@ parameter_name = "ORM"
 initialized = true
 script = ExtResource("1_b8cyd")
 
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qliaj"]
+parameter_name = "Depth"
+texture_filter = 2
+
 [resource]
 code = "shader_type spatial;
 uniform sampler2D Albedo : source_color;
 uniform sampler2D ORM;
 uniform sampler2D Normalmap : hint_normal;
+uniform sampler2D Depth : filter_linear;
 
 
 
 void fragment() {
+// UVFunc:10
+	vec2 n_in10p1 = vec2(2.00000, 2.00000);
+	vec2 n_in10p2 = vec2(0.00000, 0.00000);
+	vec2 n_out10p0 = fma((UV - n_in10p2), n_in10p1, n_in10p2);
+
+
 	vec2 n_out8p0;
 	vec4 n_out8p1;
 	vec3 n_out8p2;
@@ -42,32 +51,19 @@ void fragment() {
 	float n_out8p7;
 // TextureStack:8
 	{
-		n_out8p1 = textureLod(Albedo, UV, 0.);
+		n_out8p1 = textureLod(Albedo, n_out10p0, 0.);
 		
-		n_out8p3 = textureLod(ORM, UV, 0.).r;
-		n_out8p4 = textureLod(ORM, UV, 0.).g;
-		n_out8p5 = textureLod(ORM, UV, 0.).b;
+		n_out8p3 = textureLod(ORM, n_out10p0, 0.).r;
+		n_out8p4 = textureLod(ORM, n_out10p0, 0.).g;
+		n_out8p5 = textureLod(ORM, n_out10p0, 0.).b;
 		
-		n_out8p6 = textureLod(Normalmap, UV, 0.).rgb;
+		n_out8p6 = textureLod(Normalmap, n_out10p0, 0.).rgb;
+		
+		n_out8p7 = textureLod(Depth, n_out10p0, 0.).r;
 		
 		
-		n_out8p0 = UV;
+		n_out8p0 = n_out10p0;
 	}
-
-
-	vec3 n_out10p0;
-// ColorFunc:10
-	{
-		vec3 c = vec3(n_out8p1.xyz);
-		float max1 = max(c.r, c.g);
-		float max2 = max(max1, c.b);
-		n_out10p0 = vec3(max2, max2, max2);
-	}
-
-
-// FloatOp:11
-	float n_in11p1 = 2.25100;
-	float n_out11p0 = n_out10p0.x * n_in11p1;
 
 
 // Output:0
@@ -76,23 +72,23 @@ void fragment() {
 	ROUGHNESS = n_out8p4;
 	AO = n_out8p3;
 	NORMAL_MAP = n_out8p6;
-	NORMAL_MAP_DEPTH = n_out11p0;
+	NORMAL_MAP_DEPTH = n_out8p7;
 
 
 }
 "
-graph_offset = Vector2(-27.8027, -241.002)
+graph_offset = Vector2(-271.769, -70.1574)
 nodes/fragment/0/position = Vector2(860, 60)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_g8hug")
-nodes/fragment/2/position = Vector2(-295.143, -122.143)
+nodes/fragment/2/position = Vector2(-300, -160)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_a2cfy")
-nodes/fragment/3/position = Vector2(-280, 360)
+nodes/fragment/3/position = Vector2(-300, 360)
 nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_eafs5")
-nodes/fragment/7/position = Vector2(-600, 80)
+nodes/fragment/7/position = Vector2(-300, 100)
 nodes/fragment/8/node = SubResource("VisualShaderNodeCustom_thkgx")
 nodes/fragment/8/position = Vector2(124.857, 137.857)
-nodes/fragment/10/node = SubResource("VisualShaderNodeColorFunc_06jpf")
-nodes/fragment/10/position = Vector2(340, 380)
-nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_8w8o6")
-nodes/fragment/11/position = Vector2(520, 380)
-nodes/fragment/connections = PackedInt32Array(2, 0, 8, 1, 3, 0, 8, 6, 8, 1, 0, 0, 8, 3, 0, 6, 8, 4, 0, 3, 8, 5, 0, 2, 8, 6, 0, 9, 7, 0, 8, 2, 8, 1, 10, 0, 10, 0, 11, 0, 11, 0, 0, 10)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_qliaj")
+nodes/fragment/9/position = Vector2(-300, 580)
+nodes/fragment/10/node = SubResource("VisualShaderNodeUVFunc_idn4t")
+nodes/fragment/10/position = Vector2(-520, 60)
+nodes/fragment/connections = PackedInt32Array(2, 0, 8, 1, 3, 0, 8, 6, 8, 1, 0, 0, 8, 3, 0, 6, 8, 4, 0, 3, 8, 5, 0, 2, 8, 6, 0, 9, 7, 0, 8, 2, 9, 0, 8, 7, 8, 7, 0, 10, 10, 0, 8, 0)

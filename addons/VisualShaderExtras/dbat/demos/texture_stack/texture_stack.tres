@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://b4md8hmohnhur"]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://b4md8hmohnhur"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/TextureStack.gd" id="1_1588i"]
 
@@ -19,9 +19,6 @@ parameter_name = "Height"
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_xrkj6"]
 parameter_name = "ORM"
-
-[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_na4a3"]
-constant = 6.253
 
 [resource]
 code = "shader_type canvas_item;
@@ -58,32 +55,26 @@ void fragment() {
 	}
 
 
-// FloatConstant:9
-	float n_out9p0 = 6.253000;
-
-
 // Output:0
 	COLOR.rgb = vec3(n_out10p1.xyz);
 	NORMAL_MAP = n_out10p6;
-	NORMAL_MAP_DEPTH = n_out9p0;
+	NORMAL_MAP_DEPTH = n_out10p7;
 
 
 }
 "
-graph_offset = Vector2(-556.94, -194.013)
+graph_offset = Vector2(-286.51, 79.9361)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(140, 240)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_o2o18")
 nodes/fragment/3/position = Vector2(-620, -140)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_1wkfw")
-nodes/fragment/4/position = Vector2(-620, 640)
+nodes/fragment/4/position = Vector2(-620, 400)
 nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_5jiyq")
-nodes/fragment/7/position = Vector2(-620, 380)
+nodes/fragment/7/position = Vector2(-620, 640)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_xrkj6")
 nodes/fragment/8/position = Vector2(-620, 120)
-nodes/fragment/9/node = SubResource("VisualShaderNodeFloatConstant_na4a3")
-nodes/fragment/9/position = Vector2(-160, 540)
 nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_y67u7")
 nodes/fragment/10/position = Vector2(-260, 280)
-nodes/fragment/connections = PackedInt32Array(9, 0, 0, 4, 8, 0, 10, 2, 7, 0, 10, 7, 4, 0, 10, 6, 10, 1, 0, 0, 10, 6, 0, 3, 3, 0, 10, 1)
+nodes/fragment/connections = PackedInt32Array(8, 0, 10, 2, 7, 0, 10, 7, 4, 0, 10, 6, 10, 1, 0, 0, 3, 0, 10, 1, 10, 7, 0, 4, 10, 6, 0, 3)

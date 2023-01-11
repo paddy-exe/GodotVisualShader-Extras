@@ -1,7 +1,8 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dklhyu0fandoc"]
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://dklhyu0fandoc"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Utility/NormalMapZ.gd" id="1_e7ynp"]
-[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="1_oxwyf"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png" id="2_r8ej1"]
+[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_heightmap.png" id="3_d5ylu"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_i7wow"]
 parameter_name = "BackgroundNormalMap"
@@ -14,12 +15,17 @@ initialized = true
 script = ExtResource("1_e7ynp")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_oxktn"]
-texture = ExtResource("1_oxwyf")
+texture = ExtResource("2_r8ej1")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_eihfq"]
+texture = ExtResource("3_d5ylu")
 
 [resource]
 code = "shader_type spatial;
-uniform sampler2D tex_frg_15;
+uniform sampler2D tex_frg_15 : source_color;
 uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
+uniform sampler2D tex_frg_16;
 
 
 // RestoreNormalMapZ
@@ -76,19 +82,25 @@ void fragment() {
 	}
 
 
+// Texture2D:16
+	vec4 n_out16p0 = texture(tex_frg_16, UV);
+
+
 // Output:0
 	ALBEDO = vec3(n_out15p0.xyz);
 	NORMAL_MAP = n_out14p0;
+	NORMAL_MAP_DEPTH = n_out16p0.x;
 
 
 }
 "
-graph_offset = Vector2(262.866, -135.532)
 nodes/fragment/0/position = Vector2(1540, -80)
 nodes/fragment/12/node = SubResource("VisualShaderNodeTexture2DParameter_i7wow")
-nodes/fragment/12/position = Vector2(480, 100)
+nodes/fragment/12/position = Vector2(820, 60)
 nodes/fragment/14/node = SubResource("VisualShaderNodeCustom_574f2")
-nodes/fragment/14/position = Vector2(860, 160)
+nodes/fragment/14/position = Vector2(1140, 140)
 nodes/fragment/15/node = SubResource("VisualShaderNodeTexture_oxktn")
 nodes/fragment/15/position = Vector2(1140, -120)
-nodes/fragment/connections = PackedInt32Array(12, 0, 14, 1, 14, 0, 0, 9, 15, 0, 0, 0)
+nodes/fragment/16/node = SubResource("VisualShaderNodeTexture_eihfq")
+nodes/fragment/16/position = Vector2(1140, 280)
+nodes/fragment/connections = PackedInt32Array(12, 0, 14, 1, 14, 0, 0, 9, 15, 0, 0, 0, 16, 0, 0, 10)

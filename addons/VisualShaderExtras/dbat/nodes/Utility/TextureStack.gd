@@ -46,7 +46,7 @@ const names := [
 	["R",  "Roughness", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
 	["M",  "Metallic",  VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
 	["N",  "NormalMap", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_3D],
-	["H",  "Height",	VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR]
+	["D",  "Depth",	VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR]
 ]
 
 func _get_output_port_count():
@@ -79,7 +79,7 @@ func create_textureLod_command(invars, outvars, port):
 		match key:
 			"A": # 4d
 				s = "%s = textureLod(%s, {inuv}, 0.);" % [out, sampler]
-			"H": # float 1d
+			"D": # float 1d
 				s = "%s = textureLod(%s, {inuv}, 0.).r;" % [out, sampler]
 			"ORM": # all three from the ORM input Sampler
 				isorm = true

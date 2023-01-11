@@ -1,26 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3h2skjms2flm"]
+[gd_scene load_steps=8 format=3 uid="uid://d3h2skjms2flm"]
 
 [ext_resource type="Shader" uid="uid://b4md8hmohnhur" path="res://addons/VisualShaderExtras/dbat/demos/texture_stack/texture_stack.tres" id="1_5rhkq"]
-[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_m16nd"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png" id="2_h7i13"]
 [ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.svg" id="2_xqx38"]
-[ext_resource type="Texture2D" uid="uid://mbf8s277lmac" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_normal.png" id="3_be1ab"]
-[ext_resource type="Texture2D" uid="uid://b8cc1022mf3j5" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_orm.png" id="4_qucqx"]
+[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_heightmap.png" id="3_evkdv"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_normal.png" id="4_tfjmu"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_orm.png" id="5_vyod3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a2wk"]
 shader = ExtResource("1_5rhkq")
-shader_parameter/Albedo = ExtResource("2_m16nd")
-shader_parameter/ORM = ExtResource("4_qucqx")
-shader_parameter/Normalmap = ExtResource("3_be1ab")
+shader_parameter/Albedo = ExtResource("2_h7i13")
+shader_parameter/ORM = ExtResource("5_vyod3")
+shader_parameter/Normalmap = ExtResource("4_tfjmu")
+shader_parameter/Height = ExtResource("3_evkdv")
 
 [node name="texture_stack_2d_demo" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(34, 4)
+energy = 3.36
+texture = ExtResource("3_evkdv")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_8a2wk")
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_xqx38")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-position = Vector2(64, 67)
-energy = 6.3
-height = 0.08

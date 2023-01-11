@@ -1,8 +1,8 @@
 [gd_resource type="VisualShader" load_steps=30 format=3 uid="uid://bdv4jso7obbjv"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/WorldNormal/WorldNormalMapMixer.gd" id="1_bkjt5"]
-[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock/rock_albedo.png" id="2_5m13w"]
-[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss/moss_albedo.png" id="3_3y52a"]
+[ext_resource type="Texture2D" uid="uid://bi2ammviwcxx" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/rock_orm_albedo.png" id="2_5m13w"]
+[ext_resource type="Texture2D" uid="uid://cy54qktg6uuct" path="res://addons/VisualShaderExtras/dbat/demos/resources/textures/moss_orm_albedo.png" id="3_3y52a"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_avdsx"]
 default_input_values = [2, Vector3(0, 1, 0), 3, 0.0, 4, 0.0]
@@ -84,7 +84,7 @@ size = Vector2(827.636, 854.774)
 title = "World Normal Mixer Mask"
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_pyo5e"]
-default_input_values = [0, 0.0, 1, 1.5]
+default_input_values = [0, 0.0, 1, 5.023]
 operator = 2
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_jaa3j"]
@@ -137,7 +137,7 @@ uniform sampler2D ForegroundNormalMap : hint_normal, filter_linear;
 //
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-vec3 normal_map_add_z(
+vec3 normal_map_add_z_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
 	vec3 normal_map_texture, 
 	vec2 inuv,
 	vec3 _TANGENT,
@@ -156,9 +156,10 @@ vec3 normal_map_add_z(
 	return normal_applied;
 }
 
+
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-float world_normal_mask(
+float world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
 	vec3 normal_map_texture, 
 	vec3 vector_direction,
 	mat4 _VIEW_MATRIX
@@ -173,12 +174,14 @@ float world_normal_mask(
 	return dot_product;
 }
 
-float mask_blend(float offset, float fade, float mask_in) {
+
+float mask_blend_VisualShaderExtrasWorldNormalWorldNormalMapMixer(float offset, float fade, float mask_in) {
 	offset *= -1.;
 
 	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
 	return smoothstep(offset - fade, offset + fade, mask_in);
 }
+
 
 
 void fragment() {
@@ -208,19 +211,20 @@ void fragment() {
 		
 		vec3 normal_map_texture = textureLod(BackgroundNormalMap, UV, 0.).rgb;
 		
-		vec3 normal_applied = normal_map_add_z(
+		vec3 normal_applied = normal_map_add_z_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
 			normal_map_texture, 
 			UV,
 			TANGENT,
 			BINORMAL,
 			NORMAL);  
-		float mask = world_normal_mask(
+		float mask = world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
 			normal_applied,
 			n_in10p2,
 			VIEW_MATRIX);
-		float blended_mask = mask_blend(n_out8p0, n_out9p0, mask);
+		float blended_mask = mask_blend_VisualShaderExtrasWorldNormalWorldNormalMapMixer(n_out8p0, n_out9p0, mask);
 		n_out10p0 = blended_mask;
 		n_out10p1 = normal_map_texture;
+			
 	}
 
 
@@ -268,7 +272,7 @@ void fragment() {
 
 
 // FloatOp:32
-	float n_in32p1 = 1.50000;
+	float n_in32p1 = 5.02300;
 	float n_out32p0 = n_out22p0.x * n_in32p1;
 
 
@@ -283,7 +287,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-606.721, -52.9244)
+graph_offset = Vector2(-181.498, 37.5078)
 nodes/fragment/0/position = Vector2(1600, 400)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_2f28t")
 nodes/fragment/2/position = Vector2(-820, 220)
