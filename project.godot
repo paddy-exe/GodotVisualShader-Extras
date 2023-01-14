@@ -15,6 +15,11 @@ _global_script_classes=[{
 "path": "res://addons/VisualShaderExtras/Shapes/Box.gd"
 }, {
 "base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeCheckerboard",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/Procedural/Checkerboard.gd"
+}, {
+"base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeCircle",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Shapes/Circle.gd"
@@ -23,6 +28,11 @@ _global_script_classes=[{
 "class": &"VisualShaderNodeCustomCompare",
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Usability/Compare.gd"
+}, {
+"base": "VisualShaderNodeCustom",
+"class": &"VisualShaderNodeCustomHSVAdjustment",
+"language": &"GDScript",
+"path": "res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeDarkerColor",
@@ -161,8 +171,10 @@ _global_script_classes=[{
 }]
 _global_script_class_icons={
 "VisualShaderNodeBox": "",
+"VisualShaderNodeCheckerboard": "",
 "VisualShaderNodeCircle": "",
 "VisualShaderNodeCustomCompare": "",
+"VisualShaderNodeCustomHSVAdjustment": "",
 "VisualShaderNodeDarkerColor": "",
 "VisualShaderNodeExclusion": "",
 "VisualShaderNodeGammaDark": "",

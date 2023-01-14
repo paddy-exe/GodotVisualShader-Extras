@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://cn7nb6ac3skd6"]
+[gd_scene load_steps=188 format=3 uid="uid://cn7nb6ac3skd6"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonAssets/icon.svg" id="1_cgkaa"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/GammaIllumination.gd" id="2_jf1ub"]
@@ -12,7 +12,9 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/Exclusion.gd" id="11_q4an4"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/GammaDark.gd" id="12_q0t3q"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/HardMix.gd" id="13_7mfkw"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Checkerboard.gd" id="13_ptn0e"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="14_jc8jc"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd" id="14_o4k34"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="15_ge12c"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="16_lficu"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="17_4su7r"]
@@ -870,6 +872,146 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 5, 0, 5, 0, 0, 0, 6, 0, 5, 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8s7p"]
 shader = SubResource("VisualShader_ywwl2")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e0cta"]
+default_input_values = [1, Vector2(8, 8)]
+initialized = true
+script = ExtResource("13_ptn0e")
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_cc80l"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_2p266"]
+constant = Color(0, 0, 0, 1)
+
+[sub_resource type="VisualShader" id="VisualShader_bbxpt"]
+code = "shader_type canvas_item;
+
+
+// Checkerboard
+
+		vec3 checkerboard(vec2 _uv, vec2 _tiling, vec3 _color1, vec3 _color2) {
+			float _tiling_x = floor(mod((_uv.x / (1.0 / _tiling.x)), 2.0));
+			float _tiling_y = floor(mod((_uv.y / (1.0 / _tiling.y)), 2.0));
+			bool _compare_bool = (abs(_tiling_x - _tiling_y) < 0.00001);
+			return mix(_color1.xyz, _color2.xyz, (_compare_bool ? 1.0 : 0.0));
+		}
+	
+
+void fragment() {
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// ColorConstant:4
+	vec4 n_out4p0 = vec4(0.000000, 0.000000, 0.000000, 1.000000);
+
+
+	vec3 n_out2p0;
+// Checkerboard:2
+	vec2 n_in2p1 = vec2(8.00000, 8.00000);
+	{
+		n_out2p0.xyz = checkerboard(UV.xy, n_in2p1.xy, vec3(n_out3p0.xyz), vec3(n_out4p0.xyz));
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+
+
+}
+"
+graph_offset = Vector2(-61, 72)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_e0cta")
+nodes/fragment/2/position = Vector2(180, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_cc80l")
+nodes/fragment/3/position = Vector2(-60, 220)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorConstant_2p266")
+nodes/fragment/4/position = Vector2(-40, 300)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 2, 4, 0, 2, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ijt06"]
+shader = SubResource("VisualShader_bbxpt")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5d2we"]
+texture = ExtResource("1_cgkaa")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cdqbk"]
+default_input_values = [1, 129.657, 2, -0.419, 3, 0.126]
+initialized = true
+script = ExtResource("14_o4k34")
+
+[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_45eaf"]
+function = 1
+
+[sub_resource type="VisualShader" id="VisualShader_5n70k"]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_3 : source_color;
+
+
+// HSVAdjustment
+
+		vec3 hsv_adjustment(vec3 col, float hue_offset, float sat_offset, float val_offset) {
+			vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+			vec4 p = mix(vec4(col.bg, K.wz), vec4(col.gb, K.xy), step(col.b, col.g));
+			vec4 q = mix(vec4(p.xyw, col.r), vec4(col.r, p.yzx), step(p.x, col.r));
+			float d = q.x - min(q.w, q.y);
+			float e = 1.0e-10;
+			vec3 hsv = vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+			hsv.x += hue_offset / 360.0;
+			hsv.y += sat_offset;
+			hsv.z += val_offset;
+			return hsv;
+		}
+		
+	
+
+void fragment() {
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, UV);
+
+
+	vec3 n_out4p0;
+// HSVAdjustment:4
+	float n_in4p1 = 129.65700;
+	float n_in4p2 = -0.41900;
+	float n_in4p3 = 0.12600;
+	{
+		n_out4p0 = hsv_adjustment(vec3(n_out3p0.xyz).xyz, n_in4p1, n_in4p2, n_in4p3);
+	}
+
+
+	vec3 n_out6p0;
+// ColorFunc:6
+	{
+		vec3 c = n_out4p0;
+		vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+		vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+		n_out6p0 = c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out6p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(580, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_5d2we")
+nodes/fragment/3/position = Vector2(-220, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_cdqbk")
+nodes/fragment/4/position = Vector2(60, 140)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorFunc_45eaf")
+nodes/fragment/6/position = Vector2(380, 200)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 6, 0, 0, 0, 4, 0, 6, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_le34p"]
+shader = SubResource("VisualShader_5n70k")
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dkexg"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
@@ -2055,6 +2197,77 @@ layout_mode = 2
 text = "Hard Mix"
 horizontal_alignment = 1
 
+[node name="Procedural" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Procedural"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Procedural"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Procedural/VBoxContainer"]
+layout_mode = 2
+
+[node name="Checkerboard" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
+material = SubResource("ShaderMaterial_ijt06")
+layout_mode = 2
+texture = ExtResource("1_cgkaa")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
+layout_mode = 2
+text = "Checkerboard"
+horizontal_alignment = 1
+
+[node name="ColorAdjustment" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorAdjustment"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="ColorAdjustment/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Color Adjustment"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorAdjustment/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSVAdjustment" type="VBoxContainer" parent="ColorAdjustment/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ColorAdjustment/VBoxContainer/HBoxContainer/HSVAdjustment"]
+material = SubResource("ShaderMaterial_le34p")
+layout_mode = 2
+texture = ExtResource("1_cgkaa")
+
+[node name="Label" type="Label" parent="ColorAdjustment/VBoxContainer/HBoxContainer/HSVAdjustment"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "HSVAdjustment"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Shapes" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -2198,6 +2411,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UV" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_right = 40.0
