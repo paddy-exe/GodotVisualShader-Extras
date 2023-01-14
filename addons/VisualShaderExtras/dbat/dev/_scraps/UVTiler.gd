@@ -19,7 +19,7 @@
 # With assist from https://thebookofshaders.com/09/
 
 @tool
-extends VisualShaderNodeCustom
+#extends VisualShaderNodeCustom
 class_name VisualShaderNodeTilerDeprecated
 
 func _get_name():

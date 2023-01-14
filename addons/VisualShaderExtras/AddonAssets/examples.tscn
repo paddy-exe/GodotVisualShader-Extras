@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://cn7nb6ac3skd6"]
+[gd_scene load_steps=176 format=3]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonAssets/icon.svg" id="1_cgkaa"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/GammaIllumination.gd" id="2_jf1ub"]
@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bn8avh1dk262a" path="res://addons/VisualShaderExtras/AddonAssets/DinoSprites - vita.png" id="23_7eq8w"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" id="24_b72mw"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" id="24_peh0q"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTiler.gd" id="24_xmnb7"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/dev/_scraps/UVTiler.gd" id="24_xmnb7"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="25_srj7y"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="26_777un"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="27_5a8eg"]

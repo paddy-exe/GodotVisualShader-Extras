@@ -44,7 +44,7 @@ extends VisualShaderNodeCustom
 class_name NodeUVTilerV3
 
 func _get_name():
-	return "UVTilerV3"
+	return "UVTiler"
 
 func _get_category():
 	return "VisualShaderExtras/UV"

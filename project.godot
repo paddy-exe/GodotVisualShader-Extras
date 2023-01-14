@@ -209,10 +209,10 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://addons/VisualShaderExtras/Wave/SquareWave.gd"
 }, {
-"base": "VisualShaderNodeCustom",
+"base": "RefCounted",
 "class": &"VisualShaderNodeTilerDeprecated",
 "language": &"GDScript",
-"path": "res://addons/VisualShaderExtras/UV/UVTiler.gd"
+"path": "res://addons/VisualShaderExtras/dbat/dev/_scraps/UVTiler.gd"
 }, {
 "base": "VisualShaderNodeCustom",
 "class": &"VisualShaderNodeTrapezoid",
