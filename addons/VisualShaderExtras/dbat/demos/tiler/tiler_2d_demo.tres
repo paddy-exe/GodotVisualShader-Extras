@@ -52,24 +52,24 @@ uniform float BrickShift : hint_range(0, 1) = 0.5;
 uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_linear;
 
 
-// UVTilerV3
+// UVTiler
 
 // _angle in radians
-vec2 vec2_rotate_VisualShaderExtrasUvUvTilerV3(vec2 _uv, float _angle, vec2 _pivot) {
+vec2 vec2_rotate_VisualShaderExtrasUvUvTiler(vec2 _uv, float _angle, vec2 _pivot) {
 	_uv -= _pivot;
 	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
 	_uv += _pivot;
 	return _uv;
 }
 
-vec2 brick_tile_VisualShaderExtrasUvUvTilerV3(vec2 _uv, float _zoom, float _shift)
+vec2 brick_tile_VisualShaderExtrasUvUvTiler(vec2 _uv, float _zoom, float _shift)
 {
 	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
 	return fract(_uv);
 }
 
 // Returns float from 0.0 to 1.0
-float random_float_VisualShaderExtrasUvUvTilerV3(vec2 input) {
+float random_float_VisualShaderExtrasUvUvTiler(vec2 input) {
 	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
 
@@ -92,7 +92,7 @@ void fragment() {
 
 
 	vec2 n_out9p0;
-// UVTilerV3:9
+// UVTiler:9
 	{
 		
 			//Much simpler to calculate zoom from the tiling vec2 
@@ -105,13 +105,13 @@ void fragment() {
 			
 			//Something about this calc is the problem with the brick shift when 
 			//rr is > 0
-			float rand_rotation = (( random_float_VisualShaderExtrasUvUvTilerV3(unique_val) * 2.0) - 1.0) * n_out6p0;
+			float rand_rotation = (( random_float_VisualShaderExtrasUvUvTiler(unique_val) * 2.0) - 1.0) * n_out6p0;
 			
 			//Just add whatever static rotation may be input and clamp:
 			rand_rotation = clamp(rand_rotation + n_out7p0, 0.0, 2.*PI);
 			
-			st = brick_tile_VisualShaderExtrasUvUvTilerV3(st, zoom, n_out5p0);
-			st = vec2_rotate_VisualShaderExtrasUvUvTilerV3(st, rand_rotation, vec2(0.5));
+			st = brick_tile_VisualShaderExtrasUvUvTiler(st, zoom, n_out5p0);
+			st = vec2_rotate_VisualShaderExtrasUvUvTiler(st, rand_rotation, vec2(0.5));
 			
 			n_out9p0 = st;
 			
