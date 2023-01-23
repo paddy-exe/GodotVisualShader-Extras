@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4faiuv28dq4d"]
 
-[ext_resource type="Shader" uid="uid://cruu3xwn7bhet" path="res://addons/VisualShaderExtras/dbat/demos/connectors/Connectors_Demo.tres" id="1_q1015"]
+[ext_resource type="Shader" uid="uid://4lfhviw470v4" path="res://addons/VisualShaderExtras/dbat/demos/connectors/Connectors_Demo.tres" id="1_q1015"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/dbat/demos/resources/icon.png" id="2_5em8o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f0t8b"]

@@ -1,8 +1,8 @@
-[gd_resource type="VisualShader" load_steps=19 format=3 uid="uid://cruu3xwn7bhet"]
+[gd_resource type="VisualShader" load_steps=21 format=3 uid="uid://4lfhviw470v4"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="1_10ds4"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ConnectorMM.gd" id="2_5d53v"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/ConnectorOM.gd" id="3_083sn"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/RerouteMany.gd" id="2_lqd6l"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/dbat/nodes/Usability/Reroute.gd" id="3_tr5mt"]
 
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_m3ool"]
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.5]
@@ -54,10 +54,16 @@ constant = Quaternion(-200, 0, -11.2, 100)
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_6r16i"]
 input_name = "uv"
 
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_v2ehy"]
+parameter_name = "Texture2DParameter"
+
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_k1ph0"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, -0.005]
 initialized = true
 script = ExtResource("1_10ds4")
+
+[sub_resource type="VisualShaderNodeTexture3D" id="VisualShaderNodeTexture3D_arkyd"]
+source = 1
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_dd5ua"]
 constant = Color(1, 0.386878, 0.342078, 1)
@@ -67,7 +73,7 @@ operator = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_v7x2n"]
 initialized = true
-script = ExtResource("2_5d53v")
+script = ExtResource("2_lqd6l")
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_btql7"]
 default_input_values = [0, 0.757, 1, 0.0]
@@ -77,10 +83,11 @@ operator = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cyr48"]
 initialized = true
-script = ExtResource("3_083sn")
+script = ExtResource("3_tr5mt")
 
 [resource]
 code = "shader_type canvas_item;
+uniform sampler2D Texture2DParameter;
 
 
 // Circle
@@ -96,9 +103,9 @@ void fragment() {
 
 
 	vec4 n_out9p0;
-// ConnectOne:9
+// Route:9
 	{
-		n_out9p0 = vec4(n_out18p0.xy,0.,0.);
+		n_out9p0 = vec4(n_out18p0, 0.0, 0.0);
 	}
 
 
@@ -126,7 +133,7 @@ void fragment() {
 	vec3 n_out6p4;
 	vec4 n_out6p5;
 	mat4 n_out6p6;
-// ConnectMany:6
+// RouteMany:6
 	{
 		n_out6p1 = n_out2p0;
 		n_out6p4 = n_out5p0;
@@ -151,7 +158,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-302.806, -0.00927734)
+graph_offset = Vector2(-56.2779, 119.222)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(900, 200)
@@ -185,4 +192,8 @@ nodes/fragment/17/node = SubResource("VisualShaderNodeVec4Constant_61tys")
 nodes/fragment/17/position = Vector2(-360, 1000)
 nodes/fragment/18/node = SubResource("VisualShaderNodeInput_6r16i")
 nodes/fragment/18/position = Vector2(-300, 560)
-nodes/fragment/connections = PackedInt32Array(2, 0, 5, 1, 3, 0, 5, 0, 5, 0, 6, 4, 2, 0, 6, 1, 6, 1, 7, 1, 7, 0, 0, 1, 9, 0, 10, 0, 6, 4, 10, 1, 10, 0, 0, 0, 9, 0, 0, 4, 18, 0, 9, 0)
+nodes/fragment/19/node = SubResource("VisualShaderNodeTexture2DParameter_v2ehy")
+nodes/fragment/19/position = Vector2(-220, 300)
+nodes/fragment/20/node = SubResource("VisualShaderNodeTexture3D_arkyd")
+nodes/fragment/20/position = Vector2(702.816, 491.136)
+nodes/fragment/connections = PackedInt32Array(2, 0, 5, 1, 3, 0, 5, 0, 5, 0, 6, 4, 2, 0, 6, 1, 6, 1, 7, 1, 7, 0, 0, 1, 9, 0, 10, 0, 6, 4, 10, 1, 10, 0, 0, 0, 9, 0, 0, 4, 18, 0, 9, 0, 19, 0, 6, 7, 6, 7, 20, 2)
