@@ -22,7 +22,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeWorldNormalMask
+class_name VisualShaderNodeWorldNormalMask
 
 func _get_name():
 	return "World_Normal_Mask"

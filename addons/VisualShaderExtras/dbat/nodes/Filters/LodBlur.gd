@@ -18,7 +18,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeLodBlur
+class_name VisualShaderNodeLodBlur
 
 func _get_name():
 	return "LoDBlur"

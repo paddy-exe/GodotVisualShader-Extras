@@ -18,7 +18,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeReroute
+class_name VisualShaderNodeReroute
 
 func _get_name():
 	return "Route"

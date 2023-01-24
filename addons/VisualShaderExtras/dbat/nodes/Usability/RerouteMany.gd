@@ -18,7 +18,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeRerouteMany
+class_name VisualShaderNodeRerouteMany
 
 func _get_name():
 	return "RouteMany"

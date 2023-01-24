@@ -22,7 +22,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeSamplerNormalMapZ
+class_name VisualShaderNodeSamplerNormalMapZ
 
 func _get_name():
 	return "RestoreNormalMapZ"

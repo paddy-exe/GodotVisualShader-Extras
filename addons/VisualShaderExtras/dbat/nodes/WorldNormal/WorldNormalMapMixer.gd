@@ -22,7 +22,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeWorldNormalMapMixer
+class_name VisualShaderNodeWorldNormalMapMixer
 
 func _get_name():
 	return "World_Normal_Map_Mixer"

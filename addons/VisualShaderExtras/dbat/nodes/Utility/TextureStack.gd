@@ -22,7 +22,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeTextureStack
+class_name VisualShaderNodeTextureStack
 
 func _get_name():
 	return "TextureStack"

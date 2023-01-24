@@ -22,7 +22,7 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name TempVisualShaderNodeMaskBlend
+class_name VisualShaderNodeMaskBlend
 
 func _get_name():
 	return "MaskBlend"
