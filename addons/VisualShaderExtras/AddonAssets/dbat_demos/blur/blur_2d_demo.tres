@@ -1,0 +1,77 @@
+[gd_resource type="VisualShader" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Filters/LodBlur.gd" id="1_nbohf"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_jfkp4"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+texture_filter = 3
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8pvek"]
+default_input_values = [2, 1.115]
+initialized = true
+script = ExtResource("1_nbohf")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_r8lli"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_q7lk4"]
+function = 1
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_4wbml"]
+default_input_values = [0, 0.0, 1, 10.0]
+operator = 2
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D Texture2DParameter : source_color, filter_nearest_mipmap;
+
+
+
+void fragment() {
+// Input:5
+	float n_out5p0 = TIME;
+
+
+// FloatFunc:6
+	float n_out6p0 = cos(n_out5p0);
+
+
+// FloatOp:7
+	float n_in7p1 = 10.00000;
+	float n_out7p0 = n_out6p0 * n_in7p1;
+
+
+	vec3 n_out3p0;
+// LoDBlur:3
+	{
+		
+			//When the sampler is set to Linear Mipmap it works best.
+			//The Bias will cause blurring.
+			vec4 color = textureLod(Texture2DParameter, UV, n_out7p0);
+			n_out3p0 = color.rgb;
+			
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+
+
+}
+"
+graph_offset = Vector2(-298, -23)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(500, 120)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_jfkp4")
+nodes/fragment/2/position = Vector2(-193.333, 281.667)
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_8pvek")
+nodes/fragment/3/position = Vector2(220, 180)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_r8lli")
+nodes/fragment/5/position = Vector2(-560, 40)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_q7lk4")
+nodes/fragment/6/position = Vector2(-260, 20)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_4wbml")
+nodes/fragment/7/position = Vector2(-47.2, 39.6)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 1, 3, 0, 0, 0, 5, 0, 6, 0, 6, 0, 7, 0, 7, 0, 3, 2)
