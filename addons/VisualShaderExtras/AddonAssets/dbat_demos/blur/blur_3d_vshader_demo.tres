@@ -1,0 +1,59 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://kettq437klka"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Filters/LodBlur.gd" id="1_u5y11"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qxj8l"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+texture_filter = 4
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e5pk6"]
+default_input_values = [2, 1.115]
+initialized = true
+script = ExtResource("1_u5y11")
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_k3rmt"]
+parameter_name = "Blur"
+hint = 1
+max = 10.0
+default_value_enabled = true
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D Texture2DParameter : source_color, filter_linear_mipmap;
+uniform float Blur : hint_range(0, 10) = 0;
+
+
+
+void fragment() {
+// FloatParameter:23
+	float n_out23p0 = Blur;
+
+
+	vec3 n_out22p0;
+// LoDBlur:22
+	{
+		
+			//When the sampler is set to Linear Mipmap it works best.
+			//The Bias will cause blurring.
+			vec4 color = textureLod(Texture2DParameter, UV, n_out23p0);
+			n_out22p0 = color.rgb;
+			
+	}
+
+
+// Output:0
+	ALBEDO = n_out22p0;
+
+
+}
+"
+graph_offset = Vector2(-863.14, 760.545)
+nodes/fragment/0/position = Vector2(-280, 1080)
+nodes/fragment/18/node = SubResource("VisualShaderNodeTexture2DParameter_qxj8l")
+nodes/fragment/18/position = Vector2(-980, 1240)
+nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_e5pk6")
+nodes/fragment/22/position = Vector2(-580, 1140)
+nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_k3rmt")
+nodes/fragment/23/position = Vector2(-980, 960)
+nodes/fragment/connections = PackedInt32Array(18, 0, 22, 1, 23, 0, 22, 2, 22, 0, 0, 0)

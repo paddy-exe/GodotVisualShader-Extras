@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/mask_blend/mask_blend_demo.tres" id="1_8i6o1"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_n8abd"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_albedo.png" id="3_8270c"]
+[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_heightmap.png" id="3_qb5u7"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_normal.png" id="4_2mbpu"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.svg" id="4_fftsb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tv3gx"]
+shader = ExtResource("1_8i6o1")
+shader_parameter/ForeGroundAlbedo = ExtResource("3_8270c")
+shader_parameter/BackgroundAlbedo = ExtResource("2_n8abd")
+shader_parameter/BackgroundNormalMap = ExtResource("4_2mbpu")
+shader_parameter/BackgroundDepth = ExtResource("3_qb5u7")
+
+[node name="Node2D" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [38.0]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tv3gx")
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("4_fftsb")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(122, 114)
+color = Color(0.960784, 1, 1, 1)
+energy = 3.5
+texture = ExtResource("3_qb5u7")
