@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djkhiujfs5d88"
-path.s3tc="res://.godot/imported/VisualShaderExtras-Logo.png-2e9d09de6f35fd64bfc664451faf7d91.s3tc.ctex"
+uid="uid://ba7cojxxohdjb"
+path.s3tc="res://.godot/imported/icon.png-2fb838320ef1b5aed823ef65c6799d7a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo.png"
-dest_files=["res://.godot/imported/VisualShaderExtras-Logo.png-2e9d09de6f35fd64bfc664451faf7d91.s3tc.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.png"
+dest_files=["res://.godot/imported/icon.png-2fb838320ef1b5aed823ef65c6799d7a.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
