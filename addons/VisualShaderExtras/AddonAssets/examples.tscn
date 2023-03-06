@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=3 uid="uid://cn7nb6ac3skd6"]
+[gd_scene load_steps=187 format=3 uid="uid://cn7nb6ac3skd6"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonAssets/icon.svg" id="1_cgkaa"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/GammaIllumination.gd" id="2_jf1ub"]
@@ -1542,17 +1542,15 @@ script = ExtResource("24_peh0q")
 default_input_values = [0, Quaternion(0, 0, 0, 0)]
 op_type = 2
 
-[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_wfss0"]
-default_input_values = [1, Vector2(1, 1), 2, Vector2(0.002, 0)]
-
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_3avxn"]
 parameter_name = "MainTex"
 texture_type = 1
 texture_filter = 1
+texture_repeat = 2
 
 [sub_resource type="VisualShader" id="VisualShader_pgiym"]
 code = "shader_type canvas_item;
-uniform sampler2D MainTex : source_color, filter_nearest;
+uniform sampler2D MainTex : source_color, filter_nearest, repeat_disable;
 
 
 // UVFlipbook
@@ -1589,15 +1587,9 @@ void fragment() {
 	}
 
 
-// UVFunc:6
-	vec2 n_in6p1 = vec2(1.00000, 1.00000);
-	vec2 n_in6p2 = vec2(0.00200, 0.00000);
-	vec2 n_out6p0 = fma(n_in6p2, n_in6p1, n_out4p0);
-
-
 	vec4 n_out3p0;
 // Texture2D:3
-	n_out3p0 = texture(MainTex, n_out6p0);
+	n_out3p0 = texture(MainTex, n_out4p0);
 
 
 // VectorDecompose:5
@@ -1614,21 +1606,19 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-18.7114, -102.932)
+graph_offset = Vector2(-105.011, 27.9852)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(1040, 60)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_vdmwd")
 nodes/fragment/3/position = Vector2(220, 20)
 nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_72wbf")
-nodes/fragment/4/position = Vector2(-820, 100)
+nodes/fragment/4/position = Vector2(-340, 80)
 nodes/fragment/5/node = SubResource("VisualShaderNodeVectorDecompose_4i80k")
 nodes/fragment/5/position = Vector2(560, 300)
-nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_wfss0")
-nodes/fragment/6/position = Vector2(-380, 100)
 nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_3avxn")
 nodes/fragment/7/position = Vector2(-520, 400)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 0, 5, 0, 5, 3, 0, 1, 4, 0, 6, 0, 6, 0, 3, 0, 7, 0, 3, 2)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 0, 5, 0, 5, 3, 0, 1, 7, 0, 3, 2, 4, 0, 3, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esshf"]
 shader = SubResource("VisualShader_pgiym")
@@ -2233,6 +2223,7 @@ text = "Checkerboard"
 horizontal_alignment = 1
 
 [node name="ColorAdjustment" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2411,7 +2402,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UV" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_right = 40.0
@@ -2550,4 +2540,3 @@ vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-current = true
