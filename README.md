@@ -75,7 +75,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
 </div>
 
 ## How to get started
-To integrate the Visual Shader nodes library into your poject, copy the VisualShaderExtras folder inside your addons folder. If the addons folder doesn't exist yet, create one. There's no further steps or activation through the project settings necessary.
+To integrate the Visual Shader nodes library into your project, copy the VisualShaderExtras folder inside your addons folder. If the addons folder doesn't exist yet, create one. There's no further steps or activation through the project settings necessary.
 
 ## Why another Visual Shader add-on?
 There are already two major Visual Shader add-on solutions. [ShaderV](https://github.com/arkology/ShaderV) is mainly focused on CanvasItem shaders though and [Godot-Visual-Shader-Node-Library](https://github.com/Maujoe/Godot-Visual-Shader-Node-Library) has run stale.
@@ -84,6 +84,12 @@ Furthermore, I have plans to work on another add-on (or perhaps a GDExtension) t
 
 ## ℹ️ Contributing
 You can contribute by:
+* giving feedback
+* reporting issues
+* creating PRs to solve standing issues
+* adding more nodes that you find useful yourself in a PR
+* using the library and spreading the word 📰
+
 * giving feedback
 * reporting issues
 * creating PRs to solve standing issues
