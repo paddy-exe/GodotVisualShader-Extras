@@ -1,7 +1,28 @@
-# based checked this shadertoy source: https://www.shadertoy.com/view/XdS3RW
+# MIT License
+#
+# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeExclusion
+class_name VisualShaderNodeExclusionBlendAdvanced
 
 func _get_name():
 	return "BlendExclusion"
@@ -50,13 +71,11 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float blend_exclusion_f( float c1, float c2 )
-		{
+		float blend_exclusion_f(float c1, float c2) {
 			return c1 + c2 - 2.0 * c1 * c2;
 		}
 		
-		vec3 blend_exclusion(vec3 c1, vec3 c2, float opacity)
-		{
+		vec3 blend_exclusion(vec3 c1, vec3 c2, float opacity) {
 			return opacity*vec3(blend_exclusion_f(c1.x, c2.x), blend_exclusion_f(c1.y, c2.y), blend_exclusion_f(c1.z, c2.z)) + (1.0-opacity)*c2;
 		}
 	"""

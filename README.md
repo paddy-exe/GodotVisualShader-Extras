@@ -35,7 +35,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Vivid Light
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.png" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.gif" width="800"/>
 </div>
 
 - Shapes (Signed Distance Fields)
