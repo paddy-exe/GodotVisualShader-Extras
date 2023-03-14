@@ -2,25 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck6ib50lrnxw5"
-path.s3tc="res://.godot/imported/icon.png-ebcb9e8febbef65cb93d423dcdff820d.s3tc.ctex"
-path.etc2="res://.godot/imported/icon.png-ebcb9e8febbef65cb93d423dcdff820d.etc2.ctex"
+uid="uid://im3imr3u2j1y"
+path.s3tc="res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonAssets/icon.png"
-dest_files=["res://.godot/imported/icon.png-ebcb9e8febbef65cb93d423dcdff820d.s3tc.ctex", "res://.godot/imported/icon.png-ebcb9e8febbef65cb93d423dcdff820d.etc2.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo-128x128.png"
+dest_files=["res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

@@ -1,9 +1,9 @@
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeLinearLight
+class_name VisualShaderNodeGammaLightAdvanced
 
 func _get_name():
-	return "BlendLinearLight"
+	return "BlendGammaLight"
 
 func _init() -> void:
 	set_input_port_default_value(2, 0.5)
@@ -12,7 +12,7 @@ func _get_category():
 	return "VisualShaderExtras/BlendModes"
 
 func _get_description():
-	return "Linear Light Blending Mode"
+	return "Gamma Light Blending Mode"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
@@ -49,17 +49,17 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float blend_linear_light_f(float c1, float c2) 
+		float blend_gamma_light_f(float c1, float c2) 
 		{
-			return (c2 + 2.0 * c1) - 1.0;
+			return pow(c2, c1);
 		}
 		
-		vec3 blend_linear_light(vec3 c1, vec3 c2, float opacity)
+		vec3 blend_gamma_light(vec3 c1, vec3 c2, float opacity)
 		{
-			return opacity*vec3(blend_linear_light_f(c1.x, c2.x), blend_linear_light_f(c1.y, c2.y), blend_linear_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+			return opacity*vec3(blend_gamma_light_f(c1.x, c2.x), blend_gamma_light_f(c1.y, c2.y), blend_gamma_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
 		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	
-	return "%s.rgb = blend_linear_light(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]
+	return "%s.rgb = blend_gamma_light(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]
