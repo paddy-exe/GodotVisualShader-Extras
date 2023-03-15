@@ -59,6 +59,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - UV Twirl
     - UV Flipbook
     - UV Tiler
+    - UV Rotate
 
 <div align="center">
   <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
