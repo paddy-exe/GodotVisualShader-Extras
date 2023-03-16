@@ -3,7 +3,7 @@ name: Release 4.0
 on:
   push:
     branches:
-      - master
+      - v4
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v3
         with:
-          ref: 4.0
+          ref: v4
 
       - name: Move License
         shell: bash
