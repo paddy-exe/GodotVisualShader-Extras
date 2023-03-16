@@ -1,63 +1,63 @@
-[gd_scene load_steps=309 format=3 uid="uid://bptntdpwwdm42"]
+[gd_scene load_steps=309 format=3 uid="uid://ccq8442x4u4qs"]
 
-[ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonAssets/icon.svg" id="1_cgkaa"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighter_color_blend.gd" id="2_0j8nr"]
-[ext_resource type="Texture2D" uid="uid://im3imr3u2j1y" path="res://addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo-128x128.png" id="2_xu8kj"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/normal_blend.gd" id="3_ccrdy"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darker_color_blend.gd" id="3_hlnti"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dissolve_blend.gd" id="4_cts0n"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/screen_blend.gd" id="5_gekge"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/overlay_blend.gd" id="6_bm1kt"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/hard_light_blend.gd" id="7_k5h5m"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/soft_light_blend.gd" id="8_b7tf0"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/burn_blend.gd" id="9_l1uqn"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dodge_blend.gd" id="10_jsvo6"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighten_blend.gd" id="11_n0wvd"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darken_blend.gd" id="12_6hew4"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/difference_blend.gd" id="13_dcg01"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/additive_blend.gd" id="14_8yep8"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="14_jc8jc"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd" id="14_o4k34"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/addsub_blend.gd" id="15_0c124"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="15_ge12c"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_light_blend.gd" id="16_4i1ph"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="16_lficu"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="17_4su7r"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" id="17_kodn2"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/vivid_light_blend.gd" id="17_tu5cu"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/pin_light_blend.gd" id="18_ffndm"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" id="19_jp1e3"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/exclusion_blend.gd" id="19_os21r"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Trapezoid.gd" id="20_7awbu"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_illumination_blend.gd" id="20_qv1mj"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_light_blend.gd" id="21_0usud"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Triangle.gd" id="21_775g5"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTwirl.gd" id="22_0m23s"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_dark_blend.gd" id="22_u1p6g"]
-[ext_resource type="Texture2D" uid="uid://bn8avh1dk262a" path="res://addons/VisualShaderExtras/AddonAssets/DinoSprites - vita.png" id="23_7eq8w"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/luminosity_blend.gd" id="23_gg06w"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_burn_blend.gd" id="24_7rxgg"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" id="24_b72mw"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" id="24_peh0q"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTiler.gd" id="24_xmnb7"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="25_srj7y"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="26_777un"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="27_5a8eg"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise2D.gd" id="27_fgvk5"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="41_5yrmd"]
+[ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="1_pmvkm"]
+[ext_resource type="Texture2D" uid="uid://im3imr3u2j1y" path="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png" id="2_myiw4"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/normal_blend.gd" id="3_t67k3"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dissolve_blend.gd" id="4_eqjgp"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/screen_blend.gd" id="5_afmfx"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/overlay_blend.gd" id="6_d40l5"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/hard_light_blend.gd" id="7_wcbap"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/soft_light_blend.gd" id="8_oqb1v"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/burn_blend.gd" id="9_hsv27"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dodge_blend.gd" id="10_5tjq4"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighten_blend.gd" id="11_jra88"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darken_blend.gd" id="12_vqxt2"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/difference_blend.gd" id="13_laece"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/additive_blend.gd" id="14_lxeqv"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/addsub_blend.gd" id="15_meo86"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_light_blend.gd" id="16_dmlhh"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/vivid_light_blend.gd" id="17_s2asn"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/pin_light_blend.gd" id="18_kji71"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/exclusion_blend.gd" id="19_gkxhr"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_illumination_blend.gd" id="20_d7i5c"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_light_blend.gd" id="21_fpode"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_dark_blend.gd" id="22_wf7lc"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/luminosity_blend.gd" id="23_451rj"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_burn_blend.gd" id="24_fak3r"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighter_color_blend.gd" id="25_1twgi"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darker_color_blend.gd" id="26_37c4m"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise2D.gd" id="27_qxbdi"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd" id="28_ye5rl"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="29_k5cvk"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="30_nhxin"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="31_3swwc"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" id="32_2uhvd"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="33_q3h5g"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" id="34_yicdm"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Trapezoid.gd" id="35_4prw4"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Triangle.gd" id="36_4uciv"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTwirl.gd" id="37_psyxx"]
+[ext_resource type="Texture2D" uid="uid://bn8avh1dk262a" path="res://addons/VisualShaderExtras/AddonExamples/DinoSprites - vita.png" id="38_u53ku"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" id="39_iilbj"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTiler.gd" id="40_x0ogt"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="41_7oy85"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" id="42_ubein"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="43_7mn1k"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="44_ikc7r"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="45_w1ca0"]
 
 [sub_resource type="VisualShaderNodeTexture" id="67"]
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pj0n4"]
-texture = ExtResource("2_xu8kj")
+texture = ExtResource("2_myiw4")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_lnt7t"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("3_ccrdy")
+script = ExtResource("3_t67k3")
 
 [sub_resource type="VisualShader" id="68"]
 code = "shader_type canvas_item;
@@ -127,7 +127,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_g0xuu"]
 default_input_values = [2, 0.5, 3, Vector3(1, 1, 1)]
 initialized = true
-script = ExtResource("4_cts0n")
+script = ExtResource("4_eqjgp")
 
 [sub_resource type="VisualShader" id="VisualShader_my0mx"]
 code = "shader_type canvas_item;
@@ -211,7 +211,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_kwjoc"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("5_gekge")
+script = ExtResource("5_afmfx")
 
 [sub_resource type="VisualShader" id="VisualShader_unmd3"]
 code = "shader_type canvas_item;
@@ -281,7 +281,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_u0kr0"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("6_bm1kt")
+script = ExtResource("6_d40l5")
 
 [sub_resource type="VisualShader" id="VisualShader_mvyjv"]
 code = "shader_type canvas_item;
@@ -355,7 +355,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_1wfak"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("7_k5h5m")
+script = ExtResource("7_wcbap")
 
 [sub_resource type="VisualShader" id="VisualShader_ne8xj"]
 code = "shader_type canvas_item;
@@ -433,7 +433,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_xn7bc"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("8_b7tf0")
+script = ExtResource("8_oqb1v")
 
 [sub_resource type="VisualShader" id="VisualShader_peul7"]
 code = "shader_type canvas_item;
@@ -507,7 +507,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_aavj5"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("9_l1uqn")
+script = ExtResource("9_hsv27")
 
 [sub_resource type="VisualShader" id="VisualShader_3ay0w"]
 code = "shader_type canvas_item;
@@ -581,7 +581,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_lvjdb"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("10_jsvo6")
+script = ExtResource("10_5tjq4")
 
 [sub_resource type="VisualShader" id="VisualShader_dt03t"]
 code = "shader_type canvas_item;
@@ -655,7 +655,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_hhvwi"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("11_n0wvd")
+script = ExtResource("11_jra88")
 
 [sub_resource type="VisualShader" id="VisualShader_mti26"]
 code = "shader_type canvas_item;
@@ -725,7 +725,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_weqb1"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("12_6hew4")
+script = ExtResource("12_vqxt2")
 
 [sub_resource type="VisualShader" id="VisualShader_4a1r1"]
 code = "shader_type canvas_item;
@@ -795,7 +795,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_be4ge"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("13_dcg01")
+script = ExtResource("13_laece")
 
 [sub_resource type="VisualShader" id="VisualShader_0hxt1"]
 code = "shader_type canvas_item;
@@ -865,7 +865,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_6fheq"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("14_8yep8")
+script = ExtResource("14_lxeqv")
 
 [sub_resource type="VisualShader" id="VisualShader_y0dk6"]
 code = "shader_type canvas_item;
@@ -935,7 +935,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ud1un"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("15_0c124")
+script = ExtResource("15_meo86")
 
 [sub_resource type="VisualShader" id="VisualShader_qrxbr"]
 code = "shader_type canvas_item;
@@ -1005,7 +1005,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jpw1j"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("16_4i1ph")
+script = ExtResource("16_dmlhh")
 
 [sub_resource type="VisualShader" id="VisualShader_fahnp"]
 code = "shader_type canvas_item;
@@ -1079,7 +1079,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qs8wi"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("17_tu5cu")
+script = ExtResource("17_s2asn")
 
 [sub_resource type="VisualShader" id="VisualShader_bkutg"]
 code = "shader_type canvas_item;
@@ -1153,7 +1153,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_4hvqo"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("18_ffndm")
+script = ExtResource("18_kji71")
 
 [sub_resource type="VisualShader" id="VisualShader_vs058"]
 code = "shader_type canvas_item;
@@ -1227,7 +1227,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ehnmp"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("7_k5h5m")
+script = ExtResource("7_wcbap")
 
 [sub_resource type="VisualShader" id="VisualShader_fch6n"]
 code = "shader_type canvas_item;
@@ -1305,7 +1305,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_oaswl"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("19_os21r")
+script = ExtResource("19_gkxhr")
 
 [sub_resource type="VisualShader" id="VisualShader_nbmqa"]
 code = "shader_type canvas_item;
@@ -1379,7 +1379,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qy2c2"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("20_qv1mj")
+script = ExtResource("20_d7i5c")
 
 [sub_resource type="VisualShader" id="VisualShader_6so37"]
 code = "shader_type canvas_item;
@@ -1455,7 +1455,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_w3tct"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("21_0usud")
+script = ExtResource("21_fpode")
 
 [sub_resource type="VisualShader" id="VisualShader_x1r6j"]
 code = "shader_type canvas_item;
@@ -1531,7 +1531,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_i2k47"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("22_u1p6g")
+script = ExtResource("22_wf7lc")
 
 [sub_resource type="VisualShader" id="VisualShader_5pcav"]
 code = "shader_type canvas_item;
@@ -1607,7 +1607,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rbhk2"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("23_gg06w")
+script = ExtResource("23_451rj")
 
 [sub_resource type="VisualShader" id="VisualShader_t28pt"]
 code = "shader_type canvas_item;
@@ -1689,7 +1689,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fpgxy"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("24_7rxgg")
+script = ExtResource("24_fak3r")
 
 [sub_resource type="VisualShader" id="VisualShader_t0pob"]
 code = "shader_type canvas_item;
@@ -1763,7 +1763,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_r87l6"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("2_0j8nr")
+script = ExtResource("25_1twgi")
 
 [sub_resource type="VisualShader" id="VisualShader_rnl3p"]
 code = "shader_type canvas_item;
@@ -1839,7 +1839,7 @@ texture_type = 1
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_gc53a"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("3_hlnti")
+script = ExtResource("26_37c4m")
 
 [sub_resource type="VisualShader" id="VisualShader_8l46s"]
 code = "shader_type canvas_item;
@@ -2035,7 +2035,7 @@ shader = SubResource("VisualShader_bbxpt")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_iuo5i"]
 default_input_values = [0, Vector2(0.195, 0.142), 1, Vector2(10, 10), 2, 0.0]
 initialized = true
-script = ExtResource("27_fgvk5")
+script = ExtResource("27_qxbdi")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_0k1tk"]
 input_name = "uv"
@@ -2150,13 +2150,13 @@ nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 2, 0, 6, 0, 2, 2
 shader = SubResource("VisualShader_nrxtj")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5d2we"]
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cdqbk"]
 default_input_values = [1, 129.657, 2, -0.419, 3, 0.126]
 initialized = true
-script = ExtResource("14_o4k34")
+script = ExtResource("28_ye5rl")
 
 [sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_45eaf"]
 function = 1
@@ -2231,7 +2231,7 @@ shader = SubResource("VisualShader_5n70k")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dkexg"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
 initialized = true
-script = ExtResource("14_jc8jc")
+script = ExtResource("29_k5cvk")
 
 [sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_3vt21"]
 
@@ -2286,7 +2286,7 @@ shader = SubResource("VisualShader_ew583")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_7hsui"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 0.25]
 initialized = true
-script = ExtResource("15_ge12c")
+script = ExtResource("30_nhxin")
 
 [sub_resource type="VisualShader" id="VisualShader_b85uw"]
 code = "shader_type canvas_item;
@@ -2337,7 +2337,7 @@ shader = SubResource("VisualShader_b85uw")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jvi73"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 0.15, 3, 0.3, 4, 0.2]
 initialized = true
-script = ExtResource("16_lficu")
+script = ExtResource("31_3swwc")
 
 [sub_resource type="VisualShader" id="VisualShader_jh5y8"]
 code = "shader_type canvas_item;
@@ -2399,7 +2399,7 @@ shader = SubResource("VisualShader_jh5y8")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qfav1"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
 initialized = true
-script = ExtResource("17_kodn2")
+script = ExtResource("32_2uhvd")
 
 [sub_resource type="VisualShader" id="VisualShader_atxn6"]
 code = "shader_type canvas_item;
@@ -2455,7 +2455,7 @@ shader = SubResource("VisualShader_atxn6")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eypac"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(-0.25, -0.25), 3, Vector2(0.25, 0.25), 4, 0.2]
 initialized = true
-script = ExtResource("17_4su7r")
+script = ExtResource("33_q3h5g")
 
 [sub_resource type="VisualShader" id="VisualShader_2wk66"]
 code = "shader_type canvas_item;
@@ -2514,7 +2514,7 @@ shader = SubResource("VisualShader_2wk66")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_d8n2b"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25), 3, Vector4(0, 0, 0, 0)]
 initialized = true
-script = ExtResource("19_jp1e3")
+script = ExtResource("34_yicdm")
 
 [sub_resource type="VisualShaderNodeVec4Parameter" id="VisualShaderNodeVec4Parameter_ma1o7"]
 parameter_name = "Vector4Parameter"
@@ -2581,7 +2581,7 @@ shader_parameter/Vector4Parameter = Vector4(0.25, 0.056, 0.25, 0)
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_543dt"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 0.15, 3, 0.35, 4, 0.25]
 initialized = true
-script = ExtResource("20_7awbu")
+script = ExtResource("35_4prw4")
 
 [sub_resource type="VisualShader" id="VisualShader_7tc5t"]
 code = "shader_type canvas_item;
@@ -2641,7 +2641,7 @@ shader = SubResource("VisualShader_7tc5t")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_0ievt"]
 default_input_values = [1, Vector2(0.5, 0.25), 2, Vector2(0.25, 0.5)]
 initialized = true
-script = ExtResource("21_775g5")
+script = ExtResource("36_4uciv")
 
 [sub_resource type="VisualShader" id="VisualShader_sqnwd"]
 code = "shader_type canvas_item;
@@ -2697,7 +2697,7 @@ shader = SubResource("VisualShader_sqnwd")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8dss3"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 10.0, 3, Vector2(0, 0)]
 initialized = true
-script = ExtResource("22_0m23s")
+script = ExtResource("37_psyxx")
 
 [sub_resource type="VisualShader" id="VisualShader_eqdrg"]
 code = "shader_type canvas_item;
@@ -2745,13 +2745,13 @@ shader = SubResource("VisualShader_eqdrg")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_vdmwd"]
 source = 5
-texture = ExtResource("23_7eq8w")
+texture = ExtResource("38_u53ku")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_72wbf"]
 default_input_values = [1, 24, 2, 1, 3, 0, 4, 24, 5, 0.3]
 initialized = true
-script = ExtResource("24_peh0q")
+script = ExtResource("39_iilbj")
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_4i80k"]
 default_input_values = [0, Quaternion(0, 0, 0, 0)]
@@ -2847,12 +2847,12 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 0, 5, 0, 5, 3, 0, 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esshf"]
 shader = SubResource("VisualShader_pgiym")
-shader_parameter/MainTex = ExtResource("23_7eq8w")
+shader_parameter/MainTex = ExtResource("38_u53ku")
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fuam6"]
 default_input_values = [0, Vector2(2, 2), 1, 4.0, 2, 2.08165e-12]
 initialized = true
-script = ExtResource("24_xmnb7")
+script = ExtResource("40_x0ogt")
 
 [sub_resource type="VisualShader" id="VisualShader_8gnev"]
 code = "shader_type canvas_item;
@@ -2909,7 +2909,7 @@ shader = SubResource("VisualShader_8gnev")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_a1kwj"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 10.0, 3, Vector2(0, 0)]
 initialized = true
-script = ExtResource("41_5yrmd")
+script = ExtResource("41_7oy85")
 
 [sub_resource type="VisualShader" id="VisualShader_7uhii"]
 code = "shader_type canvas_item;
@@ -2956,13 +2956,13 @@ shader = SubResource("VisualShader_7uhii")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qhyoa"]
 default_input_values = [1, 2.0, 2, 1.0, 3, 0.0]
 initialized = true
-script = ExtResource("24_b72mw")
+script = ExtResource("42_ubein")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3o0vd"]
 input_name = "time"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_eqdgy"]
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_67ujy"]
@@ -3029,13 +3029,13 @@ shader = SubResource("VisualShader_wx5y0")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_0j4rd"]
 default_input_values = [1, 2.0, 2, 1.0, 3, 0.0]
 initialized = true
-script = ExtResource("25_srj7y")
+script = ExtResource("43_7mn1k")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_baknj"]
 operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ikytu"]
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gcea3"]
@@ -3101,13 +3101,13 @@ shader = SubResource("VisualShader_puwg7")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_nfkyf"]
 default_input_values = [1, 1.0, 2, 1.0, 3, 0.0]
 initialized = true
-script = ExtResource("26_777un")
+script = ExtResource("44_ikc7r")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_won18"]
 operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3hn32"]
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_g3y1n"]
@@ -3174,7 +3174,7 @@ shader = SubResource("VisualShader_y5gtx")
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8d5ov"]
 default_input_values = [1, 1.0, 2, 1.0, 3, 0.0, 4, 0.0]
 initialized = true
-script = ExtResource("27_5a8eg")
+script = ExtResource("45_w1ca0")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_esgtp"]
 input_name = "time"
@@ -3183,7 +3183,7 @@ input_name = "time"
 operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qt8jv"]
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 texture_type = 1
 
 [sub_resource type="VisualShader" id="VisualShader_enkir"]
@@ -3293,7 +3293,7 @@ layout_mode = 2
 material = SubResource("69")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Normal"]
 layout_mode = 2
@@ -3307,7 +3307,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_enr5s")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Dissolve"]
 layout_mode = 2
@@ -3321,7 +3321,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_wu7lk")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Screen"]
 layout_mode = 2
@@ -3335,7 +3335,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_kkpnf")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Overlay"]
 layout_mode = 2
@@ -3349,7 +3349,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_lkbav")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/HardLight"]
 layout_mode = 2
@@ -3363,7 +3363,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_qayvd")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/SoftLight"]
 layout_mode = 2
@@ -3377,7 +3377,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_deh4d")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Burn"]
 layout_mode = 2
@@ -3391,7 +3391,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_wdg44")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Dodge"]
 layout_mode = 2
@@ -3405,7 +3405,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_vyc0v")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Lighten"]
 layout_mode = 2
@@ -3419,7 +3419,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_h8ry5")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Darken"]
 layout_mode = 2
@@ -3433,7 +3433,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_d3mgk")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Difference"]
 layout_mode = 2
@@ -3447,7 +3447,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_uof40")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Additive"]
 layout_mode = 2
@@ -3461,7 +3461,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_eli8g")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/AddSub"]
 layout_mode = 2
@@ -3475,7 +3475,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_nmcdm")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/LinearLight"]
 layout_mode = 2
@@ -3489,7 +3489,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_idbae")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/VividLight"]
 layout_mode = 2
@@ -3503,7 +3503,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_4c0lm")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/PinLight"]
 layout_mode = 2
@@ -3517,7 +3517,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_pnkpk")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/HardMix"]
 layout_mode = 2
@@ -3531,7 +3531,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_r53ff")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Exclusion"]
 layout_mode = 2
@@ -3545,7 +3545,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_klgwi")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/GammaIllumination"]
 layout_mode = 2
@@ -3560,7 +3560,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_5g7rp")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/GammaLight"]
 layout_mode = 2
@@ -3574,7 +3574,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_ommw6")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/GammaDark"]
 layout_mode = 2
@@ -3588,7 +3588,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_p71em")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/Luminosity"]
 layout_mode = 2
@@ -3602,7 +3602,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_fv25u")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/LinearBurn"]
 layout_mode = 2
@@ -3616,7 +3616,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_n1onk")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/LighterColor"]
 layout_mode = 2
@@ -3630,7 +3630,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_uvepn")
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/DarkerColor"]
 layout_mode = 2
@@ -3664,7 +3664,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
 material = SubResource("ShaderMaterial_ijt06")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
 layout_mode = 2
@@ -3677,7 +3677,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise2D"]
 material = SubResource("ShaderMaterial_qqdvx")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise2D"]
 layout_mode = 2
@@ -3712,7 +3712,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="ColorAdjustment/VBoxContainer/HBoxContainer/HSVAdjustment"]
 material = SubResource("ShaderMaterial_le34p")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="ColorAdjustment/VBoxContainer/HBoxContainer/HSVAdjustment"]
 layout_mode = 2
@@ -3750,7 +3750,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_yp0tr")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Box"]
 layout_mode = 2
@@ -3765,7 +3765,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_52mrt")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Circle"]
 layout_mode = 2
@@ -3780,7 +3780,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_b8srd")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Parallelogram"]
 layout_mode = 2
@@ -3795,7 +3795,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_yyiql")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Rhombus"]
 layout_mode = 2
@@ -3810,7 +3810,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_lucsr")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/PreciseBox"]
 layout_mode = 2
@@ -3825,7 +3825,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_pr0po")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/RoundedBox"]
 layout_mode = 2
@@ -3840,7 +3840,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_wr7cc")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Trapezoid"]
 layout_mode = 2
@@ -3855,7 +3855,7 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_7wkl2")
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Triangle"]
 layout_mode = 2
@@ -3889,7 +3889,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="UV/VBoxContainer/HBoxContainer/UVTwirl"]
 material = SubResource("ShaderMaterial_nk7cv")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="UV/VBoxContainer/HBoxContainer/UVTwirl"]
 layout_mode = 2
@@ -3902,7 +3902,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="UV/VBoxContainer/HBoxContainer/UVFlipbook"]
 material = SubResource("ShaderMaterial_esshf")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="UV/VBoxContainer/HBoxContainer/UVFlipbook"]
 layout_mode = 2
@@ -3916,7 +3916,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="UV/VBoxContainer/HBoxContainer/UVTiler"]
 material = SubResource("ShaderMaterial_v8ct1")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="UV/VBoxContainer/HBoxContainer/UVTiler"]
 layout_mode = 2
@@ -3929,7 +3929,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="UV/VBoxContainer/HBoxContainer/UVRotate"]
 material = SubResource("ShaderMaterial_cu70s")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="UV/VBoxContainer/HBoxContainer/UVRotate"]
 layout_mode = 2
@@ -3964,7 +3964,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/TriangleWave"]
 material = SubResource("ShaderMaterial_o3d0f")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/TriangleWave"]
 layout_mode = 2
@@ -3978,7 +3978,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/SquareWave"]
 material = SubResource("ShaderMaterial_t427w")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/SquareWave"]
 layout_mode = 2
@@ -3992,7 +3992,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/SawtoothWave"]
 material = SubResource("ShaderMaterial_7g4dk")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/SawtoothWave"]
 layout_mode = 2
@@ -4006,7 +4006,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Wave/VBoxContainer/HBoxContainer/SineWave"]
 material = SubResource("ShaderMaterial_20n14")
 layout_mode = 2
-texture = ExtResource("1_cgkaa")
+texture = ExtResource("1_pmvkm")
 
 [node name="Label" type="Label" parent="Wave/VBoxContainer/HBoxContainer/SineWave"]
 layout_mode = 2
