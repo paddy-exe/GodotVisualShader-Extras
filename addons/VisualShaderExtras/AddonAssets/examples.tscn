@@ -1,4 +1,4 @@
-[gd_scene load_steps=302 format=3 uid="uid://dhonmus7cuhkx"]
+[gd_scene load_steps=309 format=3 uid="uid://bptntdpwwdm42"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonAssets/icon.svg" id="1_cgkaa"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighter_color_blend.gd" id="2_0j8nr"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighten_blend.gd" id="11_n0wvd"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darken_blend.gd" id="12_6hew4"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/difference_blend.gd" id="13_dcg01"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Checkerboard.gd" id="13_ptn0e"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/additive_blend.gd" id="14_8yep8"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="14_jc8jc"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd" id="14_o4k34"]
@@ -44,6 +43,7 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="25_srj7y"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="26_777un"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="27_5a8eg"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise2D.gd" id="27_fgvk5"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="41_5yrmd"]
 
 [sub_resource type="VisualShaderNodeTexture" id="67"]
@@ -1898,10 +1898,83 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uvepn"]
 shader = SubResource("VisualShader_8l46s")
 
+[sub_resource type="GDScript" id="GDScript_xqgp2"]
+script/source = "@tool
+extends VisualShaderNodeCustom
+class_name VisualShaderNodeCheckerboard
+
+func _get_name():
+	return \"Checkerboard\"
+
+func _init() -> void:
+	set_input_port_default_value(1, Vector2(8.0, 8.0))
+
+func _get_category():
+	return \"VisualShaderExtras/Procedural\"
+
+func _get_description():
+	return \"Checkerboard Pattern with two given input colors\"
+
+func _get_return_icon_type():
+	return VisualShaderNode.PORT_TYPE_VECTOR_3D
+
+func _get_input_port_count():
+	return 4
+
+func _get_input_port_name(port):
+	match port:
+		0:
+			return \"UV\"
+		1:
+			return \"Tiling\"
+		2:
+			return \"Color\"
+		3:
+			return \"Color\"
+
+func _get_input_port_type(port):
+	match port:
+		0:
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		1:
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		2:
+			return VisualShaderNode.PORT_TYPE_VECTOR_3D
+		3:
+			return VisualShaderNode.PORT_TYPE_VECTOR_3D
+			
+func _get_output_port_count():
+	return 1
+
+func _get_output_port_name(port: int) -> String:
+	return \"\"
+
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_VECTOR_3D
+
+func _get_global_code(mode):
+	return \"\"\"
+		vec3 checkerboard(vec2 _uv, vec2 _tiling, vec3 _color1, vec3 _color2) {
+			float _tiling_x = floor(mod((_uv.x / (1.0 / _tiling.x)), 2.0));
+			float _tiling_y = floor(mod((_uv.y / (1.0 / _tiling.y)), 2.0));
+			bool _compare_bool = (abs(_tiling_x - _tiling_y) < 0.00001);
+			return mix(_color1.xyz, _color2.xyz, (_compare_bool ? 1.0 : 0.0));
+		}
+	\"\"\"
+
+func _get_code(input_vars, output_vars, mode, type):
+	var uv = \"UV\"
+	
+	if input_vars[0]:
+		uv = input_vars[0]
+	
+	return \"%s.xyz = checkerboard(%s.xy, %s.xy, %s, %s);\" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]
+"
+
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e0cta"]
 default_input_values = [1, Vector2(8, 8)]
 initialized = true
-script = ExtResource("13_ptn0e")
+script = SubResource("GDScript_xqgp2")
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_cc80l"]
 
@@ -1958,6 +2031,123 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 2, 4, 0, 2, 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ijt06"]
 shader = SubResource("VisualShader_bbxpt")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_iuo5i"]
+default_input_values = [0, Vector2(0.195, 0.142), 1, Vector2(10, 10), 2, 0.0]
+initialized = true
+script = ExtResource("27_fgvk5")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_0k1tk"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_7u225"]
+default_input_values = [1, Vector2(4, 4), 2, Vector2(0, 0)]
+function = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_hacq2"]
+input_name = "time"
+
+[sub_resource type="VisualShader" id="VisualShader_nrxtj"]
+code = "shader_type canvas_item;
+
+
+// PSRDNoise2D
+
+		float psrdnoise2_with_gradient(vec2 x, vec2 period, float alpha, out vec2 gradient) {
+			vec2 uv = vec2(x.x+x.y*0.5, x.y);
+			vec2 i0 = floor(uv), f0 = fract(uv);
+			float cmp = step(f0.y, f0.x);
+			vec2 o1 = vec2(cmp, 1.0-cmp);
+			vec2 i1 = i0 + o1, i2 = i0 + 1.0;
+			vec2 v0 = vec2(i0.x - i0.y*0.5, i0.y);
+			vec2 v1 = vec2(v0.x + o1.x - o1.y*0.5, v0.y + o1.y);
+			vec2 v2 = vec2(v0.x + 0.5, v0.y + 1.0);
+			vec2 x0 = x - v0, x1 = x - v1, x2 = x - v2;
+			vec3 iu, iv, xw, yw;
+			if(any(greaterThan(period, vec2(0.0)))) {
+				xw = vec3(v0.x, v1.x, v2.x);
+				yw = vec3(v0.y, v1.y, v2.y);
+				if(period.x > 0.0)
+				xw = mod(vec3(v0.x, v1.x, v2.x), period.x);
+				if(period.y > 0.0)
+				yw = mod(vec3(v0.y, v1.y, v2.y), period.y);
+				iu = floor(xw + 0.5*yw + 0.5); iv = floor(yw + 0.5);
+			} else {
+				iu = vec3(i0.x, i1.x, i2.x); iv = vec3(i0.y, i1.y, i2.y);
+			}
+			vec3 hash = mod(iu, 289.0);
+			hash = mod((hash*51.0 + 2.0)*hash + iv, 289.0);
+			hash = mod((hash*34.0 + 10.0)*hash, 289.0);
+			vec3 psi = hash*0.07482 + alpha;
+			vec3 gx = cos(psi); vec3 gy = sin(psi);
+			vec2 g0 = vec2(gx.x, gy.x);
+			vec2 g1 = vec2(gx.y, gy.y);
+			vec2 g2 = vec2(gx.z, gy.z);
+			vec3 w = 0.8 - vec3(dot(x0, x0), dot(x1, x1), dot(x2, x2));
+			w = max(w, 0.0); vec3 w2 = w*w; vec3 w4 = w2*w2;
+			vec3 gdotx = vec3(dot(g0, x0), dot(g1, x1), dot(g2, x2));
+			float n = dot(w4, gdotx);
+			vec3 w3 = w2*w; vec3 dw = -8.0*w3*gdotx;
+			vec2 dn0 = w4.x*g0 + dw.x*x0;
+			vec2 dn1 = w4.y*g1 + dw.y*x1;
+			vec2 dn2 = w4.z*g2 + dw.z*x2;
+			gradient = 10.9*(dn0 + dn1 + dn2);
+			return 10.9*n;
+		}
+		
+		float psrdnoise2(vec2 x, vec2 period, float alpha) {
+			vec2 gradient;
+			return psrdnoise2_with_gradient(x, period, alpha, gradient);
+		}
+		
+	
+
+void fragment() {
+// Input:4
+	vec2 n_out4p0 = UV;
+
+
+// UVFunc:5
+	vec2 n_in5p1 = vec2(4.00000, 4.00000);
+	vec2 n_in5p2 = vec2(0.00000, 0.00000);
+	vec2 n_out5p0 = (n_out4p0 - n_in5p2) * n_in5p1 + n_in5p2;
+
+
+// Input:6
+	float n_out6p0 = TIME;
+
+
+	float n_out2p0;
+// PSRDNoise2D:2
+	vec2 n_in2p1 = vec2(10.00000, 10.00000);
+	{
+		n_out2p0 = psrdnoise2(n_out5p0.xy, n_in2p1.xy, n_out6p0);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out2p0);
+	COLOR.a = n_out2p0;
+
+
+}
+"
+graph_offset = Vector2(-459.364, 39.6364)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(340, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_iuo5i")
+nodes/fragment/2/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_0k1tk")
+nodes/fragment/4/position = Vector2(-540, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_7u225")
+nodes/fragment/5/position = Vector2(-200, 80)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_hacq2")
+nodes/fragment/6/position = Vector2(-260, 280)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 2, 0, 6, 0, 2, 2, 2, 0, 0, 0, 2, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qqdvx"]
+shader = SubResource("VisualShader_nrxtj")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5d2we"]
 texture = ExtResource("1_cgkaa")
@@ -3448,7 +3638,6 @@ text = "Darker Color"
 horizontal_alignment = 1
 
 [node name="Procedural" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3480,6 +3669,19 @@ texture = ExtResource("1_cgkaa")
 [node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
 layout_mode = 2
 text = "Checkerboard"
+horizontal_alignment = 1
+
+[node name="PSRDNoise2D" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise2D"]
+material = SubResource("ShaderMaterial_qqdvx")
+layout_mode = 2
+texture = ExtResource("1_cgkaa")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise2D"]
+layout_mode = 2
+text = "PSRD Noise2D"
 horizontal_alignment = 1
 
 [node name="ColorAdjustment" type="Control" parent="."]
@@ -3662,6 +3864,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UV" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_right = 40.0
