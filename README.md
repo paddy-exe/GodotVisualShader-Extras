@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/VisualShaderExtras-Logo.png" width="250"/>
+  <img src="addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo.png" width="250"/>
 </div>
 <div id="badges" align="center">
   <a href="https://ko-fi.com/flamelizard">
@@ -21,21 +21,36 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
 
 ## Provided Nodes
 - Blending Modes (taken from Krita Docs and other sources)
-    - Darker Colors
-    - Exclusion
-    - Gamma Dark
-    - Gamma Illumination
-    - Gamma Light
-    - Hard Mix
-    - Lighter Color
-    - Linear Burn
+    - Normal
+    - Dissolve
+    - Screen
+    - Overlay
+    - Hard Light
+    - Soft Light
+    - Burn
+    - Dodge
+    - Lighten
+    - Darken
+    - Difference
+    - Additive
+    - AddSub
     - Linear Light
-    - Luminosity
-    - Pin Light
     - Vivid Light
+    - Pin Light
+    - Hard Mix
+    - Exclusion
+    - Gamma Illumination
+    - Gammma Light
+    - Gamma Dark
+    - Luminosity
+    - Linear Burn
+    - Lighter Color
+    - Darker Color
+
+Please refer to the documentation of MaterialMaker for explanation about the [different blend modes](https://rodzill4.github.io/material-maker/doc/node_filter_blend.html).
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/BlendingModes-Showcase.gif" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonExamples/BlendingModes-Showcase.gif" width="800"/>
 </div>
 
 - Shapes (Signed Distance Fields)
@@ -49,11 +64,20 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - Parallelogram
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/Shapes-Showcase.png" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonExamples/Shapes-Showcase.png" width="800"/>
 </div>
 
 - Usability
     - Compare
+
+- Procedural
+    - Checkerboard
+    - PSRD Noise 2D
+    - PSRD Noise 3D
+
+<div align="center">
+  <img src="addons/VisualShaderExtras/AddonExamples/Procedural-Showcase.png" width="800"/>
+</div>
 
 - UV
     - UV Twirl
@@ -62,7 +86,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - UV Rotate
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/UV-Showcase.gif" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonExamples/UV-Showcase.gif" width="800"/>
 </div>
 
 - Wave (click on the links for more detail about the patterns)
@@ -72,7 +96,7 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
     - [Sine (+ Angular Frequency Input variant)](https://en.wikipedia.org/wiki/Sine_wave)
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonAssets/Wave-Showcase.gif" width="800"/>
+  <img src="addons/VisualShaderExtras/AddonExamples/Wave-Showcase.gif" width="800"/>
 </div>
 
 ## How to get started
@@ -92,4 +116,4 @@ You can contribute by:
 * using the library and spreading the word 📰
 
 ## 🔢 Versioning
-This branch is currently still undergoing changes so you might encounter bugs and breaking changes from the 3.x version.
+This branch is only meant to be used with Godot 4.0 and higher
