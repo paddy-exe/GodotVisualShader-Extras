@@ -1,4 +1,4 @@
-[gd_scene load_steps=309 format=3 uid="uid://ccq8442x4u4qs"]
+[gd_scene load_steps=320 format=3 uid="uid://cv4lpljwiaudr"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="1_pmvkm"]
 [ext_resource type="Texture2D" uid="uid://im3imr3u2j1y" path="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png" id="2_myiw4"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="29_k5cvk"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="30_nhxin"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="31_3swwc"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="31_a7ssf"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" id="32_2uhvd"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="33_q3h5g"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" id="34_yicdm"]
@@ -43,6 +44,7 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="41_7oy85"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" id="42_ubein"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="43_7mn1k"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/RadialGradient.gd" id="43_ada6o"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="44_ikc7r"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="45_w1ca0"]
 
@@ -2132,7 +2134,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-459.364, 39.6364)
+graph_offset = Vector2(-213, 59)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(340, 160)
@@ -2148,6 +2150,190 @@ nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 2, 0, 6, 0, 2, 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qqdvx"]
 shader = SubResource("VisualShader_nrxtj")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_5rnkb"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_2432w"]
+default_input_values = [1, Vector2(4, 4), 2, Vector2(0, 0)]
+function = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7kepg"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_o2eky"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 1.0]
+initialized = true
+script = ExtResource("31_a7ssf")
+
+[sub_resource type="VisualShader" id="VisualShader_xaol5"]
+code = "shader_type canvas_item;
+
+
+// PSRDNoise3D
+
+		vec4 __psrdnoise3_permute(vec4 i) {
+			vec4 im = mod(i, 289.0);
+			return mod(((im*34.0)+10.0)*im, 289.0);
+		}
+		
+		float psrdnoise3_with_gradient(vec3 x, vec3 period, float alpha, out vec3 gradient) {
+			const mat3 M = mat3(vec3(0.0, 1.0, 1.0), vec3(1.0, 0.0, 1.0), vec3(1.0, 1.0, 0.0));
+			const mat3 Mi = mat3(vec3(-0.5, 0.5, 0.5), vec3(0.5,-0.5, 0.5), vec3(0.5, 0.5,-0.5));
+			vec3 uvw = M * x;
+			vec3 i0 = floor(uvw), f0 = fract(uvw);
+			vec3 g_ = step(f0.xyx, f0.yzz), l_ = 1.0 - g_;
+			vec3 g = vec3(l_.z, g_.xy), l = vec3(l_.xy, g_.z);
+			vec3 o1 = min( g, l ), o2 = max( g, l );
+			vec3 i1 = i0 + o1, i2 = i0 + o2, i3 = i0 + vec3(1.0);
+			vec3 v0 = Mi * i0, v1 = Mi * i1, v2 = Mi * i2, v3 = Mi * i3;
+			vec3 x0 = x - v0, x1 = x - v1, x2 = x - v2, x3 = x - v3;
+			if(any(greaterThan(period, vec3(0.0)))) {
+				vec4 vx = vec4(v0.x, v1.x, v2.x, v3.x);
+				vec4 vy = vec4(v0.y, v1.y, v2.y, v3.y);
+				vec4 vz = vec4(v0.z, v1.z, v2.z, v3.z);
+				if(period.x > 0.0) vx = mod(vx, period.x);
+				if(period.y > 0.0) vy = mod(vy, period.y);
+				if(period.z > 0.0) vz = mod(vz, period.z);
+				i0 = floor(M * vec3(vx.x, vy.x, vz.x) + 0.5);
+				i1 = floor(M * vec3(vx.y, vy.y, vz.y) + 0.5);
+				i2 = floor(M * vec3(vx.z, vy.z, vz.z) + 0.5);
+				i3 = floor(M * vec3(vx.w, vy.w, vz.w) + 0.5);
+			}
+			
+		vec4 hash = __psrdnoise3_permute( __psrdnoise3_permute( __psrdnoise3_permute( 
+					  vec4(i0.z, i1.z, i2.z, i3.z ))
+					+ vec4(i0.y, i1.y, i2.y, i3.y ))
+					+ vec4(i0.x, i1.x, i2.x, i3.x ));
+		vec4 theta = hash * 3.883222077;
+		vec4 sz = hash * -0.006920415 + 0.996539792;
+		vec4 psi = hash * 0.108705628;
+		vec4 Ct = cos(theta), St = sin(theta);
+		vec4 sz_prime = sqrt( 1.0 - sz*sz );
+		vec4 gx, gy, gz;
+		if(alpha != 0.0) {
+			vec4 px = Ct * sz_prime, py = St * sz_prime, pz = sz;
+			vec4 Sp = sin(psi), Cp = cos(psi), Ctp = St*Sp - Ct*Cp;
+			vec4 qx = mix( Ctp*St, Sp, sz), qy = mix(-Ctp*Ct, Cp, sz);
+			vec4 qz = -(py*Cp + px*Sp);
+			vec4 Sa = vec4(sin(alpha)), Ca = vec4(cos(alpha));
+			gx = Ca*px + Sa*qx; gy = Ca*py + Sa*qy; gz = Ca*pz + Sa*qz;
+		} else {
+			gx = Ct * sz_prime; gy = St * sz_prime; gz = sz;  
+		}
+		vec3 g0 = vec3(gx.x, gy.x, gz.x), g1 = vec3(gx.y, gy.y, gz.y);
+		vec3 g2 = vec3(gx.z, gy.z, gz.z), g3 = vec3(gx.w, gy.w, gz.w);
+		vec4 w = 0.5-vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3));
+		w = max(w, 0.0); vec4 w2 = w * w, w3 = w2 * w;
+		vec4 gdotx = vec4(dot(g0,x0), dot(g1,x1), dot(g2,x2), dot(g3,x3));
+		float n = dot(w3, gdotx);
+		vec4 dw = -6.0 * w2 * gdotx;
+		vec3 dn0 = w3.x * g0 + dw.x * x0;
+		vec3 dn1 = w3.y * g1 + dw.y * x1;
+		vec3 dn2 = w3.z * g2 + dw.z * x2;
+		vec3 dn3 = w3.w * g3 + dw.w * x3;
+		gradient = 39.5 * (dn0 + dn1 + dn2 + dn3);
+		return 39.5 * n;
+		}
+		
+		float psrdnoise3(vec3 x, vec3 period, float alpha) {
+			vec3 gradient;
+			return psrdnoise3_with_gradient(x, period, alpha, gradient);
+		}
+		
+	
+
+void fragment() {
+// Input:4
+	vec2 n_out4p0 = UV;
+
+
+// UVFunc:5
+	vec2 n_in5p1 = vec2(4.00000, 4.00000);
+	vec2 n_in5p2 = vec2(0.00000, 0.00000);
+	vec2 n_out5p0 = (n_out4p0 - n_in5p2) * n_in5p1 + n_in5p2;
+
+
+// Input:6
+	float n_out6p0 = TIME;
+
+
+	float n_out7p0;
+// PSRDNoise3D:7
+	vec3 n_in7p1 = vec3(1.00000, 1.00000, 1.00000);
+	{
+		n_out7p0 = psrdnoise3(vec3(n_out5p0, 0.0).xyz, n_in7p1.xyz, n_out6p0);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out7p0);
+
+
+}
+"
+graph_offset = Vector2(-460, 43)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(340, 160)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_5rnkb")
+nodes/fragment/4/position = Vector2(-560, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_2432w")
+nodes/fragment/5/position = Vector2(-220, 80)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_7kepg")
+nodes/fragment/6/position = Vector2(-300, 280)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_o2eky")
+nodes/fragment/7/position = Vector2(60, 160)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 6, 0, 7, 2, 7, 0, 0, 0, 5, 0, 7, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iasic"]
+shader = SubResource("VisualShader_xaol5")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_s1pc4"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 2.0]
+initialized = true
+script = ExtResource("43_ada6o")
+
+[sub_resource type="VisualShader" id="VisualShader_caujt"]
+code = "shader_type canvas_item;
+
+
+// UVRadialGradient
+
+		float uv_radial_gradient(vec2 uv, vec2 offset, float fraction_size) {
+			vec2 __uv = uv - offset;
+			float grad = atan(__uv.x, __uv.y);
+			grad = fract(grad / (fraction_size * PI));
+			return grad;
+		}
+	
+
+void fragment() {
+	float n_out2p0;
+// UVRadialGradient:2
+	vec2 n_in2p1 = vec2(0.50000, 0.50000);
+	float n_in2p2 = 2.00000;
+	{
+		n_out2p0 = uv_radial_gradient(UV.xy, n_in2p1.xy, n_in2p2);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out2p0);
+
+
+}
+"
+graph_offset = Vector2(-883.727, 12.7051)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(-140, 60)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_s1pc4")
+nodes/fragment/2/position = Vector2(-420, 80)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65iv8"]
+shader = SubResource("VisualShader_caujt")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5d2we"]
 texture = ExtResource("1_pmvkm")
@@ -3683,6 +3869,33 @@ texture = ExtResource("1_pmvkm")
 layout_mode = 2
 text = "PSRD Noise2D"
 horizontal_alignment = 1
+
+[node name="PSRDNoise3D" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise3D"]
+material = SubResource("ShaderMaterial_iasic")
+layout_mode = 2
+texture = ExtResource("1_pmvkm")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise3D"]
+layout_mode = 2
+text = "PSRD Noise3D"
+horizontal_alignment = 1
+
+[node name="UVRadialGradient" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/UVRadialGradient"]
+material = SubResource("ShaderMaterial_65iv8")
+layout_mode = 2
+texture = ExtResource("1_pmvkm")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/UVRadialGradient"]
+layout_mode = 2
+text = "Radial Gradient"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="ColorAdjustment" type="Control" parent="."]
 visible = false
