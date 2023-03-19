@@ -1,6 +1,4 @@
 # The MIT License
-# Copyright © 2022 Inigo Quilez
-# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
 # Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
@@ -20,57 +18,59 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCustomCompare
+class_name VisualShaderNodeRerouteTransform
 
 func _get_name():
-	return "Compare"
-
-func _init() -> void:
-	pass#set_input_port_default_value(2, 0.5)
+	return "RerouteTransform"
 
 func _get_category():
 	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return "Compare Color inputs and output a mask for the second input"
+	return "Node to let you just hang a noodle somewhere and pass it through.\nNB: Make sure to match the same in and out ports."
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_SCALAR
+	return VisualShaderNode.PORT_TYPE_TRANSFORM
 
-func _get_input_port_count():
-	return 2
-
-func _get_input_port_name(port):
-	match port:
-		0:
-			return "Color 1"
-		1:
-			return "Color 2"
-
-func _get_input_port_type(port):
-	match port:
-		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR_4D
-		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR_4D
-
-func _get_output_port_count():
-	return 1
-
-func _get_output_port_name(port: int) -> String:
-	return "Mask"
+const ptypes:Array = [
+	VisualShaderNode.PORT_TYPE_BOOLEAN,
+	VisualShaderNode.PORT_TYPE_SCALAR,
+	VisualShaderNode.PORT_TYPE_SCALAR_INT,
+	VisualShaderNode.PORT_TYPE_VECTOR_2D,
+	VisualShaderNode.PORT_TYPE_VECTOR_3D,
+	VisualShaderNode.PORT_TYPE_VECTOR_4D,
+	VisualShaderNode.PORT_TYPE_TRANSFORM,
+	#VisualShaderNode.PORT_TYPE_SAMPLER #Does not seem to work in G 4.0.1
+]
+const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform"]#,"Sampler"]
 
 func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_SCALAR #float
+	return VisualShaderNode.PORT_TYPE_TRANSFORM
+	#return ptypes[port]
+	
+func _get_output_port_count():
+	return 1 #ptypes.size()
 
-func _get_global_code(mode):
-	## Code from MaterialMaker, care of Rodzilla
-	return """
-		float compare(vec4 in1, vec4 in2) 
-		{
-			return dot(abs(in1-in2), vec4(1.0));
-		}
-	"""
+func _get_output_port_name(port: int):
+	return ""
+	
+func _get_input_port_count():
+	return 1 #ptypes.size()
+
+func _get_input_port_name(port):
+	return "T"
+	#return names[port]
+
+func _get_input_port_type(port):
+	return VisualShaderNode.PORT_TYPE_TRANSFORM
+	#return ptypes[port]
 
 func _get_code(input_vars, output_vars, mode, type):
-	return "%s = compare(%s,%s);" % [output_vars[0],input_vars[0],input_vars[1]]
+	if input_vars[0]:
+		return "%s = %s;\n" % [output_vars[0],input_vars[0]]
+#	var s = ""
+#	for p in range(0,7):
+#		if input_vars[p]:
+#			s += "{outp} = {inp};\n".format({"outp":output_vars[p],"inp":input_vars[p]})
+#	return s
+	

@@ -1,7 +1,7 @@
-[gd_scene load_steps=309 format=3 uid="uid://ccq8442x4u4qs"]
+[gd_scene load_steps=329 format=3 uid="uid://cnuej70tbjgwd"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="1_pmvkm"]
-[ext_resource type="Texture2D" uid="uid://im3imr3u2j1y" path="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png" id="2_myiw4"]
+[ext_resource type="Texture2D" uid="uid://e6k5hrwrnjy3" path="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png" id="2_myiw4"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/normal_blend.gd" id="3_t67k3"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dissolve_blend.gd" id="4_eqjgp"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/screen_blend.gd" id="5_afmfx"]
@@ -26,11 +26,13 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_burn_blend.gd" id="24_fak3r"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighter_color_blend.gd" id="25_1twgi"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darker_color_blend.gd" id="26_37c4m"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Checkerboard.gd" id="27_5htah"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise2D.gd" id="27_qxbdi"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd" id="28_ye5rl"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="29_k5cvk"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="30_nhxin"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="31_3swwc"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="31_a7ssf"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="31_hcapl"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" id="32_2uhvd"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="33_q3h5g"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" id="34_yicdm"]
@@ -43,6 +45,7 @@
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="41_7oy85"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/TriangleWave.gd" id="42_ubein"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SquareWave.gd" id="43_7mn1k"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/RadialGradient.gd" id="43_ada6o"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SawtoothWave.gd" id="44_ikc7r"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Wave/SineWave.gd" id="45_w1ca0"]
 
@@ -111,14 +114,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("68")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8j805"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_yy23m"]
 texture = SubResource("CompressedTexture2D_8j805")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yfuqr"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fxobl"]
 texture = SubResource("CompressedTexture2D_yfuqr")
@@ -195,14 +196,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_my0mx")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0hw3s"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sxjik"]
 texture = SubResource("CompressedTexture2D_0hw3s")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qdblg"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ik4a7"]
 texture = SubResource("CompressedTexture2D_qdblg")
@@ -265,14 +264,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_unmd3")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1ynhs"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_rt0m3"]
 texture = SubResource("CompressedTexture2D_1ynhs")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_edt0t"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xhs62"]
 texture = SubResource("CompressedTexture2D_edt0t")
@@ -339,14 +336,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_mvyjv")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vxpi2"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8w4nd"]
 texture = SubResource("CompressedTexture2D_vxpi2")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oxl1k"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8firm"]
 texture = SubResource("CompressedTexture2D_oxl1k")
@@ -417,14 +412,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_ne8xj")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_00ke3"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_elge6"]
 texture = SubResource("CompressedTexture2D_00ke3")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cp33d"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6h42k"]
 texture = SubResource("CompressedTexture2D_cp33d")
@@ -491,14 +484,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_peul7")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6ow1i"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_seack"]
 texture = SubResource("CompressedTexture2D_6ow1i")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_17q7d"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ao4mv"]
 texture = SubResource("CompressedTexture2D_17q7d")
@@ -565,14 +556,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_3ay0w")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8y6sy"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_kj7vr"]
 texture = SubResource("CompressedTexture2D_8y6sy")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vy1rt"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5cu28"]
 texture = SubResource("CompressedTexture2D_vy1rt")
@@ -639,14 +628,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_dt03t")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ooykv"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_y28sw"]
 texture = SubResource("CompressedTexture2D_ooykv")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dvrwt"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pn8yk"]
 texture = SubResource("CompressedTexture2D_dvrwt")
@@ -709,14 +696,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_mti26")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7yhob"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tsdn0"]
 texture = SubResource("CompressedTexture2D_7yhob")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_78r8g"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_rsvo0"]
 texture = SubResource("CompressedTexture2D_78r8g")
@@ -779,14 +764,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_4a1r1")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wxvs1"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6x7wi"]
 texture = SubResource("CompressedTexture2D_wxvs1")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_upvxc"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k15wi"]
 texture = SubResource("CompressedTexture2D_upvxc")
@@ -849,14 +832,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_0hxt1")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rdblh"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_x4y2t"]
 texture = SubResource("CompressedTexture2D_rdblh")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m2qfr"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gj8i7"]
 texture = SubResource("CompressedTexture2D_m2qfr")
@@ -919,14 +900,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_y0dk6")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hkxip"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_lkoh1"]
 texture = SubResource("CompressedTexture2D_hkxip")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1fmn1"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_jxr11"]
 texture = SubResource("CompressedTexture2D_1fmn1")
@@ -989,14 +968,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_qrxbr")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qiwvk"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_uknmv"]
 texture = SubResource("CompressedTexture2D_qiwvk")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f85gt"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6n35c"]
 texture = SubResource("CompressedTexture2D_f85gt")
@@ -1063,14 +1040,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_fahnp")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pxd8u"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6n6vq"]
 texture = SubResource("CompressedTexture2D_pxd8u")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j4xhf"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_t70bk"]
 texture = SubResource("CompressedTexture2D_j4xhf")
@@ -1137,14 +1112,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_bkutg")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wcipp"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mgtt1"]
 texture = SubResource("CompressedTexture2D_wcipp")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vg1kd"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_skt4l"]
 texture = SubResource("CompressedTexture2D_vg1kd")
@@ -1211,14 +1184,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_vs058")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w77h0"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pci2l"]
 texture = SubResource("CompressedTexture2D_w77h0")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ltems"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4j1w7"]
 texture = SubResource("CompressedTexture2D_ltems")
@@ -1289,14 +1260,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_fch6n")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3qkdn"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fbka3"]
 texture = SubResource("CompressedTexture2D_3qkdn")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lavva"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_n2e2a"]
 texture = SubResource("CompressedTexture2D_lavva")
@@ -1363,14 +1332,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_nbmqa")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oqyir"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_bkrbv"]
 texture = SubResource("CompressedTexture2D_oqyir")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7rrsv"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4ci2j"]
 texture = SubResource("CompressedTexture2D_7rrsv")
@@ -1439,14 +1406,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_6so37")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u3em0"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tctwu"]
 texture = SubResource("CompressedTexture2D_u3em0")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l1c1l"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_43pa2"]
 texture = SubResource("CompressedTexture2D_l1c1l")
@@ -1515,14 +1480,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_x1r6j")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3rhjo"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xy11v"]
 texture = SubResource("CompressedTexture2D_3rhjo")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4yyob"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_70u2u"]
 texture = SubResource("CompressedTexture2D_4yyob")
@@ -1591,14 +1554,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_5pcav")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tlqw3"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_thkhw"]
 texture = SubResource("CompressedTexture2D_tlqw3")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hview"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_2hipn"]
 texture = SubResource("CompressedTexture2D_hview")
@@ -1673,14 +1634,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_t28pt")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xrhoy"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_t0mwb"]
 texture = SubResource("CompressedTexture2D_xrhoy")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8wahj"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_aqwmg"]
 texture = SubResource("CompressedTexture2D_8wahj")
@@ -1747,14 +1706,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_t0pob")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_73dxk"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ro1fw"]
 texture = SubResource("CompressedTexture2D_73dxk")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8rya1"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sh8cd"]
 texture = SubResource("CompressedTexture2D_8rya1")
@@ -1823,14 +1780,12 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 shader = SubResource("VisualShader_rnl3p")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_abuxd"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ki8cq"]
 texture = SubResource("CompressedTexture2D_abuxd")
 texture_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xwk36"]
-load_path = "res://.godot/imported/VisualShaderExtras-Logo-128x128.png-baf0a25b91b2730f8004ac7a0f413caa.s3tc.ctex"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qf4do"]
 texture = SubResource("CompressedTexture2D_xwk36")
@@ -1898,88 +1853,15 @@ nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uvepn"]
 shader = SubResource("VisualShader_8l46s")
 
-[sub_resource type="GDScript" id="GDScript_xqgp2"]
-script/source = "@tool
-extends VisualShaderNodeCustom
-class_name VisualShaderNodeCheckerboard
-
-func _get_name():
-	return \"Checkerboard\"
-
-func _init() -> void:
-	set_input_port_default_value(1, Vector2(8.0, 8.0))
-
-func _get_category():
-	return \"VisualShaderExtras/Procedural\"
-
-func _get_description():
-	return \"Checkerboard Pattern with two given input colors\"
-
-func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_3D
-
-func _get_input_port_count():
-	return 4
-
-func _get_input_port_name(port):
-	match port:
-		0:
-			return \"UV\"
-		1:
-			return \"Tiling\"
-		2:
-			return \"Color\"
-		3:
-			return \"Color\"
-
-func _get_input_port_type(port):
-	match port:
-		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		2:
-			return VisualShaderNode.PORT_TYPE_VECTOR_3D
-		3:
-			return VisualShaderNode.PORT_TYPE_VECTOR_3D
-			
-func _get_output_port_count():
-	return 1
-
-func _get_output_port_name(port: int) -> String:
-	return \"\"
-
-func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_3D
-
-func _get_global_code(mode):
-	return \"\"\"
-		vec3 checkerboard(vec2 _uv, vec2 _tiling, vec3 _color1, vec3 _color2) {
-			float _tiling_x = floor(mod((_uv.x / (1.0 / _tiling.x)), 2.0));
-			float _tiling_y = floor(mod((_uv.y / (1.0 / _tiling.y)), 2.0));
-			bool _compare_bool = (abs(_tiling_x - _tiling_y) < 0.00001);
-			return mix(_color1.xyz, _color2.xyz, (_compare_bool ? 1.0 : 0.0));
-		}
-	\"\"\"
-
-func _get_code(input_vars, output_vars, mode, type):
-	var uv = \"UV\"
-	
-	if input_vars[0]:
-		uv = input_vars[0]
-	
-	return \"%s.xyz = checkerboard(%s.xy, %s.xy, %s, %s);\" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]
-"
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_e0cta"]
-default_input_values = [1, Vector2(8, 8)]
-initialized = true
-script = SubResource("GDScript_xqgp2")
-
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_cc80l"]
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_2p266"]
 constant = Color(0, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_pj0ae"]
+default_input_values = [1, Vector2(8, 8)]
+initialized = true
+script = ExtResource("27_5htah")
 
 [sub_resource type="VisualShader" id="VisualShader_bbxpt"]
 code = "shader_type canvas_item;
@@ -2004,30 +1886,30 @@ void fragment() {
 	vec4 n_out4p0 = vec4(0.000000, 0.000000, 0.000000, 1.000000);
 
 
-	vec3 n_out2p0;
-// Checkerboard:2
-	vec2 n_in2p1 = vec2(8.00000, 8.00000);
+	vec3 n_out5p0;
+// Checkerboard:5
+	vec2 n_in5p1 = vec2(8.00000, 8.00000);
 	{
-		n_out2p0.xyz = checkerboard(UV.xy, n_in2p1.xy, vec3(n_out3p0.xyz), vec3(n_out4p0.xyz));
+		n_out5p0.xyz = checkerboard(UV.xy, n_in5p1.xy, vec3(n_out3p0.xyz), vec3(n_out4p0.xyz));
 	}
 
 
 // Output:0
-	COLOR.rgb = n_out2p0;
+	COLOR.rgb = n_out5p0;
 
 
 }
 "
-graph_offset = Vector2(-61, 72)
+graph_offset = Vector2(-137, 25)
 mode = 1
 flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_e0cta")
-nodes/fragment/2/position = Vector2(180, 180)
 nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_cc80l")
 nodes/fragment/3/position = Vector2(-60, 220)
 nodes/fragment/4/node = SubResource("VisualShaderNodeColorConstant_2p266")
 nodes/fragment/4/position = Vector2(-40, 300)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 2, 4, 0, 2, 3)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_pj0ae")
+nodes/fragment/5/position = Vector2(140, 120)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 2, 4, 0, 5, 3, 5, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ijt06"]
 shader = SubResource("VisualShader_bbxpt")
@@ -2132,7 +2014,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-459.364, 39.6364)
+graph_offset = Vector2(-213, 59)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(340, 160)
@@ -2148,6 +2030,190 @@ nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 5, 0, 2, 0, 6, 0, 2, 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qqdvx"]
 shader = SubResource("VisualShader_nrxtj")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_5rnkb"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_2432w"]
+default_input_values = [1, Vector2(4, 4), 2, Vector2(0, 0)]
+function = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7kepg"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_o2eky"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 1.0]
+initialized = true
+script = ExtResource("31_a7ssf")
+
+[sub_resource type="VisualShader" id="VisualShader_xaol5"]
+code = "shader_type canvas_item;
+
+
+// PSRDNoise3D
+
+		vec4 __psrdnoise3_permute(vec4 i) {
+			vec4 im = mod(i, 289.0);
+			return mod(((im*34.0)+10.0)*im, 289.0);
+		}
+		
+		float psrdnoise3_with_gradient(vec3 x, vec3 period, float alpha, out vec3 gradient) {
+			const mat3 M = mat3(vec3(0.0, 1.0, 1.0), vec3(1.0, 0.0, 1.0), vec3(1.0, 1.0, 0.0));
+			const mat3 Mi = mat3(vec3(-0.5, 0.5, 0.5), vec3(0.5,-0.5, 0.5), vec3(0.5, 0.5,-0.5));
+			vec3 uvw = M * x;
+			vec3 i0 = floor(uvw), f0 = fract(uvw);
+			vec3 g_ = step(f0.xyx, f0.yzz), l_ = 1.0 - g_;
+			vec3 g = vec3(l_.z, g_.xy), l = vec3(l_.xy, g_.z);
+			vec3 o1 = min( g, l ), o2 = max( g, l );
+			vec3 i1 = i0 + o1, i2 = i0 + o2, i3 = i0 + vec3(1.0);
+			vec3 v0 = Mi * i0, v1 = Mi * i1, v2 = Mi * i2, v3 = Mi * i3;
+			vec3 x0 = x - v0, x1 = x - v1, x2 = x - v2, x3 = x - v3;
+			if(any(greaterThan(period, vec3(0.0)))) {
+				vec4 vx = vec4(v0.x, v1.x, v2.x, v3.x);
+				vec4 vy = vec4(v0.y, v1.y, v2.y, v3.y);
+				vec4 vz = vec4(v0.z, v1.z, v2.z, v3.z);
+				if(period.x > 0.0) vx = mod(vx, period.x);
+				if(period.y > 0.0) vy = mod(vy, period.y);
+				if(period.z > 0.0) vz = mod(vz, period.z);
+				i0 = floor(M * vec3(vx.x, vy.x, vz.x) + 0.5);
+				i1 = floor(M * vec3(vx.y, vy.y, vz.y) + 0.5);
+				i2 = floor(M * vec3(vx.z, vy.z, vz.z) + 0.5);
+				i3 = floor(M * vec3(vx.w, vy.w, vz.w) + 0.5);
+			}
+			
+		vec4 hash = __psrdnoise3_permute( __psrdnoise3_permute( __psrdnoise3_permute( 
+					  vec4(i0.z, i1.z, i2.z, i3.z ))
+					+ vec4(i0.y, i1.y, i2.y, i3.y ))
+					+ vec4(i0.x, i1.x, i2.x, i3.x ));
+		vec4 theta = hash * 3.883222077;
+		vec4 sz = hash * -0.006920415 + 0.996539792;
+		vec4 psi = hash * 0.108705628;
+		vec4 Ct = cos(theta), St = sin(theta);
+		vec4 sz_prime = sqrt( 1.0 - sz*sz );
+		vec4 gx, gy, gz;
+		if(alpha != 0.0) {
+			vec4 px = Ct * sz_prime, py = St * sz_prime, pz = sz;
+			vec4 Sp = sin(psi), Cp = cos(psi), Ctp = St*Sp - Ct*Cp;
+			vec4 qx = mix( Ctp*St, Sp, sz), qy = mix(-Ctp*Ct, Cp, sz);
+			vec4 qz = -(py*Cp + px*Sp);
+			vec4 Sa = vec4(sin(alpha)), Ca = vec4(cos(alpha));
+			gx = Ca*px + Sa*qx; gy = Ca*py + Sa*qy; gz = Ca*pz + Sa*qz;
+		} else {
+			gx = Ct * sz_prime; gy = St * sz_prime; gz = sz;  
+		}
+		vec3 g0 = vec3(gx.x, gy.x, gz.x), g1 = vec3(gx.y, gy.y, gz.y);
+		vec3 g2 = vec3(gx.z, gy.z, gz.z), g3 = vec3(gx.w, gy.w, gz.w);
+		vec4 w = 0.5-vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3));
+		w = max(w, 0.0); vec4 w2 = w * w, w3 = w2 * w;
+		vec4 gdotx = vec4(dot(g0,x0), dot(g1,x1), dot(g2,x2), dot(g3,x3));
+		float n = dot(w3, gdotx);
+		vec4 dw = -6.0 * w2 * gdotx;
+		vec3 dn0 = w3.x * g0 + dw.x * x0;
+		vec3 dn1 = w3.y * g1 + dw.y * x1;
+		vec3 dn2 = w3.z * g2 + dw.z * x2;
+		vec3 dn3 = w3.w * g3 + dw.w * x3;
+		gradient = 39.5 * (dn0 + dn1 + dn2 + dn3);
+		return 39.5 * n;
+		}
+		
+		float psrdnoise3(vec3 x, vec3 period, float alpha) {
+			vec3 gradient;
+			return psrdnoise3_with_gradient(x, period, alpha, gradient);
+		}
+		
+	
+
+void fragment() {
+// Input:4
+	vec2 n_out4p0 = UV;
+
+
+// UVFunc:5
+	vec2 n_in5p1 = vec2(4.00000, 4.00000);
+	vec2 n_in5p2 = vec2(0.00000, 0.00000);
+	vec2 n_out5p0 = (n_out4p0 - n_in5p2) * n_in5p1 + n_in5p2;
+
+
+// Input:6
+	float n_out6p0 = TIME;
+
+
+	float n_out7p0;
+// PSRDNoise3D:7
+	vec3 n_in7p1 = vec3(1.00000, 1.00000, 1.00000);
+	{
+		n_out7p0 = psrdnoise3(vec3(n_out5p0, 0.0).xyz, n_in7p1.xyz, n_out6p0);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out7p0);
+
+
+}
+"
+graph_offset = Vector2(-460, 43)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(340, 160)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_5rnkb")
+nodes/fragment/4/position = Vector2(-560, 80)
+nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_2432w")
+nodes/fragment/5/position = Vector2(-220, 80)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_7kepg")
+nodes/fragment/6/position = Vector2(-300, 280)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_o2eky")
+nodes/fragment/7/position = Vector2(60, 160)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 6, 0, 7, 2, 7, 0, 0, 0, 5, 0, 7, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iasic"]
+shader = SubResource("VisualShader_xaol5")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_s1pc4"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 2.0]
+initialized = true
+script = ExtResource("43_ada6o")
+
+[sub_resource type="VisualShader" id="VisualShader_caujt"]
+code = "shader_type canvas_item;
+
+
+// RadialGradient
+
+		float uv_radial_gradient(vec2 uv, vec2 offset, float fraction_size) {
+			vec2 __uv = uv - offset;
+			float grad = atan(__uv.x, __uv.y);
+			grad = fract(grad / (fraction_size * PI));
+			return grad;
+		}
+	
+
+void fragment() {
+	float n_out2p0;
+// RadialGradient:2
+	vec2 n_in2p1 = vec2(0.50000, 0.50000);
+	float n_in2p2 = 2.00000;
+	{
+		n_out2p0 = uv_radial_gradient(UV.xy, n_in2p1.xy, n_in2p2);
+	}
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out2p0);
+
+
+}
+"
+graph_offset = Vector2(-883.727, 12.7051)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(-140, 60)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_s1pc4")
+nodes/fragment/2/position = Vector2(-420, 80)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65iv8"]
+shader = SubResource("VisualShader_caujt")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5d2we"]
 texture = ExtResource("1_pmvkm")
@@ -2228,12 +2294,28 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 6, 0, 0, 0, 4, 0, 6, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_le34p"]
 shader = SubResource("VisualShader_5n70k")
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dkexg"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_2kfye"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.317, 0.316), 3, 0.0]
 initialized = true
-script = ExtResource("29_k5cvk")
+script = ExtResource("31_hcapl")
 
 [sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_3vt21"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vmtac"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_jr8jk"]
+output_port_for_preview = 0
+default_input_values = [0, 0.0, 1, 0.5, 2, 0.001, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_q1cc4"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_mirv2"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25), 3, 0.057]
+initialized = true
+script = ExtResource("31_hcapl")
 
 [sub_resource type="VisualShader" id="VisualShader_ew583"]
 code = "shader_type canvas_item;
@@ -2241,52 +2323,120 @@ code = "shader_type canvas_item;
 
 // Box
 
-		float sdBox( in vec2 __position, in vec2 __proportions )
-		{
-			vec2 __d = abs(__position) - __proportions;
-			return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
-		}
+float sdBox_VisualShaderNodeBoxV2(vec2 _pos, vec2 _proportions, float _feather) {
+	vec2 d = abs(_pos) - _proportions; 
+	float outside = length(max(d, 0.));
+	float inside = min(max(d.x, d.y), 0.);
+	float both = outside + inside;
 	
+	//float f = outside - _feather; //makes a kind of outline
+	
+	// ok! smoothness is v sensitive tho.
+	// when f is 0 the edge is sharp
+	float f = _feather; 
+	
+	return smoothstep(outside, inside, f);
+}
+
 
 void fragment() {
-	float n_out2p0;
-// Box:2
-	vec2 n_in2p1 = vec2(0.50000, 0.50000);
-	vec2 n_in2p2 = vec2(0.25000, 0.25000);
+// Input:6
+	vec2 n_out6p0 = UV;
+
+
+// VectorDecompose:8
+	float n_out8p0 = n_out6p0.x;
+	float n_out8p1 = n_out6p0.y;
+
+
+	float n_out9p0;
+// Box:9
+	vec2 n_in9p1 = vec2(0.50000, 0.50000);
+	vec2 n_in9p2 = vec2(0.25000, 0.25000);
+	float n_in9p3 = 0.05700;
 	{
-		n_out2p0 = sdBox(UV.xy - n_in2p1.xy, n_in2p2.xy);
+		n_out9p0 = sdBox_VisualShaderNodeBoxV2(UV-n_in9p1, n_in9p2, n_in9p3);
+	}
+
+
+	float n_out10p0;
+// Box:10
+	vec2 n_in10p1 = vec2(0.50000, 0.50000);
+	vec2 n_in10p2 = vec2(0.31700, 0.31600);
+	float n_in10p3 = 0.00000;
+	{
+		n_out10p0 = sdBox_VisualShaderNodeBoxV2(UV-n_in10p1, n_in10p2, n_in10p3);
 	}
 
 
 // Step:3
 	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out2p0, n_in3p1);
+	float n_out3p0 = step(n_out10p0, n_in3p1);
+
+
+	vec3 n_out7p0;
+// If:7
+	float n_in7p1 = 0.50000;
+	float n_in7p2 = 0.00100;
+	vec3 n_in7p3 = vec3(0.00000, 0.00000, 0.00000);
+	if(abs(n_out8p0 - n_in7p1) < n_in7p2)
+	{
+		n_out7p0 = n_in7p3;
+	}
+	else if(n_out8p0 < n_in7p1)
+	{
+		n_out7p0 = vec3(n_out3p0);
+	}
+	else
+	{
+		n_out7p0 = vec3(n_out9p0);
+	}
 
 
 // Output:0
-	COLOR.rgb = vec3(n_out3p0);
+	COLOR.rgb = n_out7p0;
 
 
 }
 "
-graph_offset = Vector2(-265, -41)
+graph_offset = Vector2(-393.855, 15.4945)
 mode = 1
 flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_dkexg")
-nodes/fragment/2/position = Vector2(-240, 120)
 nodes/fragment/3/node = SubResource("VisualShaderNodeStep_3vt21")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0)
+nodes/fragment/3/position = Vector2(-200, 180)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_vmtac")
+nodes/fragment/6/position = Vector2(-460, 540)
+nodes/fragment/7/node = SubResource("VisualShaderNodeIf_jr8jk")
+nodes/fragment/7/position = Vector2(120, 180)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorDecompose_q1cc4")
+nodes/fragment/8/position = Vector2(-140, 460)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_mirv2")
+nodes/fragment/9/position = Vector2(-320, 300)
+nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_2kfye")
+nodes/fragment/10/position = Vector2(-560, 180)
+nodes/fragment/connections = PackedInt32Array(6, 0, 8, 0, 8, 0, 7, 0, 9, 0, 7, 4, 7, 0, 0, 0, 10, 0, 3, 0, 3, 0, 7, 5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yp0tr"]
 shader = SubResource("VisualShader_ew583")
 
 [sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_waqbe"]
+default_input_values = [0, 0.0, 1, 0.241]
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_7hsui"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, 0.25]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5lnj3"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.276, 3, 1.0]
 initialized = true
 script = ExtResource("30_nhxin")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_5kd2u"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_x4hn7"]
+output_port_for_preview = 0
+default_input_values = [0, 0.0, 1, 0.5, 2, 0.001, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_6vtrh"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
 
 [sub_resource type="VisualShader" id="VisualShader_b85uw"]
 code = "shader_type canvas_item;
@@ -2294,40 +2444,83 @@ code = "shader_type canvas_item;
 
 // Circle
 
-		float sdCircle(vec2 pos, float r) {
-			return length(pos) - r;
-		}
-	
+//Original code
+//float sdCircle(vec2 pos, float r) {
+//	return step(length(pos) - r, pos).x;
+//}
+
+//New hack - faster than using length func
+float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
+{
+	return smoothstep(radius, radius + smoothness, dot(position, position) * 6.0);
+}
+
 
 void fragment() {
+// Input:5
+	vec2 n_out5p0 = UV;
+
+
+// VectorDecompose:8
+	float n_out8p0 = n_out5p0.x;
+	float n_out8p1 = n_out5p0.y;
+
+
 	float n_out4p0;
 // Circle:4
 	vec2 n_in4p1 = vec2(0.50000, 0.50000);
-	float n_in4p2 = 0.25000;
+	float n_in4p2 = 0.27600;
+	float n_in4p3 = 1.00000;
 	{
-		n_out4p0 = sdCircle(UV.xy - n_in4p1.xy, n_in4p2);
+		n_out4p0 = VisualShaderNodeCircle_circle(UV - n_in4p1, n_in4p2, n_in4p3);
 	}
 
 
 // Step:3
-	float n_in3p1 = 0.00000;
+	float n_in3p1 = 0.24100;
 	float n_out3p0 = step(n_out4p0, n_in3p1);
 
 
+	vec3 n_out7p0;
+// If:7
+	float n_in7p1 = 0.50000;
+	float n_in7p2 = 0.00100;
+	vec3 n_in7p3 = vec3(0.00000, 0.00000, 0.00000);
+	if(abs(n_out8p0 - n_in7p1) < n_in7p2)
+	{
+		n_out7p0 = n_in7p3;
+	}
+	else if(n_out8p0 < n_in7p1)
+	{
+		n_out7p0 = vec3(n_out3p0);
+	}
+	else
+	{
+		n_out7p0 = vec3(n_out4p0);
+	}
+
+
 // Output:0
-	COLOR.rgb = vec3(n_out3p0);
+	COLOR.rgb = n_out7p0;
 
 
 }
 "
-graph_offset = Vector2(-306, -11)
+graph_offset = Vector2(-386.058, 72.3369)
 mode = 1
 flags/light_only = false
+nodes/fragment/0/position = Vector2(480, 240)
 nodes/fragment/3/node = SubResource("VisualShaderNodeStep_waqbe")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_7hsui")
-nodes/fragment/4/position = Vector2(-197, 129)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+nodes/fragment/3/position = Vector2(-80, 520)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_5lnj3")
+nodes/fragment/4/position = Vector2(-360, 340)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_5kd2u")
+nodes/fragment/5/position = Vector2(-520, 160)
+nodes/fragment/7/node = SubResource("VisualShaderNodeIf_x4hn7")
+nodes/fragment/7/position = Vector2(120, 320)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorDecompose_6vtrh")
+nodes/fragment/8/position = Vector2(-120, 180)
+nodes/fragment/connections = PackedInt32Array(4, 0, 3, 0, 5, 0, 8, 0, 8, 0, 7, 0, 4, 0, 7, 4, 3, 0, 7, 5, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_52mrt"]
 shader = SubResource("VisualShader_b85uw")
@@ -2382,7 +2575,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-335, -68.8333)
+graph_offset = Vector2(-306.727, -11.4546)
 mode = 1
 flags/light_only = false
 nodes/fragment/3/node = SubResource("VisualShaderNodeStep_287f8")
@@ -2849,106 +3042,148 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 0, 5, 0, 5, 3, 0, 1
 shader = SubResource("VisualShader_pgiym")
 shader_parameter/MainTex = ExtResource("38_u53ku")
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fuam6"]
-default_input_values = [0, Vector2(2, 2), 1, 4.0, 2, 2.08165e-12]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8cwaj"]
+default_input_values = [0, Vector2(2, 2), 1, 0.0, 2, 0.0, 3, 0.5]
 initialized = true
 script = ExtResource("40_x0ogt")
 
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_e266m"]
+texture = ExtResource("1_pmvkm")
+
 [sub_resource type="VisualShader" id="VisualShader_8gnev"]
 code = "shader_type canvas_item;
+uniform sampler2D tex_frg_3;
 
 
 // UVTiler
 
-		vec2 tile(vec2 _uv, float _zoom){
-			_uv *= _zoom;
-			return fract(_uv);
-		}
-		
-		vec2 rotate(vec2 _uv, float _angle) {
-			_uv -= 0.5;
-			_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-			_uv += 0.5;
-			return _uv;
-		}
-	
+vec2 vec2_rotate_NodeUVTilerV3(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
+vec2 brick_tile_NodeUVTilerV3(vec2 _uv, float _zoom, float _shift)
+{
+	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
+	return fract(_uv);
+}
+// Returns float from 0.0 to 1.0
+float random_float_NodeUVTilerV3(vec2 input) {
+	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 
 void fragment() {
 	vec2 n_out2p0;
 // UVTiler:2
 	vec2 n_in2p0 = vec2(2.00000, 2.00000);
-	float n_in2p1 = 4.00000;
+	float n_in2p1 = 0.00000;
 	float n_in2p2 = 0.00000;
+	float n_in2p3 = 0.50000;
 	{
 		
-			vec2 st = UV.xy/n_in2p0.xy;
-			st = tile(st,n_in2p1);
-			st = rotate(st, n_in2p2);
+			//Much simpler to calculate zoom from the tiling vec2 
+			float zoom = (n_in2p0.x * n_in2p0.y);
+			
+			vec2 st = UV/n_in2p0;
+			st *= zoom; //Scale coordinate system by zoom
+			
+			vec2 unique_val = floor( st ); //get the integer coordinates
+			
+			//Something about this calc is the problem with the brick shift when 
+			//rr is > 0
+			float rand_rotation = (( random_float_NodeUVTilerV3(unique_val) * 2.0) - 1.0) * n_in2p2;
+			
+			//Just add whatever static rotation may be input and clamp:
+			rand_rotation = clamp(rand_rotation + n_in2p1, 0.0, 2.*PI);
+			
+			st = brick_tile_NodeUVTilerV3(st, zoom, n_in2p3);
+			st = vec2_rotate_NodeUVTilerV3(st, rand_rotation, vec2(0.5));
+			
 			n_out2p0 = st;
 			
 	}
 
 
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, n_out2p0);
+
+
 // Output:0
-	COLOR.rgb = vec3(n_out2p0, 0.0);
+	COLOR.rgb = vec3(n_out3p0.xyz);
 
 
 }
 "
-graph_offset = Vector2(-491, -33)
+graph_offset = Vector2(-324.562, -15.0541)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(340, 40)
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_fuam6")
-nodes/fragment/2/position = Vector2(-260, 60)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_8cwaj")
+nodes/fragment/2/position = Vector2(-200, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_e266m")
+nodes/fragment/3/position = Vector2(120, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v8ct1"]
 shader = SubResource("VisualShader_8gnev")
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_a1kwj"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, 10.0, 3, Vector2(0, 0)]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_6p5lt"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 11.97]
 initialized = true
 script = ExtResource("41_7oy85")
 
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pdxj7"]
+texture = ExtResource("1_pmvkm")
+
 [sub_resource type="VisualShader" id="VisualShader_7uhii"]
 code = "shader_type canvas_item;
+uniform sampler2D tex_frg_3;
 
 
 // UVRotate
 
-		vec2 uv_rotate(vec2 uv, vec2 pivot, float angle) {
-			mat2 rotation = mat2(vec2(sin(angle), -cos(angle)), vec2(cos(angle), sin(angle)));
-			uv -= pivot;
-			uv = uv * rotation;
-			uv += pivot;
-			return uv;
-		}
-	
+vec2 vec2_rotate_NodeUVRotateV2(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
 
 void fragment() {
 	vec2 n_out2p0;
 // UVRotate:2
 	vec2 n_in2p1 = vec2(0.50000, 0.50000);
-	float n_in2p2 = 10.00000;
+	float n_in2p2 = 11.97000;
 	{
-		n_out2p0.xy = uv_rotate(UV.xy, n_in2p1.xy, n_in2p2);
+		
+			vec2 rotated_uv = UV;
+			rotated_uv = vec2_rotate_NodeUVRotateV2(UV, n_in2p2, n_in2p1);
+			n_out2p0 = rotated_uv;
+			
 	}
 
 
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, n_out2p0);
+
+
 // Output:0
-	COLOR.rgb = vec3(n_out2p0, 0.0);
+	COLOR.rgb = vec3(n_out3p0.xyz);
 
 
 }
 "
-graph_offset = Vector2(-175, 13)
+graph_offset = Vector2(-368.661, 10.4463)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(340, 40)
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_a1kwj")
-nodes/fragment/2/position = Vector2(80, 40)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_6p5lt")
+nodes/fragment/2/position = Vector2(-166, 88)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_pdxj7")
+nodes/fragment/3/position = Vector2(60, 120)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cu70s"]
 shader = SubResource("VisualShader_7uhii")
@@ -3255,6 +3490,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BlendModes" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3684,6 +3920,33 @@ layout_mode = 2
 text = "PSRD Noise2D"
 horizontal_alignment = 1
 
+[node name="PSRDNoise3D" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise3D"]
+material = SubResource("ShaderMaterial_iasic")
+layout_mode = 2
+texture = ExtResource("1_pmvkm")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise3D"]
+layout_mode = 2
+text = "PSRD Noise3D"
+horizontal_alignment = 1
+
+[node name="UVRadialGradient" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/UVRadialGradient"]
+material = SubResource("ShaderMaterial_65iv8")
+layout_mode = 2
+texture = ExtResource("1_pmvkm")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/UVRadialGradient"]
+layout_mode = 2
+text = "Radial Gradient"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="ColorAdjustment" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -3722,11 +3985,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Shapes" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 

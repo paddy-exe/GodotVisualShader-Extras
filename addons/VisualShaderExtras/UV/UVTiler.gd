@@ -1,5 +1,6 @@
 # The MIT License
 # Copyright © 2022 Inigo Quilez
+# Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation 
@@ -18,85 +19,121 @@
 
 # With assist from https://thebookofshaders.com/09/
 
+# Portions taken from the work of Arnklit under CC0 Licence:
+# https://github.com/Arnklit/TutorialResources/blob/main/LICENSE
+# Creative Commons Legal Code
+#
+# CC0 1.0 Universal
+#
+#    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE
+#    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN
+#    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS
+#    INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES
+#    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS
+#    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM
+#    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
+#    HEREUNDER.
+
+## ISSUES
+## 1. There's often one tile that will not rotate randomly. Search me!
+## 2. The brick-shifting and the random rotation do not play well together. Help!
+## 3. Should this take-in a UV? And how would that work?
+
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTiler
+class_name NodeUVTilerV3
 
 func _get_name():
 	return "UVTiler"
-
-func _init() -> void:
-	set_input_port_default_value(0, Vector2(2, 2))
-	set_input_port_default_value(1, 4.0)
-	set_input_port_default_value(2, 0.0)
 
 func _get_category():
 	return "VisualShaderExtras/UV"
 
 func _get_description():
-	return "Tile a given UV into the given UV tiles and rotate them"
+	return "Tiles the UV, rotates and brick-shifts it."
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
 
-func _get_input_port_count():
-	return 3
-
-func _get_input_port_name(port):
-	match port:
-		0:
-			return "Tiling"
-		1:
-			return "Split"
-		2:
-			return "Rotation (Radians)"
-
-func _get_input_port_type(port):
-	match port:
-		0:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		1:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-		2:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-			
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_VECTOR_2D
+	
 func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int) -> String:
 	return "UV"
+	
+func _init() -> void:
+	set_input_port_default_value(0, Vector2(2, 2))
+	set_input_port_default_value(1, 0.0) #rot
+	set_input_port_default_value(2, 0.0) #randomize
+	set_input_port_default_value(3, 0.5) #shift
+	
+func _get_input_port_count():
+	return 4
 
-func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_2D
+func _get_input_port_name(port):
+	match port:
+		0: return "Tiling (Down, Across)"
+		1: return "Rotation (Radians)"
+		2: return "Randomize rotation"
+		3: return "Brick Shift"
+
+func _get_input_port_type(port):
+	match port:
+		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D #tile y, x
+		1: return VisualShaderNode.PORT_TYPE_SCALAR #radians
+		2: return VisualShaderNode.PORT_TYPE_SCALAR #float
+		3: return VisualShaderNode.PORT_TYPE_SCALAR #float for bricks
 
 func _get_global_code(mode):
 	return """
-		vec2 tile(vec2 _uv, float _zoom){
-			_uv *= _zoom;
-			return fract(_uv);
-		}
-		
-		vec2 rotate(vec2 _uv, float _angle) {
-			_uv -= 0.5;
-			_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-			_uv += 0.5;
-			return _uv;
-		}
-	"""
+vec2 vec2_rotate_NodeUVTilerV3(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
+vec2 brick_tile_NodeUVTilerV3(vec2 _uv, float _zoom, float _shift)
+{
+	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
+	return fract(_uv);
+}
+// Returns float from 0.0 to 1.0
+float random_float_NodeUVTilerV3(vec2 input) {
+	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	var rot:String
-	rot = "st = rotate(st, %s);" % input_vars[2] if input_vars[2] != "" else ""
-		
-	return """
-	vec2 st = UV.xy/{in_tilexy}.xy;
-	st = tile(st,{split});
-	{rot}
+	
+	var code = """
+	//Much simpler to calculate zoom from the tiling vec2 
+	float zoom = ({in_tilexy}.x * {in_tilexy}.y);
+	
+	vec2 st = UV/{in_tilexy};
+	st *= zoom; //Scale coordinate system by zoom
+	
+	vec2 unique_val = floor( st ); //get the integer coordinates
+	
+	//Something about this calc is the problem with the brick shift when 
+	//rr is > 0
+	float rand_rotation = (( random_float_NodeUVTilerV3(unique_val) * 2.0) - 1.0) * {rr};
+	
+	//Just add whatever static rotation may be input and clamp:
+	rand_rotation = clamp(rand_rotation + {rot}, 0.0, 2.*PI);
+	
+	st = brick_tile_NodeUVTilerV3(st, zoom, {shift});
+	st = vec2_rotate_NodeUVTilerV3(st, rand_rotation, vec2(0.5));
+	
 	{out_uv} = st;
 	""".format(
 		{
 		"in_tilexy":input_vars[0],
-		"split":  	input_vars[1],
-		"out_uv":	output_vars[0],
-		"rot":		rot
+		"rot":		input_vars[1],
+		"rr":		input_vars[2],
+		"shift":	input_vars[3],
+		"out_uv":	output_vars[0] 
 		})
+	return code
