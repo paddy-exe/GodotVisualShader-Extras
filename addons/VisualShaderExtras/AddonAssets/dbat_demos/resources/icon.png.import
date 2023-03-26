@@ -20,7 +20,11 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
+<<<<<<< HEAD:addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.png.import
 compress/normal_map=1
+=======
+compress/normal_map=0
+>>>>>>> 0aa8aaafd966443a6b6d12435018578d59f9a97b:addons/VisualShaderExtras/dbat/demos/resources/icon.png.import
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
