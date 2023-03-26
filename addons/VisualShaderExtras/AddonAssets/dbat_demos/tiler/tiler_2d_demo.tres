@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=10 format=3]
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://b7ibxcf8x0cgu"]
 
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.png" id="1_tufna"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTiler.gd" id="2_7nca1"]
@@ -129,6 +129,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-346.926, -29.686)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(500, 140)

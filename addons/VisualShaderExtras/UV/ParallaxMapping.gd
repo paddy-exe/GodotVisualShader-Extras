@@ -79,14 +79,6 @@ func _get_input_port_type(port):
 		4: return VisualShaderNode.PORT_TYPE_SCALAR_INT
 		5: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		
-## return all the functions (in the ShaderLib Dict) that you want
-## to use.
-#func _get_global_func_names()->Array:
-#	return ["world_normal_mask"]
-
-#func _get_global_code(mode):
-#	return ShaderLib.prep_global_code(self)
-
 func _get_code(input_vars, output_vars, mode, type):
 	var uv = input_vars[0] if input_vars[0] else "UV"
 	var code = """
@@ -97,7 +89,6 @@ int heightmap_max_layers = {heightmap_max_layers};
 vec2 heightmap_flip = {heightmap_flip};
 vec2 base_uv = {uv};
 {
-	
 	vec3 view_dir = normalize(normalize(-VERTEX)*mat3(TANGENT*heightmap_flip.x,-BINORMAL*heightmap_flip.y,NORMAL));
 	float num_layers = mix(float(heightmap_max_layers),float(heightmap_min_layers), abs(dot(vec3(0.0, 0.0, 1.0), view_dir)));
 	float layer_depth = 1.0 / num_layers;

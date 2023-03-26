@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=7 format=3]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://c8q2fwhkcutar"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/TextureStack.gd" id="1_1588i"]
 
@@ -63,7 +63,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-487.548, -123.901)
+graph_offset = Vector2(-482.683, 124.66)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(140, 240)

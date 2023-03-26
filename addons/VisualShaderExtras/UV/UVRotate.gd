@@ -60,17 +60,20 @@ func _get_input_port_type(port):
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D #pivot
 		2: return VisualShaderNode.PORT_TYPE_SCALAR #radians
 
-func _get_global_func_names()->Array:
-	return ["vec2_rotate"]
-
 func _get_global_code(mode)->String:
-	return ShaderLib.prep_global_code(self)
+	return """
+vec2 vec2_rotate_NodeUVRotateV2(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}"""
 	
 func _get_code(input_vars, output_vars, mode, type):
 	var uv = input_vars[0] if input_vars[0] else "UV"
 	var code : String = """
 	vec2 rotated_uv = {uv};
-	rotated_uv = vec2_rotate({uv}, {rand_rotation}, {pivot});
+	rotated_uv = vec2_rotate_NodeUVRotateV2({uv}, {rand_rotation}, {pivot});
 	{out_uv} = rotated_uv;
 	""".format(
 		{
@@ -79,5 +82,5 @@ func _get_code(input_vars, output_vars, mode, type):
 		"rand_rotation": input_vars[2],
 		"out_uv": output_vars[0] 
 		})
-	return ShaderLib.rename_functions(self, code)
+	return code
 

@@ -87,13 +87,24 @@ func _get_input_port_type(port):
 		2: return VisualShaderNode.PORT_TYPE_SCALAR #float
 		3: return VisualShaderNode.PORT_TYPE_SCALAR #float for bricks
 
-## return all the functions (in the ShaderLib Dict) that you want
-## to use.
-func _get_global_func_names()->Array:
-	return ["vec2_rotate","brick_tile","random_float"]
-	
 func _get_global_code(mode):
-	return ShaderLib.prep_global_code(self)
+	return """
+vec2 vec2_rotate_NodeUVTilerV3(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
+vec2 brick_tile_NodeUVTilerV3(vec2 _uv, float _zoom, float _shift)
+{
+	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
+	return fract(_uv);
+}
+// Returns float from 0.0 to 1.0
+float random_float_NodeUVTilerV3(vec2 input) {
+	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	
@@ -108,13 +119,13 @@ func _get_code(input_vars, output_vars, mode, type):
 	
 	//Something about this calc is the problem with the brick shift when 
 	//rr is > 0
-	float rand_rotation = (( random_float(unique_val) * 2.0) - 1.0) * {rr};
+	float rand_rotation = (( random_float_NodeUVTilerV3(unique_val) * 2.0) - 1.0) * {rr};
 	
 	//Just add whatever static rotation may be input and clamp:
 	rand_rotation = clamp(rand_rotation + {rot}, 0.0, 2.*PI);
 	
-	st = brick_tile(st, zoom, {shift});
-	st = vec2_rotate(st, rand_rotation, vec2(0.5));
+	st = brick_tile_NodeUVTilerV3(st, zoom, {shift});
+	st = vec2_rotate_NodeUVTilerV3(st, rand_rotation, vec2(0.5));
 	
 	{out_uv} = st;
 	""".format(
@@ -125,4 +136,4 @@ func _get_code(input_vars, output_vars, mode, type):
 		"shift":	input_vars[3],
 		"out_uv":	output_vars[0] 
 		})
-	return ShaderLib.rename_functions(self, code)
+	return code

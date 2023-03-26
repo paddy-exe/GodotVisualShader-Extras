@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=10 format=3]
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://b8sek0nh63rhw"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="1_lmtvb"]
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.png" id="2_2acqy"]

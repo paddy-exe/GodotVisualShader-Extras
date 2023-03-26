@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://bmodub6wb5fwm"]
 
 [ext_resource type="ArrayMesh" uid="uid://dsgni0xlkinot" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/suzanne_high_poly.obj" id="1_73xfj"]
 [ext_resource type="Shader" uid="uid://6gmb8xxcbpq" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/parallax_mapping/pm_demo_3d.tres" id="2_5wjnb"]

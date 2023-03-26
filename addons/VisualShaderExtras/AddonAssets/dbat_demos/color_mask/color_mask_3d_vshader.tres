@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=14 format=3]
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://24d7sb5fq4d1"]
 
 [ext_resource type="Texture2D" uid="uid://x3a0rntfqelx" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/color_mask/ids.png" id="1_ebv2o"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/ColorMask.gd" id="2_x61a6"]
@@ -55,12 +55,11 @@ uniform sampler2D tex_frg_19;
 
 // ColorMask
 
-float compare_VisualShaderExtrasUsabilityColorMask(vec4 in1, vec4 in2, float fuzz)
+float compare_VisualShaderNodeCustomColorMask(vec4 in1, vec4 in2, float fuzz)
 {
 	return dot(abs(in1-in2), vec4(fuzz));
 }
-
-
+	
 
 void fragment() {
 // ColorConstant:21
@@ -86,9 +85,6 @@ void fragment() {
 	float n_out24p0;
 // ColorMask:24
 	float n_in24p2 = 1.00000;
-	{
-		n_out24p0 = compare_VisualShaderExtrasUsabilityColorMask(n_out15p0,n_out13p0,n_in24p2);
-	}
 
 
 // Mix:8
@@ -106,9 +102,6 @@ void fragment() {
 	float n_out25p0;
 // ColorMask:25
 	float n_in25p2 = 1.00000;
-	{
-		n_out25p0 = compare_VisualShaderExtrasUsabilityColorMask(n_out19p0,n_out18p0,n_in25p2);
-	}
 
 
 // Mix:16
@@ -121,7 +114,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-328.332, 350.908)
+graph_offset = Vector2(-366.242, 238.839)
 nodes/fragment/0/position = Vector2(400, 200)
 nodes/fragment/4/node = SubResource("VisualShaderNodeColorConstant_25vsa")
 nodes/fragment/4/position = Vector2(-720, 280)

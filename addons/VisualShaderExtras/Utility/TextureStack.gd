@@ -39,14 +39,14 @@ func _get_return_icon_type():
 enum {KEY, NAME, PORT_TYPE_IN, PORT_TYPE_OUT}
 const names := [
 	#[key, name, type_in, type_out]
-	["UV", "UV", 		VisualShaderNode.PORT_TYPE_VECTOR_2D, VisualShaderNode.PORT_TYPE_VECTOR_2D],
-	["A",  "Albedo",	VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_4D],
-	["ORM","ORM",		VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_3D],
+	["UV", "UV", VisualShaderNode.PORT_TYPE_VECTOR_2D, VisualShaderNode.PORT_TYPE_VECTOR_2D],
+	["A",  "Albedo", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_4D],
+	["ORM","ORM", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_3D],
 	["O",  "Occlusion", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
 	["R",  "Roughness", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
-	["M",  "Metallic",  VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
+	["M",  "Metallic", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
 	["N",  "NormalMap", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_3D],
-	["D",  "Depth",	VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR]
+	["D",  "Depth", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR]
 ]
 
 func _get_output_port_count():

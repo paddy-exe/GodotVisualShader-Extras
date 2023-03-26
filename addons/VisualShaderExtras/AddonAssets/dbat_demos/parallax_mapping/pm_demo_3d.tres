@@ -52,7 +52,7 @@ void fragment() {
 // UVFunc:7
 	vec2 n_in7p1 = vec2(8.00000, 8.00000);
 	vec2 n_in7p2 = vec2(0.00000, 0.00000);
-	vec2 n_out7p0 = fma((UV - n_in7p2), n_in7p1, n_in7p2);
+	vec2 n_out7p0 = (UV - n_in7p2) * n_in7p1 + n_in7p2;
 
 
 	vec2 n_out2p0;
@@ -132,19 +132,19 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-404.267, 120.2)
+graph_offset = Vector2(-585.374, 13.8933)
 nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_qibuv")
-nodes/fragment/2/position = Vector2(-386.4, 243.76)
+nodes/fragment/2/position = Vector2(-260, 180)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_clofw")
-nodes/fragment/3/position = Vector2(-820, 160)
+nodes/fragment/3/position = Vector2(-840, 80)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_g6kfu")
-nodes/fragment/4/position = Vector2(-820, 460)
+nodes/fragment/4/position = Vector2(-840, 360)
 nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_yygue")
-nodes/fragment/5/position = Vector2(-40, 400)
+nodes/fragment/5/position = Vector2(80, 300)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_qnp5j")
-nodes/fragment/6/position = Vector2(-820, 720)
+nodes/fragment/6/position = Vector2(-840, 920)
 nodes/fragment/7/node = SubResource("VisualShaderNodeUVFunc_7fnxx")
-nodes/fragment/7/position = Vector2(-780, -20)
+nodes/fragment/7/position = Vector2(-520, 80)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_hw5fa")
-nodes/fragment/8/position = Vector2(-360, 760)
+nodes/fragment/8/position = Vector2(-840, 640)
 nodes/fragment/connections = PackedInt32Array(3, 0, 2, 1, 2, 0, 5, 0, 5, 1, 0, 0, 4, 0, 5, 1, 2, 1, 0, 10, 6, 0, 5, 6, 7, 0, 2, 0, 5, 6, 0, 9, 8, 0, 5, 2, 5, 3, 0, 6, 5, 4, 0, 3, 5, 5, 0, 2)

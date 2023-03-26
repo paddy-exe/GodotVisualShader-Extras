@@ -17,6 +17,8 @@ mesh = SubResource("SphereMesh_27ab8")
 surface_material_override/0 = SubResource("ShaderMaterial_n806v")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.809164)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.822552)
 light_color = Color(0.392157, 0.584314, 1, 1)
-omni_range = 1.46783
+light_energy = 5.392
+omni_range = 0.981
+omni_attenuation = 0.68302

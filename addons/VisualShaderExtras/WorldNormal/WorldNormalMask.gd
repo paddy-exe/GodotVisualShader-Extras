@@ -66,17 +66,28 @@ func _get_input_port_type(port):
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_3D
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
-## return all the functions (in the ShaderLib Dict) that you want
-## to use.
-func _get_global_func_names()->Array:
-	return ["world_normal_mask"]
-
 func _get_global_code(mode):
-	return ShaderLib.prep_global_code(self)
+	return """
+// Create the texture to pass in like this:
+//  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
+float world_normal_mask_VisualShaderNodeWorldNormalMask(
+	vec3 normal_map_texture, 
+	vec3 vector_direction,
+	mat4 _VIEW_MATRIX
+	) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+	// Convert the world up vector into view-space with a matrix multiplication.
+	vec3 up_vector_viewspace = mat3(_VIEW_MATRIX) * vector_direction;
+
+	// Compare the up vector to the surface with the normal map applied using the dot product.
+	float dot_product = dot(up_vector_viewspace, normal_map_texture);
+
+	return dot_product;
+}"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	var code = """
-{out_float} = world_normal_mask(
+{out_float} = world_normal_mask_VisualShaderNodeWorldNormalMask(
 	{normal_z_applied},
 	{vector_direction},
 	VIEW_MATRIX);
@@ -86,4 +97,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	"vector_direction" : input_vars[1],
 	"out_float" : output_vars[0],
 	})
-	return ShaderLib.rename_functions(self, code)
+	return code

@@ -81,13 +81,61 @@ func _get_input_port_type(port):
 		3: return VisualShaderNode.PORT_TYPE_SCALAR #offset
 		4: return VisualShaderNode.PORT_TYPE_SCALAR #fade
 
-## return all the functions (in the ShaderLib Dict) that you want
-## to use.
-func _get_global_func_names()->Array:
-	return ["normal_map_add_z", "world_normal_mask", "mask_blend"]
-
 func _get_global_code(mode):
-	return ShaderLib.prep_global_code(self)
+	return """
+// Godot strips the z value from imported Normal Maps.
+// It does this for two reasons:
+// 1. Obtaining better compression because the z can be calculated by shader.
+//    Compression boosts speed of CPU to GPU transfer.
+// 2. On mobile devices they do not do that calculation. They either ignore the z
+//    or do some other calculation, but the normal one (below) is apparently too slow
+//    or power-hungry for mobile devices.
+//
+// Create the texture to pass in like this:
+//  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
+vec3 normal_map_add_z_VisualShaderNodeWorldNormalMapMixer(
+	vec3 normal_map_texture, 
+	vec2 inuv,
+	vec3 _TANGENT,
+	vec3 _BINORMAL,
+	vec3 _NORMAL) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+
+	// Unpack the background normal map.
+	vec3 bg_normal = normal_map_texture * 2.0 - 1.0;
+
+	// Recalculate z-component of the normal map with the Pythagorean theorem.
+	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
+
+	// Apply the tangent-space normal map to the view-space normals.
+	vec3 normal_applied = bg_normal.x * _TANGENT + bg_normal.y * _BINORMAL + bg_normal.z * _NORMAL;
+	return normal_applied;
+}
+
+// Create the texture to pass in like this:
+//  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
+float world_normal_mask_VisualShaderNodeWorldNormalMapMixer(
+	vec3 normal_map_texture, 
+	vec3 vector_direction,
+	mat4 _VIEW_MATRIX
+	) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+	// Convert the world up vector into view-space with a matrix multiplication.
+	vec3 up_vector_viewspace = mat3(_VIEW_MATRIX) * vector_direction;
+
+	// Compare the up vector to the surface with the normal map applied using the dot product.
+	float dot_product = dot(up_vector_viewspace, normal_map_texture);
+
+	return dot_product;
+}
+
+float mask_blend_VisualShaderNodeWorldNormalMapMixer(float offset, float fade, float mask_in) {
+	offset *= -1.;
+
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+	return smoothstep(offset - fade, offset + fade, mask_in);
+}
+"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	var inuv = "UV"
@@ -97,17 +145,17 @@ func _get_code(input_vars, output_vars, mode, type):
 	var code = """
 vec3 normal_map_texture = textureLod({normal_texture_sampler}, {inuv}, 0.).rgb;
 
-vec3 normal_applied = normal_map_add_z(
+vec3 normal_applied = normal_map_add_z_VisualShaderNodeWorldNormalMapMixer(
 	normal_map_texture, 
 	{inuv},
 	TANGENT,
 	BINORMAL,
 	NORMAL);  
-float mask = world_normal_mask(
+float mask = world_normal_mask_VisualShaderNodeWorldNormalMapMixer(
 	normal_applied,
 	{vector_direction},
 	VIEW_MATRIX);
-float blended_mask = mask_blend({offset}, {fade}, mask);
+float blended_mask = mask_blend_VisualShaderNodeWorldNormalMapMixer({offset}, {fade}, mask);
 {out_float} = blended_mask;
 {out_normal_map} = normal_map_texture;
 	""".format(
@@ -120,4 +168,4 @@ float blended_mask = mask_blend({offset}, {fade}, mask);
 	"out_float" : output_vars[0],
 	"out_normal_map" : output_vars[1]
 	})
-	return ShaderLib.rename_functions(self, code)
+	return code

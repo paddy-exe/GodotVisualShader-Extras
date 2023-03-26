@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=30 format=3]
+[gd_resource type="VisualShader" load_steps=30 format=3 uid="uid://dcoiyd8vndjnk"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/WorldNormal/WorldNormalMapMixer.gd" id="1_bkjt5"]
 [ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_5m13w"]

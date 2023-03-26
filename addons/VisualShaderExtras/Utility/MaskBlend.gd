@@ -62,17 +62,16 @@ func _get_input_port_name(port):
 func _get_input_port_type(port):
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
-## return all the functions (in the ShaderLib Dict) that you want
-## to use.
-func _get_global_func_names()->Array:
-	return ["mask_blend"]
-	
 func _get_global_code(mode):
-	return ShaderLib.prep_global_code(self)
+	return """
+float mask_blend_VisualShaderNodeMaskBlend(float offset, float fade, float mask_in) {
+	offset *= -1.;
+	return smoothstep(offset - fade, offset + fade, mask_in);
+}"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	var code = """
-{out_float} = mask_blend({offset}, {fade}, {mask_in});
+{out_float} = mask_blend_VisualShaderNodeMaskBlend({offset}, {fade}, {mask_in});
 """.format(
 	{
 	"mask_in" : input_vars[0],
@@ -80,4 +79,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	"fade" : input_vars[2],
 	"out_float" : output_vars[0] 
 	})
-	return ShaderLib.rename_functions(self, code)
+	return code

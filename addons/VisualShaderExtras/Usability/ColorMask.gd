@@ -61,14 +61,14 @@ func _get_input_port_type(port):
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_4D
 		2: return VisualShaderNode.PORT_TYPE_SCALAR
 
-## return all the functions (in the ShaderLib Dict) that you want
-## to use.
-func _get_global_func_names()->Array:
-	return ["compare"]
-	
 func _get_global_code(mode):
-	return ShaderLib.prep_global_code(self)
+	return """
+float compare_VisualShaderNodeCustomColorMask(vec4 in1, vec4 in2, float fuzz)
+{
+	return dot(abs(in1-in2), vec4(fuzz));
+}
+	"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	var code = "%s = compare(%s,%s,%s);" % [output_vars[0],input_vars[0],input_vars[1],input_vars[2]]
-	return ShaderLib.rename_functions(self, code)
+	var code = "%s = compare_VisualShaderNodeCustomColorMask(%s,%s,%s);" % [output_vars[0],input_vars[0],input_vars[1],input_vars[2]]
+	return code

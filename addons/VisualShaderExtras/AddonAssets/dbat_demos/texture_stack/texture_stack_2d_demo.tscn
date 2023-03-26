@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://dxopu7pfbxwps"]
 
 [ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/texture_stack/texture_stack.tres" id="1_5rhkq"]
 [ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_h7i13"]

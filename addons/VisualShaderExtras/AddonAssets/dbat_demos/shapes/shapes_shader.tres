@@ -1,6 +1,6 @@
-[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://dsds84gilcd4u"]
+[gd_resource type="VisualShader" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="2_fi760"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/SmoothBox.gd" id="2_fi760"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dmth8"]
 default_input_values = [1, Vector2(0.749, 0.5), 2, Vector2(0.079, 0.25), 3, 0.053]
@@ -77,7 +77,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-69.2178, -97.6929)
+graph_offset = Vector2(-101.182, -5.72728)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(620, 60)

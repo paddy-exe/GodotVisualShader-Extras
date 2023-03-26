@@ -26,16 +26,13 @@ func _init():
 	set_input_port_default_value(3, 0.)#smoothness
 
 func _get_name():
-	return "Box2"
+	return "SmoothBox"
 
 func _get_category():
 	return "VisualShaderExtras/Shapes"
 
 func _get_description():
 	return "Signed Distance Box Shape3D with smoothing."
-
-func _get_version():
-	return "2"
 	
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -68,15 +65,8 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-//Original
-//float sdBox( in vec2 __position, in vec2 __proportions )
-//{
-// vec2 __d = abs(__position) - __proportions;
-// return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
-//}
-//Alteration
-float sdBox(vec2 _pos, vec2 __proportions, float _feather) {
-	vec2 d = abs(_pos) - __proportions; 
+float sdBox_VisualShaderNodeBoxV2(vec2 _pos, vec2 _proportions, float _feather) {
+	vec2 d = abs(_pos) - _proportions; 
 	float outside = length(max(d, 0.));
 	float inside = min(max(d.x, d.y), 0.);
 	float both = outside + inside;
@@ -95,7 +85,7 @@ func _get_code(input_vars, output_vars, mode, type):
 	var uv = "UV"
 	if input_vars[0]:
 		uv = input_vars[0]
-	return "{out} = sdBox({uv}-{pos}, {proportions}, {smoothness});" \
+	return "{out} = sdBox_VisualShaderNodeBoxV2({uv}-{pos}, {proportions}, {smoothness});" \
 	.format({
 		"uv": uv,
 		"pos": input_vars[1],

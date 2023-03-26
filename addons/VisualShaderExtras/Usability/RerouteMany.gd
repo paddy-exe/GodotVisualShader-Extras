@@ -40,9 +40,10 @@ const ptypes:Array = [
 	VisualShaderNode.PORT_TYPE_VECTOR_3D,
 	VisualShaderNode.PORT_TYPE_VECTOR_4D,
 	VisualShaderNode.PORT_TYPE_TRANSFORM,
-	VisualShaderNode.PORT_TYPE_SAMPLER
+	#VisualShaderNode.PORT_TYPE_SAMPLER #Does not seem to work in G 4.0.1
 ]
-const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform","Sampler"]
+const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform"]#,"Sampler"]
+
 func _get_output_port_type(port):
 	return ptypes[port]
 	
