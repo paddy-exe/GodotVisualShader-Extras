@@ -1,0 +1,215 @@
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://bqvrlggkjqwqt"]
+
+[ext_resource type="Script" path="res://seamless_hex/BC_seamless_tiler.gd" id="1_6yngm"]
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_thpge"]
+constant = 0.1
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_minix"]
+default_input_values = [0, 8.0, 1, 16.0, 2, 1.1]
+initialized = true
+script = ExtResource("1_6yngm")
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_p6pau"]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_yudue"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_fa881"]
+parameter_name = "NM"
+texture_type = 2
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_yjatu"]
+parameter_name = "tex"
+texture_type = 1
+texture_filter = 2
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D tex : source_color, filter_linear;
+uniform sampler2D NM : hint_normal, filter_linear;
+
+
+// BCSeamlessTiling
+
+// Licence still somewhat in doubt. Am researching.
+
+// Ben Cloward tutorial https://www.youtube.com/watch?v=hc6msdFcnA4
+// Practical Real-Time Hex-Tiling Paper https://jcgt.org/published/0011/03/05/
+// https://github.com/Gizmo199/non_repeating_hextiling/blob/master/shaders/shd_nonrepeat/shd_nonrepeat.fsh
+
+// Functions
+//float Round(float num){ return floor(num + .5); }
+vec3 Round3(vec3 ivec){ return floor(ivec + vec3(0.5)); }
+vec2 Rotate(vec2 _UV, float amount, float _pivot, float TEX_REPEAT){
+	vec2 center = vec2(_pivot) * TEX_REPEAT;
+	_UV -= center;
+	vec2 rot = vec2(cos(amount), sin(amount));
+	return vec2((rot.x * _UV.x) + (rot.y * _UV.y), (rot.x * _UV.y) - (rot.y * _UV.x)) + center;
+}
+vec3 Hash2(vec2 _UV){
+	return fract(sin(vec3(
+		dot(vec3(_UV.x, _UV.y, _UV.x), vec3(127.09, 311.7, 74.69)), 
+		dot(vec3(_UV.y, _UV.x, _UV.x), vec3(269.5, 183.3, 246.1)), 
+		dot(vec3(_UV.x, _UV.y, _UV.y), vec3(113.5, 271.89, 124.59))
+	)) * 43758.5453);
+}
+//float Lerp(float val1, float val2, float amount){
+//	return ( val2 - val1 ) * amount;
+//}
+vec2 Translate(vec2 _UV, vec2 amount){ return _UV + amount; }
+vec2 Scale(vec2 _UV, vec2 amount){ return _UV * amount; }
+vec2 Transform(vec2 _UV, float rotation, vec2 scale, vec2 translation, float TEX_REPEAT){
+	return Translate(Scale(Rotate(_UV, rotation, 0.5, TEX_REPEAT), scale), translation);
+}
+// TEX_REPEAT is only passed-in so it can reach another function that needs it.
+vec2 RandomTransform(vec2 _UV, vec2 seed, float TEX_REPEAT, out float unrot){
+	vec3 hash = Hash2(seed);
+	float rot = mix(-3.1415, 3.1415, fract(hash.b*16.));
+	unrot = TAU - rot;
+	float scl = mix(.8, 1.2, hash.b);
+	return Transform(_UV, rot, vec2(scl), hash.xy, TEX_REPEAT);
+}
+
+
+void fragment() {
+	vec3 n_out5p0;
+	vec3 n_out5p1;
+	vec2 n_out5p2;
+// BCSeamlessTiling:5
+	float n_in5p0 = 8.00000;
+	float n_in5p1 = 16.00000;
+	float n_in5p2 = 1.10000;
+	{
+		
+			// \"color\" and \"use_col\" refer to the changed uv coordinates
+			
+			vec2 base_uv = UV * n_in5p0;
+			vec2 uv	= vec2(base_uv);
+			uv = vec2(uv.x - ((.5/(1.732 / 2.))*uv.y), (1./(1.732 / 2.))*uv.y) / n_in5p2;
+			
+			vec2 coord	= floor(uv);
+			vec4 color	= vec4(coord.x, coord.y, 0., 1.);
+			color.rgb = ((vec3(color.r - color.g) + vec3(0, 1, 2)) * .3333333) + 5./3.;
+			color.rgb = Round3(fract(color.rgb));
+			
+			vec4 refcol = vec4(fract(vec2(uv.x, uv.y)), 1., 1.);
+			refcol.rgb = vec3(refcol.g + refcol.r) - 1.;
+			vec4 abscol = vec4(abs(refcol.rgb), 1.);
+			
+			vec4 refswz = vec4(fract(vec2(uv.y, uv.x)), 1, 1);
+			vec4 use_col = vec4(fract(vec2(uv.x, uv.y)), 1, 1);
+			
+			float flip_check = 0.;
+			if ( ((refcol.r+refcol.g+refcol.b)/3.) > 0. ){
+				use_col = vec4(1.-refswz.x, 1.-refswz.y, refswz.b, refswz.a);
+				flip_check = 1.;
+			}
+		
+			abscol.rgb = abs(vec3(abscol.r, use_col.r, use_col.g));
+			use_col.rgb = vec3(
+				pow(dot(abscol.rgb, vec3(color.z, color.x, color.y)), n_in5p1), 
+				pow(dot(abscol.rgb, vec3(color.y, color.z, color.x)), n_in5p1), 
+				pow(dot(abscol.rgb, color.rgb), n_in5p1)
+			);
+		
+			float coldot = dot(use_col.rgb, vec3(1));
+			use_col /= coldot;
+			
+			vec2 color_swiz1 = vec2(color.a, color.z);
+			vec2 color_swiz2 = vec2(color.z, color.x);
+			vec2 color_swiz3 = vec2(color.x, color.a);
+			
+			color.rgb *= flip_check;
+			
+			vec3 rgb_out = vec3(0.,0.,0.);
+			
+			float unrot_r = 0.;
+			float unrot_g = 0.;
+			float unrot_b = 0.;
+			
+			// Get the random rotated uv within the hexagon shape
+			vec2 rotated_uv_1 = RandomTransform(base_uv, color_swiz1 + vec2(color.r)
+				 + coord, n_in5p0, unrot_r);
+			vec2 rotated_uv_2 = RandomTransform(base_uv, color_swiz2 + vec2(color.g)
+				 + coord, n_in5p0, unrot_g);
+			vec2 rotated_uv_3 = RandomTransform(base_uv, color_swiz3 + vec2(color.b)
+				 + coord, n_in5p0, unrot_b);
+			
+			// If it's a Normal Map, then we must unrotate the rgb colors of the
+			// normal map by the amount we just rotated. The if is tmp for debugging.
+			// Followed Ben Cowan again: https://www.youtube.com/watch?v=BBRmZ1dZCro
+			if (true) { 
+				vec2 unrotated_uvmap_rg = vec2(0.,0.);
+				vec2 rotated_uv = vec2(0.,0.);
+				vec3 mulv3 = vec3(0.,0.,0.);
+				vec3 sam = vec3(0.,0.,0.);
+				float _pivot = 0.;
+				
+				sam = texture( NM, rotated_uv_1).rgb;
+				unrotated_uvmap_rg = Rotate(sam.rg, unrot_r, _pivot, n_in5p0);
+				mulv3 = vec3(unrotated_uvmap_rg, sam.b) * vec3(use_col.r);
+				rgb_out = mulv3;
+				
+				sam = texture( NM, rotated_uv_2).rgb;
+				unrotated_uvmap_rg = Rotate(sam.rg, unrot_g, _pivot, n_in5p0);
+				mulv3 = vec3(unrotated_uvmap_rg, sam.b) * vec3(use_col.g);
+				rgb_out += mulv3;
+				
+				//unrotated_uvmap_rg = Rotate(sam.rg, unrot_b, _pivot, n_in5p0);
+				//sam = texture( NM, rotated_uv_3).rgb;
+				//mulv3 = vec3(unrotated_uvmap_rg, sam.b) * vec3(use_col.b);
+				//rgb_out += mulv3;
+					
+				n_out5p1 =  rgb_out;
+			}
+			
+			// Apply the albedo to the new uv hexagon
+			vec3 ruv1 = texture( tex, rotated_uv_1).rgb * vec3(use_col.r);
+			vec3 ruv2 = texture( tex, rotated_uv_2).rgb * vec3(use_col.g);
+			vec3 ruv3 = texture( tex, rotated_uv_3).rgb * vec3(use_col.b);
+			rgb_out = ruv1.rgb + ruv2.rgb + ruv3.rgb;
+			n_out5p0 = rgb_out;
+		
+			//Pass out the basic UV hex grid - it's usefull.
+			n_out5p2 = use_col.rg;
+	}
+
+
+// FloatConstant:6
+	float n_out6p0 = 0.000000;
+
+
+// Mix:7
+	vec3 n_out7p0 = mix(n_out5p0, vec3(n_out5p2, 0.0), vec3(n_out6p0));
+
+
+// FloatConstant:10
+	float n_out10p0 = 0.100000;
+
+
+// Output:0
+	ALBEDO = n_out7p0;
+	NORMAL_MAP = n_out5p1;
+	NORMAL_MAP_DEPTH = n_out10p0;
+
+
+}
+"
+graph_offset = Vector2(-164.465, 141.935)
+nodes/fragment/0/position = Vector2(640, 300)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_minix")
+nodes/fragment/5/position = Vector2(-40, 300)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatConstant_p6pau")
+nodes/fragment/6/position = Vector2(80, 520)
+nodes/fragment/7/node = SubResource("VisualShaderNodeMix_yudue")
+nodes/fragment/7/position = Vector2(280, 360)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_fa881")
+nodes/fragment/8/position = Vector2(-620, 400)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_yjatu")
+nodes/fragment/9/position = Vector2(-400, 200)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatConstant_thpge")
+nodes/fragment/10/position = Vector2(400, 580)
+nodes/fragment/connections = PackedInt32Array(8, 0, 5, 4, 9, 0, 5, 3, 10, 0, 0, 10, 5, 2, 7, 1, 6, 0, 7, 2, 5, 0, 7, 0, 7, 0, 0, 0, 5, 1, 0, 9)
