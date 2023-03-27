@@ -1,14 +1,8 @@
-[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://b863u44o66dbm"]
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://b863u44o66dbm"]
 
 [ext_resource type="Texture2D" uid="uid://ck6ib50lrnxw5" path="res://addons/VisualShaderExtras/AddonAssets/icon.png" id="2_1sqgn"]
 [ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_albedo.png" id="2_814ee"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/MaskBlend.gd" id="3_52467"]
-
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_6xmu7"]
-input_name = "time"
-
-[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_y5reu"]
-function = 0
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5sxjw"]
 default_input_values = [0, 0.0, 1, 0.1, 2, 0.969]
@@ -21,13 +15,16 @@ texture = ExtResource("2_1sqgn")
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_kxghh"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rov27"]
-default_input_values = [0, 1.337, 1, 1.0]
+default_input_values = [0, 1.337, 1, 0.74]
 operator = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_imegm"]
 source = 5
 texture = ExtResource("2_814ee")
 texture_type = 1
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_dbcma"]
+constant = 0.064
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_338pd"]
 source = 5
@@ -59,8 +56,6 @@ uniform sampler2D tex_frg_18;
 
 float mask_blend_VisualShaderNodeMaskBlend(float offset, float fade, float mask_in) {
 	offset *= -1.;
-
-	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
 	return smoothstep(offset - fade, offset + fade, mask_in);
 }
 
@@ -86,16 +81,12 @@ void fragment() {
 
 
 // FloatOp:21
-	float n_in21p1 = 1.00000;
+	float n_in21p1 = 0.74000;
 	float n_out21p0 = n_out20p0 - n_in21p1;
 
 
-// Input:10
-	float n_out10p0 = TIME;
-
-
-// FloatFunc:12
-	float n_out12p0 = sin(n_out10p0);
+// FloatConstant:24
+	float n_out24p0 = 0.064000;
 
 
 	float n_out17p0;
@@ -103,7 +94,7 @@ void fragment() {
 	float n_in17p1 = 0.10000;
 	{
 		
-		n_out17p0 = mask_blend_VisualShaderNodeMaskBlend(n_in17p1, n_out12p0, n_out21p0);
+		n_out17p0 = mask_blend_VisualShaderNodeMaskBlend(n_in17p1, n_out24p0, n_out21p0);
 	}
 
 
@@ -117,7 +108,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-5.14496, 79.0191)
+graph_offset = Vector2(-233.691, 36.2942)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(960, 380)
@@ -129,12 +120,8 @@ nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_kafga")
 nodes/fragment/6/position = Vector2(-300, 700)
 nodes/fragment/9/node = SubResource("VisualShaderNodeMix_3p70w")
 nodes/fragment/9/position = Vector2(720, 420)
-nodes/fragment/10/node = SubResource("VisualShaderNodeInput_6xmu7")
-nodes/fragment/10/position = Vector2(-100, 340)
-nodes/fragment/12/node = SubResource("VisualShaderNodeFloatFunc_y5reu")
-nodes/fragment/12/position = Vector2(200, 340)
 nodes/fragment/17/node = SubResource("VisualShaderNodeCustom_5sxjw")
-nodes/fragment/17/position = Vector2(400, 280)
+nodes/fragment/17/position = Vector2(400, 360)
 nodes/fragment/18/node = SubResource("VisualShaderNodeTexture_3k2pa")
 nodes/fragment/18/position = Vector2(-300, 40)
 nodes/fragment/20/node = SubResource("VisualShaderNodeVectorDecompose_kxghh")
@@ -143,4 +130,6 @@ nodes/fragment/21/node = SubResource("VisualShaderNodeFloatOp_rov27")
 nodes/fragment/21/position = Vector2(200, 140)
 nodes/fragment/22/node = SubResource("VisualShaderNodeTexture_imegm")
 nodes/fragment/22/position = Vector2(0, 700)
-nodes/fragment/connections = PackedInt32Array(5, 0, 4, 2, 10, 0, 12, 0, 4, 0, 9, 0, 17, 0, 9, 2, 9, 0, 0, 0, 18, 0, 20, 0, 21, 0, 17, 0, 6, 0, 22, 2, 22, 0, 9, 1, 20, 0, 21, 0, 12, 0, 17, 2)
+nodes/fragment/24/node = SubResource("VisualShaderNodeFloatConstant_dbcma")
+nodes/fragment/24/position = Vector2(140, 300)
+nodes/fragment/connections = PackedInt32Array(5, 0, 4, 2, 4, 0, 9, 0, 9, 0, 0, 0, 18, 0, 20, 0, 21, 0, 17, 0, 6, 0, 22, 2, 22, 0, 9, 1, 20, 0, 21, 0, 24, 0, 17, 2, 17, 0, 9, 2)

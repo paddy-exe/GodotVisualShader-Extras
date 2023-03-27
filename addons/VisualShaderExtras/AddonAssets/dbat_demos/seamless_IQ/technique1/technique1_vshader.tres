@@ -16,7 +16,7 @@ initialized = true
 script = ExtResource("1_bpdut")
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_grwja"]
-constant = 1.0
+constant = 2.0
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_1q02o"]
 parameter_name = "ORM"
@@ -84,17 +84,17 @@ void fragment() {
 	{
 		
 			vec2 uv = UV * n_in5p0;
-			NORMAL_MAP_DEPTH = 3.0;
 			n_out5p0 = textureNoTile_VisualShaderNodeIQSeamlessTilingTechnique1(albedo, uv).rgb;n_out5p1 = textureNoTile_VisualShaderNodeIQSeamlessTilingTechnique1(norm, uv).rgb;n_out5p2 = textureNoTile_VisualShaderNodeIQSeamlessTilingTechnique1(ORM, uv).r;n_out5p3 = textureNoTile_VisualShaderNodeIQSeamlessTilingTechnique1(ORM, uv).g;n_out5p4 = textureNoTile_VisualShaderNodeIQSeamlessTilingTechnique1(ORM, uv).b;
 	}
 
 
 // FloatConstant:6
-	float n_out6p0 = 1.000000;
+	float n_out6p0 = 2.000000;
 
 
 // Output:0
 	ALBEDO = n_out5p0;
+	METALLIC = n_out5p4;
 	ROUGHNESS = n_out5p3;
 	AO = n_out5p2;
 	NORMAL_MAP = n_out5p1;
@@ -103,7 +103,8 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-30.1983, -18.9174)
+graph_offset = Vector2(-256.607, 126.438)
+nodes/fragment/0/position = Vector2(540, 200)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_qimeh")
 nodes/fragment/3/position = Vector2(-520, 60)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_bd6lt")
@@ -111,7 +112,7 @@ nodes/fragment/4/position = Vector2(-520, 360)
 nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_e1gub")
 nodes/fragment/5/position = Vector2(0, 280)
 nodes/fragment/6/node = SubResource("VisualShaderNodeFloatConstant_grwja")
-nodes/fragment/6/position = Vector2(140, 500)
+nodes/fragment/6/position = Vector2(100, 460)
 nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_1q02o")
 nodes/fragment/7/position = Vector2(-540, 600)
-nodes/fragment/connections = PackedInt32Array(3, 0, 5, 1, 5, 1, 0, 9, 6, 0, 0, 10, 4, 0, 5, 2, 5, 0, 0, 0, 5, 2, 0, 6, 7, 0, 5, 3, 5, 3, 0, 3)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 1, 4, 0, 5, 2, 7, 0, 5, 3, 5, 0, 0, 0, 5, 1, 0, 9, 5, 2, 0, 6, 5, 3, 0, 3, 5, 4, 0, 2, 6, 0, 0, 10)

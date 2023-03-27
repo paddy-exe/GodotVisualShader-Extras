@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://kettq437klka"]
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://kettq437klka"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Filters/LodBlur.gd" id="1_u5y11"]
 
@@ -17,6 +17,11 @@ parameter_name = "Blur"
 hint = 1
 max = 10.0
 default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_kmo4s"]
+size = Vector2(315.035, 321.918)
+description = "Be sure to choose a Filter that mentions Mimaps,
+like Linear Mipmap or Nearest Mipmap."
 
 [resource]
 code = "shader_type spatial;
@@ -48,12 +53,14 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-863.14, 760.545)
-nodes/fragment/0/position = Vector2(-280, 1080)
+graph_offset = Vector2(-764.241, 636.82)
+nodes/fragment/0/position = Vector2(-220, 1060)
 nodes/fragment/18/node = SubResource("VisualShaderNodeTexture2DParameter_qxj8l")
 nodes/fragment/18/position = Vector2(-980, 1240)
 nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_e5pk6")
 nodes/fragment/22/position = Vector2(-580, 1140)
 nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_k3rmt")
 nodes/fragment/23/position = Vector2(-980, 960)
+nodes/fragment/24/node = SubResource("VisualShaderNodeComment_kmo4s")
+nodes/fragment/24/position = Vector2(-680, 1040)
 nodes/fragment/connections = PackedInt32Array(18, 0, 22, 1, 23, 0, 22, 2, 22, 0, 0, 0)

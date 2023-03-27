@@ -24,3 +24,17 @@ offset_left = 209.0
 offset_right = 398.0
 offset_bottom = 180.0
 texture = ExtResource("2_5em8o")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 53.0
+offset_top = 192.0
+offset_right = 146.0
+offset_bottom = 218.0
+text = "Route Many"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 257.0
+offset_top = 192.0
+offset_right = 350.0
+offset_bottom = 218.0
+text = "Route One"

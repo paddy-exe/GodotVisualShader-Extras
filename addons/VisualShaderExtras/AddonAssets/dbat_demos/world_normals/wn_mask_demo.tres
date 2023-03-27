@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://bv323q4wxyo3v"]
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://bv323q4wxyo3v"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/WorldNormal/WorldNormalMask.gd" id="1_xm86j"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/NormalMapZ.gd" id="2_662ls"]
@@ -7,6 +7,13 @@
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_tmwtl"]
 default_input_values = [0, 1.0, 1, 0.5]
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_wphbm"]
+size = Vector2(578.859, 288.951)
+description = "These two nodes work together to create the proper effect.
+You can then choose which material is the top/up and which is the bottom/down
+
+(Or left/right, as you can adjust the Direction Vector)"
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_4lrbg"]
 parameter_name = "BackgroundNormalMap"
@@ -74,7 +81,7 @@ vec3 normal_map_add_z_VisualShaderNodeSamplerNormalMapZ(
 
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-float world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMask(
+float world_normal_mask_VisualShaderNodeWorldNormalMask(
 	vec3 normal_map_texture, 
 	vec3 vector_direction,
 	mat4 _VIEW_MATRIX
@@ -88,8 +95,6 @@ float world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMask(
 
 	return dot_product;
 }
-
-
 
 void fragment() {
 // Texture2D:8
@@ -121,7 +126,7 @@ void fragment() {
 	vec3 n_in9p1 = vec3(0.00000, 1.00000, 0.00000);
 	{
 		
-		n_out9p0 = world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMask(
+		n_out9p0 = world_normal_mask_VisualShaderNodeWorldNormalMask(
 			n_out5p0,
 			n_in9p1,
 			VIEW_MATRIX);
@@ -143,19 +148,21 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-250.879, 188.66)
+graph_offset = Vector2(-570.317, 152.57)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_4lrbg")
-nodes/fragment/4/position = Vector2(-640, 660)
+nodes/fragment/4/position = Vector2(-860, 400)
 nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_qn4go")
-nodes/fragment/5/position = Vector2(-280, 740)
+nodes/fragment/5/position = Vector2(-520, 580)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_6nx55")
-nodes/fragment/6/position = Vector2(-200, -20)
+nodes/fragment/6/position = Vector2(-800, -80)
 nodes/fragment/7/node = SubResource("VisualShaderNodeMix_cwa0d")
-nodes/fragment/7/position = Vector2(180, 260)
+nodes/fragment/7/position = Vector2(200, 180)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_bnyx1")
-nodes/fragment/8/position = Vector2(-480, 140)
+nodes/fragment/8/position = Vector2(-800, 160)
 nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_8ghky")
-nodes/fragment/9/position = Vector2(-400, 440)
+nodes/fragment/9/position = Vector2(-240, 580)
 nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_tmwtl")
-nodes/fragment/10/position = Vector2(30.923, 495.833)
+nodes/fragment/10/position = Vector2(60, 320)
+nodes/fragment/11/node = SubResource("VisualShaderNodeComment_wphbm")
+nodes/fragment/11/position = Vector2(-560, 440)
 nodes/fragment/connections = PackedInt32Array(4, 0, 5, 1, 7, 0, 0, 0, 5, 0, 9, 0, 6, 0, 7, 1, 8, 0, 7, 0, 10, 0, 7, 2, 9, 0, 10, 0)

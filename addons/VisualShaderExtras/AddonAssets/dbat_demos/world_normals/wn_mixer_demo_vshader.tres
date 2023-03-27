@@ -80,8 +80,11 @@ size = Vector2(708.197, 390.703)
 title = "Foreground Normal Map"
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_sworv"]
-size = Vector2(827.636, 854.774)
-title = "World Normal Mixer Mask"
+size = Vector2(572.354, 416.313)
+title = "World Normal Mixer Node"
+description = "This node already includes code to add the Z back to the Normal Map.
+It provides a \"Mask\" value that you can use to split
+between textures."
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_pyo5e"]
 default_input_values = [0, 0.0, 1, 5.023]
@@ -137,7 +140,7 @@ uniform sampler2D ForegroundNormalMap : hint_normal, filter_linear;
 //
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-vec3 normal_map_add_z_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
+vec3 normal_map_add_z_VisualShaderNodeWorldNormalMapMixer(
 	vec3 normal_map_texture, 
 	vec2 inuv,
 	vec3 _TANGENT,
@@ -156,10 +159,9 @@ vec3 normal_map_add_z_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
 	return normal_applied;
 }
 
-
 // Create the texture to pass in like this:
 //  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
-float world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
+float world_normal_mask_VisualShaderNodeWorldNormalMapMixer(
 	vec3 normal_map_texture, 
 	vec3 vector_direction,
 	mat4 _VIEW_MATRIX
@@ -174,14 +176,12 @@ float world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
 	return dot_product;
 }
 
-
-float mask_blend_VisualShaderExtrasWorldNormalWorldNormalMapMixer(float offset, float fade, float mask_in) {
+float mask_blend_VisualShaderNodeWorldNormalMapMixer(float offset, float fade, float mask_in) {
 	offset *= -1.;
 
 	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
 	return smoothstep(offset - fade, offset + fade, mask_in);
 }
-
 
 
 void fragment() {
@@ -211,17 +211,17 @@ void fragment() {
 		
 		vec3 normal_map_texture = textureLod(BackgroundNormalMap, UV, 0.).rgb;
 		
-		vec3 normal_applied = normal_map_add_z_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
+		vec3 normal_applied = normal_map_add_z_VisualShaderNodeWorldNormalMapMixer(
 			normal_map_texture, 
 			UV,
 			TANGENT,
 			BINORMAL,
 			NORMAL);  
-		float mask = world_normal_mask_VisualShaderExtrasWorldNormalWorldNormalMapMixer(
+		float mask = world_normal_mask_VisualShaderNodeWorldNormalMapMixer(
 			normal_applied,
 			n_in10p2,
 			VIEW_MATRIX);
-		float blended_mask = mask_blend_VisualShaderExtrasWorldNormalWorldNormalMapMixer(n_out8p0, n_out9p0, mask);
+		float blended_mask = mask_blend_VisualShaderNodeWorldNormalMapMixer(n_out8p0, n_out9p0, mask);
 		n_out10p0 = blended_mask;
 		n_out10p1 = normal_map_texture;
 			
@@ -287,18 +287,18 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-181.498, 37.5078)
+graph_offset = Vector2(-379.776, 204.044)
 nodes/fragment/0/position = Vector2(1600, 400)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_2f28t")
-nodes/fragment/2/position = Vector2(-820, 220)
+nodes/fragment/2/position = Vector2(-1140, 240)
 nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_husir")
 nodes/fragment/5/position = Vector2(240, -220)
 nodes/fragment/6/node = SubResource("VisualShaderNodeMix_e8a6r")
 nodes/fragment/6/position = Vector2(820, -80)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_yshv2")
-nodes/fragment/8/position = Vector2(-780, 460)
+nodes/fragment/8/position = Vector2(-1100, 520)
 nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_7jdar")
-nodes/fragment/9/position = Vector2(-780, 680)
+nodes/fragment/9/position = Vector2(-1120, 720)
 nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_avdsx")
 nodes/fragment/10/position = Vector2(-480, 460)
 nodes/fragment/11/node = SubResource("VisualShaderNodeTexture_wsq0g")
@@ -334,7 +334,7 @@ nodes/fragment/29/position = Vector2(180, 680)
 nodes/fragment/30/node = SubResource("VisualShaderNodeComment_55bab")
 nodes/fragment/30/position = Vector2(140, 220)
 nodes/fragment/31/node = SubResource("VisualShaderNodeComment_sworv")
-nodes/fragment/31/position = Vector2(-880, 140)
+nodes/fragment/31/position = Vector2(-660, 320)
 nodes/fragment/32/node = SubResource("VisualShaderNodeFloatOp_pyo5e")
 nodes/fragment/32/position = Vector2(1160, 400)
 nodes/fragment/33/node = SubResource("VisualShaderNodeComment_jaa3j")

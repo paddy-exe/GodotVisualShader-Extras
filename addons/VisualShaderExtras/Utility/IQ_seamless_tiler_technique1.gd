@@ -14,9 +14,6 @@ func _get_description():
 func _is_available(mode, type):
 	return mode == VisualShader.MODE_SPATIAL
 	
-func _is_highend():
-	return true #mark as PC only.
-
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
@@ -108,7 +105,6 @@ vec4 textureNoTile_VisualShaderNodeIQSeamlessTilingTechnique1( sampler2D samp, i
 func _get_code(input_vars, output_vars, mode, type):
 	var foo = """
 	vec2 uv = UV * {UV_SCALE_in};
-	NORMAL_MAP_DEPTH = 3.0;
 	"""
 	
 	if input_vars[1]: 
