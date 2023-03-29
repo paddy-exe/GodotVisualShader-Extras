@@ -6,7 +6,7 @@
 constant = Vector2(0, 1)
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_minix"]
-default_input_values = [0, 6.0, 1, 2.0, 2, 1.0]
+default_input_values = [0, 2.0, 1, 12.0, 2, 1.0]
 initialized = true
 script = ExtResource("1_6yngm")
 
@@ -83,8 +83,8 @@ void fragment() {
 	vec3 n_out5p1;
 	vec3 n_out5p2;
 // BCSeamlessTiling:5
-	float n_in5p0 = 6.00000;
-	float n_in5p1 = 2.00000;
+	float n_in5p0 = 2.00000;
+	float n_in5p1 = 12.00000;
 	float n_in5p2 = 1.00000;
 	{
 		
@@ -125,16 +125,6 @@ void fragment() {
 				
 			vec3 RGBgrid = round(fractionThat);
 			
-		
-				
-			//uv_col.rgb = ((vec3(uv_col.r - uv_col.g) + vec3(0, 1, 2)) * ONEDIVTHREE) + FIVEDIVTHREE;
-		
-			
-			//orig uv_col.rgb = Round3(fract(uv_col.rgb));
-			//uv_col.rgb = round(fract(uv_col.rgb)).rgb;
-			
-			
-			
 			//Step 2: HEX MASK - based on tiled UV
 			//  fract add sub abs
 			vec2 first_fraction = vec2(fract(vec2(uv_tiled.x, uv_tiled.y)));
@@ -144,31 +134,20 @@ void fragment() {
 			
 			vec2 refswz = first_fraction.yx; //SWIZZ YX
 			
-			
 			//setup use_col val for the < 0. branch
-			//orig vec4 use_col = vec4(fract(vec2(uv_tiled.x, uv_tiled.y)), 1, 1);
-			use_col = sub_one; //vec4(sub_one.x, sub_one.y, 1, 1);
-				
-			vec2 inverted_refswz = 1. - refswz; //Looks okay
+			use_col.rg = first_fraction.rg;
+			
 			
 			// if sub_one.rgb > 0 then use_col is built from inverted swizzle
 			float flip_check = 0.;
 			if ( ((sub_one.r + sub_one.g + sub_one.b)/3.) > 0. ){
-				//orig use_col = vec4(1.-refswz.x, 1.-refswz.y, refswz.b, refswz.a);
+				vec2 inverted_refswz = 1. - refswz; //Looks okay
 				use_col.rg = inverted_refswz;
 				flip_check = 1.;
-			} else {
-				use_col.rg = first_fraction.rg;
 			}
 			
-			
+			abscol.rgb = vec3(abscol.r, use_col.r, use_col.g);
 		
-			
-			//abscol.rgb = abs(vec3(abscol.r, use_col.r, use_col.g));
-			abscol.rgb = vec3(abscol.r, use_col.r, use_col.g); //mine abscol COMBINED with use_col
-		
-			// test: use_col = abscol; //looks good
-					
 			vec3 ZXY = vec3(RGBgrid.z, RGBgrid.x, RGBgrid.y);
 			vec3 YZX = vec3(RGBgrid.y, RGBgrid.z, RGBgrid.x);
 			vec3 XYZ = RGBgrid;
@@ -260,7 +239,7 @@ void fragment() {
 			n_out5p0 = rgb_out;
 			
 			//Pass out the basic UV hex grid - it's usefull.
-			n_out5p2 = RGBgrid;
+			n_out5p2 = sharphexgrid;
 			//n_out5p0 = rgb_out; //test;//use_col.rgb;
 	}
 
@@ -272,7 +251,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(50.9023, 197.322)
+graph_offset = Vector2(-115.364, 204.636)
 nodes/fragment/0/position = Vector2(680, 220)
 nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_minix")
 nodes/fragment/5/position = Vector2(-40, 300)

@@ -151,16 +151,6 @@ func _get_code(input_vars, output_vars, mode, type):
 		
 	vec3 RGBgrid = round(fractionThat);
 	
-
-		
-	//uv_col.rgb = ((vec3(uv_col.r - uv_col.g) + vec3(0, 1, 2)) * ONEDIVTHREE) + FIVEDIVTHREE;
-
-	
-	//orig uv_col.rgb = Round3(fract(uv_col.rgb));
-	//uv_col.rgb = round(fract(uv_col.rgb)).rgb;
-	
-	
-	
 	//Step 2: HEX MASK - based on tiled UV
 	//  fract add sub abs
 	vec2 first_fraction = vec2(fract(vec2(uv_tiled.x, uv_tiled.y)));
@@ -170,31 +160,20 @@ func _get_code(input_vars, output_vars, mode, type):
 	
 	vec2 refswz = first_fraction.yx; //SWIZZ YX
 	
-	
 	//setup use_col val for the < 0. branch
-	//orig vec4 use_col = vec4(fract(vec2(uv_tiled.x, uv_tiled.y)), 1, 1);
-	use_col = sub_one; //vec4(sub_one.x, sub_one.y, 1, 1);
-		
-	vec2 inverted_refswz = 1. - refswz; //Looks okay
+	use_col.rg = first_fraction.rg;
+	
 	
 	// if sub_one.rgb > 0 then use_col is built from inverted swizzle
 	float flip_check = 0.;
 	if ( ((sub_one.r + sub_one.g + sub_one.b)/3.) > 0. ){
-		//orig use_col = vec4(1.-refswz.x, 1.-refswz.y, refswz.b, refswz.a);
+		vec2 inverted_refswz = 1. - refswz; //Looks okay
 		use_col.rg = inverted_refswz;
 		flip_check = 1.;
-	} else {
-		use_col.rg = first_fraction.rg;
 	}
 	
-	
+	abscol.rgb = vec3(abscol.r, use_col.r, use_col.g);
 
-	
-	//abscol.rgb = abs(vec3(abscol.r, use_col.r, use_col.g));
-	abscol.rgb = vec3(abscol.r, use_col.r, use_col.g); //mine abscol COMBINED with use_col
-
-	// test: use_col = abscol; //looks good
-			
 	vec3 ZXY = vec3(RGBgrid.z, RGBgrid.x, RGBgrid.y);
 	vec3 YZX = vec3(RGBgrid.y, RGBgrid.z, RGBgrid.x);
 	vec3 XYZ = RGBgrid;
@@ -286,8 +265,7 @@ func _get_code(input_vars, output_vars, mode, type):
 	{ALBEDO} = rgb_out;
 	
 	//Pass out the basic UV hex grid - it's usefull.
-	{GRID_out} = RGBgrid;
-	//{ALBEDO} = rgb_out; //test;//use_col.rgb;
+	{GRID_out} = sharphexgrid;
 """.format(
 	{
 		"TEX_REPEAT": input_vars[0],
