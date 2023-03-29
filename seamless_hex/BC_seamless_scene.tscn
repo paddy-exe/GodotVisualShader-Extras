@@ -3,13 +3,11 @@
 [ext_resource type="Material" uid="uid://cp31o3txfs01h" path="res://seamless_hex/BC_seamless_material.tres" id="1_0ac6o"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_k6go4"]
-subdivide_width = 1
-subdivide_depth = 1
 
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.682698, 0, 0, 0, -2.98417e-08, 0.682698, 0, -0.682698, -2.98417e-08, -6.36348, 0, 12.0758)
 mesh = SubResource("QuadMesh_k6go4")
 surface_material_override/0 = ExtResource("1_0ac6o")
 

@@ -80,11 +80,17 @@ func _get_global_code(mode):
 // Functions
 //float Round(float num){ return floor(num + .5); }
 vec3 Round3(vec3 ivec){ return floor(ivec + vec3(0.5)); }
-vec2 Rotate(vec2 _UV, float amount, float _pivot, float TEX_REPEAT){
-	vec2 center = vec2(_pivot) * TEX_REPEAT;
-	_UV -= center;
-	vec2 rot = vec2(cos(amount), sin(amount));
-	return vec2((rot.x * _UV.x) + (rot.y * _UV.y), (rot.x * _UV.y) - (rot.y * _UV.x)) + center;
+vec2 Rotate(vec2 _uv, float _angle, float _pivot, float TEX_REPEAT){
+	//vec2 center = vec2(_pivot) * TEX_REPEAT;
+	//_UV -= center;
+	//vec2 rot = vec2(cos(amount), sin(amount));
+	//return vec2((rot.x * _UV.x) + (rot.y * _UV.y), (rot.x * _UV.y) - (rot.y * _UV.x)) + center;
+	
+	_uv -= _pivot * TEX_REPEAT;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot * TEX_REPEAT;
+	return _uv ;
+		
 }
 vec3 Hash2(vec2 _UV){
 	return fract(sin(vec3(
@@ -104,34 +110,57 @@ vec2 Transform(vec2 _UV, float rotation, vec2 scale, vec2 translation, float TEX
 // TEX_REPEAT is only passed-in so it can reach another function that needs it.
 vec2 RandomTransform(vec2 _UV, vec2 seed, float TEX_REPEAT, out float unrot){
 	vec3 hash = Hash2(seed);
-	float rot = mix(-3.1415, 3.1415, fract(hash.b*16.));
+	float rot = mix(-PI, PI, fract(hash.b*16.));
 	unrot = TAU - rot;
-	float scl = mix(.8, 1.2, hash.b);
+	float scl = 1.0; //mix(.8, 1.2, hash.b);
 	return Transform(_UV, rot, vec2(scl), hash.xy, TEX_REPEAT);
+	//return Rotate(_UV, rot, 0., TEX_REPEAT);
+}
+
+vec3 normal_map_add_z_FOOBAR(
+	vec3 normal_map_texture, 
+	vec2 inuv,
+	vec3 _TANGENT,
+	vec3 _BINORMAL,
+	vec3 _NORMAL) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+
+	// Unpack the background normal map.
+	vec3 bg_normal = normal_map_texture * 2.0 - 1.0;
+
+	// Recalculate z-component of the normal map with the Pythagorean theorem.
+	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
+
+	// Apply the tangent-space normal map to the view-space normals.
+	vec3 normal_applied = bg_normal.x * _TANGENT + bg_normal.y * _BINORMAL + bg_normal.z * _NORMAL;
+	return normal_applied;
 }
 """
 
 
 func _get_code(input_vars, output_vars, mode, type):
 	var foo = """
-	// "uv_col" and "use_col" refer to the changed uv coordinates
+	// "uv_col" and "weights" refer to the changed uv coordinates
 
 	//Step 1 : Build a BGR Grid
-	vec2 WEIRDNESS = vec2(0.,1.);
-	vec2 base_uv = (UV - WEIRDNESS) * {TEX_REPEAT};
-	//vec2 base_uv = (UV - {FUCK}) * {TEX_REPEAT};
+	vec2 WEIRDNESS = {FUCK}; //vec2(0.,1.);
+	vec2 base_uv = (UV + WEIRDNESS) * {TEX_REPEAT};
 	//vec2 base_uv = (UV) * {TEX_REPEAT};
-	vec2 uv_tiled = base_uv;// - vec2(0.5 * {TEX_REPEAT});
+	//vec2 uv_tiled = base_uv;
+	//uv_tiled = vec2(uv_tiled.x - ((.5/(1.732 / 2.))*uv_tiled.y), (1./(1.732 / 2.))*uv_tiled.y) / {HEX_SIZE};
 	
-	uv_tiled = vec2(uv_tiled.x - ((.5/(1.732 / 2.))*uv_tiled.y), (1./(1.732 / 2.))*uv_tiled.y) / {HEX_SIZE};
+	float one732div2 = 1.732 / 2.;
+	float recip_one732div2 = 1. / one732div2;
+	float m1 = base_uv.g * recip_one732div2;
+	float div05byone732div2 = 0.5 / one732div2;
+	float m2 = base_uv.g * div05byone732div2;
+	float s1 = base_uv.r - m2;
+	vec2 uv_tiled = vec2(s1, m1) / {HEX_SIZE};
 	
-	vec4 use_col;
+	
+	vec4 weights;
 	
 	vec2 coord	= floor(uv_tiled);
-	
-	//use_col.rg = coord.rg;
-	//use_col.b = 1.0;
-	
 	
 	vec4 uv_col	= vec4(coord,1.,1.); //vec4(coord.r, coord.g, 0., 1.);
 	
@@ -148,31 +177,31 @@ func _get_code(input_vars, output_vars, mode, type):
 	vec3 addFIVEDIVTHREE = mulONEDIVTHREE + FIVEDIVTHREE;
 	
 	vec3 fractionThat = fract(addFIVEDIVTHREE); //DOES NOT LOOK THE SAME!
-		
 	vec3 RGBgrid = round(fractionThat);
+	
 	
 	//Step 2: HEX MASK - based on tiled UV
 	//  fract add sub abs
-	vec2 first_fraction = vec2(fract(vec2(uv_tiled.x, uv_tiled.y)));
+	vec2 first_fraction = vec2(fract(uv_tiled)); // vec2(uv_tiled.x, uv_tiled.y)));
 	float addsub = (first_fraction.g + first_fraction.r) - 1.0; //ADD and SUB ONE
 	vec4 sub_one = vec4(addsub);
 	vec4 abscol = vec4(abs(sub_one.rgb), 1.); //ABSOLUTE : Working
 	
 	vec2 refswz = first_fraction.yx; //SWIZZ YX
 	
-	//setup use_col val for the < 0. branch
-	use_col.rg = first_fraction.rg;
+	//setup weights val for the < 0. branch
+	weights.rg = first_fraction.rg;
+	weights.ba = vec2(0.);
 	
-	
-	// if sub_one.rgb > 0 then use_col is built from inverted swizzle
+	// if sub_one.rgb > 0 then weights is built from inverted swizzle
 	float flip_check = 0.;
 	if ( ((sub_one.r + sub_one.g + sub_one.b)/3.) > 0. ){
 		vec2 inverted_refswz = 1. - refswz; //Looks okay
-		use_col.rg = inverted_refswz;
+		weights.rg = inverted_refswz;
 		flip_check = 1.;
 	}
 	
-	abscol.rgb = vec3(abscol.r, use_col.r, use_col.g);
+	abscol.rgb = vec3(abscol.r, weights.r, weights.g);
 
 	vec3 ZXY = vec3(RGBgrid.z, RGBgrid.x, RGBgrid.y);
 	vec3 YZX = vec3(RGBgrid.y, RGBgrid.z, RGBgrid.x);
@@ -195,7 +224,7 @@ func _get_code(input_vars, output_vars, mode, type):
 	
 	vec3 sharphexgrid = powrgb / powdot111;
 	
-	use_col = vec4(sharphexgrid, 1.0);
+	weights = vec4(sharphexgrid, 1.0);
 		
 	//Last step - Don't ask me.
 		
@@ -209,60 +238,57 @@ func _get_code(input_vars, output_vars, mode, type):
 	vec2 coordPlusG = vec2(coord + RGBgrid.g);
 	vec2 coordPlusB = vec2(coord + RGBgrid.b);
 	
-	vec2 gridID1 = coordPlusR + uvRG;
-	vec2 gridID2 = coordPlusG + uvBR;
-	vec2 gridID3 = coordPlusB + uvGB;
+	vec2 seed01 = coordPlusR + uvRG;
+	vec2 seed02 = coordPlusG + uvBR;
+	vec2 seed03 = coordPlusB + uvGB;
 	
-	
-	float unrot_r = 0.;
-	float unrot_g = 0.;
-	float unrot_b = 0.;
+	float unrot_uv1 = 0.;
+	float unrot_uv2 = 0.;
+	float unrot_uv3 = 0.;
 	
 	//// Get the random rotated uv within the hexagon shape
-	vec2 rotated_uv_1 = RandomTransform(base_uv, gridID1, {TEX_REPEAT}, unrot_r);
-	vec2 rotated_uv_2 = RandomTransform(base_uv, gridID2, {TEX_REPEAT}, unrot_g);
-	vec2 rotated_uv_3 = RandomTransform(base_uv, gridID3, {TEX_REPEAT}, unrot_b);
 	
+	//RandomTransform(base_uv, seed01, {TEX_REPEAT}, unrot_uv1);
+	vec2 rotated_uv_1 = RandomTransform(base_uv, seed01, {TEX_REPEAT}, unrot_uv1);
+	vec2 rotated_uv_2 = RandomTransform(base_uv, seed02, {TEX_REPEAT}, unrot_uv1);
+	vec2 rotated_uv_3 = RandomTransform(base_uv, seed03, {TEX_REPEAT}, unrot_uv1);
+	
+	vec3 albedo1 = texture( {ALBEDO_TEX}, rotated_uv_1).rgb * vec3(weights.r);
+	vec3 albedo2 = texture( {ALBEDO_TEX}, rotated_uv_2).rgb * vec3(weights.g);
+	vec3 albedo3 = texture( {ALBEDO_TEX}, rotated_uv_3).rgb * vec3(weights.b);
 	
 	vec3 rgb_out = vec3(0.,0.,0.);
-	if (false) {
-		
-		
-		// If it's a Normal Map, then we must unrotate the rgb colors of the
-		// normal map by the amount we just rotated. The if is first_fraction for debugging.
-		// Followed Ben Cowan again: https://www.youtube.com/watch?v=BBRmZ1dZCro
-		//if (false) { 
-			vec2 unrotated_uvmap_rg = vec2(0.,0.);
-			vec2 rotated_uv = vec2(0.,0.);
-			vec3 mulv3 = vec3(0.,0.,0.);
-			vec3 sam = vec3(0.,0.,0.);
-			float _pivot = 0.;
-			
-			sam = texture( {NM_in}, rotated_uv_1).rgb;
-			unrotated_uvmap_rg = Rotate(sam.rg, unrot_r, _pivot, {TEX_REPEAT});
-			mulv3 = vec3(unrotated_uvmap_rg, sam.b) * vec3(use_col.r);
-			rgb_out = mulv3;
-			
-			sam = texture( {NM_in}, rotated_uv_2).rgb;
-			unrotated_uvmap_rg = Rotate(sam.rg, unrot_g, _pivot, {TEX_REPEAT});
-			mulv3 = vec3(unrotated_uvmap_rg, sam.b) * vec3(use_col.g);
-			rgb_out += mulv3;
-			
-			//unrotated_uvmap_rg = Rotate(sam.rg, unrot_b, _pivot, {TEX_REPEAT});
-			//sam = texture( {NM_in}, rotated_uv_3).rgb;
-			//mulv3 = vec3(unrotated_uvmap_rg, sam.b) * vec3(use_col.b);
-			//rgb_out += mulv3;
-				
-			{NM_out} =  rgb_out;
-		//}
-	}
-		
-	// Apply the albedo to the new uv hexagon
-	vec3 ruv1 = texture( {ALBEDO_TEX}, rotated_uv_1).rgb * vec3(use_col.r);
-	vec3 ruv2 = texture( {ALBEDO_TEX}, rotated_uv_2).rgb * vec3(use_col.g);
-	vec3 ruv3 = texture( {ALBEDO_TEX}, rotated_uv_3).rgb * vec3(use_col.b);
-	rgb_out = ruv1.rgb + ruv2.rgb + ruv3.rgb;
+	rgb_out = albedo1.rgb + albedo2.rgb + albedo3.rgb;
 	{ALBEDO} = rgb_out;
+	
+	if (false) {
+		// If it's a Normal Map, then we must unrotate the rgb colors of the
+		// normal map by the amount we just rotated. The if is only for debugging.
+		// Followed Ben Cowan again: https://www.youtube.com/watch?v=BBRmZ1dZCro
+		float _pivot = 0.;
+		
+		vec2 unrot1;
+		unrot1 = Rotate(texture( {NM_in}, uv_tiled).rg, unrot_uv1, _pivot, {TEX_REPEAT});
+		vec2 mul1 = unrot1 * weights.r;
+		
+		vec2 unrot2;
+		unrot2 = Rotate(texture( {NM_in}, uv_tiled).rg, unrot_uv2, _pivot, {TEX_REPEAT});
+		vec2 mul2 = unrot2 * weights.g;
+
+		//vec3 norm = normal_map_add_z_FOOBAR(
+		//	texture( {NM_in}, uv_tiled), 
+		//	uv_tiled,
+		//	TANGENT,
+		//	BINORMAL,
+		//	NORMAL)
+		vec2 unrot3;
+		unrot3 = Rotate(texture( {NM_in}, uv_tiled).rg, unrot_uv3, _pivot, {TEX_REPEAT});
+		vec2 mul3 = unrot2 * weights.b;
+	
+		vec2 nm_out = mul1 + mul2 + mul3;
+	
+		{NM_out} =  vec3(nm_out.rg, 1.);
+	}
 	
 	//Pass out the basic UV hex grid - it's usefull.
 	{GRID_out} = sharphexgrid;
