@@ -9,12 +9,12 @@ subdivide_depth = 1
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-0.381565, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("QuadMesh_k6go4")
 surface_material_override/0 = ExtResource("1_0ac6o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.367, 0)
+transform = Transform3D(0.995085, 4.3285e-09, -0.0990245, 0.0990245, -4.34966e-08, 0.995085, 0, -1, -4.37114e-08, 0, 5.367, 0)
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
 light_bake_mode = 0

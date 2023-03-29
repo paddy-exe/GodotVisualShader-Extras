@@ -27,13 +27,13 @@ func _get_output_port_type(port):
 	match port:
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_3D
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_3D
-		2: return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		2: return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
 func _get_output_port_name(port: int):
 	match port:
 		0: return "Albedo"
 		1: return "Normal Map"
-		2: return "UV"
+		2: return "Grid"
 #		3: return "Roughness"
 #		4: return "Metallic"
 #		5: return "Specular"
@@ -117,36 +117,41 @@ func _get_code(input_vars, output_vars, mode, type):
 	// "uv_col" and "use_col" refer to the changed uv coordinates
 
 	//Step 1 : Build a BGR Grid
-	vec2 WEIRDNESS = vec2(-0.5,0.5);
+	vec2 WEIRDNESS = vec2(0.,1.);
 	vec2 base_uv = (UV - WEIRDNESS) * {TEX_REPEAT};
+	//vec2 base_uv = (UV - {FUCK}) * {TEX_REPEAT};
+	//vec2 base_uv = (UV) * {TEX_REPEAT};
 	vec2 uv_tiled = base_uv;// - vec2(0.5 * {TEX_REPEAT});
 	
-	//uv_tiled = vec2(uv_tiled.x - ((.5/(1.732 / 2.))*uv_tiled.y), (1./(1.732 / 2.))*uv_tiled.y) / {HEX_SIZE};
+	uv_tiled = vec2(uv_tiled.x - ((.5/(1.732 / 2.))*uv_tiled.y), (1./(1.732 / 2.))*uv_tiled.y) / {HEX_SIZE};
 	
 	vec4 use_col;
 	
-	vec2 coord	= trunc(floor(uv_tiled));
+	vec2 coord	= floor(uv_tiled);
+	
+	//use_col.rg = coord.rg;
+	//use_col.b = 1.0;
 	
 	
+	vec4 uv_col	= vec4(coord,1.,1.); //vec4(coord.r, coord.g, 0., 1.);
 	
-	vec4 uv_col	= vec4(coord.x, coord.y, 1., 1.);
-	vec3 redMinusGreen = vec3(uv_col.r - uv_col.g);
+	float rmb = coord.r - coord.g;
+	vec3 redMinusGreen = vec3(rmb);
+	
 	vec3 add012 = redMinusGreen + vec3(0., 1., 2.);
 	
-	float ONEDIVTHREE = 1./ 3.;
+	
+	float ONEDIVTHREE = 1. / 3.;
 	float FIVEDIVTHREE = 5. / 3.;
 
 	vec3 mulONEDIVTHREE = add012 * ONEDIVTHREE;
 	vec3 addFIVEDIVTHREE = mulONEDIVTHREE + FIVEDIVTHREE;
 	
 	vec3 fractionThat = fract(addFIVEDIVTHREE); //DOES NOT LOOK THE SAME!
-	
-	use_col.rgb = fractionThat;
-	if (false) {
-		
 		
 	vec3 RGBgrid = round(fractionThat);
 	
+
 		
 	//uv_col.rgb = ((vec3(uv_col.r - uv_col.g) + vec3(0, 1, 2)) * ONEDIVTHREE) + FIVEDIVTHREE;
 
@@ -189,54 +194,65 @@ func _get_code(input_vars, output_vars, mode, type):
 	abscol.rgb = vec3(abscol.r, use_col.r, use_col.g); //mine abscol COMBINED with use_col
 
 	// test: use_col = abscol; //looks good
+			
+	vec3 ZXY = vec3(RGBgrid.z, RGBgrid.x, RGBgrid.y);
+	vec3 YZX = vec3(RGBgrid.y, RGBgrid.z, RGBgrid.x);
+	vec3 XYZ = RGBgrid;
 	
-	vec3 ZXY = vec3(uv_col.z, uv_col.x, uv_col.y);
-	use_col = vec4(ZXY,1.);
+	float dotred = dot(ZXY, abscol.rgb);
+	float dotgreen = dot(YZX, abscol.rgb);
+	float dotblue = dot(XYZ, abscol.rgb);
 	
-	float dotred = dot(vec3(uv_col.z, uv_col.x, uv_col.y), abscol.rgb);
-	use_col = vec4(dotred,dotred,dotred,1.);
+	float powred = pow(dotred,{SHARPNESS});
+	float powgreen = pow(dotgreen,{SHARPNESS});
+	float powblue = pow(dotblue,{SHARPNESS});
 	
-
-	
-	use_col.rgb = vec3(
-		pow(dot(abscol.rgb, vec3(uv_col.z, uv_col.x, uv_col.y)), {SHARPNESS}), 
-		pow(dot(abscol.rgb, vec3(uv_col.y, uv_col.z, uv_col.x)), {SHARPNESS}), 
-		pow(dot(abscol.rgb, uv_col.rgb), {SHARPNESS})
+	vec3 powrgb = vec3(
+		pow(dotred,{SHARPNESS}), 
+		pow(dotgreen,{SHARPNESS}), 
+		pow(dotblue,{SHARPNESS})
 	);
+	float powdot111 = dot(powrgb, vec3(1,1,1));
 	
+	vec3 sharphexgrid = powrgb / powdot111;
+	
+	use_col = vec4(sharphexgrid, 1.0);
 		
-	// BC Does this divide after the pow
-	//use_col = use_col / dot(use_col.rgb,vec3(1,1,1));
-
-		//STEP 3
-
-		float coldot = dot(use_col.rgb, vec3(1));
-		use_col /= coldot;
+	//Last step - Don't ask me.
 		
-		vec2 color_swiz1 = vec2(uv_col.a, uv_col.z);
-		vec2 color_swiz2 = vec2(uv_col.z, uv_col.x);
-		vec2 color_swiz3 = vec2(uv_col.x, uv_col.a);
+	vec3 step3 = RGBgrid * flip_check;
+	
+	vec2 uvRG = vec2(RGBgrid.r, RGBgrid.g);
+	vec2 uvBR = vec2(RGBgrid.b, RGBgrid.r);
+	vec2 uvGB = vec2(RGBgrid.g, RGBgrid.b);
+	
+	vec2 coordPlusR = vec2(coord + RGBgrid.r);
+	vec2 coordPlusG = vec2(coord + RGBgrid.g);
+	vec2 coordPlusB = vec2(coord + RGBgrid.b);
+	
+	vec2 gridID1 = coordPlusR + uvRG;
+	vec2 gridID2 = coordPlusG + uvBR;
+	vec2 gridID3 = coordPlusB + uvGB;
+	
+	
+	float unrot_r = 0.;
+	float unrot_g = 0.;
+	float unrot_b = 0.;
+	
+	//// Get the random rotated uv within the hexagon shape
+	vec2 rotated_uv_1 = RandomTransform(base_uv, gridID1, {TEX_REPEAT}, unrot_r);
+	vec2 rotated_uv_2 = RandomTransform(base_uv, gridID2, {TEX_REPEAT}, unrot_g);
+	vec2 rotated_uv_3 = RandomTransform(base_uv, gridID3, {TEX_REPEAT}, unrot_b);
+	
+	
+	vec3 rgb_out = vec3(0.,0.,0.);
+	if (false) {
 		
-		uv_col.rgb *= flip_check;
-		
-		vec3 rgb_out = vec3(0.,0.,0.);
-		
-		float unrot_r = 0.;
-		float unrot_g = 0.;
-		float unrot_b = 0.;
-		
-		// Get the random rotated uv within the hexagon shape
-		vec2 rotated_uv_1 = RandomTransform(base_uv, color_swiz1 + vec2(uv_col.r)
-			 + coord, {TEX_REPEAT}, unrot_r);
-		vec2 rotated_uv_2 = RandomTransform(base_uv, color_swiz2 + vec2(uv_col.g)
-			 + coord, {TEX_REPEAT}, unrot_g);
-		vec2 rotated_uv_3 = RandomTransform(base_uv, color_swiz3 + vec2(uv_col.b)
-			 + coord, {TEX_REPEAT}, unrot_b);
 		
 		// If it's a Normal Map, then we must unrotate the rgb colors of the
 		// normal map by the amount we just rotated. The if is first_fraction for debugging.
 		// Followed Ben Cowan again: https://www.youtube.com/watch?v=BBRmZ1dZCro
-		if (false) { 
+		//if (false) { 
 			vec2 unrotated_uvmap_rg = vec2(0.,0.);
 			vec2 rotated_uv = vec2(0.,0.);
 			vec3 mulv3 = vec3(0.,0.,0.);
@@ -259,19 +275,19 @@ func _get_code(input_vars, output_vars, mode, type):
 			//rgb_out += mulv3;
 				
 			{NM_out} =  rgb_out;
-		}
-		
-		// Apply the albedo to the new uv hexagon
-		vec3 ruv1 = texture( {ALBEDO_TEX}, rotated_uv_1).rgb * vec3(use_col.r);
-		vec3 ruv2 = texture( {ALBEDO_TEX}, rotated_uv_2).rgb * vec3(use_col.g);
-		vec3 ruv3 = texture( {ALBEDO_TEX}, rotated_uv_3).rgb * vec3(use_col.b);
-		rgb_out = ruv1.rgb + ruv2.rgb + ruv3.rgb;
-		{ALBEDO} = rgb_out;
+		//}
 	}
+		
+	// Apply the albedo to the new uv hexagon
+	vec3 ruv1 = texture( {ALBEDO_TEX}, rotated_uv_1).rgb * vec3(use_col.r);
+	vec3 ruv2 = texture( {ALBEDO_TEX}, rotated_uv_2).rgb * vec3(use_col.g);
+	vec3 ruv3 = texture( {ALBEDO_TEX}, rotated_uv_3).rgb * vec3(use_col.b);
+	rgb_out = ruv1.rgb + ruv2.rgb + ruv3.rgb;
+	{ALBEDO} = rgb_out;
 	
 	//Pass out the basic UV hex grid - it's usefull.
-	{UV_out} = use_col.rg;
-	{ALBEDO} = use_col.rgb;
+	{GRID_out} = RGBgrid;
+	//{ALBEDO} = rgb_out; //test;//use_col.rgb;
 """.format(
 	{
 		"TEX_REPEAT": input_vars[0],
@@ -282,6 +298,6 @@ func _get_code(input_vars, output_vars, mode, type):
 		"FUCK": input_vars[5],
 		"ALBEDO": output_vars[0],
 		"NM_out": output_vars[1],
-		"UV_out": output_vars[2]
+		"GRID_out": output_vars[2]
 	})
 	return foo
