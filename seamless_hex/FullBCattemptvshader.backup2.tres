@@ -1,13 +1,13 @@
-[gd_resource type="VisualShader" load_steps=88 format=3 uid="uid://i5hwq3g0tb4e"]
+[gd_resource type="VisualShader" load_steps=88 format=3 uid="uid://g2hjqtj082nd"]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/Reroute.gd" id="1_v8r65"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="4_2p0o1"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/Reroute.gd" id="1_mkahy"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVRotate.gd" id="2_vrnbp"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_pku6c"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_3f2km"]
 initialized = true
-script = ExtResource("1_v8r65")
+script = ExtResource("1_mkahy")
 
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_u38la"]
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
@@ -137,7 +137,7 @@ operator = 5
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_lbcxh"]
 parameter_name = "HexFocus"
 default_value_enabled = true
-default_value = 2.0
+default_value = 8.0
 
 [sub_resource type="VisualShaderNodeDotProduct" id="VisualShaderNodeDotProduct_0teqr"]
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1)]
@@ -233,7 +233,7 @@ expression = "uvout=RandomTransform(uv,seed,unrot1);"
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_mmnua"]
 initialized = true
-script = ExtResource("1_v8r65")
+script = ExtResource("1_mkahy")
 
 [sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_j4or1"]
 output_port_for_preview = 0
@@ -264,7 +264,7 @@ op_type = 0
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_nliqm"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_4knvq"]
-default_input_values = [0, Vector2(0, 0), 1, Vector2(12, 12)]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(2, 2)]
 op_type = 0
 operator = 2
 
@@ -300,7 +300,7 @@ size = Vector2(1760.02, 1357.67)
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_4x57g"]
 initialized = true
-script = ExtResource("1_v8r65")
+script = ExtResource("1_mkahy")
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_hie5d"]
 size = Vector2(326.372, 221.55)
@@ -309,7 +309,7 @@ expression = "uvout = RandomTransform(uv,seed,unrot2);"
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_25hj2"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, -1.571]
 initialized = true
-script = ExtResource("4_2p0o1")
+script = ExtResource("2_vrnbp")
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_8xvpn"]
 size = Vector2(326.372, 221.55)
@@ -346,9 +346,17 @@ operator = 2
 [resource]
 code = "shader_type spatial;
 uniform sampler2D Albedo : source_color, filter_linear, repeat_enable;
-uniform float HexFocus = 2;
+uniform float HexFocus = 8;
 
 
+// UVRotateV2
+
+vec2 vec2_rotate_NodeUVRotateV2(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
 // GlobalExpression:0
 	const vec2 TEX_REPEAT = vec2(1,1);
 	vec2 Translate(vec2 _UV, vec2 amount){ return _UV + amount; }
@@ -390,9 +398,22 @@ void fragment() {
 	vec2 n_out2p0 = UV;
 
 
+	vec2 n_out9p0;
+// UVRotateV2:9
+	vec2 n_in9p1 = vec2(0.50000, 0.50000);
+	float n_in9p2 = -1.57100;
+	{
+		
+			vec2 rotated_uv = n_out2p0;
+			rotated_uv = vec2_rotate_NodeUVRotateV2(n_out2p0, n_in9p2, n_in9p1);
+			n_out9p0 = rotated_uv;
+			
+	}
+
+
 // VectorOp:8
-	vec2 n_in8p1 = vec2(12.00000, 12.00000);
-	vec2 n_out8p0 = n_out2p0 * n_in8p1;
+	vec2 n_in8p1 = vec2(2.00000, 2.00000);
+	vec2 n_out8p0 = n_out9p0 * n_in8p1;
 
 
 	vec4 n_out88p0;
@@ -419,11 +440,11 @@ void fragment() {
 
 
 // FloatOp:60
-	float n_out60p0 = n_out54p1 * n_out58p0;
+	float n_out60p0 = n_out54p0 * n_out58p0;
 
 
 // FloatOp:61
-	float n_out61p0 = n_out54p0 - n_out60p0;
+	float n_out61p0 = n_out54p1 - n_out60p0;
 
 
 // FloatFunc:57
@@ -431,7 +452,7 @@ void fragment() {
 
 
 // FloatOp:59
-	float n_out59p0 = n_out54p1 * n_out57p0;
+	float n_out59p0 = n_out54p0 * n_out57p0;
 
 
 // VectorCompose:62
@@ -457,7 +478,7 @@ void fragment() {
 
 
 // FloatOp:27
-	float n_out27p0 = n_out26p0 + n_out26p1;
+	float n_out27p0 = n_out26p1 + n_out26p0;
 
 
 // FloatOp:28
@@ -483,7 +504,7 @@ void fragment() {
 
 
 // FloatOp:12
-	float n_out12p0 = n_out14p0 - n_out14p1;
+	float n_out12p0 = n_out14p1 - n_out14p0;
 
 
 // VectorOp:13
@@ -528,22 +549,22 @@ void fragment() {
 	float n_out72p2 = n_out70p0.z;
 
 
-// VectorOp:83
-	vec2 n_out83p0 = n_out7p0 + vec2(n_out72p2);
+// VectorOp:82
+	vec2 n_out82p0 = n_out7p0 + vec2(n_out72p1);
 
 
-// VectorDecompose:74
-	float n_out74p0 = n_out21p0.x;
-	float n_out74p1 = n_out21p0.y;
-	float n_out74p2 = n_out21p0.z;
+// VectorDecompose:76
+	float n_out76p0 = n_out21p0.x;
+	float n_out76p1 = n_out21p0.y;
+	float n_out76p2 = n_out21p0.z;
 
 
-// VectorCompose:75
-	vec2 n_out75p0 = vec2(n_out74p0, n_out74p1);
+// VectorCompose:77
+	vec2 n_out77p0 = vec2(n_out76p0, n_out76p2);
 
 
-// VectorOp:84
-	vec2 n_out84p0 = n_out83p0 + n_out75p0;
+// VectorOp:85
+	vec2 n_out85p0 = n_out82p0 + n_out77p0;
 
 
 	vec2 n_out66p0;
@@ -552,7 +573,7 @@ void fragment() {
 	n_out66p0 = vec2(0.0, 0.0);
 	n_out66p1 = 0.0;
 	{
-		n_out66p0=RandomTransform(vec2(n_out88p0.xy),n_out84p0,n_out66p1);
+		n_out66p0=RandomTransform(vec2(n_out88p0.xy),n_out85p0,n_out66p1);
 	}
 
 
@@ -575,6 +596,10 @@ void fragment() {
 	float n_out29p0 = abs(n_out28p0);
 
 
+// VectorFunc:32
+	vec2 n_out32p0 = vec2(1.0) - n_out24p0;
+
+
 // VectorDecompose:30
 	float n_out30p0 = n_out24p0.x;
 	float n_out30p1 = n_out24p0.y;
@@ -584,13 +609,9 @@ void fragment() {
 	vec2 n_out31p0 = vec2(n_out30p1, n_out30p0);
 
 
-// VectorFunc:32
-	vec2 n_out32p0 = vec2(1.0) - n_out31p0;
-
-
 	vec2 n_out36p0;
 // Switch:36
-	n_out36p0 = mix(n_out24p0, n_out32p0, float(n_out35p0));
+	n_out36p0 = mix(n_out31p0, n_out32p0, float(n_out35p0));
 
 
 // VectorDecompose:38
@@ -657,22 +678,22 @@ void fragment() {
 	vec3 n_out96p0 = vec3(n_out93p0.xyz) * vec3(n_out91p0);
 
 
-// VectorOp:82
-	vec2 n_out82p0 = n_out7p0 + vec2(n_out72p1);
+// VectorOp:83
+	vec2 n_out83p0 = n_out7p0 + vec2(n_out72p2);
 
 
-// VectorDecompose:76
-	float n_out76p0 = n_out21p0.x;
-	float n_out76p1 = n_out21p0.y;
-	float n_out76p2 = n_out21p0.z;
+// VectorDecompose:74
+	float n_out74p0 = n_out21p0.x;
+	float n_out74p1 = n_out21p0.y;
+	float n_out74p2 = n_out21p0.z;
 
 
-// VectorCompose:77
-	vec2 n_out77p0 = vec2(n_out76p2, n_out76p0);
+// VectorCompose:75
+	vec2 n_out75p0 = vec2(n_out74p1, n_out74p0);
 
 
-// VectorOp:85
-	vec2 n_out85p0 = n_out82p0 + n_out77p0;
+// VectorOp:84
+	vec2 n_out84p0 = n_out83p0 + n_out75p0;
 
 
 	vec2 n_out89p0;
@@ -681,7 +702,7 @@ void fragment() {
 	n_out89p0 = vec2(0.0, 0.0);
 	n_out89p1 = 0.0;
 	{
-		n_out89p0 = RandomTransform(vec2(n_out88p0.xy),n_out85p0,n_out89p1);
+		n_out89p0 = RandomTransform(vec2(n_out88p0.xy),n_out84p0,n_out89p1);
 	}
 
 
@@ -709,7 +730,7 @@ void fragment() {
 
 
 // VectorCompose:78
-	vec2 n_out78p0 = vec2(n_out79p1, n_out79p2);
+	vec2 n_out78p0 = vec2(n_out79p2, n_out79p1);
 
 
 // VectorOp:86
@@ -746,13 +767,25 @@ void fragment() {
 	}
 
 
+	vec4 n_out101p0;
+// Route:101
+	{
+		n_out101p0 = vec4(n_out52p0, 0.0);
+	}
+
+
+// Mix:102
+	vec3 n_in102p2 = vec3(0.50000, 0.50000, 0.50000);
+	vec3 n_out102p0 = mix(vec3(n_out67p0.xyz), vec3(n_out101p0.xyz), n_in102p2);
+
+
 // Output:0
-	ALBEDO = vec3(n_out67p0.xyz);
+	ALBEDO = n_out102p0;
 
 
 }
 "
-graph_offset = Vector2(-807.498, -413.887)
+graph_offset = Vector2(-2151.25, -205.968)
 nodes/fragment/0/position = Vector2(3480, -2080)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_x0i8j")
 nodes/fragment/2/position = Vector2(-4740, 520)
@@ -787,9 +820,9 @@ nodes/fragment/23/position = Vector2(-2640, -920)
 nodes/fragment/24/node = SubResource("VisualShaderNodeVectorFunc_pytb0")
 nodes/fragment/24/position = Vector2(-2480, -60)
 nodes/fragment/26/node = SubResource("VisualShaderNodeVectorDecompose_tl7wx")
-nodes/fragment/26/position = Vector2(-2220, -60)
+nodes/fragment/26/position = Vector2(-2160, -60)
 nodes/fragment/27/node = SubResource("VisualShaderNodeFloatOp_upu48")
-nodes/fragment/27/position = Vector2(-2020, -60)
+nodes/fragment/27/position = Vector2(-1980, -60)
 nodes/fragment/28/node = SubResource("VisualShaderNodeFloatOp_hwmc7")
 nodes/fragment/28/position = Vector2(-1840, -60)
 nodes/fragment/29/node = SubResource("VisualShaderNodeFloatFunc_ixukh")
@@ -837,7 +870,7 @@ nodes/fragment/52/position = Vector2(1100, -400)
 nodes/fragment/53/node = SubResource("VisualShaderNodeComment_l0jft")
 nodes/fragment/53/position = Vector2(380, -500)
 nodes/fragment/54/node = SubResource("VisualShaderNodeVectorDecompose_5ydf6")
-nodes/fragment/54/position = Vector2(-3840, -660)
+nodes/fragment/54/position = Vector2(-3820, -600)
 nodes/fragment/56/node = SubResource("VisualShaderNodeFloatOp_j7tb2")
 nodes/fragment/56/position = Vector2(-3920, -400)
 nodes/fragment/57/node = SubResource("VisualShaderNodeFloatFunc_qnnol")
@@ -847,15 +880,15 @@ nodes/fragment/58/position = Vector2(-3740, -460)
 nodes/fragment/59/node = SubResource("VisualShaderNodeFloatOp_ofrqv")
 nodes/fragment/59/position = Vector2(-3500, -360)
 nodes/fragment/60/node = SubResource("VisualShaderNodeFloatOp_olhjv")
-nodes/fragment/60/position = Vector2(-3500, -640)
+nodes/fragment/60/position = Vector2(-3500, -480)
 nodes/fragment/61/node = SubResource("VisualShaderNodeFloatOp_6tf4d")
-nodes/fragment/61/position = Vector2(-3360, -480)
+nodes/fragment/61/position = Vector2(-3320, -440)
 nodes/fragment/62/node = SubResource("VisualShaderNodeVectorCompose_ptqes")
 nodes/fragment/62/position = Vector2(-3160, -440)
 nodes/fragment/63/node = SubResource("VisualShaderNodeVectorOp_ce7h4")
 nodes/fragment/63/position = Vector2(-3000, -440)
 nodes/fragment/64/node = SubResource("VisualShaderNodeComment_cmbo6")
-nodes/fragment/64/position = Vector2(0, -160)
+nodes/fragment/64/position = Vector2(-3980, -660)
 nodes/fragment/65/node = SubResource("VisualShaderNodeGlobalExpression_8covm")
 nodes/fragment/65/position = Vector2(400, 40)
 nodes/fragment/65/size = Vector2(817.27, 594.985)
@@ -928,9 +961,9 @@ nodes/fragment/82/position = Vector2(-40, -1580)
 nodes/fragment/83/node = SubResource("VisualShaderNodeVectorOp_vm28q")
 nodes/fragment/83/position = Vector2(-40, -1740)
 nodes/fragment/84/node = SubResource("VisualShaderNodeVectorOp_ho44w")
-nodes/fragment/84/position = Vector2(740, -1780)
+nodes/fragment/84/position = Vector2(520, -1400)
 nodes/fragment/85/node = SubResource("VisualShaderNodeVectorOp_ws6f5")
-nodes/fragment/85/position = Vector2(560, -1420)
+nodes/fragment/85/position = Vector2(520, -1740)
 nodes/fragment/86/node = SubResource("VisualShaderNodeVectorOp_15ppr")
 nodes/fragment/86/position = Vector2(520, -1080)
 nodes/fragment/87/node = SubResource("VisualShaderNodeComment_cg6ea")
@@ -973,4 +1006,4 @@ nodes/fragment/101/node = SubResource("VisualShaderNodeCustom_3f2km")
 nodes/fragment/101/position = Vector2(2860, -1780)
 nodes/fragment/102/node = SubResource("VisualShaderNodeMix_u38la")
 nodes/fragment/102/position = Vector2(3200, -2060)
-nodes/fragment/connections = PackedInt32Array(12, 0, 13, 0, 7, 0, 14, 0, 13, 0, 15, 0, 16, 0, 15, 1, 15, 0, 17, 0, 19, 0, 17, 1, 17, 0, 20, 0, 20, 0, 21, 0, 2, 0, 9, 0, 24, 0, 26, 0, 27, 0, 28, 0, 28, 0, 29, 0, 28, 0, 35, 0, 35, 0, 36, 0, 32, 0, 36, 1, 24, 0, 30, 0, 29, 0, 37, 0, 36, 0, 38, 0, 21, 0, 39, 0, 39, 2, 42, 0, 39, 0, 42, 1, 39, 1, 42, 2, 40, 0, 43, 2, 21, 0, 40, 0, 42, 0, 44, 0, 37, 0, 44, 1, 43, 0, 45, 0, 37, 0, 45, 1, 21, 0, 46, 0, 37, 0, 46, 1, 44, 0, 47, 0, 45, 0, 47, 1, 46, 0, 47, 2, 47, 0, 49, 0, 50, 0, 49, 1, 49, 0, 51, 0, 49, 0, 52, 0, 51, 0, 52, 1, 8, 0, 54, 0, 56, 0, 57, 0, 56, 0, 58, 1, 57, 0, 59, 1, 58, 0, 60, 1, 60, 0, 61, 1, 61, 0, 62, 0, 59, 0, 62, 1, 62, 0, 63, 0, 21, 0, 70, 1, 35, 0, 71, 0, 71, 0, 70, 0, 70, 0, 72, 0, 21, 0, 74, 0, 21, 0, 76, 0, 21, 0, 79, 0, 7, 0, 81, 0, 7, 0, 82, 0, 83, 0, 84, 0, 75, 0, 84, 1, 78, 0, 86, 1, 81, 0, 86, 0, 82, 0, 85, 0, 77, 0, 85, 1, 72, 0, 81, 1, 72, 1, 82, 1, 7, 0, 83, 0, 72, 2, 83, 1, 88, 0, 66, 0, 88, 0, 89, 0, 88, 0, 90, 0, 52, 0, 91, 0, 92, 0, 93, 2, 92, 0, 94, 2, 92, 0, 95, 2, 66, 0, 93, 0, 93, 0, 96, 0, 91, 0, 96, 1, 94, 0, 97, 0, 91, 1, 97, 1, 95, 0, 98, 0, 91, 2, 98, 1, 96, 0, 99, 0, 97, 0, 99, 1, 99, 0, 100, 0, 98, 0, 100, 1, 100, 0, 67, 0, 52, 0, 101, 0, 67, 0, 102, 0, 101, 0, 102, 1, 89, 0, 94, 0, 90, 0, 95, 0, 8, 0, 88, 0, 2, 0, 8, 0, 26, 0, 27, 0, 26, 1, 27, 1, 63, 0, 7, 0, 14, 0, 12, 0, 14, 1, 12, 1, 30, 0, 31, 1, 30, 1, 31, 0, 31, 0, 32, 0, 74, 0, 75, 0, 74, 1, 75, 1, 76, 2, 77, 0, 76, 0, 77, 1, 79, 1, 78, 0, 79, 2, 78, 1, 84, 0, 66, 1, 85, 0, 89, 1, 86, 0, 90, 1, 67, 0, 0, 0, 63, 0, 24, 0, 54, 1, 60, 0, 54, 1, 59, 0, 54, 0, 61, 0, 38, 0, 37, 1, 38, 1, 37, 2, 40, 1, 43, 0, 40, 2, 43, 1, 24, 0, 36, 2)
+nodes/fragment/connections = PackedInt32Array(12, 0, 13, 0, 7, 0, 14, 0, 14, 0, 12, 1, 14, 1, 12, 0, 13, 0, 15, 0, 16, 0, 15, 1, 15, 0, 17, 0, 19, 0, 17, 1, 17, 0, 20, 0, 20, 0, 21, 0, 2, 0, 9, 0, 24, 0, 26, 0, 26, 0, 27, 1, 26, 1, 27, 0, 27, 0, 28, 0, 28, 0, 29, 0, 24, 0, 32, 0, 28, 0, 35, 0, 35, 0, 36, 0, 32, 0, 36, 1, 24, 0, 30, 0, 30, 0, 31, 1, 30, 1, 31, 0, 31, 0, 36, 2, 29, 0, 37, 0, 36, 0, 38, 0, 38, 0, 37, 1, 38, 1, 37, 2, 21, 0, 39, 0, 39, 2, 42, 0, 39, 0, 42, 1, 39, 1, 42, 2, 40, 1, 43, 0, 40, 2, 43, 1, 40, 0, 43, 2, 21, 0, 40, 0, 42, 0, 44, 0, 37, 0, 44, 1, 43, 0, 45, 0, 37, 0, 45, 1, 21, 0, 46, 0, 37, 0, 46, 1, 44, 0, 47, 0, 45, 0, 47, 1, 46, 0, 47, 2, 47, 0, 49, 0, 50, 0, 49, 1, 49, 0, 51, 0, 49, 0, 52, 0, 51, 0, 52, 1, 8, 0, 54, 0, 56, 0, 57, 0, 56, 0, 58, 1, 57, 0, 59, 1, 58, 0, 60, 1, 54, 0, 59, 0, 54, 0, 60, 0, 54, 1, 61, 0, 60, 0, 61, 1, 61, 0, 62, 0, 59, 0, 62, 1, 62, 0, 63, 0, 63, 0, 7, 0, 63, 0, 24, 0, 21, 0, 70, 1, 35, 0, 71, 0, 71, 0, 70, 0, 70, 0, 72, 0, 21, 0, 74, 0, 21, 0, 76, 0, 21, 0, 79, 0, 7, 0, 81, 0, 7, 0, 82, 0, 83, 0, 84, 0, 75, 0, 84, 1, 78, 0, 86, 1, 81, 0, 86, 0, 82, 0, 85, 0, 77, 0, 85, 1, 72, 0, 81, 1, 72, 1, 82, 1, 79, 1, 78, 1, 79, 2, 78, 0, 7, 0, 83, 0, 72, 2, 83, 1, 74, 1, 75, 0, 74, 0, 75, 1, 76, 2, 77, 1, 76, 0, 77, 0, 88, 0, 66, 0, 88, 0, 89, 0, 88, 0, 90, 0, 85, 0, 66, 1, 52, 0, 91, 0, 92, 0, 93, 2, 92, 0, 94, 2, 92, 0, 95, 2, 66, 0, 93, 0, 93, 0, 96, 0, 91, 0, 96, 1, 94, 0, 97, 0, 91, 1, 97, 1, 95, 0, 98, 0, 91, 2, 98, 1, 96, 0, 99, 0, 97, 0, 99, 1, 99, 0, 100, 0, 98, 0, 100, 1, 100, 0, 67, 0, 52, 0, 101, 0, 67, 0, 102, 0, 101, 0, 102, 1, 89, 0, 94, 0, 90, 0, 95, 0, 84, 0, 89, 1, 86, 0, 90, 1, 102, 0, 0, 0, 8, 0, 88, 0, 9, 0, 8, 0)
