@@ -15,14 +15,14 @@ const float FIVEDIVTHREE = 5. / 3.;
 //float Round(float num){ return floor(num + .5); }
 vec3 Round3(vec3 ivec){ return floor(ivec + vec3(0.5)); }
 vec2 Rotate(vec2 _uv, float _angle, float _pivot){
-	vec2 center = vec2(_pivot) * TEX_REPEAT;
-	_uv -= center;
-	vec2 rot = vec2(cos(_angle), sin(_angle));
-	return vec2((rot.x * _uv.x) + (rot.y * _uv.y), (rot.x * _uv.y) - (rot.y * _uv.x)) + center;
-	//_uv -= _pivot * _TEX_REPEAT;
-	//_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-	//_uv += _pivot * _TEX_REPEAT;
-	//return _uv ;
+	//vec2 center = vec2(_pivot) * TEX_REPEAT;
+	//_uv -= center;
+	//vec2 rot = vec2(cos(_angle), sin(_angle));
+	//return vec2((rot.x * _uv.x) + (rot.y * _uv.y), (rot.x * _uv.y) - (rot.y * _uv.x)) + center;
+	_uv -= _pivot;// * _TEX_REPEAT;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;// * _TEX_REPEAT;
+	return _uv ;
 }
 vec3 Hash2(vec2 _uv){
 	return fract(sin(vec3(
@@ -55,7 +55,8 @@ void fragment() {
 
 	{
 			//Step 1 : Build a BGR Grid
-			vec2 base_uv = (UV + WEIRDNESS) * TEX_REPEAT;
+			vec2 base_uv = Rotate(UV,-PI/2.,0.); //(UV + WEIRDNESS) * TEX_REPEAT;
+			base_uv = base_uv * TEX_REPEAT;
 			
 			//Un-slant the final hex uv grid
 			float one732div2 = 1.732 / 2.;

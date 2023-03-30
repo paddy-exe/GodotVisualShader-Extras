@@ -9,5 +9,7 @@ render_priority = 0
 shader = ExtResource("1_y7anl")
 shader_parameter/WEIRDNESS = Vector2(0, 0)
 shader_parameter/TEX_REPEAT = 6.0
+shader_parameter/SHARPNESS = 16.0
+shader_parameter/HEX_SIZE = 1.0
 shader_parameter/tex = ExtResource("3_x6wsv")
 shader_parameter/NM = ExtResource("2_ltw0d")
