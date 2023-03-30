@@ -80,18 +80,7 @@ func _get_global_code(mode):
 // Functions
 //float Round(float num){ return floor(num + .5); }
 vec3 Round3(vec3 ivec){ return floor(ivec + vec3(0.5)); }
-vec2 Rotate(vec2 _uv, float _angle, float _pivot, float TEX_REPEAT){
-	//vec2 center = vec2(_pivot) * TEX_REPEAT;
-	//_UV -= center;
-	//vec2 rot = vec2(cos(amount), sin(amount));
-	//return vec2((rot.x * _UV.x) + (rot.y * _UV.y), (rot.x * _UV.y) - (rot.y * _UV.x)) + center;
-	
-	_uv -= _pivot * TEX_REPEAT;
-	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-	_uv += _pivot * TEX_REPEAT;
-	return _uv ;
-		
-}
+
 vec3 Hash2(vec2 _UV){
 	return fract(sin(vec3(
 		dot(vec3(_UV.x, _UV.y, _UV.x), vec3(127.09, 311.7, 74.69)), 
@@ -104,6 +93,18 @@ vec3 Hash2(vec2 _UV){
 //}
 vec2 Translate(vec2 _UV, vec2 amount){ return _UV + amount; }
 vec2 Scale(vec2 _UV, vec2 amount){ return _UV * amount; }
+vec2 Rotate(vec2 _uv, float _angle, float _pivot, float TEX_REPEAT){
+	//vec2 center = vec2(_pivot) * TEX_REPEAT;
+	//_UV -= center;
+	//vec2 rot = vec2(cos(amount), sin(amount));
+	//return vec2((rot.x * _UV.x) + (rot.y * _UV.y), (rot.x * _UV.y) - (rot.y * _UV.x)) + center;
+	
+	_uv -= _pivot * TEX_REPEAT;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot * TEX_REPEAT;
+	return _uv ;
+		
+}
 vec2 Transform(vec2 _UV, float rotation, vec2 scale, vec2 translation, float TEX_REPEAT){
 	return Translate(Scale(Rotate(_UV, rotation, 0.5, TEX_REPEAT), scale), translation);
 }
