@@ -1,16 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf6rkpkhv452g"]
+[gd_scene load_steps=7 format=3 uid="uid://bf6rkpkhv452g"]
 
 [ext_resource type="Material" uid="uid://cp31o3txfs01h" path="res://seamless_hex/BC_seamless_material.tres" id="1_0ac6o"]
 [ext_resource type="Shader" uid="uid://i5hwq3g0tb4e" path="res://seamless_hex/FullBCattemptvshader.tres" id="1_vlb8e"]
-[ext_resource type="Texture2D" uid="uid://ck6ib50lrnxw5" path="res://addons/VisualShaderExtras/AddonAssets/icon.png" id="2_us4oe"]
+[ext_resource type="Texture2D" uid="uid://bc38tkdt2r35v" path="res://seamless_hex/Gravel_001_BaseColor.jpg" id="2_ed7u1"]
+[ext_resource type="Texture2D" uid="uid://xj4lictq4nmi" path="res://seamless_hex/Gravel_001_Normal.jpg" id="3_7524o"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_k6go4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smt7e"]
 render_priority = 0
 shader = ExtResource("1_vlb8e")
-shader_parameter/HexFocus = 2.0
-shader_parameter/Albedo = ExtResource("2_us4oe")
+shader_parameter/HexFocus = 12.0
+shader_parameter/Albedo = ExtResource("2_ed7u1")
+shader_parameter/NormalMap = ExtResource("3_7524o")
 
 [node name="Node3D" type="Node3D"]
 
