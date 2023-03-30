@@ -18,10 +18,10 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeRerouteMany
+class_name VisualShaderNodeRerouteTransform
 
 func _get_name():
-	return "RouteMany"
+	return "RerouteTransform"
 
 func _get_category():
 	return "VisualShaderExtras/Usability"
@@ -30,7 +30,7 @@ func _get_description():
 	return "Node to let you just hang a noodle somewhere and pass it through.\nNB: Make sure to match the same in and out ports."
 
 func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+	return VisualShaderNode.PORT_TYPE_TRANSFORM
 
 const ptypes:Array = [
 	VisualShaderNode.PORT_TYPE_BOOLEAN,
@@ -45,27 +45,32 @@ const ptypes:Array = [
 const names:Array = ["Boolean","Scalar","Integer","Vector2D","Vector3D","Vector4D","Transform"]#,"Sampler"]
 
 func _get_output_port_type(port):
-	return ptypes[port]
+	return VisualShaderNode.PORT_TYPE_TRANSFORM
+	#return ptypes[port]
 	
 func _get_output_port_count():
-	return ptypes.size()
+	return 1 #ptypes.size()
 
 func _get_output_port_name(port: int):
 	return ""
 	
 func _get_input_port_count():
-	return ptypes.size()
+	return 1 #ptypes.size()
 
 func _get_input_port_name(port):
-	return names[port]
+	return "T"
+	#return names[port]
 
 func _get_input_port_type(port):
-	return ptypes[port]
+	return VisualShaderNode.PORT_TYPE_TRANSFORM
+	#return ptypes[port]
 
 func _get_code(input_vars, output_vars, mode, type):
-	var s = ""
-	for p in range(0,7):
-		if input_vars[p]:
-			s += "{outp} = {inp};\n".format({"outp":output_vars[p],"inp":input_vars[p]})
-	return s
+	if input_vars[0]:
+		return "%s = %s;\n" % [output_vars[0],input_vars[0]]
+#	var s = ""
+#	for p in range(0,7):
+#		if input_vars[p]:
+#			s += "{outp} = {inp};\n".format({"outp":output_vars[p],"inp":input_vars[p]})
+#	return s
 	

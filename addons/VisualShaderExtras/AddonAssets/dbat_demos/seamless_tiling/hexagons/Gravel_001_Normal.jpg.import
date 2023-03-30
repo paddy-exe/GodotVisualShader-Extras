@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xj4lictq4nmi"
-path.s3tc="res://.godot/imported/Gravel_001_Normal.jpg-7ab44384bf537e3961a84b14d7c07df6.s3tc.ctex"
+path.s3tc="res://.godot/imported/Gravel_001_Normal.jpg-180c8e53d8c702e03fcbad0e2a065138.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://seamless_hex/Gravel_001_Normal.jpg"
-dest_files=["res://.godot/imported/Gravel_001_Normal.jpg-7ab44384bf537e3961a84b14d7c07df6.s3tc.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/seamless_tiling/hexagons/Gravel_001_Normal.jpg"
+dest_files=["res://.godot/imported/Gravel_001_Normal.jpg-180c8e53d8c702e03fcbad0e2a065138.s3tc.ctex"]
 
 [params]
 

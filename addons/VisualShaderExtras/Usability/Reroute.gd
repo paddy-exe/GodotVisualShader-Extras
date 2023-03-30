@@ -21,16 +21,16 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeReroute
 
 func _get_name():
-	return "Route"
+	return "Reroute"
 
 func _get_category():
 	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return "Re-route any number-like. Helps with long noodles.\nWill convert the incoming to the outgoing it connects to."
+	return "Re-route any number-like. Helps with long noodles.\nWill convert the incoming to the outgoing it connects to. You can't reroute Transforms."
 
-func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+#func _get_return_icon_type():
+#	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_output_port_count():
 	return 1
@@ -51,5 +51,6 @@ func _get_input_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_code(input_vars, output_vars, mode, type):
-	return "%s = %s;\n" % [output_vars[0],input_vars[0]]
+	if input_vars[0]:
+		return "%s = %s;\n" % [output_vars[0],input_vars[0]]
 

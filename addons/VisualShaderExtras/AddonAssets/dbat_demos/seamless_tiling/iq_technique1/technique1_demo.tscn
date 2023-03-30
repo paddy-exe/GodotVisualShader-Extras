@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmslvw6fuqfgi"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Material" uid="uid://kjy6e2amw6t6" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/seamless_IQ/technique1/rocky_material.tres" id="1_0ac6o"]
+[ext_resource type="Material" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/seamless_tiling/iq_technique1/rocky_material.tres" id="1_0ac6o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7exsq"]
 size = Vector3(4.528, 1, 9.163)

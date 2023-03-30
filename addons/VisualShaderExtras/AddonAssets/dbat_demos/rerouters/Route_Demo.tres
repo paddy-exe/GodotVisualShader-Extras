@@ -1,7 +1,8 @@
-[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://80hncgx63l85"]
+[gd_resource type="VisualShader" load_steps=19 format=3 uid="uid://80hncgx63l85"]
 
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.png" id="2_cvh7q"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/Reroute.gd" id="2_oul58"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/RerouteTransform.gd" id="3_q3ajf"]
 
 [sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_ha5ap"]
 constant = Vector2(0.5, 0.3)
@@ -35,14 +36,18 @@ op_type = 5
 initialized = true
 script = ExtResource("2_oul58")
 
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bntpv"]
+initialized = true
+script = ExtResource("3_q3ajf")
+
+[sub_resource type="VisualShaderNodeTransformFunc" id="VisualShaderNodeTransformFunc_1u1pl"]
+
+[sub_resource type="VisualShaderNodeTransformDecompose" id="VisualShaderNodeTransformDecompose_ntqfp"]
+
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_dd5ua"]
 constant = Color(1, 0.386878, 0.342078, 1)
 
 [sub_resource type="VisualShaderNodeBooleanConstant" id="VisualShaderNodeBooleanConstant_yq66k"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cyr48"]
-initialized = true
-script = ExtResource("2_oul58")
 
 [resource]
 code = "shader_type canvas_item;
@@ -60,25 +65,10 @@ void fragment() {
 
 
 	vec4 n_out19p0;
-// Route:19
+// Reroute:19
 	{
 		n_out19p0 = n_out3p0;
 	}
-
-
-// Input:18
-	vec2 n_out18p0 = UV;
-
-
-	vec4 n_out9p0;
-// Route:9
-	{
-		n_out9p0 = vec4(n_out18p0, 0.0, 0.0);
-	}
-
-
-// Mix:21
-	vec4 n_out21p0 = mix(n_out20p0, n_out19p0, n_out9p0);
 
 
 // FloatConstant:13
@@ -86,20 +76,43 @@ void fragment() {
 
 
 	vec4 n_out22p0;
-// Route:22
+// Reroute:22
 	{
 		n_out22p0 = vec4(n_out13p0);
 	}
 
 
+// Mix:21
+	vec4 n_out21p0 = mix(n_out20p0, n_out19p0, n_out22p0);
+
+
+// TransformFunc:25
+	mat4 n_in25p0 = mat4(vec4(1.00000, 0.00000, 0.00000, 0.0), vec4(0.00000, 1.00000, 0.00000, 0.0), vec4(0.00000, 0.00000, 1.00000, 0.0), vec4(0.00000, 0.00000, 0.00000, 1.0));
+	mat4 n_out25p0 = inverse(n_in25p0);
+
+
+	mat4 n_out24p0;
+// RerouteTransform:24
+	{
+		n_out24p0 = n_out25p0;
+	}
+
+
+// TransformDecompose:26
+	vec3 n_out26p0 = n_out24p0[0].xyz;
+	vec3 n_out26p1 = n_out24p0[1].xyz;
+	vec3 n_out26p2 = n_out24p0[2].xyz;
+	vec3 n_out26p3 = n_out24p0[3].xyz;
+
+
 // Output:0
 	COLOR.rgb = vec3(n_out21p0.xyz);
-	COLOR.a = n_out22p0.x;
+	COLOR.a = n_out26p0.x;
 
 
 }
 "
-graph_offset = Vector2(-160.651, -86.7911)
+graph_offset = Vector2(-192.931, 9.15219)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(980, 200)
@@ -107,12 +120,10 @@ nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_dd5ua")
 nodes/fragment/3/position = Vector2(-20, 220)
 nodes/fragment/8/node = SubResource("VisualShaderNodeBooleanConstant_yq66k")
 nodes/fragment/8/position = Vector2(-40, 440)
-nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_cyr48")
-nodes/fragment/9/position = Vector2(380, 260)
 nodes/fragment/12/node = SubResource("VisualShaderNodeVec2Constant_ha5ap")
 nodes/fragment/12/position = Vector2(-20, 600)
 nodes/fragment/13/node = SubResource("VisualShaderNodeFloatConstant_v1480")
-nodes/fragment/13/position = Vector2(-40, 300)
+nodes/fragment/13/position = Vector2(-40, 280)
 nodes/fragment/14/node = SubResource("VisualShaderNodeIntConstant_4p474")
 nodes/fragment/14/position = Vector2(0, 520)
 nodes/fragment/15/node = SubResource("VisualShaderNodeVec3Constant_uutbx")
@@ -129,4 +140,10 @@ nodes/fragment/21/node = SubResource("VisualShaderNodeMix_b115i")
 nodes/fragment/21/position = Vector2(620, 100)
 nodes/fragment/22/node = SubResource("VisualShaderNodeCustom_g7m7u")
 nodes/fragment/22/position = Vector2(460, 320)
-nodes/fragment/connections = PackedInt32Array(18, 0, 9, 0, 3, 0, 19, 0, 20, 0, 21, 0, 19, 0, 21, 1, 21, 0, 0, 0, 9, 0, 21, 2, 13, 0, 22, 0, 22, 0, 0, 1)
+nodes/fragment/24/node = SubResource("VisualShaderNodeCustom_bntpv")
+nodes/fragment/24/position = Vector2(360, 520)
+nodes/fragment/25/node = SubResource("VisualShaderNodeTransformFunc_1u1pl")
+nodes/fragment/25/position = Vector2(0, 900)
+nodes/fragment/26/node = SubResource("VisualShaderNodeTransformDecompose_ntqfp")
+nodes/fragment/26/position = Vector2(680, 380)
+nodes/fragment/connections = PackedInt32Array(3, 0, 19, 0, 20, 0, 21, 0, 19, 0, 21, 1, 13, 0, 22, 0, 21, 0, 0, 0, 25, 0, 24, 0, 24, 0, 26, 0, 26, 0, 0, 1, 22, 0, 21, 2)
