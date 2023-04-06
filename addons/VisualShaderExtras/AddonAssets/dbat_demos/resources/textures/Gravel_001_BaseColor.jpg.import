@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xj4lictq4nmi"
-path.s3tc="res://.godot/imported/Gravel_001_Normal.jpg-180c8e53d8c702e03fcbad0e2a065138.s3tc.ctex"
+uid="uid://bc38tkdt2r35v"
+path.s3tc="res://.godot/imported/Gravel_001_BaseColor.jpg-c394c4f0426a32e53addd6da9bb711b5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/seamless_tiling/hexagons/Gravel_001_Normal.jpg"
-dest_files=["res://.godot/imported/Gravel_001_Normal.jpg-180c8e53d8c702e03fcbad0e2a065138.s3tc.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/Gravel_001_BaseColor.jpg"
+dest_files=["res://.godot/imported/Gravel_001_BaseColor.jpg-c394c4f0426a32e53addd6da9bb711b5.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

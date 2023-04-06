@@ -46,7 +46,7 @@ const names := [
 	["R",  "Roughness", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
 	["M",  "Metallic", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR],
 	["N",  "NormalMap", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_VECTOR_3D],
-	["D",  "Depth", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR]
+	["D",  "DepthMap", VisualShaderNode.PORT_TYPE_SAMPLER, VisualShaderNode.PORT_TYPE_SCALAR]
 ]
 
 func _get_output_port_count():
