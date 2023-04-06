@@ -1,7 +1,7 @@
-[gd_resource type="VisualShader" load_steps=19 format=3 uid="uid://80hncgx63l85"]
+[gd_resource type="VisualShader" load_steps=19 format=3]
 
 [ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.png" id="2_cvh7q"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/Reroute.gd" id="2_oul58"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/Rerouter.gd" id="2_oul58"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/RerouteTransform.gd" id="3_q3ajf"]
 
 [sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_ha5ap"]

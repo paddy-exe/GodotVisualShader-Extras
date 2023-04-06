@@ -1,6 +1,6 @@
-[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://byuxg8ejv5p3o"]
+[gd_resource type="VisualShader" load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/IQ_seamless_tiler_technique1.gd" id="1_bpdut"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/SeamlessTiling/seamless_tiler_technique1.gd" id="1_bpdut"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qimeh"]
 parameter_name = "albedo"

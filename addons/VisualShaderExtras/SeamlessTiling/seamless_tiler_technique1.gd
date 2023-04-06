@@ -6,7 +6,7 @@ func _get_name():
 	return "IQSeamlessTilingTechnique1"
 
 func _get_category():
-	return "VisualShaderExtras/dev"
+	return "VisualShaderExtras/SeamlessTiling"
 
 func _get_description():
 	return """https://iquilezles.org/articles/texturerepetition\nOne way to prevent the visual repetition of the texture is to assign a random offset and orientation to each tile of the repetition. We can do that by determining in which tile we are, creating a series of four pseudo-random values for the tile, and then using these to offset and re-orient the texture. Re-orientation can be something as simple as mirroring in x or y or both. This produces a non repeating pattern over the whole surface.."""
