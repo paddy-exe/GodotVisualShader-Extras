@@ -2450,7 +2450,7 @@ code = "shader_type canvas_item;
 //}
 
 //New hack - faster than using length func
-float circle(vec2 position, float radius, float smoothness)
+float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
 {
 	return smoothstep(radius, radius + smoothness, dot(position, position) * 6.0);
 }
@@ -2472,7 +2472,7 @@ void fragment() {
 	float n_in4p2 = 0.27600;
 	float n_in4p3 = 1.00000;
 	{
-		n_out4p0 = circle(UV - n_in4p1, n_in4p2, n_in4p3);
+		n_out4p0 = VisualShaderNodeCircle_circle(UV - n_in4p1, n_in4p2, n_in4p3);
 	}
 
 

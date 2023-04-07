@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://duaujvdhys1pc"]
 
 [ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/shapes/shapes_shader.tres" id="1_xvkxh"]
-[ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="2_n7xmv"]
+[ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="2_n7xmv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ajk8"]
 shader = ExtResource("1_xvkxh")

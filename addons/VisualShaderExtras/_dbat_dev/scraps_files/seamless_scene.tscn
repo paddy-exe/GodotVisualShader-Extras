@@ -1,0 +1,95 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/_dbat_dev/scraps_files/seamless_scene_vshader.tres" id="1_1x000"]
+[ext_resource type="ArrayMesh" uid="uid://bcv4ug57hcmnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/suzanne.obj" id="1_qfl0m"]
+[ext_resource type="Texture2D" uid="uid://xj4lictq4nmi" path="res://addons/VisualShaderExtras/_dbat_dev/scraps_files/Gravel_001_Normal.jpg" id="6_qa53r"]
+[ext_resource type="Shader" path="res://seamless_hex/BC_seamless_scene_vshader.tres" id="6_tj0yx"]
+[ext_resource type="Texture2D" uid="uid://bc38tkdt2r35v" path="res://addons/VisualShaderExtras/_dbat_dev/scraps_files/Gravel_001_BaseColor.jpg" id="7_jyado"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/_dbat_dev/scraps_files/IQ_seamless_tiling.gdshader" id="10_7eon8"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/_dbat_dev/scraps_files/BC_hack.gdshader" id="10_s3mli"]
+[ext_resource type="Texture2D" uid="uid://ck6ib50lrnxw5" path="res://addons/VisualShaderExtras/AddonAssets/icon.png" id="11_3gh7u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7wb8k"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_8fnfa"]
+sky_material = SubResource("ProceduralSkyMaterial_7wb8k")
+
+[sub_resource type="Environment" id="Environment_50vof"]
+background_mode = 2
+sky = SubResource("Sky_8fnfa")
+ambient_light_color = Color(1, 0.909804, 0.592157, 1)
+ambient_light_energy = 1.79
+tonemap_mode = 2
+ssil_intensity = 10.73
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eghtw"]
+render_priority = 0
+shader = ExtResource("1_1x000")
+shader_parameter/triplanar_scale = Vector3(1, 1, 1)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2w8c"]
+render_priority = 0
+shader = ExtResource("6_tj0yx")
+
+[sub_resource type="BoxMesh" id="BoxMesh_gd7ji"]
+size = Vector3(4.528, 1, 9.163)
+subdivide_height = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdbt1"]
+render_priority = 0
+shader = ExtResource("10_s3mli")
+shader_parameter/tex_repeat = Vector2(4, 4)
+shader_parameter/sharpness = 1.992
+shader_parameter/hex_size = 0.067
+shader_parameter/gm_BaseTexture = ExtResource("11_3gh7u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tp08"]
+render_priority = 0
+shader = ExtResource("6_tj0yx")
+shader_parameter/tex = ExtResource("7_jyado")
+shader_parameter/NM = ExtResource("6_qa53r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_782jk"]
+render_priority = 0
+shader = ExtResource("10_7eon8")
+shader_parameter/uv_scale = 22.939
+shader_parameter/albedo = ExtResource("11_3gh7u")
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.88315)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_50vof")
+
+[node name="SuzanneHighPoly" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.32728, 0, 0, 0, 3.32728, 0, 0, 0, 3.32728, -1.46868, 0, 1.27395)
+visible = false
+mesh = ExtResource("1_qfl0m")
+surface_material_override/0 = SubResource("ShaderMaterial_eghtw")
+
+[node name="SuzanneHighPoly2" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.32728, 0, 0, 0, 3.32728, 0, 0, 0, 3.32728, 4.77067, 0, 1.27395)
+mesh = ExtResource("1_qfl0m")
+surface_material_override/0 = SubResource("ShaderMaterial_q2w8c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33444, 0, 0)
+mesh = SubResource("BoxMesh_gd7ji")
+surface_material_override/0 = SubResource("ShaderMaterial_xdbt1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01761, 0, 0)
+mesh = SubResource("BoxMesh_gd7ji")
+surface_material_override/0 = SubResource("ShaderMaterial_0tp08")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0765, 0, 0)
+mesh = SubResource("BoxMesh_gd7ji")
+surface_material_override/0 = SubResource("ShaderMaterial_782jk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0206025, 0.396603, -0.917759, -0.00890098, 0.91799, 0.396503, 0.999748, 9.31453e-10, 0.022443, -20.9184, 5.36721, 0)
