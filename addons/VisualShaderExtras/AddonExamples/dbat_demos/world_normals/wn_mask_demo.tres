@@ -1,0 +1,168 @@
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://b8qm1p7erox03"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/WorldNormal/WorldNormalMask.gd" id="1_xm86j"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/NormalMapZ.gd" id="2_662ls"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_albedo.png" id="3_etwos"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/moss_orm_albedo.png" id="4_106cm"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_tmwtl"]
+default_input_values = [0, 1.0, 1, 0.5]
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_wphbm"]
+size = Vector2(578.859, 288.951)
+description = "These two nodes work together to create the proper effect.
+You can then choose which material is the top/up and which is the bottom/down
+
+(Or left/right, as you can adjust the Direction Vector)"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_4lrbg"]
+parameter_name = "BackgroundNormalMap"
+texture_type = 2
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qn4go"]
+default_input_values = [2, 0.0]
+initialized = true
+script = ExtResource("2_662ls")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6nx55"]
+texture = ExtResource("3_etwos")
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_cwa0d"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 0.5]
+op_type = 4
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_bnyx1"]
+texture = ExtResource("4_106cm")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8ghky"]
+default_input_values = [1, Vector3(0, 1, 0)]
+initialized = true
+script = ExtResource("1_xm86j")
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D tex_frg_8;
+uniform sampler2D tex_frg_6;
+uniform sampler2D BackgroundNormalMap : hint_normal, filter_linear;
+
+
+// RestoreNormalMapZ
+
+// Godot strips the z value from imported Normal Maps.
+// It does this for two reasons:
+// 1. Obtaining better compression because the z can be calculated by shader.
+//    Compression boosts speed of CPU to GPU transfer.
+// 2. On mobile devices they do not do that calculation. They either ignore the z
+//    or do some other calculation, but the normal one (below) is apparently too slow
+//    or power-hungry for mobile devices.
+//
+// Create the texture to pass in like this:
+//  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
+vec3 normal_map_add_z_VisualShaderNodeSamplerNormalMapZ(
+	vec3 normal_map_texture, 
+	vec2 inuv,
+	vec3 _TANGENT,
+	vec3 _BINORMAL,
+	vec3 _NORMAL) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+
+	// Unpack the background normal map.
+	vec3 bg_normal = normal_map_texture * 2.0 - 1.0;
+
+	// Recalculate z-component of the normal map with the Pythagorean theorem.
+	bg_normal.z = sqrt(1.0 - bg_normal.x * bg_normal.x - bg_normal.y * bg_normal.y);
+
+	// Apply the tangent-space normal map to the view-space normals.
+	vec3 normal_applied = bg_normal.x * _TANGENT + bg_normal.y * _BINORMAL + bg_normal.z * _NORMAL;
+	return normal_applied;
+}
+// World_Normal_Mask
+
+// Create the texture to pass in like this:
+//  vec3 normal_map_texture = textureLod(normal_texture_sampler, inuv, 0.).rgb;
+float world_normal_mask_VisualShaderNodeWorldNormalMask(
+	vec3 normal_map_texture, 
+	vec3 vector_direction,
+	mat4 _VIEW_MATRIX
+	) {
+	// 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+	// Convert the world up vector into view-space with a matrix multiplication.
+	vec3 up_vector_viewspace = mat3(_VIEW_MATRIX) * vector_direction;
+
+	// Compare the up vector to the surface with the normal map applied using the dot product.
+	float dot_product = dot(up_vector_viewspace, normal_map_texture);
+
+	return dot_product;
+}
+
+void fragment() {
+// Texture2D:8
+	vec4 n_out8p0 = texture(tex_frg_8, UV);
+
+
+// Texture2D:6
+	vec4 n_out6p0 = texture(tex_frg_6, UV);
+
+
+	vec3 n_out5p0;
+// RestoreNormalMapZ:5
+	{
+		
+		vec3 normal_map_texture = textureLod(BackgroundNormalMap, UV, 0.).rgb;
+		
+		n_out5p0 = normal_map_add_z_VisualShaderNodeSamplerNormalMapZ(
+			normal_map_texture, 
+			UV,
+			TANGENT,
+			BINORMAL,
+			NORMAL);
+			
+	}
+
+
+	float n_out9p0;
+// World_Normal_Mask:9
+	vec3 n_in9p1 = vec3(0.00000, 1.00000, 0.00000);
+	{
+		
+		n_out9p0 = world_normal_mask_VisualShaderNodeWorldNormalMask(
+			n_out5p0,
+			n_in9p1,
+			VIEW_MATRIX);
+	}
+
+
+// FloatOp:10
+	float n_in10p1 = 0.50000;
+	float n_out10p0 = n_out9p0 + n_in10p1;
+
+
+// Mix:7
+	vec3 n_out7p0 = mix(vec3(n_out8p0.xyz), vec3(n_out6p0.xyz), n_out10p0);
+
+
+// Output:0
+	ALBEDO = n_out7p0;
+
+
+}
+"
+graph_offset = Vector2(-570.317, 152.57)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_4lrbg")
+nodes/fragment/4/position = Vector2(-860, 400)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_qn4go")
+nodes/fragment/5/position = Vector2(-520, 580)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_6nx55")
+nodes/fragment/6/position = Vector2(-800, -80)
+nodes/fragment/7/node = SubResource("VisualShaderNodeMix_cwa0d")
+nodes/fragment/7/position = Vector2(200, 180)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_bnyx1")
+nodes/fragment/8/position = Vector2(-800, 160)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_8ghky")
+nodes/fragment/9/position = Vector2(-240, 580)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_tmwtl")
+nodes/fragment/10/position = Vector2(60, 320)
+nodes/fragment/11/node = SubResource("VisualShaderNodeComment_wphbm")
+nodes/fragment/11/position = Vector2(-560, 440)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 1, 7, 0, 0, 0, 5, 0, 9, 0, 6, 0, 7, 1, 8, 0, 7, 0, 10, 0, 7, 2, 9, 0, 10, 0)

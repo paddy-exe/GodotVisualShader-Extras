@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Shader" uid="uid://b7ibxcf8x0cgu" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/uv_tiler/tiler_2d_demo.tres" id="1_fr47i"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="1_lbymb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drvuj"]
+shader = ExtResource("1_fr47i")
+shader_parameter/DownAcross = Vector2(2, 2)
+shader_parameter/Rot = 0.0
+shader_parameter/RandRot = 0.0
+shader_parameter/BrickShift = 0.5
+shader_parameter/Texture2DParameter = ExtResource("1_lbymb")
+
+[node name="tiler_2d_demo" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_drvuj")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_lbymb")

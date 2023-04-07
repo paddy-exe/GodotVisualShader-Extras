@@ -12,4 +12,4 @@ export_presets.cfg
 data_*/
 
 # Ignore dbat dev stuff
-dbat_dev/
+_dbat_dev/

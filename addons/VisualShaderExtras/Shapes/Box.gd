@@ -1,6 +1,5 @@
 # The MIT License
 # Copyright © 2022 Inigo Quilez
-# Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
 # to deal in the Software without restriction, including without limitation 
@@ -19,24 +18,21 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCircle
+class_name VisualShaderNodeBox
 
 func _init():
-	set_input_port_default_value(1, Vector2(0.5, 0.5))#pos
-	set_input_port_default_value(2, 0.25) #radius
-	set_input_port_default_value(3, 0.25) #smoothness
+	set_input_port_default_value(1, Vector2(0.5, 0.5))
+	set_input_port_default_value(2, Vector2(0.25, 0.25))
+	set_input_port_default_value(3, 0.)#smoothness
 
 func _get_name():
-	return "Circle"
+	return "Box"
 
 func _get_category():
 	return "VisualShaderExtras/Shapes"
 
 func _get_description():
-	return "Signed Distance Circle Shape3D with smoothing."
-
-func _get_version():
-	return "2"
+	return "Signed Distance Box Shape3D with smoothing."
 	
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -48,15 +44,15 @@ func _get_input_port_name(port):
 	match port:
 		0: return "UV"
 		1: return "Position"
-		2: return "Radius"
+		2: return "Proportions"
 		3: return "Smoothness"
-
+		
 func _get_input_port_type(port):
 	match port:
 		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		2: return VisualShaderNode.PORT_TYPE_SCALAR
-		3: return VisualShaderNode.PORT_TYPE_SCALAR
+		2: return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		3: return VisualShaderNode.PORT_TYPE_SCALAR #smoothness
 
 func _get_output_port_count():
 	return 1
@@ -69,15 +65,19 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-//Original code
-//float sdCircle(vec2 pos, float r) {
-//	return step(length(pos) - r, pos).x;
-//}
-
-//New hack - faster than using length func
-float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
-{
-	return smoothstep(radius, radius + smoothness, dot(position, position) * 6.0);
+float sdBox_VisualShaderNodeBoxV2(vec2 _pos, vec2 _proportions, float _feather) {
+	vec2 d = abs(_pos) - _proportions; 
+	float outside = length(max(d, 0.));
+	float inside = min(max(d.x, d.y), 0.);
+	float both = outside + inside;
+	
+	//float f = outside - _feather; //makes a kind of outline
+	
+	// ok! smoothness is v sensitive tho.
+	// when f is 0 the edge is sharp
+	float f = _feather; 
+	
+	return smoothstep(outside, inside, f);
 }
 """
 
@@ -85,11 +85,12 @@ func _get_code(input_vars, output_vars, mode, type):
 	var uv = "UV"
 	if input_vars[0]:
 		uv = input_vars[0]
-	return "{out} = VisualShaderNodeCircle_circle({uv} - {pos}, {radius}, {smoothness});" \
+	return "{out} = sdBox_VisualShaderNodeBoxV2({uv}-{pos}, {proportions}, {smoothness});" \
 	.format({
 		"uv": uv,
 		"pos": input_vars[1],
-		"radius": input_vars[2],
+		"proportions": input_vars[2],
 		"smoothness": input_vars[3],
 		"out" : output_vars[0]
 	})
+	
