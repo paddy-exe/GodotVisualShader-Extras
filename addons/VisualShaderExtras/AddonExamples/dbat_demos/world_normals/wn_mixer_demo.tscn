@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Shader" uid="uid://dcoiyd8vndjnk" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/world_normals/wn_mixer_demo_vshader.tres" id="1_pxyxk"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_albedo.png" id="2_oek2h"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_normal.png" id="3_oanfk"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_orm.png" id="4_s7kvu"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/moss_orm_albedo.png" id="5_gl7y4"]
+[ext_resource type="Texture2D" uid="uid://bqtpccn3wemel" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/moss_orm_orm.png" id="6_mn6qu"]
+[ext_resource type="Texture2D" uid="uid://ms6yr1tx6aq8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/moss_orm_normal.png" id="7_06qru"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hfkdh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebavy"]
+render_priority = 0
+shader = ExtResource("1_pxyxk")
+shader_parameter/Offset = -0.352
+shader_parameter/Fade = 0.152
+shader_parameter/BackgroundAlbedo = ExtResource("2_oek2h")
+shader_parameter/ForeGroundAlbedo = ExtResource("5_gl7y4")
+shader_parameter/BackgroundNormalMap = ExtResource("3_oanfk")
+shader_parameter/BackgroundORM = ExtResource("4_s7kvu")
+shader_parameter/ForeGroundORM = ExtResource("6_mn6qu")
+shader_parameter/ForegroundNormalMap = ExtResource("7_06qru")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.121389, -0.147712)
+mesh = SubResource("CapsuleMesh_hfkdh")
+surface_material_override/0 = SubResource("ShaderMaterial_ebavy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.215656, 0.976469, 0, -0.976469, 0.215656, 0, -0.327638, -0.840646)
+mesh = SubResource("CapsuleMesh_hfkdh")
+surface_material_override/0 = SubResource("ShaderMaterial_ebavy")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.237296, 0.948579, -0.209496, 0, 0.215656, 0.976469, 0.971437, 0.231712, -0.0511742, 0.719517, -0.152918, -1.15993)
+mesh = SubResource("CapsuleMesh_hfkdh")
+surface_material_override/0 = SubResource("ShaderMaterial_ebavy")

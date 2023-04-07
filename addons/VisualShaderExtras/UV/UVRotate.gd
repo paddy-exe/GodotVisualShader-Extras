@@ -1,3 +1,4 @@
+@tool
 # The MIT License
 # Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
@@ -15,13 +16,15 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-@tool
+class_name VisualShaderNodeUVRotate
 extends VisualShaderNodeCustom
-class_name NodeUVRotateV2
+
+func _init():
+	set_input_port_default_value(1, Vector2(0.5,0.5))
+	set_input_port_default_value(2, 10.0)
 
 func _get_name():
-	return "UVRotateV2"
+	return "UVRotate"
 
 func _get_category():
 	return "VisualShaderExtras/UV"
@@ -41,10 +44,6 @@ func _get_output_port_count():
 func _get_output_port_name(port: int) -> String:
 	return "UV"
 	
-func _init() -> void:
-	set_input_port_default_value(1, Vector2(0., 0.)) #pivot
-	set_input_port_default_value(2, 0.0) #rot
-	
 func _get_input_port_count():
 	return 3
 
@@ -52,7 +51,7 @@ func _get_input_port_name(port):
 	match port:
 		0: return "UV"
 		1: return "Pivot"
-		2: return "Rotation (Radians)"
+		2: return "Angle (Radians)"
 
 func _get_input_port_type(port):
 	match port:

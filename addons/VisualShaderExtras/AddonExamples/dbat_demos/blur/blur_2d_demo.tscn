@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://o0jl88m0fgfa"]
+
+[ext_resource type="Shader" uid="uid://dslnddtvc43tl" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/blur/blur_2d_demo.tres" id="1_6t74a"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/icon.svg" id="1_wby0f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gswws"]
+shader = ExtResource("1_6t74a")
+shader_parameter/Texture2DParameter = ExtResource("1_wby0f")
+
+[node name="blur_2d_demo" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_gswws")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_wby0f")

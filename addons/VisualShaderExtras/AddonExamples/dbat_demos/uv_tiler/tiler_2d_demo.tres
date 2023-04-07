@@ -1,0 +1,147 @@
+[gd_resource type="VisualShader" load_steps=10 format=3]
+
+[ext_resource type="Texture2D" uid="uid://ba7cojxxohdjb" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="1_tufna"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTiler.gd" id="2_7nca1"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_bjkae"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+source = 5
+texture = ExtResource("1_tufna")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_p00pk"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+color_default = 2
+texture_filter = 2
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_eobun"]
+parameter_name = "BrickShift"
+hint = 1
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_eb67r"]
+parameter_name = "RandRot"
+hint = 1
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_6suix"]
+parameter_name = "Rot"
+hint = 1
+max = 3.142
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_rcxwt"]
+parameter_name = "DownAcross"
+default_value_enabled = true
+default_value = Vector2(2, 2)
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rat7q"]
+default_input_values = [0, Vector2(2, 2), 1, 0.0, 2, 0.0, 3, 0.5]
+initialized = true
+script = ExtResource("2_7nca1")
+
+[resource]
+code = "shader_type canvas_item;
+uniform vec2 DownAcross = vec2(2.000000, 2.000000);
+uniform float Rot : hint_range(0, 3.14199995994568) = 0;
+uniform float RandRot : hint_range(0, 1) = 0;
+uniform float BrickShift : hint_range(0, 1) = 0.5;
+uniform sampler2D Texture2DParameter : source_color, hint_default_transparent, filter_linear;
+
+
+// UVTiler
+
+vec2 vec2_rotate_NodeUVTilerV3(vec2 _uv, float _angle, vec2 _pivot) {
+	_uv -= _pivot;
+	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
+	_uv += _pivot;
+	return _uv;
+}
+vec2 brick_tile_NodeUVTilerV3(vec2 _uv, float _zoom, float _shift)
+{
+	_uv.x += step(1.0, mod(_uv.y, 2.0))  *  _shift;
+	return fract(_uv);
+}
+// Returns float from 0.0 to 1.0
+float random_float_NodeUVTilerV3(vec2 input) {
+	return fract(sin(dot(input.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+
+void fragment() {
+// Vector2Parameter:8
+	vec2 n_out8p0 = DownAcross;
+
+
+// FloatParameter:7
+	float n_out7p0 = Rot;
+
+
+// FloatParameter:6
+	float n_out6p0 = RandRot;
+
+
+// FloatParameter:5
+	float n_out5p0 = BrickShift;
+
+
+	vec2 n_out9p0;
+// UVTiler:9
+	{
+		
+			//Much simpler to calculate zoom from the tiling vec2 
+			float zoom = (n_out8p0.x * n_out8p0.y);
+			
+			vec2 st = UV/n_out8p0;
+			st *= zoom; //Scale coordinate system by zoom
+			
+			vec2 unique_val = floor( st ); //get the integer coordinates
+			
+			//Something about this calc is the problem with the brick shift when 
+			//rr is > 0
+			float rand_rotation = (( random_float_NodeUVTilerV3(unique_val) * 2.0) - 1.0) * n_out6p0;
+			
+			//Just add whatever static rotation may be input and clamp:
+			rand_rotation = clamp(rand_rotation + n_out7p0, 0.0, 2.*PI);
+			
+			st = brick_tile_NodeUVTilerV3(st, zoom, n_out5p0);
+			st = vec2_rotate_NodeUVTilerV3(st, rand_rotation, vec2(0.5));
+			
+			n_out9p0 = st;
+			
+	}
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture2DParameter, n_out9p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-108, 65)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(700, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_bjkae")
+nodes/fragment/3/position = Vector2(160, 220)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_p00pk")
+nodes/fragment/4/position = Vector2(-240, 360)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_eobun")
+nodes/fragment/5/position = Vector2(-869.255, 396.578)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatParameter_eb67r")
+nodes/fragment/6/position = Vector2(-609.255, 396.578)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_6suix")
+nodes/fragment/7/position = Vector2(-749.255, 116.578)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVec2Parameter_rcxwt")
+nodes/fragment/8/position = Vector2(-489.255, -23.4216)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_rat7q")
+nodes/fragment/9/position = Vector2(-149.255, 56.5784)
+nodes/fragment/connections = PackedInt32Array(4, 0, 3, 2, 8, 0, 9, 0, 9, 0, 3, 0, 7, 0, 9, 1, 6, 0, 9, 2, 5, 0, 9, 3, 3, 0, 0, 0)
