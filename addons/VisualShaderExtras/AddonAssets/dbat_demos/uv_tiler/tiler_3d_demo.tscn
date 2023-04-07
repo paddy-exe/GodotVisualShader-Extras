@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="ArrayMesh" uid="uid://bcv4ug57hcmnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/suzanne.obj" id="1_b56b5"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/uv_tiler/tiler_vshader.tres" id="2_lwe2q"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/icon.svg" id="3_pom0l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0e48"]
+render_priority = 0
+shader = ExtResource("2_lwe2q")
+shader_parameter/DownAcross = null
+shader_parameter/Rot = null
+shader_parameter/RandRot = null
+shader_parameter/BrickShift = null
+shader_parameter/Texture2DParameter = ExtResource("3_pom0l")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xbehk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vc1bm"]
+render_priority = 0
+shader = ExtResource("2_lwe2q")
+shader_parameter/DownAcross = null
+shader_parameter/Rot = null
+shader_parameter/RandRot = null
+shader_parameter/BrickShift = null
+shader_parameter/Texture2DParameter = ExtResource("3_pom0l")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.566285, 0.0365433, 0.0734995)
+mesh = ExtResource("1_b56b5")
+surface_material_override/0 = SubResource("ShaderMaterial_k0e48")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.10987, -0.0478901, 0.061174)
+mesh = SubResource("PlaneMesh_xbehk")
+surface_material_override/0 = SubResource("ShaderMaterial_vc1bm")

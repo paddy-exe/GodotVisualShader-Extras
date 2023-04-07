@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/color_mask/color_mask_2d_demo.tres" id="1_yj4qn"]
-[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.svg" id="2_k005x"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/icon.svg" id="2_k005x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sgbdy"]
 shader = ExtResource("1_yj4qn")

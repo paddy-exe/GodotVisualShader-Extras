@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://rwo423fltew1"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Shader" uid="uid://dcoiyd8vndjnk" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/world_normals/wn_mixer_demo_vshader.tres" id="1_pxyxk"]
-[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_oek2h"]
-[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_normal.png" id="3_oanfk"]
-[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_orm.png" id="4_s7kvu"]
-[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_albedo.png" id="5_gl7y4"]
-[ext_resource type="Texture2D" uid="uid://bqtpccn3wemel" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_orm.png" id="6_mn6qu"]
-[ext_resource type="Texture2D" uid="uid://ms6yr1tx6aq8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_normal.png" id="7_06qru"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_albedo.png" id="2_oek2h"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_normal.png" id="3_oanfk"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_orm.png" id="4_s7kvu"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/moss_orm_albedo.png" id="5_gl7y4"]
+[ext_resource type="Texture2D" uid="uid://bqtpccn3wemel" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/moss_orm_orm.png" id="6_mn6qu"]
+[ext_resource type="Texture2D" uid="uid://ms6yr1tx6aq8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/moss_orm_normal.png" id="7_06qru"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hfkdh"]
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://tf7xrqsnj4vc"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/blur/blur_2d_demo.tres" id="1_6t74a"]
-[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.svg" id="1_wby0f"]
+[ext_resource type="Shader" uid="uid://dslnddtvc43tl" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/blur/blur_2d_demo.tres" id="1_6t74a"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/icon.svg" id="1_wby0f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gswws"]
 shader = ExtResource("1_6t74a")

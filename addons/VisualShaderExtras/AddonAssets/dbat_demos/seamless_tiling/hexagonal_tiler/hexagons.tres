@@ -234,24 +234,25 @@ void fragment() {
 	ALBEDO = n_out13p0;
 	METALLIC = n_out7p2;
 	ROUGHNESS = n_out7p1;
+	AO = n_out7p0;
 	NORMAL_MAP = n_out13p2;
 	NORMAL_MAP_DEPTH = n_out10p0;
 
 
 }
 "
-graph_offset = Vector2(-452.274, 74.2941)
-nodes/fragment/0/position = Vector2(620, 120)
+graph_offset = Vector2(-394.352, 78.3043)
+nodes/fragment/0/position = Vector2(340, 140)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_vcklp")
 nodes/fragment/3/position = Vector2(-680, 40)
 nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_g41qx")
 nodes/fragment/5/position = Vector2(-660, 420)
 nodes/fragment/7/node = SubResource("VisualShaderNodeVectorDecompose_74ftc")
-nodes/fragment/7/position = Vector2(340, 200)
+nodes/fragment/7/position = Vector2(60, 220)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_g0xj7")
 nodes/fragment/8/position = Vector2(-880, 200)
 nodes/fragment/10/node = SubResource("VisualShaderNodeFloatConstant_cnrot")
-nodes/fragment/10/position = Vector2(460, 460)
+nodes/fragment/10/position = Vector2(60, 420)
 nodes/fragment/13/node = SubResource("VisualShaderNodeCustom_egcue")
 nodes/fragment/13/position = Vector2(-220, 220)
-nodes/fragment/connections = PackedInt32Array(7, 1, 0, 3, 10, 0, 0, 10, 3, 0, 13, 1, 5, 0, 13, 2, 8, 0, 13, 3, 7, 2, 0, 2, 13, 0, 0, 0, 13, 1, 7, 0, 13, 2, 0, 9)
+nodes/fragment/connections = PackedInt32Array(7, 1, 0, 3, 10, 0, 0, 10, 3, 0, 13, 1, 5, 0, 13, 2, 8, 0, 13, 3, 7, 2, 0, 2, 13, 0, 0, 0, 13, 1, 7, 0, 13, 2, 0, 9, 7, 0, 0, 6)

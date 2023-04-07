@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d06vlyieg00iu"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Shader" uid="uid://bv323q4wxyo3v" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/world_normals/wn_mask_demo.tres" id="1_nrcg1"]
-[ext_resource type="ArrayMesh" uid="uid://dsgni0xlkinot" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/suzanne_high_poly.obj" id="2_pao0a"]
+[ext_resource type="ArrayMesh" uid="uid://dsgni0xlkinot" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/suzanne_high_poly.obj" id="2_pao0a"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_04dv8"]
 height = 0.561

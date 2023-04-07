@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmodub6wb5fwm"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="ArrayMesh" uid="uid://dsgni0xlkinot" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/suzanne_high_poly.obj" id="1_73xfj"]
+[ext_resource type="ArrayMesh" uid="uid://dsgni0xlkinot" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/suzanne_high_poly.obj" id="1_73xfj"]
 [ext_resource type="Shader" uid="uid://6gmb8xxcbpq" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/parallax_mapping/pm_demo_3d.tres" id="2_5wjnb"]
-[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="3_aah15"]
-[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_heightmap.png" id="4_nn2is"]
-[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_normal.png" id="5_nmwjw"]
-[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_orm.png" id="6_vqudy"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_albedo.png" id="3_aah15"]
+[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_heightmap.png" id="4_nn2is"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_normal.png" id="5_nmwjw"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_orm.png" id="6_vqudy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jltqy"]
 render_priority = 0

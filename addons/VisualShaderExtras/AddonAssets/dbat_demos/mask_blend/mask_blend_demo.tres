@@ -1,7 +1,7 @@
-[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://b863u44o66dbm"]
+[gd_resource type="VisualShader" load_steps=14 format=3]
 
 [ext_resource type="Texture2D" uid="uid://ck6ib50lrnxw5" path="res://addons/VisualShaderExtras/AddonAssets/icon.png" id="2_1sqgn"]
-[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_albedo.png" id="2_814ee"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/moss_orm_albedo.png" id="2_814ee"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/MaskBlend.gd" id="3_52467"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5sxjw"]

@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://hrrywu84ghfb"]
+[gd_scene load_steps=5 format=3 uid="uid://c701c1dkmygbt"]
 
 [ext_resource type="Shader" uid="uid://kettq437klka" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/blur/blur_3d_vshader_demo.tres" id="1_8qkj1"]
-[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.svg" id="2_64tgo"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/icon.svg" id="2_64tgo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xbehk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mjkcc"]
 render_priority = 0
 shader = ExtResource("1_8qkj1")
-shader_parameter/Blur = 1.718
+shader_parameter/Blur = 2.238
 shader_parameter/Texture2DParameter = ExtResource("2_64tgo")
 
 [node name="Node3D" type="Node3D"]

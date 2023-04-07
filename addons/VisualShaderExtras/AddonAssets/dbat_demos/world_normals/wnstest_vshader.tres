@@ -1,8 +1,8 @@
 [gd_resource type="VisualShader" load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/WorldNormal/WorldNormalMapMixer.gd" id="1_bkjt5"]
-[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_5m13w"]
-[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/moss_orm_albedo.png" id="3_3y52a"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_albedo.png" id="2_5m13w"]
+[ext_resource type="Texture2D" uid="uid://dhfswrmammtnt" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/moss_orm_albedo.png" id="3_3y52a"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_avdsx"]
 default_input_values = [2, Vector3(0, 1, 0), 3, 0.0, 4, 0.0]

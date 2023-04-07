@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Usability/ColorMask.gd" id="1_8hvao"]
-[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.svg" id="2_lfyqb"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/icon.svg" id="2_lfyqb"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ipv1k"]
 output_port_for_preview = 0

@@ -1,8 +1,8 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://818fgc0ukawl"]
+[gd_resource type="VisualShader" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Utility/NormalMapZ.gd" id="1_e7ynp"]
-[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_r8ej1"]
-[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_heightmap.png" id="3_d5ylu"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_albedo.png" id="2_r8ej1"]
+[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_heightmap.png" id="3_d5ylu"]
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_i7wow"]
 parameter_name = "BackgroundNormalMap"

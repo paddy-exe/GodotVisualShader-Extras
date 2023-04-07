@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://be01trctfkeya"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Shader" uid="uid://818fgc0ukawl" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/normalmap_z/normalmap_z_demo.tres" id="1_pviys"]
-[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_normal.png" id="2_8lq7g"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_normal.png" id="2_8lq7g"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_27ab8"]
 

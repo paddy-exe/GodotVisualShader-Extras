@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxopu7pfbxwps"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/texture_stack/texture_stack.tres" id="1_5rhkq"]
-[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_albedo.png" id="2_h7i13"]
-[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/icon.svg" id="2_xqx38"]
-[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_heightmap.png" id="3_evkdv"]
-[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_normal.png" id="4_tfjmu"]
-[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/resources/textures/rock_orm_orm.png" id="5_vyod3"]
+[ext_resource type="Shader" uid="uid://c8q2fwhkcutar" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/texture_stack/texture_stack.tres" id="1_5rhkq"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_albedo.png" id="2_h7i13"]
+[ext_resource type="Texture2D" uid="uid://dja24d5rtr2ae" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/icon.svg" id="2_xqx38"]
+[ext_resource type="Texture2D" uid="uid://33ty6m6q8j0k" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_heightmap.png" id="3_evkdv"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_normal.png" id="4_tfjmu"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonAssets/dbat_demos/_resources/textures/rock_orm_orm.png" id="5_vyod3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a2wk"]
 shader = ExtResource("1_5rhkq")
