@@ -77,7 +77,7 @@ func _get_global_code(mode):
 //New hack - faster than using length func
 float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
 {
-	return smoothstep(radius, radius + smoothness, dot(position, position) * 6.0);
+	return smoothstep(radius + smoothness, radius, dot(position, position) * 6.0);
 }
 """
 

@@ -1,16 +1,26 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://d3l5jysmci50t"]
 
-[ext_resource type="Material" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/seamless_tiling/seamless_tiler_technique1/rocky_material.tres" id="1_0ac6o"]
+[ext_resource type="Shader" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/seamless_tiling/seamless_tiler_technique1/technique1_vshader.tres" id="1_5kigc"]
+[ext_resource type="Texture2D" uid="uid://ccra6c4ccwuya" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_orm.png" id="2_ppe3l"]
+[ext_resource type="Texture2D" uid="uid://dq3jk3ga3vpy8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_albedo.png" id="3_tt8ec"]
+[ext_resource type="Texture2D" uid="uid://dq1popjjfe6u8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_normal.png" id="4_ca1x4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7exsq"]
 size = Vector3(4.528, 1, 9.163)
 subdivide_height = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_34fmc"]
+render_priority = 0
+shader = ExtResource("1_5kigc")
+shader_parameter/albedo = ExtResource("3_tt8ec")
+shader_parameter/norm = ExtResource("4_ca1x4")
+shader_parameter/ORM = ExtResource("2_ppe3l")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_7exsq")
-surface_material_override/0 = ExtResource("1_0ac6o")
+surface_material_override/0 = SubResource("ShaderMaterial_34fmc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.0221929, 0.148879, -0.988606, -0.00334136, 0.988855, 0.148842, 0.999748, 6.70721e-08, 0.022443, -2.57942, 5.36721, 0)

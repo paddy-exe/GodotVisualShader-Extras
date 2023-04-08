@@ -1,0 +1,84 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cyaiien7casfl"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="2_fi760"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dmth8"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.667, 0.5), 2, Vector2(0.194, 0.25), 3, 0.032]
+initialized = true
+script = ExtResource("2_fi760")
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_6k8wk"]
+output_port_for_preview = 0
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dj0k4"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25), 3, 0.0]
+initialized = true
+script = ExtResource("2_fi760")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+// Box
+
+float sdBox_VisualShaderNodeBoxV2(vec2 _pos, vec2 _proportions, float _feather) {
+	vec2 d = abs(_pos) - _proportions; 
+	float outside = length(max(d, 0.));
+	float inside = min(max(d.x, d.y), 0.);
+	float both = outside + inside;
+	
+	//float f = outside - _feather; //makes a kind of outline
+	
+	// ok! smoothness is v sensitive tho.
+	// when f is 0 the edge is sharp
+	float f = _feather; 
+	
+	//ok::return smoothstep(outside, inside, f); //black on white
+	return smoothstep(inside, outside, f); //white on black
+}
+
+
+void fragment() {
+	float n_out9p0;
+// Box:9
+	vec2 n_in9p1 = vec2(0.50000, 0.50000);
+	vec2 n_in9p2 = vec2(0.25000, 0.25000);
+	float n_in9p3 = 0.00000;
+	{
+		n_out9p0 = sdBox_VisualShaderNodeBoxV2(UV-n_in9p1, n_in9p2, n_in9p3);
+	}
+
+
+	float n_out11p0;
+// Box:11
+	vec2 n_in11p1 = vec2(0.66700, 0.50000);
+	vec2 n_in11p2 = vec2(0.19400, 0.25000);
+	float n_in11p3 = 0.03200;
+	{
+		n_out11p0 = sdBox_VisualShaderNodeBoxV2(UV-n_in11p1, n_in11p2, n_in11p3);
+	}
+
+
+// FloatOp:14
+	float n_out14p0 = n_out9p0 + n_out11p0;
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out14p0);
+
+
+}
+"
+graph_offset = Vector2(-206.179, 205.056)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(780, 120)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_dj0k4")
+nodes/fragment/9/position = Vector2(-180, -20)
+nodes/fragment/11/node = SubResource("VisualShaderNodeCustom_dmth8")
+nodes/fragment/11/position = Vector2(-20, 200)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFloatOp_6k8wk")
+nodes/fragment/14/position = Vector2(311.727, 68.9091)
+nodes/fragment/connections = PackedInt32Array(9, 0, 14, 0, 11, 0, 14, 1, 14, 0, 0, 0)

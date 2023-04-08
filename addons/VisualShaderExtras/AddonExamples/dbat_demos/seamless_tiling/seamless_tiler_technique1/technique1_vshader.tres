@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=7 format=3]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://w2mc4iohmivr"]
 
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/SeamlessTiling/seamless_tiler_technique1.gd" id="1_bpdut"]
 
@@ -103,7 +103,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-153.014, 120.452)
 nodes/fragment/0/position = Vector2(540, 200)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_qimeh")
 nodes/fragment/3/position = Vector2(-520, 60)

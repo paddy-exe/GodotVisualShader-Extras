@@ -77,7 +77,8 @@ float sdBox_VisualShaderNodeBoxV2(vec2 _pos, vec2 _proportions, float _feather) 
 	// when f is 0 the edge is sharp
 	float f = _feather; 
 	
-	return smoothstep(outside, inside, f);
+	//ok::return smoothstep(outside, inside, f); //black on white
+	return smoothstep(inside, outside, f); //white on black
 }
 """
 

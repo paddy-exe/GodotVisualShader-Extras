@@ -1,4 +1,4 @@
-[gd_scene load_steps=329 format=3 uid="uid://cnuej70tbjgwd"]
+[gd_scene load_steps=328 format=3 uid="uid://cnuej70tbjgwd"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="1_pmvkm"]
 [ext_resource type="Texture2D" uid="uid://e6k5hrwrnjy3" path="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png" id="2_myiw4"]
@@ -2295,24 +2295,24 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 6, 0, 0, 0, 4, 0, 6, 0
 shader = SubResource("VisualShader_5n70k")
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_2kfye"]
+output_port_for_preview = 0
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.317, 0.316), 3, 0.0]
 initialized = true
 script = ExtResource("31_hcapl")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_3vt21"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vmtac"]
 input_name = "uv"
 
 [sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_jr8jk"]
 output_port_for_preview = 0
-default_input_values = [0, 0.0, 1, 0.5, 2, 0.001, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+default_input_values = [0, 0.0, 1, 0.5, 2, 0.0, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_q1cc4"]
 default_input_values = [0, Vector2(0, 0)]
 op_type = 0
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_mirv2"]
+output_port_for_preview = 0
 default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25), 3, 0.057]
 initialized = true
 script = ExtResource("31_hcapl")
@@ -2335,7 +2335,8 @@ float sdBox_VisualShaderNodeBoxV2(vec2 _pos, vec2 _proportions, float _feather) 
 	// when f is 0 the edge is sharp
 	float f = _feather; 
 	
-	return smoothstep(outside, inside, f);
+	//ok::return smoothstep(outside, inside, f); //black on white
+	return smoothstep(inside, outside, f); //white on black
 }
 
 
@@ -2369,15 +2370,10 @@ void fragment() {
 	}
 
 
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out10p0, n_in3p1);
-
-
 	vec3 n_out7p0;
 // If:7
 	float n_in7p1 = 0.50000;
-	float n_in7p2 = 0.00100;
+	float n_in7p2 = 0.00000;
 	vec3 n_in7p3 = vec3(0.00000, 0.00000, 0.00000);
 	if(abs(n_out8p0 - n_in7p1) < n_in7p2)
 	{
@@ -2385,7 +2381,7 @@ void fragment() {
 	}
 	else if(n_out8p0 < n_in7p1)
 	{
-		n_out7p0 = vec3(n_out3p0);
+		n_out7p0 = vec3(n_out10p0);
 	}
 	else
 	{
@@ -2399,11 +2395,9 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-393.855, 15.4945)
+graph_offset = Vector2(-452.579, 31.6431)
 mode = 1
 flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_3vt21")
-nodes/fragment/3/position = Vector2(-200, 180)
 nodes/fragment/6/node = SubResource("VisualShaderNodeInput_vmtac")
 nodes/fragment/6/position = Vector2(-460, 540)
 nodes/fragment/7/node = SubResource("VisualShaderNodeIf_jr8jk")
@@ -2411,19 +2405,17 @@ nodes/fragment/7/position = Vector2(120, 180)
 nodes/fragment/8/node = SubResource("VisualShaderNodeVectorDecompose_q1cc4")
 nodes/fragment/8/position = Vector2(-140, 460)
 nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_mirv2")
-nodes/fragment/9/position = Vector2(-320, 300)
+nodes/fragment/9/position = Vector2(-360, 180)
 nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_2kfye")
-nodes/fragment/10/position = Vector2(-560, 180)
-nodes/fragment/connections = PackedInt32Array(6, 0, 8, 0, 8, 0, 7, 0, 9, 0, 7, 4, 7, 0, 0, 0, 10, 0, 3, 0, 3, 0, 7, 5)
+nodes/fragment/10/position = Vector2(-580, 100)
+nodes/fragment/connections = PackedInt32Array(6, 0, 8, 0, 8, 0, 7, 0, 9, 0, 7, 4, 7, 0, 0, 0, 10, 0, 7, 5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yp0tr"]
 shader = SubResource("VisualShader_ew583")
 
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_waqbe"]
-default_input_values = [0, 0.0, 1, 0.241]
-
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5lnj3"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, 0.276, 3, 1.0]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.276, 3, 0.988]
 initialized = true
 script = ExtResource("30_nhxin")
 
@@ -2437,6 +2429,12 @@ default_input_values = [0, 0.0, 1, 0.5, 2, 0.001, 3, Vector3(0, 0, 0), 4, Vector
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_6vtrh"]
 default_input_values = [0, Vector2(0, 0)]
 op_type = 0
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cb4jc"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.276, 3, 0.001]
+initialized = true
+script = ExtResource("30_nhxin")
 
 [sub_resource type="VisualShader" id="VisualShader_b85uw"]
 code = "shader_type canvas_item;
@@ -2452,7 +2450,7 @@ code = "shader_type canvas_item;
 //New hack - faster than using length func
 float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
 {
-	return smoothstep(radius, radius + smoothness, dot(position, position) * 6.0);
+	return smoothstep(radius + smoothness, radius, dot(position, position) * 6.0);
 }
 
 
@@ -2470,15 +2468,20 @@ void fragment() {
 // Circle:4
 	vec2 n_in4p1 = vec2(0.50000, 0.50000);
 	float n_in4p2 = 0.27600;
-	float n_in4p3 = 1.00000;
+	float n_in4p3 = 0.98800;
 	{
 		n_out4p0 = VisualShaderNodeCircle_circle(UV - n_in4p1, n_in4p2, n_in4p3);
 	}
 
 
-// Step:3
-	float n_in3p1 = 0.24100;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
+	float n_out9p0;
+// Circle:9
+	vec2 n_in9p1 = vec2(0.50000, 0.50000);
+	float n_in9p2 = 0.27600;
+	float n_in9p3 = 0.00100;
+	{
+		n_out9p0 = VisualShaderNodeCircle_circle(UV - n_in9p1, n_in9p2, n_in9p3);
+	}
 
 
 	vec3 n_out7p0;
@@ -2492,7 +2495,7 @@ void fragment() {
 	}
 	else if(n_out8p0 < n_in7p1)
 	{
-		n_out7p0 = vec3(n_out3p0);
+		n_out7p0 = vec3(n_out9p0);
 	}
 	else
 	{
@@ -2506,21 +2509,21 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-386.058, 72.3369)
+graph_offset = Vector2(-319.527, 173.247)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(480, 240)
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_waqbe")
-nodes/fragment/3/position = Vector2(-80, 520)
 nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_5lnj3")
-nodes/fragment/4/position = Vector2(-360, 340)
+nodes/fragment/4/position = Vector2(-380, 300)
 nodes/fragment/5/node = SubResource("VisualShaderNodeInput_5kd2u")
 nodes/fragment/5/position = Vector2(-520, 160)
 nodes/fragment/7/node = SubResource("VisualShaderNodeIf_x4hn7")
 nodes/fragment/7/position = Vector2(120, 320)
 nodes/fragment/8/node = SubResource("VisualShaderNodeVectorDecompose_6vtrh")
 nodes/fragment/8/position = Vector2(-120, 180)
-nodes/fragment/connections = PackedInt32Array(4, 0, 3, 0, 5, 0, 8, 0, 8, 0, 7, 0, 4, 0, 7, 4, 3, 0, 7, 5, 7, 0, 0, 0)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_cb4jc")
+nodes/fragment/9/position = Vector2(-180, 480)
+nodes/fragment/connections = PackedInt32Array(5, 0, 8, 0, 8, 0, 7, 0, 4, 0, 7, 4, 7, 0, 0, 0, 9, 0, 7, 5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_52mrt"]
 shader = SubResource("VisualShader_b85uw")

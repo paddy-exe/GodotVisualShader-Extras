@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc7pruowuvxel"]
+
+[ext_resource type="Shader" uid="uid://cxui2its7mir8" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/shapes/smooth_circle_shader.tres" id="1_t1sjd"]
+[ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="2_a4dbu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4d508"]
+shader = ExtResource("1_t1sjd")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4d508")
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_a4dbu")
