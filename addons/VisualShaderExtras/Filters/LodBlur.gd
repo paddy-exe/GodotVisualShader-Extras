@@ -21,7 +21,7 @@ extends VisualShaderNodeCustom
 class_name VisualShaderNodeLodBlur
 
 func _get_name():
-	return "LoDBlur"
+	return "LodBlur"
 
 func _get_category():
 	return "VisualShaderExtras/Filters"
