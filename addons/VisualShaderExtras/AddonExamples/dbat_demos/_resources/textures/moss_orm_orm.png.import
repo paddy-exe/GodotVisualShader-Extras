@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e6k5hrwrnjy3"
-path.s3tc="res://.godot/imported/VisualShaderExtras-Logo-128x128.png-726a4ccf96ab2edb98da5e19c7db9d4c.s3tc.ctex"
+uid="uid://bqtpccn3wemel"
+path.s3tc="res://.godot/imported/moss_orm_orm.png-468ca1feb8d411ee321feb7f8ada844a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png"
-dest_files=["res://.godot/imported/VisualShaderExtras-Logo-128x128.png-726a4ccf96ab2edb98da5e19c7db9d4c.s3tc.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/moss_orm_orm.png"
+dest_files=["res://.godot/imported/moss_orm_orm.png-468ca1feb8d411ee321feb7f8ada844a.s3tc.ctex"]
 
 [params]
 

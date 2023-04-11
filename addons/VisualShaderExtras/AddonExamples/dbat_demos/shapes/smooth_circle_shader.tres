@@ -1,0 +1,115 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://cxui2its7mir8"]
+
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="1_3evrx"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_fukdh"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_n6kkt"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_jjsoh"]
+output_port_for_preview = 0
+default_input_values = [0, 0.0, 1, 0.5, 2, 0.001, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ksvn0"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.276, 3, 0.988]
+initialized = true
+script = ExtResource("1_3evrx")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_2fxko"]
+output_port_for_preview = 0
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.276, 3, 0.001]
+initialized = true
+script = ExtResource("1_3evrx")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+// Circle
+
+//Original code
+//float sdCircle(vec2 pos, float r) {
+//	return step(length(pos) - r, pos).x;
+//}
+
+//New hack - faster than using length func
+float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
+{
+	return smoothstep(radius + smoothness, radius, dot(position, position) * 6.0);
+}
+
+
+void fragment() {
+// Input:2
+	vec2 n_out2p0 = UV;
+
+
+// VectorDecompose:3
+	float n_out3p0 = n_out2p0.x;
+	float n_out3p1 = n_out2p0.y;
+
+
+	float n_out5p0;
+// Circle:5
+	vec2 n_in5p1 = vec2(0.50000, 0.50000);
+	float n_in5p2 = 0.27600;
+	float n_in5p3 = 0.98800;
+	{
+		n_out5p0 = VisualShaderNodeCircle_circle(UV - n_in5p1, n_in5p2, n_in5p3);
+	}
+
+
+	float n_out6p0;
+// Circle:6
+	vec2 n_in6p1 = vec2(0.50000, 0.50000);
+	float n_in6p2 = 0.27600;
+	float n_in6p3 = 0.00100;
+	{
+		n_out6p0 = VisualShaderNodeCircle_circle(UV - n_in6p1, n_in6p2, n_in6p3);
+	}
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 0.50000;
+	float n_in4p2 = 0.00100;
+	vec3 n_in4p3 = vec3(0.00000, 0.00000, 0.00000);
+	if(abs(n_out3p0 - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = n_in4p3;
+	}
+	else if(n_out3p0 < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out6p0);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out5p0);
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out4p0;
+
+
+}
+"
+graph_offset = Vector2(-86.5636, -75.4656)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(780, 120)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_fukdh")
+nodes/fragment/2/position = Vector2(-83.7461, -30.5869)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVectorDecompose_n6kkt")
+nodes/fragment/3/position = Vector2(316.254, -10.5869)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_jjsoh")
+nodes/fragment/4/position = Vector2(556.254, 129.413)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_ksvn0")
+nodes/fragment/5/position = Vector2(56.2539, 109.413)
+nodes/fragment/6/node = SubResource("VisualShaderNodeCustom_2fxko")
+nodes/fragment/6/position = Vector2(256.254, 289.413)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 4, 0, 5, 0, 4, 4, 6, 0, 4, 5, 4, 0, 0, 0)

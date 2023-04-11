@@ -19,6 +19,10 @@ config/icon="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Lo
 
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

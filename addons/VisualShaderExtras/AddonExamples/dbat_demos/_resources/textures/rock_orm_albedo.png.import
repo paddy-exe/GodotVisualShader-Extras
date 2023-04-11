@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e6k5hrwrnjy3"
-path.s3tc="res://.godot/imported/VisualShaderExtras-Logo-128x128.png-726a4ccf96ab2edb98da5e19c7db9d4c.s3tc.ctex"
+uid="uid://dq3jk3ga3vpy8"
+path.s3tc="res://.godot/imported/rock_orm_albedo.png-6996258c6b7373c785b1b87d9f76865f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png"
-dest_files=["res://.godot/imported/VisualShaderExtras-Logo-128x128.png-726a4ccf96ab2edb98da5e19c7db9d4c.s3tc.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/textures/rock_orm_albedo.png"
+dest_files=["res://.godot/imported/rock_orm_albedo.png-6996258c6b7373c785b1b87d9f76865f.s3tc.ctex"]
 
 [params]
 

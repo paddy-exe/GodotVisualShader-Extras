@@ -1,4 +1,3 @@
-@tool
 # The MIT License
 # Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
@@ -16,70 +15,42 @@
 # DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-class_name VisualShaderNodeUVRotate
-extends VisualShaderNodeCustom
 
-func _init():
-	set_input_port_default_value(1, Vector2(0.5,0.5))
-	set_input_port_default_value(2, 10.0)
+@tool
+extends VisualShaderNodeCustom
+class_name VisualShaderNodeReroute
 
 func _get_name():
-	return "UVRotate"
+	return "Reroute"
 
 func _get_category():
-	return "VisualShaderExtras/UV"
+	return "VisualShaderExtras/Usability"
 
 func _get_description():
-	return "Rotates UV coordinates around a pivot point."
+	return "Re-route any number-like. Helps with long noodles.\nWill convert the incoming to the outgoing it connects to. You can't reroute Transforms."
 
-func _get_return_icon_type():
-	return VisualShaderNode.PORT_TYPE_VECTOR_2D
+#func _get_return_icon_type():
+#	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
-func _get_output_port_type(port):
-	return VisualShaderNode.PORT_TYPE_VECTOR_2D
-	
 func _get_output_port_count():
 	return 1
 
-func _get_output_port_name(port: int) -> String:
-	return "UV"
+func _get_output_port_type(port:int):
+	return VisualShaderNode.PORT_TYPE_VECTOR_4D
+
+func _get_output_port_name(port: int):
+	return ""
 	
 func _get_input_port_count():
-	return 3
+	return 1
 
 func _get_input_port_name(port):
-	match port:
-		0: return "UV"
-		1: return "Pivot"
-		2: return "Angle (Radians)"
+	return ""
 
 func _get_input_port_type(port):
-	match port:
-		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D #UV
-		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D #pivot
-		2: return VisualShaderNode.PORT_TYPE_SCALAR #radians
+	return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
-func _get_global_code(mode)->String:
-	return """
-vec2 vec2_rotate_NodeUVRotateV2(vec2 _uv, float _angle, vec2 _pivot) {
-	_uv -= _pivot;
-	_uv = mat2( vec2(cos(_angle), -sin(_angle)), vec2(sin(_angle), cos(_angle)) ) * _uv;
-	_uv += _pivot;
-	return _uv;
-}"""
-	
 func _get_code(input_vars, output_vars, mode, type):
-	var uv = input_vars[0] if input_vars[0] else "UV"
-	var code : String = """
-	vec2 rotated_uv = {uv};
-	rotated_uv = vec2_rotate_NodeUVRotateV2({uv}, {rand_rotation}, {pivot});
-	{out_uv} = rotated_uv;
-	""".format(
-		{
-		"uv": uv,
-		"pivot": input_vars[1],
-		"rand_rotation": input_vars[2],
-		"out_uv": output_vars[0] 
-		})
-	return code
+	if input_vars[0]:
+		return "%s = %s;\n" % [output_vars[0],input_vars[0]]
 

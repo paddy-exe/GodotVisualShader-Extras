@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e6k5hrwrnjy3"
-path.s3tc="res://.godot/imported/VisualShaderExtras-Logo-128x128.png-726a4ccf96ab2edb98da5e19c7db9d4c.s3tc.ctex"
+uid="uid://x3a0rntfqelx"
+path.s3tc="res://.godot/imported/ids.png-ed052388bc058ed5bbf311fd75b7e4e7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo-128x128.png"
-dest_files=["res://.godot/imported/VisualShaderExtras-Logo-128x128.png-726a4ccf96ab2edb98da5e19c7db9d4c.s3tc.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/color_mask/ids.png"
+dest_files=["res://.godot/imported/ids.png-ed052388bc058ed5bbf311fd75b7e4e7.s3tc.ctex"]
 
 [params]
 

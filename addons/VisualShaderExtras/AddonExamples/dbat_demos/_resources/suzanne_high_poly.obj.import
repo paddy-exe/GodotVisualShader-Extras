@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dsgni0xlkinot"
+path="res://.godot/imported/suzanne_high_poly.obj-8ab0a95ff7200a59fcdea7f04af6a3e8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/suzanne_high_poly.obj-8ab0a95ff7200a59fcdea7f04af6a3e8.mesh"]
+
+source_file="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/_resources/suzanne_high_poly.obj"
+dest_files=["res://.godot/imported/suzanne_high_poly.obj-8ab0a95ff7200a59fcdea7f04af6a3e8.mesh", "res://.godot/imported/suzanne_high_poly.obj-8ab0a95ff7200a59fcdea7f04af6a3e8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

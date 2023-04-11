@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/icon.svg" id="2_hk26s"]
+[ext_resource type="Shader" uid="uid://o5p3xjges15i" path="res://addons/VisualShaderExtras/AddonExamples/dbat_demos/rerouter/rerouter_demo.tres" id="3_15e5f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wqry"]
+shader = ExtResource("3_15e5f")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_1wqry")
+offset_right = 189.0
+offset_bottom = 180.0
+texture = ExtResource("2_hk26s")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 185.0
+offset_right = 176.0
+offset_bottom = 315.0
+text = "Rerouters Demo:
+Shows Reroute and RerouteTransform nodes.
+See the shader."
+autowrap_mode = 2

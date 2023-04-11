@@ -1,5 +1,4 @@
 # The MIT License
-# Copyright © 2022 Inigo Quilez
 # Copyright © 2022 Donn Ingle (on shoulders of giants)
 # Permission is hereby granted, free of charge, to any person obtaining a copy 
 # of this software and associated documentation files (the "Software"), 
@@ -17,79 +16,67 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# and
+
+## 2022 Kasper Arnklit Frandsen - Public Domain - No Rights Reserved
+
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeCircle
-
-func _init():
-	set_input_port_default_value(1, Vector2(0.5, 0.5))#pos
-	set_input_port_default_value(2, 0.25) #radius
-	set_input_port_default_value(3, 0.25) #smoothness
+class_name VisualShaderNodeMaskBlend
 
 func _get_name():
-	return "Circle"
+	return "MaskBlend"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Utility"
 
 func _get_description():
-	return "Signed Distance Circle Shape3D with smoothing."
+	return """Let's you control the blend and fade of a given mask."""
 
-func _get_version():
-	return "2"
-	
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
-func _get_input_port_count():
-	return 4
-
-func _get_input_port_name(port):
-	match port:
-		0: return "UV"
-		1: return "Position"
-		2: return "Radius"
-		3: return "Smoothness"
-
-func _get_input_port_type(port):
-	match port:
-		0: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		1: return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		2: return VisualShaderNode.PORT_TYPE_SCALAR
-		3: return VisualShaderNode.PORT_TYPE_SCALAR
-
+func _get_output_port_type(port):
+	return VisualShaderNode.PORT_TYPE_SCALAR
+	
 func _get_output_port_count():
 	return 1
 
-func _get_output_port_name(port):
-	return "Mask"
+func _get_output_port_name(port: int) -> String:
+	return "Output"
+	
+func _init() -> void:
+	set_input_port_default_value(0, 0.)
+	set_input_port_default_value(1, 0.)
+	set_input_port_default_value(2, 0.)
+	
+func _get_input_port_count():
+	return 3
 
-func _get_output_port_type(port):
+func _get_input_port_name(port):
+	match port:
+		0: return "Mask Input"
+		1: return "Blend Amount"
+		2: return "Blend Fade"
+
+func _get_input_port_type(port):
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_global_code(mode):
 	return """
-//Original code
-//float sdCircle(vec2 pos, float r) {
-//	return step(length(pos) - r, pos).x;
-//}
-
-//New hack - faster than using length func
-float VisualShaderNodeCircle_circle(vec2 position, float radius, float smoothness)
-{
-	return smoothstep(radius + smoothness, radius, dot(position, position) * 6.0);
-}
-"""
+float mask_blend_VisualShaderNodeMaskBlend(float offset, float fade, float mask_in) {
+	offset *= -1.;
+	return smoothstep(offset - fade, offset + fade, mask_in);
+}"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	var uv = "UV"
-	if input_vars[0]:
-		uv = input_vars[0]
-	return "{out} = VisualShaderNodeCircle_circle({uv} - {pos}, {radius}, {smoothness});" \
-	.format({
-		"uv": uv,
-		"pos": input_vars[1],
-		"radius": input_vars[2],
-		"smoothness": input_vars[3],
-		"out" : output_vars[0]
+	var code = """
+{out_float} = mask_blend_VisualShaderNodeMaskBlend({offset}, {fade}, {mask_in});
+""".format(
+	{
+	"mask_in" : input_vars[0],
+	"offset": input_vars[1],
+	"fade" : input_vars[2],
+	"out_float" : output_vars[0] 
 	})
+	return code
