@@ -1,0 +1,294 @@
+[gd_scene load_steps=23 format=3 uid="uid://cjtocgy6oar8e"]
+
+[ext_resource type="Texture2D" uid="uid://64l2eqbdwv15" path="res://addons/VisualShaderExtras/AddonExamples/Resources/KenneyPrototypeTexture.png" id="1_dvlyl"]
+[ext_resource type="PackedScene" uid="uid://b0saq40btdu4x" path="res://addons/VisualShaderExtras/AddonExamples/Resources/csg_test_scene.tscn" id="2_eedn2"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="3_55qfa"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVtoSphereCoord.gd" id="4_ce4gj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dnsta"]
+sky_top_color = Color(0.133333, 0.294118, 0.54902, 1)
+sky_horizon_color = Color(0.411765, 0.454902, 0.670588, 1)
+ground_bottom_color = Color(0.2, 0.180392, 0.34902, 1)
+ground_horizon_color = Color(0.411765, 0.454902, 0.670588, 1)
+
+[sub_resource type="Sky" id="Sky_eybnj"]
+sky_material = SubResource("ProceduralSkyMaterial_dnsta")
+
+[sub_resource type="Environment" id="Environment_7au06"]
+background_mode = 2
+sky = SubResource("Sky_eybnj")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssao_radius = 8.1
+ssao_intensity = 15.06
+sdfgi_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf0fy"]
+albedo_texture = ExtResource("1_dvlyl")
+uv1_triplanar = true
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bit1y"]
+default_input_values = [0, Vector3(1, 1, 1), 1, Vector3(1, 1, 1), 2, 1.0]
+initialized = true
+script = ExtResource("3_55qfa")
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_yel11"]
+input_name = "normal"
+
+[sub_resource type="VisualShader" id="VisualShader_30d6h"]
+code = "shader_type spatial;
+
+
+// PSRDNoise3D
+
+		vec4 __psrdnoise3_permute(vec4 i) {
+			vec4 im = mod(i, 289.0);
+			return mod(((im*34.0)+10.0)*im, 289.0);
+		}
+		
+		float psrdnoise3_with_gradient(vec3 x, vec3 period, float alpha, out vec3 gradient) {
+			const mat3 M = mat3(vec3(0.0, 1.0, 1.0), vec3(1.0, 0.0, 1.0), vec3(1.0, 1.0, 0.0));
+			const mat3 Mi = mat3(vec3(-0.5, 0.5, 0.5), vec3(0.5,-0.5, 0.5), vec3(0.5, 0.5,-0.5));
+			vec3 uvw = M * x;
+			vec3 i0 = floor(uvw), f0 = fract(uvw);
+			vec3 g_ = step(f0.xyx, f0.yzz), l_ = 1.0 - g_;
+			vec3 g = vec3(l_.z, g_.xy), l = vec3(l_.xy, g_.z);
+			vec3 o1 = min( g, l ), o2 = max( g, l );
+			vec3 i1 = i0 + o1, i2 = i0 + o2, i3 = i0 + vec3(1.0);
+			vec3 v0 = Mi * i0, v1 = Mi * i1, v2 = Mi * i2, v3 = Mi * i3;
+			vec3 x0 = x - v0, x1 = x - v1, x2 = x - v2, x3 = x - v3;
+			if(any(greaterThan(period, vec3(0.0)))) {
+				vec4 vx = vec4(v0.x, v1.x, v2.x, v3.x);
+				vec4 vy = vec4(v0.y, v1.y, v2.y, v3.y);
+				vec4 vz = vec4(v0.z, v1.z, v2.z, v3.z);
+				if(period.x > 0.0) vx = mod(vx, period.x);
+				if(period.y > 0.0) vy = mod(vy, period.y);
+				if(period.z > 0.0) vz = mod(vz, period.z);
+				i0 = floor(M * vec3(vx.x, vy.x, vz.x) + 0.5);
+				i1 = floor(M * vec3(vx.y, vy.y, vz.y) + 0.5);
+				i2 = floor(M * vec3(vx.z, vy.z, vz.z) + 0.5);
+				i3 = floor(M * vec3(vx.w, vy.w, vz.w) + 0.5);
+			}
+			
+		vec4 hash = __psrdnoise3_permute( __psrdnoise3_permute( __psrdnoise3_permute( 
+					  vec4(i0.z, i1.z, i2.z, i3.z ))
+					+ vec4(i0.y, i1.y, i2.y, i3.y ))
+					+ vec4(i0.x, i1.x, i2.x, i3.x ));
+		vec4 theta = hash * 3.883222077;
+		vec4 sz = hash * -0.006920415 + 0.996539792;
+		vec4 psi = hash * 0.108705628;
+		vec4 Ct = cos(theta), St = sin(theta);
+		vec4 sz_prime = sqrt( 1.0 - sz*sz );
+		vec4 gx, gy, gz;
+		if(alpha != 0.0) {
+			vec4 px = Ct * sz_prime, py = St * sz_prime, pz = sz;
+			vec4 Sp = sin(psi), Cp = cos(psi), Ctp = St*Sp - Ct*Cp;
+			vec4 qx = mix( Ctp*St, Sp, sz), qy = mix(-Ctp*Ct, Cp, sz);
+			vec4 qz = -(py*Cp + px*Sp);
+			vec4 Sa = vec4(sin(alpha)), Ca = vec4(cos(alpha));
+			gx = Ca*px + Sa*qx; gy = Ca*py + Sa*qy; gz = Ca*pz + Sa*qz;
+		} else {
+			gx = Ct * sz_prime; gy = St * sz_prime; gz = sz;  
+		}
+		vec3 g0 = vec3(gx.x, gy.x, gz.x), g1 = vec3(gx.y, gy.y, gz.y);
+		vec3 g2 = vec3(gx.z, gy.z, gz.z), g3 = vec3(gx.w, gy.w, gz.w);
+		vec4 w = 0.5-vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3));
+		w = max(w, 0.0); vec4 w2 = w * w, w3 = w2 * w;
+		vec4 gdotx = vec4(dot(g0,x0), dot(g1,x1), dot(g2,x2), dot(g3,x3));
+		float n = dot(w3, gdotx);
+		vec4 dw = -6.0 * w2 * gdotx;
+		vec3 dn0 = w3.x * g0 + dw.x * x0;
+		vec3 dn1 = w3.y * g1 + dw.y * x1;
+		vec3 dn2 = w3.z * g2 + dw.z * x2;
+		vec3 dn3 = w3.w * g3 + dw.w * x3;
+		gradient = 39.5 * (dn0 + dn1 + dn2 + dn3);
+		return 39.5 * n;
+		}
+		
+		float psrdnoise3(vec3 x, vec3 period, float alpha) {
+			vec3 gradient;
+			return psrdnoise3_with_gradient(x, period, alpha, gradient);
+		}
+		
+	
+
+void fragment() {
+// Input:3
+	vec3 n_out3p0 = NORMAL;
+
+
+	float n_out2p0;
+// PSRDNoise3D:2
+	vec3 n_in2p1 = vec3(1.00000, 1.00000, 1.00000);
+	float n_in2p2 = 1.00000;
+	{
+		n_out2p0 = psrdnoise3(n_out3p0.xyz, n_in2p1.xyz, n_in2p2);
+	}
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0);
+
+
+}
+"
+graph_offset = Vector2(-377.1, -13.3)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_bit1y")
+nodes/fragment/2/position = Vector2(60, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_yel11")
+nodes/fragment/3/position = Vector2(-260, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_soj5p"]
+render_priority = 0
+shader = SubResource("VisualShader_30d6h")
+
+[sub_resource type="SphereMesh" id="SphereMesh_mqqi1"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="TextMesh" id="TextMesh_ju7p1"]
+text = "PSRD-Noise3D"
+font_size = 70
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_owjoy"]
+default_input_values = [1, Vector3(0, 0, 0)]
+initialized = true
+script = ExtResource("4_ce4gj")
+
+[sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_t1x3d"]
+varying_name = "vertex_world_coord"
+varying_type = 4
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ptblt"]
+input_name = "node_position_world"
+
+[sub_resource type="VisualShaderNodeVaryingSetter" id="VisualShaderNodeVaryingSetter_h2o1j"]
+varying_name = "vertex_world_coord"
+varying_type = 4
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_nf6jw"]
+input_name = "vertex"
+
+[sub_resource type="VisualShader" id="VisualShader_o1ned"]
+code = "shader_type spatial;
+
+// Varyings
+varying vec3 vertex_world_coord;
+
+
+
+// UVtoSphereCoord
+
+		vec2 uv_to_sphere_coord(vec3 sphere_surface_point, vec3 sphere_center)
+		{
+			vec3 n = normalize(sphere_surface_point - sphere_center);
+			float sphere_u = atan(n.x, n.z) / (2.0*PI) + 0.5;
+			float sphere_v = n.y * 0.5 + 0.5;
+			return vec2(sphere_u, sphere_v);
+		}
+	
+
+void vertex() {
+// Input:3
+	vec3 n_out3p0 = VERTEX;
+
+
+// VaryingSetter:2
+	vertex_world_coord = n_out3p0;
+
+
+}
+
+void fragment() {
+// VaryingGetter:3
+	vec3 n_out3p0 = vertex_world_coord;
+
+
+// Input:4
+	vec3 n_out4p0 = NODE_POSITION_WORLD;
+
+
+	vec2 n_out2p0;
+// UVtoSphereCoord:2
+	{
+		n_out2p0.xy = uv_to_sphere_coord(n_out3p0.xyz, n_out4p0.xyz);
+	}
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0, 0.0);
+
+
+}
+"
+graph_offset = Vector2(-326, -21)
+varyings/vertex_world_coord = "0,4"
+nodes/vertex/2/node = SubResource("VisualShaderNodeVaryingSetter_h2o1j")
+nodes/vertex/2/position = Vector2(60, 140)
+nodes/vertex/3/node = SubResource("VisualShaderNodeInput_nf6jw")
+nodes/vertex/3/position = Vector2(-280, 140)
+nodes/vertex/connections = PackedInt32Array(3, 0, 2, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_owjoy")
+nodes/fragment/2/position = Vector2(60, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVaryingGetter_t1x3d")
+nodes/fragment/3/position = Vector2(-220, 100)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_ptblt")
+nodes/fragment/4/position = Vector2(-280, 200)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 0, 4, 0, 2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k2kbm"]
+render_priority = 0
+shader = SubResource("VisualShader_o1ned")
+
+[sub_resource type="TextMesh" id="TextMesh_0jqoe"]
+text = "Sphere-
+Coordinates"
+font_size = 70
+
+[node name="Examples" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7au06")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.989699, -0.110675, 0.0908126, -6.9039e-09, 0.634326, 0.773066, -0.143164, -0.765103, 0.627791, 0, 2.42828, 0)
+shadow_enabled = true
+
+[node name="MainCSG" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_wf0fy")
+
+[node name="FloorCSG" type="CSGBox3D" parent="MainCSG"]
+size = Vector3(100, 1, 50)
+
+[node name="CSGTestScene" parent="MainCSG" instance=ExtResource("2_eedn2")]
+
+[node name="CSGTestScene2" parent="MainCSG" instance=ExtResource("2_eedn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, 0)
+
+[node name="ExampleMeshes" type="Node" parent="."]
+
+[node name="PSRD-Noise3D" type="Node3D" parent="ExampleMeshes"]
+
+[node name="TestSphere" type="MeshInstance3D" parent="ExampleMeshes/PSRD-Noise3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("ShaderMaterial_soj5p")
+mesh = SubResource("SphereMesh_mqqi1")
+
+[node name="TextDescription" type="MeshInstance3D" parent="ExampleMeshes/PSRD-Noise3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -1.4)
+mesh = SubResource("TextMesh_ju7p1")
+
+[node name="SphereCoord" type="Node3D" parent="ExampleMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, 0)
+
+[node name="TestSphere" type="MeshInstance3D" parent="ExampleMeshes/SphereCoord"]
+material_override = SubResource("ShaderMaterial_k2kbm")
+mesh = SubResource("SphereMesh_mqqi1")
+skeleton = NodePath("../../PSRD-Noise3D")
+
+[node name="TextDescription" type="MeshInstance3D" parent="ExampleMeshes/SphereCoord"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.4)
+mesh = SubResource("TextMesh_0jqoe")
+skeleton = NodePath("../../PSRD-Noise3D")
