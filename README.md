@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img src="addons/VisualShaderExtras/AddonExamples/VisualShaderExtras-Logo.png" width="250"/>
+  <img src="addons/VisualShaderExtras/AddonExamples/Resources/VisualShaderExtras-Logo.png" width="250"/>
 </div>
 <div id="badges" align="center">
   <a href="https://ko-fi.com/flamelizard">
@@ -109,7 +109,7 @@ You can contribute by:
 * giving feedback
 * reporting issues
 * creating PRs to solve standing issues
-* adding more nodes that you find useful yourself in a PR
+* adding more nodes that you find useful (refer to the [Contribution Guidelines](CONTRIBUTNG.md))
 * using the library and spreading the word 📰
 
 ## 🔢 Versioning

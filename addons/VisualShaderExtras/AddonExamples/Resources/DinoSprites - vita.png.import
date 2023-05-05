@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bn8avh1dk262a"
-path="res://.godot/imported/DinoSprites - vita.png-474dffc0b24c12b30945b12d883583a4.ctex"
+path="res://.godot/imported/DinoSprites - vita.png-91fa8edb8fcf02c7c172cb2495339f77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonExamples/DinoSprites - vita.png"
-dest_files=["res://.godot/imported/DinoSprites - vita.png-474dffc0b24c12b30945b12d883583a4.ctex"]
+source_file="res://addons/VisualShaderExtras/AddonExamples/Resources/DinoSprites - vita.png"
+dest_files=["res://.godot/imported/DinoSprites - vita.png-91fa8edb8fcf02c7c172cb2495339f77.ctex"]
 
 [params]
 
