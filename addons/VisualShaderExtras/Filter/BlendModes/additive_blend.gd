@@ -22,19 +22,19 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeHardLightBlendAdvanced
+class_name VisualShaderNodeAdditiveBlendAdvanced
 
 func _get_name():
-	return "BlendHardLight"
+	return "BlendAdditive"
 
 func _init() -> void:
 	set_input_port_default_value(2, 0.5)
 
 func _get_category():
-	return "VisualShaderExtras/BlendModes"
+	return "VisualShaderExtras/Filter/BlendModes"
 
 func _get_description():
-	return "Hard Light Blending Mode"
+	return "Additive Blending Mode"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
@@ -71,19 +71,11 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float blend_overlay_f(float c1, float c2) {
-			return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
-		}
-		
-		vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-		
-		vec3 blend_hard_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*0.5*(c1*c2+blend_overlay(c1, c2, 1.0)) + (1.0-opacity)*c2;
+		vec3 blend_additive(vec3 c1, vec3 c2, float oppacity) {
+			return c2 + c1 * oppacity;
 		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	
-	return "%s.rgb = blend_hard_light(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]
+	return "%s.rgb = blend_additive(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]

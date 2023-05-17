@@ -22,19 +22,19 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeSoftLightBlendAdvanced
+class_name VisualShaderNodeLinearLightBlendAdvanced
 
 func _get_name():
-	return "BlendSoftLight"
+	return "BlendLinearLight"
 
 func _init() -> void:
 	set_input_port_default_value(2, 0.5)
 
 func _get_category():
-	return "VisualShaderExtras/BlendModes"
+	return "VisualShaderExtras/Filter/BlendModes"
 
 func _get_description():
-	return "Soft Light Blending Mode"
+	return "Linear Light Blending Mode"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
@@ -71,15 +71,15 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float blend_soft_light_f(float c1, float c2) {
-			return (c2 < 0.5) ? (2.0*c1*c2+c1*c1*(1.0-2.0*c2)) : 2.0*c1*(1.0-c2)+sqrt(c1)*(2.0*c2-1.0);
+		float blend_linear_light_f(float c1, float c2) {
+			return (c1 + 2.0 * c2) - 1.0;
 		}
-
-		vec3 blend_soft_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_soft_light_f(c1.x, c2.x), blend_soft_light_f(c1.y, c2.y), blend_soft_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+		
+		vec3 blend_linear_light(vec3 c1, vec3 c2, float opacity) {
+			return opacity*vec3(blend_linear_light_f(c1.x, c2.x), blend_linear_light_f(c1.y, c2.y), blend_linear_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
 		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	
-	return "%s.rgb = blend_soft_light(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]
+	return "%s.rgb = blend_linear_light(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]

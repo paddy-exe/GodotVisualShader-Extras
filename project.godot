@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Godot Visual Shader - Extras"
 config/description="Visual Shader Nodes Library containing procedural shapes, UV manipulation and utility nodes"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.1")
 config/icon="res://addons/VisualShaderExtras/AddonExamples/Resources/VisualShaderExtras-Logo.png"
 
 [display]

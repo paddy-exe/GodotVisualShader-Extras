@@ -57,7 +57,7 @@ func _init() -> void:
 	set_input_port_default_value(3, Vector3(0.0, 0.0, 0.0))
 
 func _get_category():
-	return "VisualShaderExtras/BlendModes"
+	return "VisualShaderExtras/Filter/BlendModes"
 
 func _get_description():
 	return "Dissolve Blending Mode"

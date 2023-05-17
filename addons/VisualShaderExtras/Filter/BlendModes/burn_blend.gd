@@ -22,19 +22,19 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeOverlayBlendAdvanced
+class_name VisualShaderNodeBurnBlendAdvanced
 
 func _get_name():
-	return "BlendOverlay"
+	return "BlendBurn"
 
 func _init() -> void:
 	set_input_port_default_value(2, 0.5)
 
 func _get_category():
-	return "VisualShaderExtras/BlendModes"
+	return "VisualShaderExtras/Filter/BlendModes"
 
 func _get_description():
-	return "Overlay Blending Mode"
+	return "Burn Blending Mode"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
@@ -71,15 +71,15 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float blend_overlay_f(float c1, float c2) {
-			return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
+		float blend_burn_f(float c1, float c2) {
+			return (c1==0.0)?c1:max((1.0-((1.0-c2)/c1)),0.0);
 		}
 
-		vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+		vec3 blend_burn(vec3 c1, vec3 c2, float opacity) {
+			return opacity*vec3(blend_burn_f(c1.x, c2.x), blend_burn_f(c1.y, c2.y), blend_burn_f(c1.z, c2.z)) + (1.0-opacity)*c2;
 		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
 	
-	return "%s.rgb = blend_overlay(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]
+	return "%s.rgb = blend_burn(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]

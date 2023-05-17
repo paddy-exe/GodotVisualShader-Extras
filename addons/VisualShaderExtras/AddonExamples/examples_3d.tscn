@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://cjtocgy6oar8e"]
+[gd_scene load_steps=37 format=3 uid="uid://cjtocgy6oar8e"]
 
 [ext_resource type="Texture2D" uid="uid://64l2eqbdwv15" path="res://addons/VisualShaderExtras/AddonExamples/Resources/KenneyPrototypeTexture.png" id="1_dvlyl"]
 [ext_resource type="PackedScene" uid="uid://b0saq40btdu4x" path="res://addons/VisualShaderExtras/AddonExamples/Resources/csg_test_scene.tscn" id="2_eedn2"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="3_55qfa"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVtoSphereCoord.gd" id="4_ce4gj"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Filter/VolumeColorAbsorption.gd" id="5_qqmdn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dnsta"]
 sky_top_color = Color(0.133333, 0.294118, 0.54902, 1)
@@ -38,6 +39,8 @@ input_name = "normal"
 
 [sub_resource type="VisualShader" id="VisualShader_30d6h"]
 code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
 
 
 // PSRDNoise3D
@@ -173,6 +176,8 @@ input_name = "vertex"
 
 [sub_resource type="VisualShader" id="VisualShader_o1ned"]
 code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
 
 // Varyings
 varying vec3 vertex_world_coord;
@@ -243,9 +248,166 @@ render_priority = 0
 shader = SubResource("VisualShader_o1ned")
 
 [sub_resource type="TextMesh" id="TextMesh_0jqoe"]
-text = "Sphere-
-Coordinates"
-font_size = 70
+text = "Volume-
+Color
+Absorption"
+font_size = 60
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_jsgn1"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_1k3kl"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 1
+
+[sub_resource type="VisualShaderNodeLinearSceneDepth" id="VisualShaderNodeLinearSceneDepth_k37xo"]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_aqgir"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_0wk8u"]
+source = 1
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_mvsnb"]
+parameter_name = "absorption_color"
+default_value_enabled = true
+default_value = Color(0.7, 0.3, 0.4, 1)
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_tgynm"]
+default_input_values = [1, Vector3(0.7, 0.3, 0.4), 2, 0.5, 3, 0.5]
+initialized = true
+script = ExtResource("5_qqmdn")
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_nam01"]
+parameter_name = "absorption_coeff"
+hint = 1
+max = 5.0
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_balq2"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_6ut3v"]
+parameter_name = "water_color"
+default_value_enabled = true
+default_value = Color(0.181027, 0.923298, 0.883855, 1)
+
+[sub_resource type="VisualShader" id="VisualShader_437cm"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 water_color : source_color = vec4(0.181027, 0.923298, 0.883855, 1.000000);
+uniform sampler2D screen_tex_frg_2 : hint_screen_texture;
+uniform vec4 absorption_color : source_color = vec4(0.700000, 0.300000, 0.400000, 1.000000);
+uniform float absorption_coeff : hint_range(0, 5) = 0.5;
+uniform sampler2D depth_tex_frg_12 : hint_depth_texture;
+
+
+// VolumeColorAbsorption
+
+		vec4 volume_absorption(vec4 input_col, vec4 abs_col, float abs_coeff, float abs_depth) {
+			return input_col - (1.0 - exp(-abs_coeff * abs_depth)) * abs_col;
+		}
+	
+
+void fragment() {
+// ColorConstant:10
+	vec4 n_out10p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// ColorParameter:9
+	vec4 n_out9p0 = water_color;
+
+
+// VectorOp:11
+	vec4 n_out11p0 = n_out10p0 - n_out9p0;
+
+
+	vec4 n_out2p0;
+// Texture2D:2
+	n_out2p0 = texture(screen_tex_frg_2, SCREEN_UV);
+
+
+// ColorParameter:3
+	vec4 n_out3p0 = absorption_color;
+
+
+// FloatParameter:6
+	float n_out6p0 = absorption_coeff;
+
+
+	float n_out12p0;
+// LinearSceneDepth:12
+	{
+		float __log_depth = textureLod(depth_tex_frg_12, SCREEN_UV, 0.0).x;
+	vec4 __depth_view = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __log_depth, 1.0);
+		__depth_view.xyz /= __depth_view.w;
+		n_out12p0 = -__depth_view.z;
+	}
+
+
+	vec4 n_out5p0;
+// VolumeColorAbsorption:5
+	{
+		n_out5p0 = volume_absorption(n_out2p0, n_out3p0, n_out6p0, n_out12p0);
+	}
+
+
+// VectorOp:8
+	vec4 n_out8p0 = n_out11p0 * n_out5p0;
+
+
+// VectorDecompose:13
+	float n_out13p0 = n_out8p0.x;
+	float n_out13p1 = n_out8p0.y;
+	float n_out13p2 = n_out8p0.z;
+	float n_out13p3 = n_out8p0.w;
+
+
+// Output:0
+	ALBEDO = vec3(n_out8p0.xyz);
+	ALPHA = n_out13p3;
+
+
+}
+"
+graph_offset = Vector2(-739.736, 159.885)
+nodes/fragment/0/position = Vector2(1100, -60)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_0wk8u")
+nodes/fragment/2/position = Vector2(-340, -100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_mvsnb")
+nodes/fragment/3/position = Vector2(-360, 60)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_tgynm")
+nodes/fragment/5/position = Vector2(200, 140)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatParameter_nam01")
+nodes/fragment/6/position = Vector2(-360, 240)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_balq2")
+nodes/fragment/8/position = Vector2(540, -100)
+nodes/fragment/9/node = SubResource("VisualShaderNodeColorParameter_6ut3v")
+nodes/fragment/9/position = Vector2(0, -80)
+nodes/fragment/10/node = SubResource("VisualShaderNodeColorConstant_jsgn1")
+nodes/fragment/10/position = Vector2(100, -180)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_1k3kl")
+nodes/fragment/11/position = Vector2(280, -120)
+nodes/fragment/12/node = SubResource("VisualShaderNodeLinearSceneDepth_k37xo")
+nodes/fragment/12/position = Vector2(-60, 300)
+nodes/fragment/13/node = SubResource("VisualShaderNodeVectorDecompose_aqgir")
+nodes/fragment/13/position = Vector2(698.235, 14.7811)
+nodes/fragment/connections = PackedInt32Array(2, 0, 5, 0, 3, 0, 5, 1, 6, 0, 5, 2, 5, 0, 8, 1, 10, 0, 11, 0, 9, 0, 11, 1, 11, 0, 8, 0, 12, 0, 5, 3, 8, 0, 0, 0, 8, 0, 13, 0, 13, 3, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2yck"]
+render_priority = 0
+shader = SubResource("VisualShader_437cm")
+shader_parameter/water_color = Color(0.313726, 0.921569, 0.913725, 0.537255)
+shader_parameter/absorption_color = Color(1, 0.0235294, 0, 1)
+shader_parameter/absorption_coeff = 0.31
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_so7ml"]
+size = Vector2(4, 3)
 
 [node name="Examples" type="Node3D"]
 
@@ -266,6 +428,9 @@ size = Vector3(100, 1, 50)
 
 [node name="CSGTestScene2" parent="MainCSG" instance=ExtResource("2_eedn2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, 0)
+
+[node name="CSGTestScene3" parent="MainCSG" instance=ExtResource("2_eedn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, 0)
 
 [node name="ExampleMeshes" type="Node" parent="."]
 
@@ -290,5 +455,23 @@ skeleton = NodePath("../../PSRD-Noise3D")
 
 [node name="TextDescription" type="MeshInstance3D" parent="ExampleMeshes/SphereCoord"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.4)
+mesh = SubResource("TextMesh_0jqoe")
+skeleton = NodePath("../../PSRD-Noise3D")
+
+[node name="VolumeColorAbsorption" type="Node3D" parent="ExampleMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, 0)
+
+[node name="TestSphere" type="MeshInstance3D" parent="ExampleMeshes/VolumeColorAbsorption"]
+mesh = SubResource("SphereMesh_mqqi1")
+skeleton = NodePath("../../PSRD-Noise3D")
+
+[node name="TestPlane" type="MeshInstance3D" parent="ExampleMeshes/VolumeColorAbsorption"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, -0.0170565, 0.0235071, 1.00438)
+material_override = SubResource("ShaderMaterial_n2yck")
+mesh = SubResource("PlaneMesh_so7ml")
+skeleton = NodePath("../../PSRD-Noise3D")
+
+[node name="TextDescription" type="MeshInstance3D" parent="ExampleMeshes/VolumeColorAbsorption"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.83305, -1.4)
 mesh = SubResource("TextMesh_0jqoe")
 skeleton = NodePath("../../PSRD-Noise3D")

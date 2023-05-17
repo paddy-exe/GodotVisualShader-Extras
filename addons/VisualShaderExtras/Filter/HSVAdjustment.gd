@@ -1,6 +1,5 @@
-# MIT License
-#
-# Copyright (c) 2018-2021 Rodolphe Suescun and contributors
+# Copyright (c) 2014-present Godot Engine contributors (see AUTHORS.md).
+# Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,64 +21,75 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeVividLightBlendAdvanced
+class_name VisualShaderNodeCustomHSVAdjustment
 
 func _get_name():
-	return "BlendVividLight"
+	return "HSVAdjustment"
 
 func _init() -> void:
-	set_input_port_default_value(2, 0.5)
+	set_input_port_default_value(1, 0.0)
+	set_input_port_default_value(2, 0.0)
+	set_input_port_default_value(3, 0.0)
 
 func _get_category():
-	return "VisualShaderExtras/BlendModes"
+	return "VisualShaderExtras/Filter"
 
 func _get_description():
-	return "Vivid Light Blending Mode"
+	return "Convert RGB input colors to HSV and offset their values"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
 func _get_input_port_count():
-	return 3
+	return 4
 
 func _get_input_port_name(port):
 	match port:
 		0:
-			return "Top layer"
+			return "RGB"
 		1:
-			return "Bottom layer"
+			return "Hue Offset (Degrees)"
 		2:
-			return "Opacity"
+			return "Saturation Offset"
+		3:
+			return "Value Offset"
 
 func _get_input_port_type(port):
 	match port:
 		0:
 			return VisualShaderNode.PORT_TYPE_VECTOR_3D
 		1:
-			return VisualShaderNode.PORT_TYPE_VECTOR_3D
+			return VisualShaderNode.PORT_TYPE_SCALAR
 		2:
+			return VisualShaderNode.PORT_TYPE_SCALAR
+		3:
 			return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_output_port_count():
 	return 1
 
 func _get_output_port_name(port: int) -> String:
-	return "Output"
+	return "HSV"
 
 func _get_output_port_type(port):
 	return VisualShaderNode.PORT_TYPE_VECTOR_3D
 
 func _get_global_code(mode):
 	return """
-		float blend_vivid_light_f(float c1, float c2) {
-			return (c1 < 0.5) ? 1.0 - (1.0 - c2) / (2.0 * c1) : c2 / (2.0 * (1.0 - c1));
+		vec3 hsv_adjustment(vec3 col, float hue_offset, float sat_offset, float val_offset) {
+			vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+			vec4 p = mix(vec4(col.bg, K.wz), vec4(col.gb, K.xy), step(col.b, col.g));
+			vec4 q = mix(vec4(p.xyw, col.r), vec4(col.r, p.yzx), step(p.x, col.r));
+			float d = q.x - min(q.w, q.y);
+			float e = 1.0e-10;
+			vec3 hsv = vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+			hsv.x += hue_offset / 360.0;
+			hsv.y += sat_offset;
+			hsv.z += val_offset;
+			return hsv;
 		}
 		
-		vec3 blend_vivid_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_vivid_light_f(c1.x, c2.x), blend_vivid_light_f(c1.y, c2.y), blend_vivid_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
 	"""
 
 func _get_code(input_vars, output_vars, mode, type):
-	
-	return "%s.rgb = blend_vivid_light(%s.rgb, %s.rgb, %s);" % [output_vars[0], input_vars[0], input_vars[1], input_vars[2]]
+	return "%s = hsv_adjustment(%s.xyz, %s, %s, %s);" % [output_vars[0],input_vars[0],input_vars[1], input_vars[2], input_vars[3]]
