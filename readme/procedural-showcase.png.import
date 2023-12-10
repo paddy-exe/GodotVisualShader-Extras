@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmqcn7ek8bvs7"
-path="res://.godot/imported/Procedural-Showcase.png-361ada4e58ef9d07a80742f05b92c471.ctex"
+uid="uid://cnw405rwmy0at"
+path="res://.godot/imported/procedural-showcase.png-0a1dd2a93aee6a655e93c6dde1c9a72c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonExamples/Procedural-Showcase.png"
-dest_files=["res://.godot/imported/Procedural-Showcase.png-361ada4e58ef9d07a80742f05b92c471.ctex"]
+source_file="res://readme/procedural-showcase.png"
+dest_files=["res://.godot/imported/procedural-showcase.png-0a1dd2a93aee6a655e93c6dde1c9a72c.ctex"]
 
 [params]
 

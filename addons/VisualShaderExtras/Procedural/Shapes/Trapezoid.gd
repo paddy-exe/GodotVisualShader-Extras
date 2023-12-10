@@ -18,26 +18,28 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTriangle
+class_name VisualShaderNodeTrapezoid
 
 func _init():
-	set_input_port_default_value(1, Vector2(0.5, 0.25))
-	set_input_port_default_value(2, Vector2(0.25, 0.5))
+	set_input_port_default_value(1, Vector2(0.5, 0.5))
+	set_input_port_default_value(2, 0.15)
+	set_input_port_default_value(3, 0.35)
+	set_input_port_default_value(4, 0.25)
 
 func _get_name():
-	return "Triangle"
+	return "SDF Trapezoid Shape"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Procedural"
 
 func _get_description():
-	return "Signed Distance Triangle Shape3D"
+	return "Signed Distance Field (SDF) Trapezoid Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 3
+	return 5
 
 func _get_input_port_name(port):
 	match port:
@@ -46,7 +48,11 @@ func _get_input_port_name(port):
 		1:
 			return "Position"
 		2:
-			return "Proportions"
+			return "Top width"
+		3:
+			return "Bottom width"
+		4:
+			return "height"
 
 func _get_input_port_type(port):
 	match port:
@@ -55,7 +61,11 @@ func _get_input_port_type(port):
 		1:
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+			return VisualShaderNode.PORT_TYPE_SCALAR
+		3:
+			return VisualShaderNode.PORT_TYPE_SCALAR
+		4:
+			return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_output_port_count():
 	return 1
@@ -68,15 +78,15 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdTriangleIsosceles( in vec2 p, in vec2 q )
+		float sdTrapezoid( in vec2 p, in float r1, float r2, float he )
 		{
+			vec2 k1 = vec2(r2,he);
+			vec2 k2 = vec2(r2-r1,2.0*he);
 			p.x = abs(p.x);
-			vec2 a = p - q*clamp( dot(p,q)/dot(q,q), 0.0, 1.0 );
-			vec2 b = p - q*vec2( clamp( p.x/q.x, 0.0, 1.0 ), 1.0 );
-			float s = -sign( q.y );
-			vec2 d = min( vec2( dot(a,a), s*(p.x*q.y-p.y*q.x) ),
-						  vec2( dot(b,b), s*(p.y-q.y)  ));
-			return -sqrt(d.x)*sign(d.y);
+			vec2 ca = vec2(p.x-min(p.x,(p.y<0.0)?r1:r2), abs(p.y)-he);
+			vec2 cb = p - k1 + k2*clamp( dot(k1-p,k2)/dot(k2, k2), 0.0, 1.0 );
+			float s = (cb.x<0.0 && ca.y<0.0) ? -1.0 : 1.0;
+			return s*sqrt( min(dot(ca, ca),dot(cb, cb)) );
 		}
 	"""
 
@@ -86,4 +96,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdTriangleIsosceles(%s.xy - %s.xy, %s.xy);" % [output_vars[0], uv, input_vars[1], input_vars[2]]
+	return "%s = sdTrapezoid(%s.xy - %s.xy, %s, %s, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]
