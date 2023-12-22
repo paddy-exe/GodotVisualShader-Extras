@@ -18,26 +18,28 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeBox
+class_name VisualShaderNodePreciseBox
 
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))
-	set_input_port_default_value(2, Vector2(0.25, 0.25))
+	set_input_port_default_value(2, Vector2(-0.25, -0.25))
+	set_input_port_default_value(3, Vector2(0.25, 0.25))
+	set_input_port_default_value(4, 0.2)
 
 func _get_name():
-	return "Box"
+	return "SDF PreciseBox Shape"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Procedural"
 
 func _get_description():
-	return "Signed Distance Box Shape3D"
+	return "Signed Distance Field (SDF) Precise Box Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 3
+	return 5
 
 func _get_input_port_name(port):
 	match port:
@@ -46,7 +48,11 @@ func _get_input_port_name(port):
 		1:
 			return "Position"
 		2:
-			return "Proportions"
+			return "Point A"
+		3:
+			return "Point B"
+		4:
+			return "Thickness"
 
 func _get_input_port_type(port):
 	match port:
@@ -56,6 +62,10 @@ func _get_input_port_type(port):
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		3:
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
+		4:
+			return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_output_port_count():
 	return 1
@@ -68,10 +78,14 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdBox( in vec2 __position, in vec2 __proportions )
+		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
 		{
-			vec2 __d = abs(__position) - __proportions;
-			return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
+			float l = length(b-a);
+			vec2  d = (b-a)/l;
+			vec2  q = (p-(a+b)*0.5);
+				  q = mat2(vec2(d.x,-d.y), vec2(d.y,d.x))*q;
+				  q = abs(q)-vec2(l,th)*0.5;
+			return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
 		}
 	"""
 
@@ -81,4 +95,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdBox(%s.xy - %s.xy, %s.xy);" % [output_vars[0], uv, input_vars[1], input_vars[2]]
+	return "%s = sdPreciseBox(%s.xy - %s.xy, %s.xy, %s.xy, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]

@@ -18,28 +18,27 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeParallelogram
+class_name VisualShaderNodeRoundedBox
 
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))
-	set_input_port_default_value(2, 0.15)
-	set_input_port_default_value(3, 0.3)
-	set_input_port_default_value(4, 0.2)
+	set_input_port_default_value(2, Vector2(0.25, 0.25))
+	set_input_port_default_value(3, Vector4(0.0, 0.0, 0.0, 0.0))
 
 func _get_name():
-	return "Parallelogram"
+	return "SDF RoundedBox Shape"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Procedural"
 
 func _get_description():
-	return "Signed Distance Parallelogram Shape3D"
+	return "Signed Distance Field (SDF) Rounded Box Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 5
+	return 4
 
 func _get_input_port_name(port):
 	match port:
@@ -48,11 +47,9 @@ func _get_input_port_name(port):
 		1:
 			return "Position"
 		2:
-			return "Width"
+			return "Proportions"
 		3:
-			return "Height"
-		4:
-			return "Skew"
+			return "Radia"
 
 func _get_input_port_type(port):
 	match port:
@@ -61,11 +58,9 @@ func _get_input_port_type(port):
 		1:
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		3:
-			return VisualShaderNode.PORT_TYPE_SCALAR
-		4:
-			return VisualShaderNode.PORT_TYPE_SCALAR
+			return VisualShaderNode.PORT_TYPE_VECTOR_4D
 
 func _get_output_port_count():
 	return 1
@@ -78,17 +73,12 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdParallelogram( in vec2 p, float wi, float he, float sk )
+		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec4 __radia )
 		{
-			vec2 e = vec2(sk,he);
-			p = (p.y<0.0)?-p:p;
-			vec2  w = p - e; w.x -= clamp(w.x,-wi,wi);
-			vec2  d = vec2(dot(w,w), -w.y);
-			float s = p.x*e.y - p.y*e.x;
-			p = (s<0.0)?-p:p;
-			vec2  v = p - vec2(wi,0); v -= e*clamp(dot(v,e)/dot(e,e),-1.0,1.0);
-			d = min( d, vec2(dot(v,v), wi*he-abs(s)));
-			return sqrt(d.x)*sign(-d.y);
+			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__radia.w, __radia.z);
+			__radia.x  = (__pos.y > 0.0) ? __radia.x  : __radia.y;
+			vec2 __q = abs(__pos) - __proportions + __radia.x;
+			return min(max(__q.x, __q.y), 0.0) + length(max(__q, 0.0)) - __radia.x;
 		}
 	"""
 
@@ -98,4 +88,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdParallelogram(%s.xy - %s.xy, %s, %s, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]
+	return "%s = sdRoundedBox(%s.xy - %s.xy, %s.xy, %s.xyzw);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3]]

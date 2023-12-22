@@ -25,13 +25,13 @@ func _init():
 	set_input_port_default_value(2, Vector2(0.25, 0.25))
 
 func _get_name():
-	return "Rhombus"
+	return "SDF Rhombus Shape"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Procedural"
 
 func _get_description():
-	return "Signed Distance Rhombus Shape3D"
+	return "Signed Distance Field (SDF) Rhombus Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR

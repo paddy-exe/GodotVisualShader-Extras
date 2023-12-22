@@ -1,44 +1,23 @@
-[gd_scene load_steps=296 format=3 uid="uid://cgepf8xhbtfu7"]
+[gd_scene load_steps=251 format=3 uid="uid://cgepf8xhbtfu7"]
 
 [ext_resource type="Texture2D" uid="uid://dkwktkcfupn2y" path="res://addons/VisualShaderExtras/AddonExamples/Resources/icon.svg" id="1_esb2p"]
 [ext_resource type="Texture2D" uid="uid://im3imr3u2j1y" path="res://addons/VisualShaderExtras/AddonExamples/Resources/VisualShaderExtras-Logo-128x128.png" id="2_tmy5s"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/normal_blend.gd" id="3_3bikb"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dissolve_blend.gd" id="4_lxroe"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/screen_blend.gd" id="5_pul6b"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/overlay_blend.gd" id="6_q8wdw"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/hard_light_blend.gd" id="7_uhx7q"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/soft_light_blend.gd" id="8_kuyys"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/burn_blend.gd" id="9_11cxq"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/dodge_blend.gd" id="10_boqv4"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighten_blend.gd" id="11_or1ov"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darken_blend.gd" id="12_i07hq"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/difference_blend.gd" id="13_6owa6"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/additive_blend.gd" id="14_wd0wt"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/addsub_blend.gd" id="15_ponjq"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_light_blend.gd" id="16_u1lbq"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/vivid_light_blend.gd" id="17_y87kb"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/pin_light_blend.gd" id="18_ablgt"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/exclusion_blend.gd" id="19_iousb"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_illumination_blend.gd" id="20_f8rk4"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_light_blend.gd" id="21_1rm50"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/gamma_dark_blend.gd" id="22_sltjx"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/luminosity_blend.gd" id="23_vhhch"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/linear_burn_blend.gd" id="24_nscn2"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/lighter_color_blend.gd" id="25_8ro85"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/darker_color_blend.gd" id="26_mlax4"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/BlendModes/blend_modes.gd" id="3_tnd0r"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/Box.gd" id="8_hykxv"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/HyperbolicCross.gd" id="17_e4l87"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/PreciseHyperbolicCross.gd" id="17_l4qqe"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Checkerboard.gd" id="27_4j47k"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise2D.gd" id="27_xa0ky"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="28_bj3bh"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/RadialGradient.gd" id="29_1apco"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/ColorAdjustment/HSVAdjustment.gd" id="30_e28ye"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Box.gd" id="31_0kkaw"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Circle.gd" id="32_1rwir"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Parallelogram.gd" id="33_k8iav"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Rhombus.gd" id="34_t306u"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/PreciseBox.gd" id="35_laxki"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/RoundedBox.gd" id="36_8mm01"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Trapezoid.gd" id="37_glmoa"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Shapes/Triangle.gd" id="38_y2sll"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/Circle.gd" id="32_1rwir"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/Parallelogram.gd" id="33_k8iav"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/Rhombus.gd" id="34_t306u"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/PreciseBox.gd" id="35_laxki"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/RoundedBox.gd" id="36_8mm01"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/Trapezoid.gd" id="37_glmoa"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/Shapes/Triangle.gd" id="38_y2sll"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVTwirl.gd" id="39_3gamp"]
 [ext_resource type="Texture2D" uid="uid://bn8avh1dk262a" path="res://addons/VisualShaderExtras/AddonExamples/Resources/DinoSprites - vita.png" id="41_gg1i3"]
 [ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVFlipbook.gd" id="41_k7n2j"]
@@ -57,23 +36,26 @@ texture_type = 1
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_lnt7t"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_vhkdd"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("3_3bikb")
+properties = "0,18;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="68"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendNormal
+// BlendModes
 
-		vec3 blend_normal(vec3 c1, vec3 c2, float opacity) {
-			return opacity*c1 + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_normal(vec3 c1, vec3 c2, float opacity) {
+					return opacity*c1 + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -85,7 +67,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendNormal:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_normal(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -98,63 +80,63 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-254, 213)
+graph_offset = Vector2(-66.24, 46.08)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(860, 240)
 nodes/fragment/4/node = SubResource("67")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_pj0n4")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_lnt7t")
-nodes/fragment/7/position = Vector2(61, 228)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_vhkdd")
+nodes/fragment/7/position = Vector2(361.16, 253.6)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="69"]
 shader = SubResource("68")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8j805"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_yy23m"]
-texture = SubResource("CompressedTexture2D_8j805")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fxobl"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_g0xuu"]
-default_input_values = [2, 0.5, 3, Vector3(1, 1, 1)]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5ef3c"]
+default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("4_lxroe")
+properties = "0,5;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_my0mx"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendDissolve
+// BlendModes
 
-		// 3D Noise with friendly permission by Inigo Quilez
-		vec3 hash_noise_range( vec3 p ) {
-			p *= mat3(vec3(127.1, 311.7, -53.7), vec3(269.5, 183.3, 77.1), vec3(-301.7, 27.3, 215.3));
-			return 2.0 * fract(fract(p)*4375.55) -1.;
-		}
+				// 3D Noise with friendly permission by Inigo Quilez
+				vec3 hash_noise_range( vec3 p ) {
+					p *= mat3(vec3(127.1, 311.7, -53.7), vec3(269.5, 183.3, 77.1), vec3(-301.7, 27.3, 215.3));
+					return 2.0 * fract(fract(p)*4375.55) -1.;
+				}
 
-		float random_range(vec3 seed, float min, float max) {
-			return mix(min, max, hash_noise_range(seed).x);
-		}
-		
-		vec3 blend_dissolve(vec3 seed, vec3 c1, vec3 c2, float opacity) {
-			if (random_range(vec3(seed), 0.0, 1.0) < opacity) {
-				return c1;
-			} else {
-				return c2;
-			}
-		}
-	
+				float random_range(vec3 seed, float min, float max) {
+					return mix(min, max, hash_noise_range(seed).x);
+				}
+				
+				vec3 blend_dissolve(vec3 seed, vec3 c1, vec3 c2, float opacity) {
+					if (random_range(vec3(seed), 0.0, 1.0) < opacity) {
+						return c1;
+					} else {
+						return c2;
+					}
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -166,7 +148,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendDissolve:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_dissolve(vec3(n_out4p0.xyz).rgb, vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -179,49 +161,49 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-139.2, -18.24)
+graph_offset = Vector2(-38.4, 60.84)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(880, 220)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_yy23m")
-nodes/fragment/4/position = Vector2(-240, 320)
+nodes/fragment/4/position = Vector2(-220, 520)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_fxobl")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_g0xuu")
-nodes/fragment/7/position = Vector2(154, 255)
-nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0, 4, 0, 7, 3)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_5ef3c")
+nodes/fragment/7/position = Vector2(300, 260)
+nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 4, 0, 7, 3, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_enr5s"]
 shader = SubResource("VisualShader_my0mx")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0hw3s"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sxjik"]
-texture = SubResource("CompressedTexture2D_0hw3s")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ik4a7"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_kwjoc"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_xrleu"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("5_pul6b")
+properties = "0,21;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_unmd3"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendScreen
+// BlendModes
 
-		vec3 blend_screen(vec3 c1, vec3 c2, float opacity) {
-			return opacity*(1.0-(1.0-c1)*(1.0-c2)) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_screen(vec3 c1, vec3 c2, float opacity) {
+					return opacity*(1.0-(1.0-c1)*(1.0-c2)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -233,7 +215,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendScreen:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_screen(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -246,53 +228,53 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-203.52, 10.56)
+graph_offset = Vector2(-42.24, 52.8)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(840, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_sxjik")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_ik4a7")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_kwjoc")
-nodes/fragment/7/position = Vector2(100, 260)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_xrleu")
+nodes/fragment/7/position = Vector2(334.52, 341.6)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wu7lk"]
 shader = SubResource("VisualShader_unmd3")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1ynhs"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_rt0m3"]
-texture = SubResource("CompressedTexture2D_1ynhs")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xhs62"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_u0kr0"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_108dd"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("6_q8wdw")
+properties = "0,19;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_mvyjv"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendOverlay
+// BlendModes
 
-		float blend_overlay_f(float c1, float c2) {
-			return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
-		}
+				float blend_overlay_f(float c1, float c2) {
+					return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
+				}
 
-		vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -304,7 +286,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendOverlay:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_overlay(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -317,57 +299,56 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-55.68, 0.96)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(800, 260)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_rt0m3")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_xhs62")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_u0kr0")
-nodes/fragment/7/position = Vector2(118, 272)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_108dd")
+nodes/fragment/7/position = Vector2(340, 260)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkpnf"]
 shader = SubResource("VisualShader_mvyjv")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vxpi2"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8w4nd"]
-texture = SubResource("CompressedTexture2D_vxpi2")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8firm"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_1wfak"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_5runc"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("7_uhx7q")
+properties = "0,11;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_ne8xj"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendHardLight
+// BlendModes
 
-		float blend_overlay_f(float c1, float c2) {
-			return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
-		}
-		
-		vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-		
-		vec3 blend_hard_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*0.5*(c1*c2+blend_overlay(c1, c2, 1.0)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_overlay_f(float c1, float c2) {
+					return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
+				}
+				
+				vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+				
+				vec3 blend_hard_light(vec3 c1, vec3 c2, float opacity) {
+					return opacity*0.5*(c1*c2+blend_overlay(c1, c2, 1.0)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -379,7 +360,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendHardLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_hard_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -392,53 +373,52 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-59.52, -5.76)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(800, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_8w4nd")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_8firm")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_1wfak")
-nodes/fragment/7/position = Vector2(97.5455, 268.636)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_5runc")
+nodes/fragment/7/position = Vector2(280, 280)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lkbav"]
 shader = SubResource("VisualShader_ne8xj")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_00ke3"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_elge6"]
-texture = SubResource("CompressedTexture2D_00ke3")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6h42k"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_xn7bc"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_evl22"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("8_kuyys")
+properties = "0,22;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_peul7"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendSoftLight
+// BlendModes
 
-		float blend_soft_light_f(float c1, float c2) {
-			return (c2 < 0.5) ? (2.0*c1*c2+c1*c1*(1.0-2.0*c2)) : 2.0*c1*(1.0-c2)+sqrt(c1)*(2.0*c2-1.0);
-		}
+				float blend_soft_light_f(float c1, float c2) {
+					return (c2 < 0.5) ? (2.0*c1*c2+c1*c1*(1.0-2.0*c2)) : 2.0*c1*(1.0-c2)+sqrt(c1)*(2.0*c2-1.0);
+				}
 
-		vec3 blend_soft_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_soft_light_f(c1.x, c2.x), blend_soft_light_f(c1.y, c2.y), blend_soft_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_soft_light(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_soft_light_f(c1.x, c2.x), blend_soft_light_f(c1.y, c2.y), blend_soft_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -450,7 +430,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendSoftLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_soft_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -463,53 +443,52 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-62.4, -14.4)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(900, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_elge6")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_6h42k")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_xn7bc")
-nodes/fragment/7/position = Vector2(84, 294)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_evl22")
+nodes/fragment/7/position = Vector2(408.2, 299.04)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qayvd"]
 shader = SubResource("VisualShader_peul7")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6ow1i"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_seack"]
-texture = SubResource("CompressedTexture2D_6ow1i")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ao4mv"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_aavj5"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_7buyj"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("9_11cxq")
+properties = "0,2;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_3ay0w"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendBurn
+// BlendModes
 
-		float blend_burn_f(float c1, float c2) {
-			return (c1==0.0)?c1:max((1.0-((1.0-c2)/c1)),0.0);
-		}
-
-		vec3 blend_burn(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_burn_f(c1.x, c2.x), blend_burn_f(c1.y, c2.y), blend_burn_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_burn_f(float c1, float c2) {
+					return (c1==0.0)?c1:max((1.0-((1.0-c2)/c1)),0.0);
+				}
+				
+				vec3 blend_burn(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_burn_f(c1.x, c2.x), blend_burn_f(c1.y, c2.y), blend_burn_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -521,7 +500,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendBurn:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_burn(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -534,53 +513,52 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-122.88, -4.8)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(1000, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_seack")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_ao4mv")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_aavj5")
-nodes/fragment/7/position = Vector2(115, 290)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_7buyj")
+nodes/fragment/7/position = Vector2(387, 256)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_deh4d"]
 shader = SubResource("VisualShader_3ay0w")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8y6sy"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_kj7vr"]
-texture = SubResource("CompressedTexture2D_8y6sy")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5cu28"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_lvjdb"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_cnang"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("10_boqv4")
+properties = "0,6;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_dt03t"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendDodge
+// BlendModes
 
-		float blend_dodge_f(float c1, float c2) {
-			return (c1==1.0)?c1:min(c2/(1.0-c1),1.0);
-		}
+				float blend_dodge_f(float c1, float c2) {
+					return (c1==1.0)?c1:min(c2/(1.0-c1),1.0);
+				}
 
-		vec3 blend_dodge(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_dodge_f(c1.x, c2.x), blend_dodge_f(c1.y, c2.y), blend_dodge_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_dodge(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_dodge_f(c1.x, c2.x), blend_dodge_f(c1.y, c2.y), blend_dodge_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -592,7 +570,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendDodge:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_dodge(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -605,49 +583,48 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-380.16, 2.88)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(800, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_kj7vr")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_5cu28")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_lvjdb")
-nodes/fragment/7/position = Vector2(103, 293)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_cnang")
+nodes/fragment/7/position = Vector2(318.04, 320.8)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wdg44"]
 shader = SubResource("VisualShader_dt03t")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ooykv"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_y28sw"]
-texture = SubResource("CompressedTexture2D_ooykv")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pn8yk"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_hhvwi"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jm11t"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("11_or1ov")
+properties = "0,13;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_mti26"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendLighten
+// BlendModes
 
-		vec3 blend_lighten(vec3 c1, vec3 c2, float opacity) {
-			return opacity*max(c1, c2) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_lighten(vec3 c1, vec3 c2, float opacity) {
+					return opacity*max(c1, c2) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -659,7 +636,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendLighten:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_lighten(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -672,49 +649,48 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-119.04, -3.84)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(1040, 220)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_y28sw")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_pn8yk")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_hhvwi")
-nodes/fragment/7/position = Vector2(94, 237)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_jm11t")
+nodes/fragment/7/position = Vector2(375, 296)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyc0v"]
 shader = SubResource("VisualShader_mti26")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7yhob"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tsdn0"]
-texture = SubResource("CompressedTexture2D_7yhob")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_rsvo0"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_weqb1"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_4nyk0"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("12_i07hq")
+properties = "0,3;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_4a1r1"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendDarken
+// BlendModes
 
-		vec3 blend_darken(vec3 c1, vec3 c2, float opacity) {
-			return opacity*min(c1, c2) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_darken(vec3 c1, vec3 c2, float opacity) {
+					return opacity*min(c1, c2) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -726,7 +702,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendDarken:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_darken(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -739,49 +715,48 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-59.52, 4.8)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(1040, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_tsdn0")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_rsvo0")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_weqb1")
-nodes/fragment/7/position = Vector2(100, 260)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_4nyk0")
+nodes/fragment/7/position = Vector2(375.72, 323.36)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h8ry5"]
 shader = SubResource("VisualShader_4a1r1")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wxvs1"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6x7wi"]
-texture = SubResource("CompressedTexture2D_wxvs1")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_k15wi"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_be4ge"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_s63we"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("13_6owa6")
+properties = "0,4;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_0hxt1"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendDifference
+// BlendModes
 
-		vec3 blend_difference(vec3 c1, vec3 c2, float opacity) {
-			return opacity*clamp(c2-c1, vec3(0.0), vec3(1.0)) + (1.0-opacity)*c2;
-		}
-	
+				vec3 blend_difference(vec3 c1, vec3 c2, float opacity) {
+					return opacity*clamp(c2-c1, vec3(0.0), vec3(1.0)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -793,7 +768,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendDifference:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_difference(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -806,49 +781,47 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-160.32, -3.84)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(900, 260)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_6x7wi")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_k15wi")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_be4ge")
-nodes/fragment/7/position = Vector2(102.091, 257.545)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_s63we")
+nodes/fragment/7/position = Vector2(351, 306)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d3mgk"]
 shader = SubResource("VisualShader_0hxt1")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rdblh"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_x4y2t"]
-texture = SubResource("CompressedTexture2D_rdblh")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gj8i7"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_6fheq"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jeelu"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("14_wd0wt")
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_y0dk6"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendAdditive
+// BlendModes
 
-		vec3 blend_additive(vec3 c1, vec3 c2, float oppacity) {
-			return c2 + c1 * oppacity;
-		}
-	
+				vec3 blend_additive(vec3 c1, vec3 c2, float oppacity) {
+					return c2 + c1 * oppacity;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -860,7 +833,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendAdditive:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_additive(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -875,46 +848,46 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(800, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_x4y2t")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_gj8i7")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_6fheq")
-nodes/fragment/7/position = Vector2(120, 260)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_jeelu")
+nodes/fragment/7/position = Vector2(367, 276)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uof40"]
 shader = SubResource("VisualShader_y0dk6")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hkxip"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_lkoh1"]
-texture = SubResource("CompressedTexture2D_hkxip")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_jxr11"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ud1un"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_2j7by"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("15_ponjq")
+properties = "0,1;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_qrxbr"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendAddSub
+// BlendModes
 
-		vec3 blend_addsub(vec3 c1, vec3 c2, float oppacity) {
-			return c2 + (c1 - .5) * 2.0 * oppacity;
-		}
-	
+				vec3 blend_addsub(vec3 c1, vec3 c2, float oppacity) {
+					return c2 + (c1 - .5) * 2.0 * oppacity;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -926,7 +899,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendAddSub:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_addsub(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -939,53 +912,52 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-60.48, -6.72)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(920, 160)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_lkoh1")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_jxr11")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_ud1un")
-nodes/fragment/7/position = Vector2(130, 261)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_2j7by")
+nodes/fragment/7/position = Vector2(369, 302)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eli8g"]
 shader = SubResource("VisualShader_qrxbr")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qiwvk"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_uknmv"]
-texture = SubResource("CompressedTexture2D_qiwvk")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6n35c"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jpw1j"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_d1dpc"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("16_u1lbq")
+properties = "0,15;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_fahnp"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendLinearLight
+// BlendModes
 
-		float blend_linear_light_f(float c1, float c2) {
-			return (c1 + 2.0 * c2) - 1.0;
-		}
-		
-		vec3 blend_linear_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_linear_light_f(c1.x, c2.x), blend_linear_light_f(c1.y, c2.y), blend_linear_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_linear_light_f(float c1, float c2) {
+					return (c1 + 2.0 * c2) - 1.0;
+				}
+				
+				vec3 blend_linear_light(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_linear_light_f(c1.x, c2.x), blend_linear_light_f(c1.y, c2.y), blend_linear_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -997,7 +969,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendLinearLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_linear_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1010,53 +982,52 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-97.92, 0)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(860, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_uknmv")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_6n35c")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_jpw1j")
-nodes/fragment/7/position = Vector2(114, 279)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_d1dpc")
+nodes/fragment/7/position = Vector2(341, 314)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nmcdm"]
 shader = SubResource("VisualShader_fahnp")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pxd8u"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6n6vq"]
-texture = SubResource("CompressedTexture2D_pxd8u")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_t70bk"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qs8wi"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_2avdk"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("17_y87kb")
+properties = "0,23;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_bkutg"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendVividLight
+// BlendModes
 
-		float blend_vivid_light_f(float c1, float c2) {
-			return (c1 < 0.5) ? 1.0 - (1.0 - c2) / (2.0 * c1) : c2 / (2.0 * (1.0 - c1));
-		}
-		
-		vec3 blend_vivid_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_vivid_light_f(c1.x, c2.x), blend_vivid_light_f(c1.y, c2.y), blend_vivid_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_vivid_light_f(float c1, float c2) {
+					return (c1 < 0.5) ? 1.0 - (1.0 - c2) / (2.0 * c1) : c2 / (2.0 * (1.0 - c1));
+				}
+				
+				vec3 blend_vivid_light(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_vivid_light_f(c1.x, c2.x), blend_vivid_light_f(c1.y, c2.y), blend_vivid_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1068,7 +1039,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendVividLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_vivid_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1081,53 +1052,52 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-184.32, 6.72)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(980, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_6n6vq")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_t70bk")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_qs8wi")
-nodes/fragment/7/position = Vector2(81.7338, 260.9)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_2avdk")
+nodes/fragment/7/position = Vector2(406.68, 363.6)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_idbae"]
 shader = SubResource("VisualShader_bkutg")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wcipp"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mgtt1"]
-texture = SubResource("CompressedTexture2D_wcipp")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_skt4l"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_4hvqo"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ocrxc"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("18_ablgt")
+properties = "0,20;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_vs058"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendPinLight
+// BlendModes
 
-		float blend_pin_light_f( float c1, float c2) {
-			return (2.0 * c1 - 1.0 > c2) ? 2.0 * c1 - 1.0 : ((c1 < 0.5 * c2) ? 2.0 * c1 : c2);
-		}
-		
-		vec3 blend_pin_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_pin_light_f(c1.x, c2.x), blend_pin_light_f(c1.y, c2.y), blend_pin_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_pin_light_f( float c1, float c2) {
+					return (2.0 * c1 - 1.0 > c2) ? 2.0 * c1 - 1.0 : ((c1 < 0.5 * c2) ? 2.0 * c1 : c2);
+				}
+				
+				vec3 blend_pin_light(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_pin_light_f(c1.x, c2.x), blend_pin_light_f(c1.y, c2.y), blend_pin_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1139,7 +1109,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendPinLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_pin_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1154,54 +1124,50 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(920, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_mgtt1")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_skt4l")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_4hvqo")
-nodes/fragment/7/position = Vector2(77, 273)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_ocrxc")
+nodes/fragment/7/position = Vector2(379.8, 333.76)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c0lm"]
 shader = SubResource("VisualShader_vs058")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w77h0"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pci2l"]
-texture = SubResource("CompressedTexture2D_w77h0")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4j1w7"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ehnmp"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_g1qq0"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("7_uhx7q")
+properties = "0,12;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_fch6n"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendHardLight
+// BlendModes
 
-		float blend_overlay_f(float c1, float c2) {
-			return (c1 < 0.5) ? (2.0*c1*c2) : (1.0-2.0*(1.0-c1)*(1.0-c2));
-		}
-		
-		vec3 blend_overlay(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_overlay_f(c1.x, c2.x), blend_overlay_f(c1.y, c2.y), blend_overlay_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-		
-		vec3 blend_hard_light(vec3 c1, vec3 c2, float opacity) {
-			return opacity*0.5*(c1*c2+blend_overlay(c1, c2, 1.0)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_hard_mix_f(float c1, float c2) {
+					return floor(c1 + c2);
+				}
+
+				vec3 blend_hard_mix(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_hard_mix_f(c1.x, c2.x), blend_hard_mix_f(c1.y, c2.y), blend_hard_mix_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1213,10 +1179,10 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendHardLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
-		n_out7p0.rgb = blend_hard_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
+		n_out7p0.rgb = blend_hard_mix(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
 	}
 
 
@@ -1228,50 +1194,50 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(900, 220)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_pci2l")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_4j1w7")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_ehnmp")
-nodes/fragment/7/position = Vector2(120, 240)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_g1qq0")
+nodes/fragment/7/position = Vector2(300.36, 302.24)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnkpk"]
 shader = SubResource("VisualShader_fch6n")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3qkdn"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fbka3"]
-texture = SubResource("CompressedTexture2D_3qkdn")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_n2e2a"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_oaswl"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rs66d"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("19_iousb")
+properties = "0,7;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_nbmqa"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendExclusion
+// BlendModes
 
-		float blend_exclusion_f(float c1, float c2) {
-			return c1 + c2 - 2.0 * c1 * c2;
-		}
-		
-		vec3 blend_exclusion(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_exclusion_f(c1.x, c2.x), blend_exclusion_f(c1.y, c2.y), blend_exclusion_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_exclusion_f(float c1, float c2) {
+					return c1 + c2 - 2.0 * c1 * c2;
+				}
+				
+				vec3 blend_exclusion(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_exclusion_f(c1.x, c2.x), blend_exclusion_f(c1.y, c2.y), blend_exclusion_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1283,7 +1249,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendExclusion:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_exclusion(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1298,52 +1264,52 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(1000, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_fbka3")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_n2e2a")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_oaswl")
-nodes/fragment/7/position = Vector2(133, 279)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_rs66d")
+nodes/fragment/7/position = Vector2(420, 300)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r53ff"]
 shader = SubResource("VisualShader_nbmqa")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oqyir"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_bkrbv"]
-texture = SubResource("CompressedTexture2D_oqyir")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4ci2j"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qy2c2"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dn56n"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("20_f8rk4")
+properties = "0,9;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_6so37"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendGammaIllumination
+// BlendModes
 
-		float blend_gamma_illumination_f(float c1, float c2) 
-		{
-			return (1.0 - pow(c2, (1.0 / c1)));
-		}
-		
-		vec3 blend_gamma_illumination(vec3 c1, vec3 c2, float opacity)
-		{
-			return opacity*vec3(blend_gamma_illumination_f(c1.x, c2.x), blend_gamma_illumination_f(c1.y, c2.y), blend_gamma_illumination_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_gamma_illumination_f(float c1, float c2) 
+				{
+					return (1.0 - pow(c2, (1.0 / c1)));
+				}
+				
+				vec3 blend_gamma_illumination(vec3 c1, vec3 c2, float opacity)
+				{
+					return opacity*vec3(blend_gamma_illumination_f(c1.x, c2.x), blend_gamma_illumination_f(c1.y, c2.y), blend_gamma_illumination_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1355,7 +1321,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendGammaIllumination:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_gamma_illumination(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1370,52 +1336,52 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(900, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_bkrbv")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_4ci2j")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_qy2c2")
-nodes/fragment/7/position = Vector2(80, 260)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_dn56n")
+nodes/fragment/7/position = Vector2(389.64, 381.04)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_klgwi"]
 shader = SubResource("VisualShader_6so37")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u3em0"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tctwu"]
-texture = SubResource("CompressedTexture2D_u3em0")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_43pa2"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_w3tct"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_w3jhn"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("21_1rm50")
+properties = "0,10;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_x1r6j"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendGammaLight
+// BlendModes
 
-		float blend_gamma_light_f(float c1, float c2) 
-		{
-			return pow(c2, c1);
-		}
-		
-		vec3 blend_gamma_light(vec3 c1, vec3 c2, float opacity)
-		{
-			return opacity*vec3(blend_gamma_light_f(c1.x, c2.x), blend_gamma_light_f(c1.y, c2.y), blend_gamma_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_gamma_light_f(float c1, float c2) 
+				{
+					return pow(c2, c1);
+				}
+				
+				vec3 blend_gamma_light(vec3 c1, vec3 c2, float opacity)
+				{
+					return opacity*vec3(blend_gamma_light_f(c1.x, c2.x), blend_gamma_light_f(c1.y, c2.y), blend_gamma_light_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1427,7 +1393,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendGammaLight:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_gamma_light(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1442,52 +1408,52 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(1000, 260)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_tctwu")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_43pa2")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_w3tct")
-nodes/fragment/7/position = Vector2(86, 279)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_w3jhn")
+nodes/fragment/7/position = Vector2(427, 314)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5g7rp"]
 shader = SubResource("VisualShader_x1r6j")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3rhjo"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xy11v"]
-texture = SubResource("CompressedTexture2D_3rhjo")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_70u2u"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_i2k47"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_j5www"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("22_sltjx")
+properties = "0,8;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_5pcav"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendGammaDark
+// BlendModes
 
-		float blend_gamma_dark_f(float c1, float c2)
-		{
-			return pow(c2, (1.0 / c1));
-		}
-		
-		vec3 blend_gamma_dark(vec3 c1, vec3 c2, float opacity)
-		{
-			return opacity*vec3(blend_gamma_dark_f(c1.x, c2.x), blend_gamma_dark_f(c1.y, c2.y), blend_gamma_dark_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_gamma_dark_f(float c1, float c2)
+				{
+					return pow(c2, (1.0 / c1));
+				}
+				
+				vec3 blend_gamma_dark(vec3 c1, vec3 c2, float opacity)
+				{
+					return opacity*vec3(blend_gamma_dark_f(c1.x, c2.x), blend_gamma_dark_f(c1.y, c2.y), blend_gamma_dark_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1499,7 +1465,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendGammaDark:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_gamma_dark(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1514,58 +1480,58 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(880, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_xy11v")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_70u2u")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_i2k47")
-nodes/fragment/7/position = Vector2(111, 279)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_j5www")
+nodes/fragment/7/position = Vector2(417, 352)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ommw6"]
 shader = SubResource("VisualShader_5pcav")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tlqw3"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_thkhw"]
-texture = SubResource("CompressedTexture2D_tlqw3")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_2hipn"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rbhk2"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_54qrl"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("23_vhhch")
+properties = "0,16;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_t28pt"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendLuminosity
+// BlendModes
 
-		float blend_luminosity_f( float c1, float c2 )
-		{
-			float dLum = dot(vec3(c2), vec3(0.3, 0.59, 0.11));
-			float sLum = dot(vec3(c1), vec3(0.3, 0.59, 0.11));
-			float lum = sLum - dLum;
-			float c = c2 + lum;
-			if(c < 0.0) return sLum + ((c - sLum) * sLum) / (sLum - c);
-			else if(c > 1.0) return sLum + ((c - sLum) * (1.0 - sLum)) / (c - sLum);
-			else return c;
-		}
-		
-		vec3 blend_luminosity(vec3 c1, vec3 c2, float opacity)
-		{
-			return opacity*vec3(blend_luminosity_f(c1.x, c2.x), blend_luminosity_f(c1.y, c2.y), blend_luminosity_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_luminosity_f( float c1, float c2 )
+				{
+					float dLum = dot(vec3(c2), vec3(0.3, 0.59, 0.11));
+					float sLum = dot(vec3(c1), vec3(0.3, 0.59, 0.11));
+					float lum = sLum - dLum;
+					float c = c2 + lum;
+					if(c < 0.0) return sLum + ((c - sLum) * sLum) / (sLum - c);
+					else if(c > 1.0) return sLum + ((c - sLum) * (1.0 - sLum)) / (c - sLum);
+					else return c;
+				}
+				
+				vec3 blend_luminosity(vec3 c1, vec3 c2, float opacity)
+				{
+					return opacity*vec3(blend_luminosity_f(c1.x, c2.x), blend_luminosity_f(c1.y, c2.y), blend_luminosity_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1577,7 +1543,7 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendLuminosity:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
 		n_out7p0.rgb = blend_luminosity(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
@@ -1592,50 +1558,50 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(920, 240)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_thkhw")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_2hipn")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_rbhk2")
-nodes/fragment/7/position = Vector2(82.7359, 260.072)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_54qrl")
+nodes/fragment/7/position = Vector2(393, 330)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p71em"]
 shader = SubResource("VisualShader_t28pt")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xrhoy"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_t0mwb"]
-texture = SubResource("CompressedTexture2D_xrhoy")
+texture = ExtResource("1_esb2p")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_aqwmg"]
 texture = ExtResource("2_tmy5s")
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_fpgxy"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_lremb"]
 default_input_values = [2, 0.5]
 initialized = true
-script = ExtResource("24_nscn2")
+properties = "0,14;"
+script = ExtResource("3_tnd0r")
 
 [sub_resource type="VisualShader" id="VisualShader_t0pob"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_6 : source_color;
 uniform sampler2D tex_frg_4 : source_color;
 
 
-// BlendLinearBurn
+// BlendModes
 
-		float blend_linear_burn_f(float c1, float c2) {
-			return 1.0- ((1.0 - c1) + (1.0 - c2));
-		}
-		
-		vec3 linear_blend_burn(vec3 c1, vec3 c2, float opacity) {
-			return opacity*vec3(blend_linear_burn_f(c1.x, c2.x), blend_linear_burn_f(c1.y, c2.y), blend_linear_burn_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
+				float blend_linear_burn_f(float c1, float c2) {
+					return 1.0- ((1.0 - c1) + (1.0 - c2));
+				}
+				
+				vec3 blend_linear_burn(vec3 c1, vec3 c2, float opacity) {
+					return opacity*vec3(blend_linear_burn_f(c1.x, c2.x), blend_linear_burn_f(c1.y, c2.y), blend_linear_burn_f(c1.z, c2.z)) + (1.0-opacity)*c2;
+				}
+			
 
 void fragment() {
 // Texture2D:6
@@ -1647,10 +1613,10 @@ void fragment() {
 
 
 	vec3 n_out7p0;
-// BlendLinearBurn:7
+// BlendModes:7
 	float n_in7p2 = 0.50000;
 	{
-		n_out7p0.rgb = linear_blend_burn(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
+		n_out7p0.rgb = blend_linear_burn(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
 	}
 
 
@@ -1662,161 +1628,17 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
+nodes/fragment/0/position = Vector2(940, 220)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_t0mwb")
 nodes/fragment/4/position = Vector2(-240, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_aqwmg")
 nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_fpgxy")
-nodes/fragment/7/position = Vector2(113, 270)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_lremb")
+nodes/fragment/7/position = Vector2(437, 284)
 nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fv25u"]
 shader = SubResource("VisualShader_t0pob")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_73dxk"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ro1fw"]
-texture = SubResource("CompressedTexture2D_73dxk")
-texture_type = 1
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sh8cd"]
-texture = ExtResource("2_tmy5s")
-texture_type = 1
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_r87l6"]
-default_input_values = [2, 0.5]
-initialized = true
-script = ExtResource("25_8ro85")
-
-[sub_resource type="VisualShader" id="VisualShader_rnl3p"]
-code = "shader_type canvas_item;
-uniform sampler2D tex_frg_6 : source_color;
-uniform sampler2D tex_frg_4 : source_color;
-
-
-// BlendLighterColor
-
-		float blend_lighter_color_f(float c1, float c2) 
-		{
-			return c1 > c2 ? c1 : c2;
-		}
-		
-		vec3 blend_lighter_color(vec3 c1, vec3 c2, float opacity)
-		{
-			return opacity*vec3(blend_lighter_color_f(c1.x, c2.x), blend_lighter_color_f(c1.y, c2.y), blend_lighter_color_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
-
-void fragment() {
-// Texture2D:6
-	vec4 n_out6p0 = texture(tex_frg_6, UV);
-
-
-// Texture2D:4
-	vec4 n_out4p0 = texture(tex_frg_4, UV);
-
-
-	vec3 n_out7p0;
-// BlendLighterColor:7
-	float n_in7p2 = 0.50000;
-	{
-		n_out7p0.rgb = blend_lighter_color(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
-	}
-
-
-// Output:0
-	COLOR.rgb = n_out7p0;
-
-
-}
-"
-mode = 1
-flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
-nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_ro1fw")
-nodes/fragment/4/position = Vector2(-240, 320)
-nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_sh8cd")
-nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_r87l6")
-nodes/fragment/7/position = Vector2(90, 272)
-nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n1onk"]
-shader = SubResource("VisualShader_rnl3p")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_abuxd"]
-load_path = "res://.godot/imported/icon.svg-d75c7d1600269a4e12e1397faef24712.ctex"
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ki8cq"]
-texture = SubResource("CompressedTexture2D_abuxd")
-texture_type = 1
-
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qf4do"]
-texture = ExtResource("2_tmy5s")
-texture_type = 1
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_gc53a"]
-default_input_values = [2, 0.5]
-initialized = true
-script = ExtResource("26_mlax4")
-
-[sub_resource type="VisualShader" id="VisualShader_8l46s"]
-code = "shader_type canvas_item;
-uniform sampler2D tex_frg_6 : source_color;
-uniform sampler2D tex_frg_4 : source_color;
-
-
-// BlendDarkerColor
-
-		float blend_darker_color_f( float c1, float c2 )
-		{
-			return (c1 < c2) ? c1 : c2;
-		}
-		
-		vec3 blend_darker_color(vec3 c1, vec3 c2, float opacity)
-		{
-			return opacity*vec3(blend_darker_color_f(c1.x, c2.x), blend_darker_color_f(c1.y, c2.y), blend_darker_color_f(c1.z, c2.z)) + (1.0-opacity)*c2;
-		}
-	
-
-void fragment() {
-// Texture2D:6
-	vec4 n_out6p0 = texture(tex_frg_6, UV);
-
-
-// Texture2D:4
-	vec4 n_out4p0 = texture(tex_frg_4, UV);
-
-
-	vec3 n_out7p0;
-// BlendDarkerColor:7
-	float n_in7p2 = 0.50000;
-	{
-		n_out7p0.rgb = blend_darker_color(vec3(n_out6p0.xyz).rgb, vec3(n_out4p0.xyz).rgb, n_in7p2);
-	}
-
-
-// Output:0
-	COLOR.rgb = n_out7p0;
-
-
-}
-"
-mode = 1
-flags/light_only = false
-nodes/fragment/0/position = Vector2(420, 240)
-nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_ki8cq")
-nodes/fragment/4/position = Vector2(-240, 320)
-nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_qf4do")
-nodes/fragment/6/position = Vector2(-240, 60)
-nodes/fragment/7/node = SubResource("VisualShaderNodeCustom_gc53a")
-nodes/fragment/7/position = Vector2(74, 249)
-nodes/fragment/connections = PackedInt32Array(6, 0, 7, 0, 4, 0, 7, 1, 7, 0, 0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uvepn"]
-shader = SubResource("VisualShader_8l46s")
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_cc80l"]
 
@@ -1830,6 +1652,8 @@ script = ExtResource("27_4j47k")
 
 [sub_resource type="VisualShader" id="VisualShader_bbxpt"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // Checkerboard
@@ -1897,6 +1721,8 @@ input_name = "time"
 
 [sub_resource type="VisualShader" id="VisualShader_nrxtj"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // PSRDNoise2D
@@ -2014,6 +1840,8 @@ script = ExtResource("28_bj3bh")
 
 [sub_resource type="VisualShader" id="VisualShader_xaol5"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // PSRDNoise3D
@@ -2142,6 +1970,8 @@ script = ExtResource("29_1apco")
 
 [sub_resource type="VisualShader" id="VisualShader_caujt"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // RadialGradient
@@ -2170,7 +2000,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-883.727, 12.7051)
+graph_offset = Vector2(-443.52, -29.76)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(-140, 60)
@@ -2180,6 +2010,657 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_65iv8"]
 shader = SubResource("VisualShader_caujt")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_3vt21"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_c037f"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
+initialized = true
+script = ExtResource("8_hykxv")
+
+[sub_resource type="VisualShader" id="VisualShader_ew583"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF Box Shape
+
+		float sdBox( in vec2 __position, in vec2 __proportions )
+		{
+			vec2 __d = abs(__position) - __proportions;
+			return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF Box Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.50000);
+	vec2 n_in4p2 = vec2(0.25000, 0.25000);
+	{
+		n_out4p0 = sdBox(UV.xy - n_in4p1.xy, n_in4p2.xy);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-297, -3)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_3vt21")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_c037f")
+nodes/fragment/4/position = Vector2(-420, 180)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yp0tr"]
+shader = SubResource("VisualShader_ew583")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_waqbe"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_7hsui"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.25]
+initialized = true
+script = ExtResource("32_1rwir")
+
+[sub_resource type="VisualShader" id="VisualShader_b85uw"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF Circle Shape
+
+		float sdCircle(vec2 pos, float r) {
+			return length(pos) - r;
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF Circle Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.50000);
+	float n_in4p2 = 0.25000;
+	{
+		n_out4p0 = sdCircle(UV.xy - n_in4p1.xy, n_in4p2);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-306, -11)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_waqbe")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_7hsui")
+nodes/fragment/4/position = Vector2(-197, 129)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_52mrt"]
+shader = SubResource("VisualShader_b85uw")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_287f8"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jvi73"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.15, 3, 0.3, 4, 0.2]
+initialized = true
+script = ExtResource("33_k8iav")
+
+[sub_resource type="VisualShader" id="VisualShader_jh5y8"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF Parallelogram Shape
+
+		float sdParallelogram( in vec2 p, float wi, float he, float sk )
+		{
+			vec2 e = vec2(sk,he);
+			p = (p.y<0.0)?-p:p;
+			vec2  w = p - e; w.x -= clamp(w.x,-wi,wi);
+			vec2  d = vec2(dot(w,w), -w.y);
+			float s = p.x*e.y - p.y*e.x;
+			p = (s<0.0)?-p:p;
+			vec2  v = p - vec2(wi,0); v -= e*clamp(dot(v,e)/dot(e,e),-1.0,1.0);
+			d = min( d, vec2(dot(v,v), wi*he-abs(s)));
+			return sqrt(d.x)*sign(-d.y);
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF Parallelogram Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.50000);
+	float n_in4p2 = 0.15000;
+	float n_in4p3 = 0.30000;
+	float n_in4p4 = 0.20000;
+	{
+		n_out4p0 = sdParallelogram(UV.xy - n_in4p1.xy, n_in4p2, n_in4p3, n_in4p4);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-335, -68.8333)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_287f8")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_jvi73")
+nodes/fragment/4/position = Vector2(-200, 120)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8srd"]
+shader = SubResource("VisualShader_jh5y8")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_a2fts"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qfav1"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
+initialized = true
+script = ExtResource("34_t306u")
+
+[sub_resource type="VisualShader" id="VisualShader_atxn6"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF Rhombus Shape
+
+		float ndot(vec2 a, vec2 b ) { return a.x*b.x - a.y*b.y; }
+		float sdRhombus( in vec2 p, in vec2 b ) 
+		{
+			p = abs(p);
+			float h = clamp( ndot(b-2.0*p,b)/dot(b,b), -1.0, 1.0 );
+			float d = length( p-0.5*b*vec2(1.0-h,1.0+h) );
+			return d * sign( p.x*b.y + p.y*b.x - b.x*b.y );
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF Rhombus Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.50000);
+	vec2 n_in4p2 = vec2(0.25000, 0.25000);
+	{
+		n_out4p0 = sdRhombus(UV.xy - n_in4p1.xy, n_in4p2.xy);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-371, -38)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_a2fts")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_qfav1")
+nodes/fragment/4/position = Vector2(-211, 98)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyiql"]
+shader = SubResource("VisualShader_atxn6")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_ronoj"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eypac"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(-0.25, -0.25), 3, Vector2(0.25, 0.25), 4, 0.2]
+initialized = true
+script = ExtResource("35_laxki")
+
+[sub_resource type="VisualShader" id="VisualShader_2wk66"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF PreciseBox Shape
+
+		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
+		{
+			float l = length(b-a);
+			vec2  d = (b-a)/l;
+			vec2  q = (p-(a+b)*0.5);
+				  q = mat2(vec2(d.x,-d.y), vec2(d.y,d.x))*q;
+				  q = abs(q)-vec2(l,th)*0.5;
+			return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF PreciseBox Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.50000);
+	vec2 n_in4p2 = vec2(-0.25000, -0.25000);
+	vec2 n_in4p3 = vec2(0.25000, 0.25000);
+	float n_in4p4 = 0.20000;
+	{
+		n_out4p0 = sdPreciseBox(UV.xy - n_in4p1.xy, n_in4p2.xy, n_in4p3.xy, n_in4p4);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-282, -33)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_ronoj")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_eypac")
+nodes/fragment/4/position = Vector2(-200, 140)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lucsr"]
+shader = SubResource("VisualShader_2wk66")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_mvbda"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_d8n2b"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25), 3, Vector4(0, 0, 0, 0)]
+initialized = true
+script = ExtResource("36_8mm01")
+
+[sub_resource type="VisualShaderNodeVec4Parameter" id="VisualShaderNodeVec4Parameter_ma1o7"]
+parameter_name = "Vector4Parameter"
+default_value_enabled = true
+
+[sub_resource type="VisualShader" id="VisualShader_e1125"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 Vector4Parameter = vec4(0.000000, 0.000000, 0.000000, 0.000000);
+
+
+// SDF RoundedBox Shape
+
+		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec4 __radia )
+		{
+			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__radia.w, __radia.z);
+			__radia.x  = (__pos.y > 0.0) ? __radia.x  : __radia.y;
+			vec2 __q = abs(__pos) - __proportions + __radia.x;
+			return min(max(__q.x, __q.y), 0.0) + length(max(__q, 0.0)) - __radia.x;
+		}
+	
+
+void fragment() {
+// Vector4Parameter:7
+	vec4 n_out7p0 = Vector4Parameter;
+
+
+	float n_out6p0;
+// SDF RoundedBox Shape:6
+	vec2 n_in6p1 = vec2(0.50000, 0.50000);
+	vec2 n_in6p2 = vec2(0.25000, 0.25000);
+	{
+		n_out6p0 = sdRoundedBox(UV.xy - n_in6p1.xy, n_in6p2.xy, n_out7p0.xyzw);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out6p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-616.6, 32.6)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_mvbda")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/6/node = SubResource("VisualShaderNodeCustom_d8n2b")
+nodes/fragment/6/position = Vector2(-191, 197)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVec4Parameter_ma1o7")
+nodes/fragment/7/position = Vector2(-560, 180)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 6, 0, 3, 0, 7, 0, 6, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pr0po"]
+shader = SubResource("VisualShader_e1125")
+shader_parameter/Vector4Parameter = Vector4(0.25, 0.056, 0.25, 0)
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_46s00"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_543dt"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, 0.15, 3, 0.35, 4, 0.25]
+initialized = true
+script = ExtResource("37_glmoa")
+
+[sub_resource type="VisualShader" id="VisualShader_7tc5t"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF Trapezoid Shape
+
+		float sdTrapezoid( in vec2 p, in float r1, float r2, float he )
+		{
+			vec2 k1 = vec2(r2,he);
+			vec2 k2 = vec2(r2-r1,2.0*he);
+			p.x = abs(p.x);
+			vec2 ca = vec2(p.x-min(p.x,(p.y<0.0)?r1:r2), abs(p.y)-he);
+			vec2 cb = p - k1 + k2*clamp( dot(k1-p,k2)/dot(k2, k2), 0.0, 1.0 );
+			float s = (cb.x<0.0 && ca.y<0.0) ? -1.0 : 1.0;
+			return s*sqrt( min(dot(ca, ca),dot(cb, cb)) );
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF Trapezoid Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.50000);
+	float n_in4p2 = 0.15000;
+	float n_in4p3 = 0.35000;
+	float n_in4p4 = 0.25000;
+	{
+		n_out4p0 = sdTrapezoid(UV.xy - n_in4p1.xy, n_in4p2, n_in4p3, n_in4p4);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-411, -37)
+mode = 1
+flags/light_only = false
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_46s00")
+nodes/fragment/3/position = Vector2(60, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_543dt")
+nodes/fragment/4/position = Vector2(-172, 144)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wr7cc"]
+shader = SubResource("VisualShader_7tc5t")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_rjno1"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_0ievt"]
+default_input_values = [1, Vector2(0.5, 0.25), 2, Vector2(0.25, 0.5)]
+initialized = true
+script = ExtResource("38_y2sll")
+
+[sub_resource type="VisualShader" id="VisualShader_sqnwd"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF Triangle Shape
+
+		float sdTriangleIsosceles( in vec2 p, in vec2 q )
+		{
+			p.x = abs(p.x);
+			vec2 a = p - q*clamp( dot(p,q)/dot(q,q), 0.0, 1.0 );
+			vec2 b = p - q*vec2( clamp( p.x/q.x, 0.0, 1.0 ), 1.0 );
+			float s = -sign( q.y );
+			vec2 d = min( vec2( dot(a,a), s*(p.x*q.y-p.y*q.x) ),
+						  vec2( dot(b,b), s*(p.y-q.y)  ));
+			return -sqrt(d.x)*sign(d.y);
+		}
+	
+
+void fragment() {
+	float n_out4p0;
+// SDF Triangle Shape:4
+	vec2 n_in4p1 = vec2(0.50000, 0.25000);
+	vec2 n_in4p2 = vec2(0.25000, 0.50000);
+	{
+		n_out4p0 = sdTriangleIsosceles(UV.xy - n_in4p1.xy, n_in4p2.xy);
+	}
+
+
+// Step:3
+	float n_in3p1 = 0.00000;
+	float n_out3p0 = step(n_out4p0, n_in3p1);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(820, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_rjno1")
+nodes/fragment/3/position = Vector2(400, 200)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_0ievt")
+nodes/fragment/4/position = Vector2(-198, 163)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7wkl2"]
+shader = SubResource("VisualShader_sqnwd")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eaeme"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.5)]
+initialized = true
+script = ExtResource("17_e4l87")
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_mrvbb"]
+parameter_name = "Size"
+default_value_enabled = true
+default_value = 0.376
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_sloj5"]
+default_input_values = [0, 0.1, 1, 0.6, 2, 0.5]
+
+[sub_resource type="VisualShader" id="VisualShader_jbp3n"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float Size = 0.3759999871254;
+
+
+// SDF HyperBolicCross Shape
+
+		float sdHyperbolicCross( in vec2 p, in vec2 __prop)
+		{
+			vec2 result = pow(abs(p), __prop);
+			return 1.0 - (result.x + result.y);
+		}
+	
+
+void fragment() {
+// FloatParameter:3
+	float n_out3p0 = Size;
+
+
+	float n_out2p0;
+// SDF HyperBolicCross Shape:2
+	vec2 n_in2p1 = vec2(0.50000, 0.50000);
+	{
+		n_out2p0 = sdHyperbolicCross(UV.xy - n_in2p1.xy, vec2(n_out3p0).xy);
+	}
+
+
+// SmoothStep:4
+	float n_in4p0 = 0.10000;
+	float n_in4p1 = 0.60000;
+	float n_out4p0 = smoothstep(n_in4p0, n_in4p1, n_out2p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out4p0);
+
+
+}
+"
+graph_offset = Vector2(-175.68, -23.04)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_eaeme")
+nodes/fragment/2/position = Vector2(-560, 260)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatParameter_mrvbb")
+nodes/fragment/3/position = Vector2(-1140, 360)
+nodes/fragment/4/node = SubResource("VisualShaderNodeSmoothStep_sloj5")
+nodes/fragment/4/position = Vector2(-120, 240)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 2, 2, 0, 4, 2, 4, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2unp1"]
+shader = SubResource("VisualShader_jbp3n")
+shader_parameter/Size = 0.386
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_43f3d"]
+default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.5, 0.5), 3, 0.13]
+initialized = true
+script = ExtResource("17_l4qqe")
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_h0e6j"]
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_8a4g5"]
+constant = -0.012
+
+[sub_resource type="VisualShader" id="VisualShader_mg8br"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// SDF PreciseHyperBolicCross Shape
+
+		float sdPreciseHyperbolicCross( in vec2 p, float k )
+		{
+			// scale
+			float s = 1.0/k - k;
+			p = p*s;
+			// symmetry
+			p = abs(p);
+			p = (p.x>p.y) ? p.yx : p.xy;
+			// offset
+			p += k;
+			
+			// solve quartic (for details see https://www.shadertoy.com/view/ftcyW8)
+			float x2 = p.x*p.x/16.0;
+			float y2 = p.y*p.y/16.0;
+			float r = (p.x*p.y-4.0)/12.0;
+			float q = y2-x2;
+			float h = q*q-r*r*r;
+			float u;
+			if( h<0.0 )
+			{
+				float m = sqrt(r);
+				u = m*cos( acos(q/(r*m) )/3.0 );
+			}
+			else
+			{
+				float m = pow(sqrt(h)+q,1.0/3.0);
+				u = (m+r/m)/2.0;
+			}
+			float w = sqrt(u+x2);
+			float x = p.x/4.0-w+sqrt(2.0*x2-u+(p.y-x2*p.x*2.0)/w/4.0);
+			
+			// clamp arm
+			x = max(x,k);
+			
+			// compute distance to closest point
+			float d = length( p-vec2(x,1.0/x) ) / s;
+
+			// sign
+			return p.x*p.y < 1.0 ? -d : d;
+		}
+	
+
+void fragment() {
+	float n_out2p0;
+// SDF PreciseHyperBolicCross Shape:2
+	vec2 n_in2p1 = vec2(0.50000, 0.50000);
+	vec2 n_in2p2 = vec2(0.50000, 0.50000);
+	float n_in2p3 = 0.13000;
+	{
+		n_out2p0 = sdPreciseHyperbolicCross((UV.xy - n_in2p1.xy)*(2.0-n_in2p2.xy), n_in2p3);
+	}
+
+
+// FloatConstant:4
+	float n_out4p0 = -0.012000;
+
+
+// Step:3
+	float n_out3p0 = step(n_out2p0, n_out4p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out3p0);
+
+
+}
+"
+graph_offset = Vector2(-295.715, -70.5703)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(660, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_43f3d")
+nodes/fragment/2/position = Vector2(-660, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeStep_h0e6j")
+nodes/fragment/3/position = Vector2(40, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatConstant_8a4g5")
+nodes/fragment/4/position = Vector2(-440, 480)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 1, 2, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbgyl"]
+shader = SubResource("VisualShader_mg8br")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5d2we"]
 texture = ExtResource("1_esb2p")
@@ -2195,6 +2676,8 @@ function = 1
 
 [sub_resource type="VisualShader" id="VisualShader_5n70k"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_3 : source_color;
 
 
@@ -2260,472 +2743,6 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 6, 0, 0, 0, 4, 0, 6, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_le34p"]
 shader = SubResource("VisualShader_5n70k")
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dkexg"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
-initialized = true
-script = ExtResource("31_0kkaw")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_3vt21"]
-
-[sub_resource type="VisualShader" id="VisualShader_ew583"]
-code = "shader_type canvas_item;
-
-
-// Box
-
-		float sdBox( in vec2 __position, in vec2 __proportions )
-		{
-			vec2 __d = abs(__position) - __proportions;
-			return length(max(__d, 0.0)) + min(max(__d.x, __d.y), 0.0);
-		}
-	
-
-void fragment() {
-	float n_out2p0;
-// Box:2
-	vec2 n_in2p1 = vec2(0.50000, 0.50000);
-	vec2 n_in2p2 = vec2(0.25000, 0.25000);
-	{
-		n_out2p0 = sdBox(UV.xy - n_in2p1.xy, n_in2p2.xy);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out2p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-265, -41)
-mode = 1
-flags/light_only = false
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_dkexg")
-nodes/fragment/2/position = Vector2(-240, 120)
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_3vt21")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yp0tr"]
-shader = SubResource("VisualShader_ew583")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_waqbe"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_7hsui"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, 0.25]
-initialized = true
-script = ExtResource("32_1rwir")
-
-[sub_resource type="VisualShader" id="VisualShader_b85uw"]
-code = "shader_type canvas_item;
-
-
-// Circle
-
-		float sdCircle(vec2 pos, float r) {
-			return length(pos) - r;
-		}
-	
-
-void fragment() {
-	float n_out4p0;
-// Circle:4
-	vec2 n_in4p1 = vec2(0.50000, 0.50000);
-	float n_in4p2 = 0.25000;
-	{
-		n_out4p0 = sdCircle(UV.xy - n_in4p1.xy, n_in4p2);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-306, -11)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_waqbe")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_7hsui")
-nodes/fragment/4/position = Vector2(-197, 129)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_52mrt"]
-shader = SubResource("VisualShader_b85uw")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_287f8"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jvi73"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, 0.15, 3, 0.3, 4, 0.2]
-initialized = true
-script = ExtResource("33_k8iav")
-
-[sub_resource type="VisualShader" id="VisualShader_jh5y8"]
-code = "shader_type canvas_item;
-
-
-// Parallelogram
-
-		float sdParallelogram( in vec2 p, float wi, float he, float sk )
-		{
-			vec2 e = vec2(sk,he);
-			p = (p.y<0.0)?-p:p;
-			vec2  w = p - e; w.x -= clamp(w.x,-wi,wi);
-			vec2  d = vec2(dot(w,w), -w.y);
-			float s = p.x*e.y - p.y*e.x;
-			p = (s<0.0)?-p:p;
-			vec2  v = p - vec2(wi,0); v -= e*clamp(dot(v,e)/dot(e,e),-1.0,1.0);
-			d = min( d, vec2(dot(v,v), wi*he-abs(s)));
-			return sqrt(d.x)*sign(-d.y);
-		}
-	
-
-void fragment() {
-	float n_out4p0;
-// Parallelogram:4
-	vec2 n_in4p1 = vec2(0.50000, 0.50000);
-	float n_in4p2 = 0.15000;
-	float n_in4p3 = 0.30000;
-	float n_in4p4 = 0.20000;
-	{
-		n_out4p0 = sdParallelogram(UV.xy - n_in4p1.xy, n_in4p2, n_in4p3, n_in4p4);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-335, -68.8333)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_287f8")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_jvi73")
-nodes/fragment/4/position = Vector2(-200, 120)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8srd"]
-shader = SubResource("VisualShader_jh5y8")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_a2fts"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_qfav1"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25)]
-initialized = true
-script = ExtResource("34_t306u")
-
-[sub_resource type="VisualShader" id="VisualShader_atxn6"]
-code = "shader_type canvas_item;
-
-
-// Rhombus
-
-		float ndot(vec2 a, vec2 b ) { return a.x*b.x - a.y*b.y; }
-		float sdRhombus( in vec2 p, in vec2 b ) 
-		{
-			p = abs(p);
-			float h = clamp( ndot(b-2.0*p,b)/dot(b,b), -1.0, 1.0 );
-			float d = length( p-0.5*b*vec2(1.0-h,1.0+h) );
-			return d * sign( p.x*b.y + p.y*b.x - b.x*b.y );
-		}
-	
-
-void fragment() {
-	float n_out4p0;
-// Rhombus:4
-	vec2 n_in4p1 = vec2(0.50000, 0.50000);
-	vec2 n_in4p2 = vec2(0.25000, 0.25000);
-	{
-		n_out4p0 = sdRhombus(UV.xy - n_in4p1.xy, n_in4p2.xy);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-371, -38)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_a2fts")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_qfav1")
-nodes/fragment/4/position = Vector2(-211, 98)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyiql"]
-shader = SubResource("VisualShader_atxn6")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_ronoj"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eypac"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(-0.25, -0.25), 3, Vector2(0.25, 0.25), 4, 0.2]
-initialized = true
-script = ExtResource("35_laxki")
-
-[sub_resource type="VisualShader" id="VisualShader_2wk66"]
-code = "shader_type canvas_item;
-
-
-// PreciseBox
-
-		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
-		{
-			float l = length(b-a);
-			vec2  d = (b-a)/l;
-			vec2  q = (p-(a+b)*0.5);
-				  q = mat2(vec2(d.x,-d.y), vec2(d.y,d.x))*q;
-				  q = abs(q)-vec2(l,th)*0.5;
-			return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
-		}
-	
-
-void fragment() {
-	float n_out4p0;
-// PreciseBox:4
-	vec2 n_in4p1 = vec2(0.50000, 0.50000);
-	vec2 n_in4p2 = vec2(-0.25000, -0.25000);
-	vec2 n_in4p3 = vec2(0.25000, 0.25000);
-	float n_in4p4 = 0.20000;
-	{
-		n_out4p0 = sdPreciseBox(UV.xy - n_in4p1.xy, n_in4p2.xy, n_in4p3.xy, n_in4p4);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-282, -33)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_ronoj")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_eypac")
-nodes/fragment/4/position = Vector2(-200, 140)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lucsr"]
-shader = SubResource("VisualShader_2wk66")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_mvbda"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_d8n2b"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, Vector2(0.25, 0.25), 3, Vector4(0, 0, 0, 0)]
-initialized = true
-script = ExtResource("36_8mm01")
-
-[sub_resource type="VisualShaderNodeVec4Parameter" id="VisualShaderNodeVec4Parameter_ma1o7"]
-parameter_name = "Vector4Parameter"
-default_value_enabled = true
-
-[sub_resource type="VisualShader" id="VisualShader_e1125"]
-code = "shader_type canvas_item;
-uniform vec4 Vector4Parameter = vec4(0.000000, 0.000000, 0.000000, 0.000000);
-
-
-// RoundedBox
-
-		float sdRoundedBox( in vec2 __pos, in vec2 __proportions, in vec4 __radia )
-		{
-			__radia.xy = (__pos.x > 0.0) ? __radia.xy : vec2(__radia.w, __radia.z);
-			__radia.x  = (__pos.y > 0.0) ? __radia.x  : __radia.y;
-			vec2 __q = abs(__pos) - __proportions + __radia.x;
-			return min(max(__q.x, __q.y), 0.0) + length(max(__q, 0.0)) - __radia.x;
-		}
-	
-
-void fragment() {
-// Vector4Parameter:7
-	vec4 n_out7p0 = Vector4Parameter;
-
-
-	float n_out6p0;
-// RoundedBox:6
-	vec2 n_in6p1 = vec2(0.50000, 0.50000);
-	vec2 n_in6p2 = vec2(0.25000, 0.25000);
-	{
-		n_out6p0 = sdRoundedBox(UV.xy - n_in6p1.xy, n_in6p2.xy, n_out7p0.xyzw);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out6p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-616.6, 32.6)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_mvbda")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/6/node = SubResource("VisualShaderNodeCustom_d8n2b")
-nodes/fragment/6/position = Vector2(-191, 197)
-nodes/fragment/7/node = SubResource("VisualShaderNodeVec4Parameter_ma1o7")
-nodes/fragment/7/position = Vector2(-560, 180)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 6, 0, 3, 0, 7, 0, 6, 3)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pr0po"]
-shader = SubResource("VisualShader_e1125")
-shader_parameter/Vector4Parameter = Vector4(0.25, 0.056, 0.25, 0)
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_46s00"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_543dt"]
-default_input_values = [1, Vector2(0.5, 0.5), 2, 0.15, 3, 0.35, 4, 0.25]
-initialized = true
-script = ExtResource("37_glmoa")
-
-[sub_resource type="VisualShader" id="VisualShader_7tc5t"]
-code = "shader_type canvas_item;
-
-
-// Trapezoid
-
-		float sdTrapezoid( in vec2 p, in float r1, float r2, float he )
-		{
-			vec2 k1 = vec2(r2,he);
-			vec2 k2 = vec2(r2-r1,2.0*he);
-			p.x = abs(p.x);
-			vec2 ca = vec2(p.x-min(p.x,(p.y<0.0)?r1:r2), abs(p.y)-he);
-			vec2 cb = p - k1 + k2*clamp( dot(k1-p,k2)/dot(k2, k2), 0.0, 1.0 );
-			float s = (cb.x<0.0 && ca.y<0.0) ? -1.0 : 1.0;
-			return s*sqrt( min(dot(ca, ca),dot(cb, cb)) );
-		}
-	
-
-void fragment() {
-	float n_out4p0;
-// Trapezoid:4
-	vec2 n_in4p1 = vec2(0.50000, 0.50000);
-	float n_in4p2 = 0.15000;
-	float n_in4p3 = 0.35000;
-	float n_in4p4 = 0.25000;
-	{
-		n_out4p0 = sdTrapezoid(UV.xy - n_in4p1.xy, n_in4p2, n_in4p3, n_in4p4);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-411, -37)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_46s00")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_543dt")
-nodes/fragment/4/position = Vector2(-172, 144)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wr7cc"]
-shader = SubResource("VisualShader_7tc5t")
-
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_rjno1"]
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_0ievt"]
-default_input_values = [1, Vector2(0.5, 0.25), 2, Vector2(0.25, 0.5)]
-initialized = true
-script = ExtResource("38_y2sll")
-
-[sub_resource type="VisualShader" id="VisualShader_sqnwd"]
-code = "shader_type canvas_item;
-
-
-// Triangle
-
-		float sdTriangleIsosceles( in vec2 p, in vec2 q )
-		{
-			p.x = abs(p.x);
-			vec2 a = p - q*clamp( dot(p,q)/dot(q,q), 0.0, 1.0 );
-			vec2 b = p - q*vec2( clamp( p.x/q.x, 0.0, 1.0 ), 1.0 );
-			float s = -sign( q.y );
-			vec2 d = min( vec2( dot(a,a), s*(p.x*q.y-p.y*q.x) ),
-						  vec2( dot(b,b), s*(p.y-q.y)  ));
-			return -sqrt(d.x)*sign(d.y);
-		}
-	
-
-void fragment() {
-	float n_out4p0;
-// Triangle:4
-	vec2 n_in4p1 = vec2(0.50000, 0.25000);
-	vec2 n_in4p2 = vec2(0.25000, 0.50000);
-	{
-		n_out4p0 = sdTriangleIsosceles(UV.xy - n_in4p1.xy, n_in4p2.xy);
-	}
-
-
-// Step:3
-	float n_in3p1 = 0.00000;
-	float n_out3p0 = step(n_out4p0, n_in3p1);
-
-
-// Output:0
-	COLOR.rgb = vec3(n_out3p0);
-
-
-}
-"
-graph_offset = Vector2(-386, -13)
-mode = 1
-flags/light_only = false
-nodes/fragment/3/node = SubResource("VisualShaderNodeStep_rjno1")
-nodes/fragment/3/position = Vector2(60, 180)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_0ievt")
-nodes/fragment/4/position = Vector2(-198, 163)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7wkl2"]
-shader = SubResource("VisualShader_sqnwd")
-
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_8dss3"]
 default_input_values = [1, Vector2(0.5, 0.5), 2, 10.0, 3, Vector2(0, 0)]
 initialized = true
@@ -2733,6 +2750,8 @@ script = ExtResource("39_3gamp")
 
 [sub_resource type="VisualShader" id="VisualShader_eqdrg"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // UVTwirl
@@ -2799,6 +2818,8 @@ texture_filter = 1
 
 [sub_resource type="VisualShader" id="VisualShader_pgiym"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D MainTex : source_color, filter_nearest;
 
 
@@ -2888,6 +2909,8 @@ script = ExtResource("42_bg3u1")
 
 [sub_resource type="VisualShader" id="VisualShader_8gnev"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // UVTiler
@@ -2945,6 +2968,8 @@ script = ExtResource("43_1ggnt")
 
 [sub_resource type="VisualShader" id="VisualShader_7uhii"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // UVRotate
@@ -3002,6 +3027,8 @@ operator = 2
 
 [sub_resource type="VisualShader" id="VisualShader_wx5y0"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_4 : source_color;
 
 
@@ -3059,7 +3086,7 @@ nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 2, 0, 5, 0, 4, 0, 5, 1
 shader = SubResource("VisualShader_wx5y0")
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_0j4rd"]
-default_input_values = [1, 2.0, 2, 1.0, 3, 0.0]
+default_input_values = [1, 1.0, 2, 1.0, 3, 0.0]
 initialized = true
 script = ExtResource("45_u3ae5")
 
@@ -3075,6 +3102,8 @@ input_name = "time"
 
 [sub_resource type="VisualShader" id="VisualShader_puwg7"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_4 : source_color;
 
 
@@ -3092,7 +3121,7 @@ void fragment() {
 
 	float n_out2p0;
 // SquareWave:2
-	float n_in2p1 = 2.00000;
+	float n_in2p1 = 1.00000;
 	float n_in2p2 = 1.00000;
 	float n_in2p3 = 0.00000;
 	{
@@ -3114,7 +3143,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-133.185, 13.5)
 mode = 1
 flags/light_only = false
 nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_0j4rd")
@@ -3147,6 +3175,8 @@ input_name = "time"
 
 [sub_resource type="VisualShader" id="VisualShader_y5gtx"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_4 : source_color;
 
 
@@ -3186,7 +3216,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-76.8375, 63)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(560, 320)
@@ -3220,6 +3249,8 @@ texture_type = 1
 
 [sub_resource type="VisualShader" id="VisualShader_enkir"]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 uniform sampler2D tex_frg_5 : source_color;
 
 
@@ -3579,6 +3610,7 @@ size_flags_horizontal = 4
 texture = ExtResource("1_esb2p")
 
 [node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/GammaIllumination"]
+custom_minimum_size = Vector2(2.08165e-12, 20)
 layout_mode = 2
 text = "Gamma Illumination"
 horizontal_alignment = 1
@@ -3640,34 +3672,6 @@ layout_mode = 2
 text = "Linear Burn"
 horizontal_alignment = 1
 
-[node name="LighterColor" type="VBoxContainer" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/LighterColor"]
-material = SubResource("ShaderMaterial_n1onk")
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/LighterColor"]
-layout_mode = 2
-text = "Lighter Color"
-horizontal_alignment = 1
-
-[node name="DarkerColor" type="VBoxContainer" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/DarkerColor"]
-material = SubResource("ShaderMaterial_uvepn")
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="BlendModes/VBoxContainer/ScrollContainer/GridContainer/DarkerColor"]
-layout_mode = 2
-text = "Darker Color"
-horizontal_alignment = 1
-
 [node name="Procedural" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -3678,70 +3682,235 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Procedural"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="Procedural/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Procedural"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Procedural/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Procedural/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="Procedural/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+columns = 8
+
+[node name="Checkerboard" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Checkerboard" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Checkerboard"]
 material = SubResource("ShaderMaterial_ijt06")
 layout_mode = 2
 texture = ExtResource("1_esb2p")
 
-[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/Checkerboard"]
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Checkerboard"]
 layout_mode = 2
 text = "Checkerboard"
 horizontal_alignment = 1
 
-[node name="PSRDNoise2D" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+[node name="PSRDNoise2D" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise2D"]
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PSRDNoise2D"]
 material = SubResource("ShaderMaterial_qqdvx")
 layout_mode = 2
 texture = ExtResource("1_esb2p")
 
-[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise2D"]
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PSRDNoise2D"]
 layout_mode = 2
 text = "PSRD Noise2D"
 horizontal_alignment = 1
 
-[node name="PSRDNoise3D" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+[node name="PSRDNoise3D" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise3D"]
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PSRDNoise3D"]
 material = SubResource("ShaderMaterial_iasic")
 layout_mode = 2
 texture = ExtResource("1_esb2p")
 
-[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/PSRDNoise3D"]
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PSRDNoise3D"]
 layout_mode = 2
 text = "PSRD Noise3D"
 horizontal_alignment = 1
 
-[node name="UVRadialGradient" type="VBoxContainer" parent="Procedural/VBoxContainer/HBoxContainer"]
+[node name="UVRadialGradient" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/HBoxContainer/UVRadialGradient"]
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/UVRadialGradient"]
 material = SubResource("ShaderMaterial_65iv8")
 layout_mode = 2
 texture = ExtResource("1_esb2p")
 
-[node name="Label" type="Label" parent="Procedural/VBoxContainer/HBoxContainer/UVRadialGradient"]
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/UVRadialGradient"]
 layout_mode = 2
 text = "Radial Gradient"
 horizontal_alignment = 1
-autowrap_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Box"]
+material = SubResource("ShaderMaterial_yp0tr")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Box"]
+layout_mode = 2
+text = "Box"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Circle" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Circle"]
+material = SubResource("ShaderMaterial_52mrt")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Circle"]
+layout_mode = 2
+text = "Circle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Parallelogram" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Parallelogram"]
+material = SubResource("ShaderMaterial_b8srd")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Parallelogram"]
+layout_mode = 2
+text = "Parallelogram"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rhombus" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Rhombus"]
+material = SubResource("ShaderMaterial_yyiql")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Rhombus"]
+layout_mode = 2
+text = "Rhombus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreciseBox" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PreciseBox"]
+material = SubResource("ShaderMaterial_lucsr")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PreciseBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Precise Box"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundedBox" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/RoundedBox"]
+material = SubResource("ShaderMaterial_pr0po")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/RoundedBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Rounded Box"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Trapezoid" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Trapezoid"]
+material = SubResource("ShaderMaterial_wr7cc")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Trapezoid"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Trapezoid"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Triangle" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Triangle"]
+material = SubResource("ShaderMaterial_7wkl2")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Triangle"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Triangle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hyperbolic CrossCustom" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Hyperbolic CrossCustom"]
+material = SubResource("ShaderMaterial_2unp1")
+layout_mode = 2
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/Hyperbolic CrossCustom"]
+custom_minimum_size = Vector2(2.08165e-12, 20)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Hyperbolic Cross"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PreciseHyperbolic Cross" type="VBoxContainer" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PreciseHyperbolic Cross"]
+material = SubResource("ShaderMaterial_lbgyl")
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_esb2p")
+
+[node name="Label" type="Label" parent="Procedural/VBoxContainer/ScrollContainer/GridContainer/PreciseHyperbolic Cross"]
+custom_minimum_size = Vector2(2.08165e-12, 20)
+layout_mode = 2
+text = "Precise Hyperbolic Cross"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="ColorAdjustment" type="Control" parent="."]
 visible = false
@@ -3777,148 +3946,6 @@ texture = ExtResource("1_esb2p")
 layout_mode = 2
 size_flags_vertical = 6
 text = "HSVAdjustment"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Shapes" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Shapes"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Shapes"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Shapes/VBoxContainer"]
-layout_mode = 2
-
-[node name="Box" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/Box"]
-material = SubResource("ShaderMaterial_yp0tr")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Box"]
-layout_mode = 2
-text = "Box"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Circle" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/Circle"]
-material = SubResource("ShaderMaterial_52mrt")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Circle"]
-layout_mode = 2
-text = "Circle"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Parallelogram" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/Parallelogram"]
-material = SubResource("ShaderMaterial_b8srd")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Parallelogram"]
-layout_mode = 2
-text = "Parallelogram"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Rhombus" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/Rhombus"]
-material = SubResource("ShaderMaterial_yyiql")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Rhombus"]
-layout_mode = 2
-text = "Rhombus"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PreciseBox" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/PreciseBox"]
-material = SubResource("ShaderMaterial_lucsr")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/PreciseBox"]
-layout_mode = 2
-text = "Precise Box"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RoundedBox" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/RoundedBox"]
-material = SubResource("ShaderMaterial_pr0po")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/RoundedBox"]
-layout_mode = 2
-text = "Rounded Box"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Trapezoid" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/Trapezoid"]
-material = SubResource("ShaderMaterial_wr7cc")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Trapezoid"]
-layout_mode = 2
-text = "Trapezoid"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Triangle" type="VBoxContainer" parent="Shapes/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shapes/VBoxContainer/HBoxContainer/Triangle"]
-material = SubResource("ShaderMaterial_7wkl2")
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_esb2p")
-
-[node name="Label" type="Label" parent="Shapes/VBoxContainer/HBoxContainer/Triangle"]
-layout_mode = 2
-text = "Triangle"
 horizontal_alignment = 1
 vertical_alignment = 1
 

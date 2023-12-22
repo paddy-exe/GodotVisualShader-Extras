@@ -1,9 +1,9 @@
 [gd_scene load_steps=23 format=3 uid="uid://cjtocgy6oar8e"]
 
-[ext_resource type="Texture2D" uid="uid://64l2eqbdwv15" path="res://addons/VisualShaderExtras/AddonExamples/Resources/KenneyPrototypeTexture.png" id="1_dvlyl"]
-[ext_resource type="PackedScene" uid="uid://b0saq40btdu4x" path="res://addons/VisualShaderExtras/AddonExamples/Resources/csg_test_scene.tscn" id="2_eedn2"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="3_55qfa"]
-[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVtoSphereCoord.gd" id="4_ce4gj"]
+[ext_resource type="Texture2D" uid="uid://64l2eqbdwv15" path="res://addons/VisualShaderExtras/AddonExamples/Resources/KenneyPrototypeTexture.png" id="1_n6ldv"]
+[ext_resource type="PackedScene" uid="uid://b0saq40btdu4x" path="res://addons/VisualShaderExtras/AddonExamples/Resources/csg_test_scene.tscn" id="2_qiifp"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/Procedural/PSRD-Noise3D.gd" id="3_se3k6"]
+[ext_resource type="Script" path="res://addons/VisualShaderExtras/UV/UVtoSphereCoord.gd" id="4_oensc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dnsta"]
 sky_top_color = Color(0.133333, 0.294118, 0.54902, 1)
@@ -25,19 +25,21 @@ ssao_intensity = 15.06
 sdfgi_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf0fy"]
-albedo_texture = ExtResource("1_dvlyl")
+albedo_texture = ExtResource("1_n6ldv")
 uv1_triplanar = true
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bit1y"]
 default_input_values = [0, Vector3(1, 1, 1), 1, Vector3(1, 1, 1), 2, 1.0]
 initialized = true
-script = ExtResource("3_55qfa")
+script = ExtResource("3_se3k6")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_yel11"]
 input_name = "normal"
 
 [sub_resource type="VisualShader" id="VisualShader_30d6h"]
 code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
 
 
 // PSRDNoise3D
@@ -155,7 +157,7 @@ font_size = 70
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_owjoy"]
 default_input_values = [1, Vector3(0, 0, 0)]
 initialized = true
-script = ExtResource("4_ce4gj")
+script = ExtResource("4_oensc")
 
 [sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_t1x3d"]
 varying_name = "vertex_world_coord"
@@ -173,6 +175,8 @@ input_name = "vertex"
 
 [sub_resource type="VisualShader" id="VisualShader_o1ned"]
 code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
 
 // Varyings
 varying vec3 vertex_world_coord;
@@ -223,7 +227,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-326, -21)
 varyings/vertex_world_coord = "0,4"
 nodes/vertex/2/node = SubResource("VisualShaderNodeVaryingSetter_h2o1j")
 nodes/vertex/2/position = Vector2(60, 140)
@@ -262,9 +265,9 @@ material_override = SubResource("StandardMaterial3D_wf0fy")
 [node name="FloorCSG" type="CSGBox3D" parent="MainCSG"]
 size = Vector3(100, 1, 50)
 
-[node name="CSGTestScene" parent="MainCSG" instance=ExtResource("2_eedn2")]
+[node name="CSGTestScene" parent="MainCSG" instance=ExtResource("2_qiifp")]
 
-[node name="CSGTestScene2" parent="MainCSG" instance=ExtResource("2_eedn2")]
+[node name="CSGTestScene2" parent="MainCSG" instance=ExtResource("2_qiifp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, 0)
 
 [node name="ExampleMeshes" type="Node" parent="."]

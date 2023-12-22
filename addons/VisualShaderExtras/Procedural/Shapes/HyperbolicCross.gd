@@ -18,28 +18,26 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodePreciseBox
+class_name VisualShaderNodeHyperbolicCross
 
 func _init():
-	set_input_port_default_value(1, Vector2(0.5, 0.5))
-	set_input_port_default_value(2, Vector2(-0.25, -0.25))
-	set_input_port_default_value(3, Vector2(0.25, 0.25))
-	set_input_port_default_value(4, 0.2)
+	set_input_port_default_value(1, Vector2(0.5, 0.25))
+	set_input_port_default_value(2, Vector2(0.5, 0.5))
 
 func _get_name():
-	return "PreciseBox"
+	return "SDF HyperBolicCross Shape"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Procedural"
 
 func _get_description():
-	return "Signed Distance precise Box Shape"
+	return "Signed Distance Field (SDF) Hyperbolic Cross Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_input_port_count():
-	return 5
+	return 3
 
 func _get_input_port_name(port):
 	match port:
@@ -48,11 +46,7 @@ func _get_input_port_name(port):
 		1:
 			return "Position"
 		2:
-			return "Point A"
-		3:
-			return "Point B"
-		4:
-			return "Thickness"
+			return "Proportions"
 
 func _get_input_port_type(port):
 	match port:
@@ -62,10 +56,6 @@ func _get_input_port_type(port):
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
 		2:
 			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		3:
-			return VisualShaderNode.PORT_TYPE_VECTOR_2D
-		4:
-			return VisualShaderNode.PORT_TYPE_SCALAR
 
 func _get_output_port_count():
 	return 1
@@ -78,14 +68,10 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdPreciseBox( in vec2 p, in vec2 a, in vec2 b, float th )
+		float sdHyperbolicCross( in vec2 p, in vec2 __prop)
 		{
-			float l = length(b-a);
-			vec2  d = (b-a)/l;
-			vec2  q = (p-(a+b)*0.5);
-				  q = mat2(vec2(d.x,-d.y), vec2(d.y,d.x))*q;
-				  q = abs(q)-vec2(l,th)*0.5;
-			return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
+			vec2 result = pow(abs(p), __prop);
+			return 1.0 - (result.x + result.y);
 		}
 	"""
 
@@ -95,4 +81,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdPreciseBox(%s.xy - %s.xy, %s.xy, %s.xy, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]
+	return "%s = sdHyperbolicCross(%s.xy - %s.xy, %s.xy);" % [output_vars[0], uv, input_vars[1], input_vars[2]]

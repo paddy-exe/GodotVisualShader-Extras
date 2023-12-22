@@ -18,22 +18,22 @@
 
 @tool
 extends VisualShaderNodeCustom
-class_name VisualShaderNodeTrapezoid
+class_name VisualShaderNodeParallelogram
 
 func _init():
 	set_input_port_default_value(1, Vector2(0.5, 0.5))
 	set_input_port_default_value(2, 0.15)
-	set_input_port_default_value(3, 0.35)
-	set_input_port_default_value(4, 0.25)
+	set_input_port_default_value(3, 0.3)
+	set_input_port_default_value(4, 0.2)
 
 func _get_name():
-	return "Trapezoid"
+	return "SDF Parallelogram Shape"
 
 func _get_category():
-	return "VisualShaderExtras/Shapes"
+	return "VisualShaderExtras/Procedural"
 
 func _get_description():
-	return "Signed Distance Trapezoid Shape3D"
+	return "Signed Distance Field (SDF) Parallelogram Shape"
 
 func _get_return_icon_type():
 	return VisualShaderNode.PORT_TYPE_SCALAR
@@ -48,11 +48,11 @@ func _get_input_port_name(port):
 		1:
 			return "Position"
 		2:
-			return "Top width"
+			return "Width"
 		3:
-			return "Bottom width"
+			return "Height"
 		4:
-			return "height"
+			return "Skew"
 
 func _get_input_port_type(port):
 	match port:
@@ -78,15 +78,17 @@ func _get_output_port_type(port):
 
 func _get_global_code(mode):
 	return """
-		float sdTrapezoid( in vec2 p, in float r1, float r2, float he )
+		float sdParallelogram( in vec2 p, float wi, float he, float sk )
 		{
-			vec2 k1 = vec2(r2,he);
-			vec2 k2 = vec2(r2-r1,2.0*he);
-			p.x = abs(p.x);
-			vec2 ca = vec2(p.x-min(p.x,(p.y<0.0)?r1:r2), abs(p.y)-he);
-			vec2 cb = p - k1 + k2*clamp( dot(k1-p,k2)/dot(k2, k2), 0.0, 1.0 );
-			float s = (cb.x<0.0 && ca.y<0.0) ? -1.0 : 1.0;
-			return s*sqrt( min(dot(ca, ca),dot(cb, cb)) );
+			vec2 e = vec2(sk,he);
+			p = (p.y<0.0)?-p:p;
+			vec2  w = p - e; w.x -= clamp(w.x,-wi,wi);
+			vec2  d = vec2(dot(w,w), -w.y);
+			float s = p.x*e.y - p.y*e.x;
+			p = (s<0.0)?-p:p;
+			vec2  v = p - vec2(wi,0); v -= e*clamp(dot(v,e)/dot(e,e),-1.0,1.0);
+			d = min( d, vec2(dot(v,v), wi*he-abs(s)));
+			return sqrt(d.x)*sign(-d.y);
 		}
 	"""
 
@@ -96,4 +98,4 @@ func _get_code(input_vars, output_vars, mode, type):
 	if input_vars[0]:
 		uv = input_vars[0]
 	
-	return "%s = sdTrapezoid(%s.xy - %s.xy, %s, %s, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]
+	return "%s = sdParallelogram(%s.xy - %s.xy, %s, %s, %s);" % [output_vars[0], uv, input_vars[1], input_vars[2], input_vars[3], input_vars[4]]

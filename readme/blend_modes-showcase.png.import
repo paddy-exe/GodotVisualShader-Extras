@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uw1cgy3qywn3"
-path="res://.godot/imported/Shapes-Showcase.png-eb31b2e88c1f67dc2e7b1569fda60793.ctex"
+uid="uid://c6tnwvp3jtnmo"
+path="res://.godot/imported/blend_modes-showcase.png-3ad5b60cb3e74d9f8614f01fb0c78ee0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/VisualShaderExtras/AddonExamples/Shapes-Showcase.png"
-dest_files=["res://.godot/imported/Shapes-Showcase.png-eb31b2e88c1f67dc2e7b1569fda60793.ctex"]
+source_file="res://readme/blend_modes-showcase.png"
+dest_files=["res://.godot/imported/blend_modes-showcase.png-3ad5b60cb3e74d9f8614f01fb0c78ee0.ctex"]
 
 [params]
 

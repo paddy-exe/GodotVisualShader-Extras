@@ -13,7 +13,12 @@
   </a>
 </div>
 
-# GodotVisualShader-Extras 4.0✨
+# GodotVisualShader-Extras 4.2✨
+
+> [!CAUTION]
+> 4.2 comes with the functionality to have custom Visual Shader 
+> drop-down options. This is only forward compatible so the `4.x` branch will
+> be 4.2+ compatible **ONLY**. For the 4.1 compatible version click [here](https://github.com/paddy-exe/GodotVisualShader-Extras/tree/v4.1)
 
 A Visual Shader Node Add-On for the Godot Engine
 
@@ -44,36 +49,32 @@ The icon was kindly supplied by [LucyLavend](https://youtube.com/LucyLavend)
 	- Gamma Dark
 	- Luminosity
 	- Linear Burn
-	- Lighter Color
-	- Darker Color
 
 Please refer to the documentation of MaterialMaker for explanation about the [different blend modes](https://rodzill4.github.io/material-maker/doc/node_filter_blend.html).
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonExamples/BlendingModes-Showcase.gif" width="800"/>
-</div>
-
-- Shapes (Signed Distance Fields)
-	- Box
-	- Circle
-	- Rounded Box
-	- Rotated Box
-	- Trapezoid
-	- Triangle
-	- Rhombus
-	- Parallelogram
-
-<div align="center">
-  <img src="addons/VisualShaderExtras/AddonExamples/Shapes-Showcase.png" width="800"/>
+  <img src="readme/blend_modes-showcase.png" width="800"/>
 </div>
 
 - Procedural
 	- Checkerboard
 	- PSRD Noise 2D
 	- PSRD Noise 3D
+	- Radial Gradient
+	- Shapes (Signed Distance Fields)
+		- Box
+		- Circle
+		- Rounded Box
+		- Rotated Box
+		- Trapezoid
+		- Triangle
+		- Rhombus
+		- Parallelogram
+		- Hyperbolic Cross
+		- Precise Hyperbolic Cross
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonExamples/Procedural-Showcase.png" width="800"/>
+  <img src="readme/procedural-showcase.png" width="800"/>
 </div>
 
 - UV
@@ -83,7 +84,7 @@ Please refer to the documentation of MaterialMaker for explanation about the [di
 	- UV Rotate
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonExamples/UV-Showcase.gif" width="800"/>
+  <img src="readme/UV-Showcase.gif" width="800"/>
 </div>
 
 - Wave (click on the links for more detail about the patterns)
@@ -93,7 +94,7 @@ Please refer to the documentation of MaterialMaker for explanation about the [di
 	- [Sine (+ Angular Frequency Input variant)](https://en.wikipedia.org/wiki/Sine_wave)
 
 <div align="center">
-  <img src="addons/VisualShaderExtras/AddonExamples/Wave-Showcase.gif" width="800"/>
+  <img src="readme/Wave-Showcase.gif" width="800"/>
 </div>
 
 ## How to get started
@@ -113,4 +114,4 @@ You can contribute by:
 * using the library and spreading the word 📰
 
 ## 🔢 Versioning
-This branch is only meant to be used with Godot 4.0 and higher
+This branch is only meant to be used with Godot 4.2 and higher
